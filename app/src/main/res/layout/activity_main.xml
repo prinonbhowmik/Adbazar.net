@@ -23,6 +23,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        android:background="@color/white"
         app:headerLayout="@layout/navigation_drawer_header"
         app:itemBackground="@drawable/nav_item_drawable"
         app:itemIconTint="@drawable/drawer_item_color"

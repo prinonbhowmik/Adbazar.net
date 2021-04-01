@@ -1,6 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="150dp"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#fff"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="5dp"
+    xmlns:tools="http://schemas.android.com/tools">
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:background="@color/white">
+       <ImageView
+           android:id="@+id/imageIV"
+           android:layout_width="30dp"
+           android:layout_height="30dp"
+           android:layout_centerHorizontal="true"
+           android:layout_marginTop="10dp"
+           tools:ignore="ContentDescription" />
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/categoryName"
+           android:layout_below="@+id/imageIV"
+           android:textColor="@color/black"
+           android:textStyle="bold"
+           android:textSize="13sp"
+           android:layout_centerHorizontal="true"
+           android:layout_marginLeft="5dp"
+           android:layout_marginTop="5dp"
+           android:maxLines="2"
+           android:layout_marginBottom="5dp"
+           tools:ignore="SmallSp" />
+        <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/ad_count"
+           android:layout_below="@+id/categoryName"
+           android:textColor="#534D4D"
+           android:textSize="13sp"
+           android:layout_centerHorizontal="true"
+           android:layout_marginLeft="5dp"
+           android:layout_marginTop="5dp"
+           android:maxLines="1"
+           android:layout_marginBottom="5dp"
+           tools:ignore="SmallSp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+   </RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -3,21 +3,21 @@ package com.adbazarnet.Models;
 public class SubCategoryModel {
     private Integer id;
     private String name;
-    private Integer adCount;
+    private Integer ad_count;
     private String slug;
-    private String adType;
-    private String categoryName;
+    private String ad_type;
+    private String category_name;
 
     public SubCategoryModel() {
     }
 
-    public SubCategoryModel(Integer id, String name, Integer adCount, String slug, String adType, String categoryName) {
+    public SubCategoryModel(Integer id, String name, Integer ad_count, String slug, String ad_type, String category_name) {
         this.id = id;
         this.name = name;
-        this.adCount = adCount;
+        this.ad_count = ad_count;
         this.slug = slug;
-        this.adType = adType;
-        this.categoryName = categoryName;
+        this.ad_type = ad_type;
+        this.category_name = category_name;
     }
 
     public Integer getId() {
@@ -28,19 +28,19 @@ public class SubCategoryModel {
         return name;
     }
 
-    public Integer getAdCount() {
-        return adCount;
+    public Integer getAd_count() {
+        return ad_count;
     }
 
     public String getSlug() {
         return slug;
     }
 
-    public String getAdType() {
-        return adType;
+    public String getAd_type() {
+        return ad_type;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public String getCategory_name() {
+        return category_name;
     }
 }
