@@ -53,8 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.login:
-                Toast.makeText(this, "Login", Toast.LENGTH_SHORT).show();
-                drawerLayout.closeDrawers();
+                startActivity(new Intent(MainActivity.this,LoginActivity.class));
                 break;
             case R.id.home:
                 FragmentTransaction home = getSupportFragmentManager().beginTransaction();
