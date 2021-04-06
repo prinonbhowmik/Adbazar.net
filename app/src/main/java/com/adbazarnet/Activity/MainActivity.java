@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         init();
-        sharedPreferences = getSharedPreferences("Customer_Id",MODE_PRIVATE);
-        int id = sharedPreferences.getInt("cust_id",0);
+        sharedPreferences = getSharedPreferences("MyRef",MODE_PRIVATE);
+        int id = sharedPreferences.getInt("id",0);
         if (id==0){
             navigationView.getMenu().removeItem(R.id.logout);
         }

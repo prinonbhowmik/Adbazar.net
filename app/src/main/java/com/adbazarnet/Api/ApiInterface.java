@@ -4,11 +4,15 @@ package com.adbazarnet.Api;
 import com.adbazarnet.Models.CategoriesModel;
 import com.adbazarnet.Models.CategorisQueryModel;
 import com.adbazarnet.Models.SubCategoryProductModel;
+import com.adbazarnet.Models.UserDetailsModel;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
@@ -26,4 +30,9 @@ public interface ApiInterface {
     Call<SubCategoryProductModel> getSubCategoriesProduct(@Query("limit") int limit,
                                                           @Query("offset") int offset,
                                                           @Query("category__slug") String ad_type);
+
+    @POST("account/auth/")
+    @FormUrlEncoded
+    Call<UserDetailsModel> userLogin(@Field("username") String phone,
+                                     @Field("password") String password);
 }
