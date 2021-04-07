@@ -4,6 +4,7 @@ package com.adbazarnet.Api;
 import com.adbazarnet.Models.CategoriesModel;
 import com.adbazarnet.Models.CategorisQueryModel;
 import com.adbazarnet.Models.SubCategoryProductModel;
+import com.adbazarnet.Models.User;
 import com.adbazarnet.Models.UserDetailsModel;
 
 import java.util.List;
@@ -35,4 +36,11 @@ public interface ApiInterface {
     @FormUrlEncoded
     Call<UserDetailsModel> userLogin(@Field("username") String phone,
                                      @Field("password") String password);
+
+    @POST("account/users/")
+    @FormUrlEncoded
+    Call<User> userRegister(@Field("name") String name,
+                            @Field("phone_number") String phone,
+                            @Field("email") String email,
+                            @Field("password") String password);
 }

@@ -29,7 +29,6 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputEditText phoneEt,passEt;
     private TextInputLayout phoneLT,passLT;
     private Button loginBtn;
-    private TextView registerTV;
     private String phone,password;
 
     @Override
@@ -106,11 +105,15 @@ public class LoginActivity extends AppCompatActivity {
         passEt = findViewById(R.id.password_ET);
         passLT = findViewById(R.id.password_LT);
         loginBtn = findViewById(R.id.loginBtn);
-        registerTV = findViewById(R.id.registerTV);
     }
 
     private void hideKeyboardFrom(Context context) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(this.getWindow().getDecorView().getRootView().getWindowToken(), 0);
+    }
+
+    public void goToSignUp(View view) {
+        startActivity(new Intent(LoginActivity.this,SignupActivity.class));
+
     }
 }

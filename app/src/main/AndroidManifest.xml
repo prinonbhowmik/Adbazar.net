@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AdBazarnet">
-        <activity android:name=".Activity.LoginActivity"></activity>
+        <activity android:name=".Activity.SignupActivity"></activity>
+        <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.SubCategoriesActivity" />
         <activity android:name=".Activity.SplashScreen">
             <intent-filter>

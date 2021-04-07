@@ -7,22 +7,22 @@ public class User {
     private String name;
     private String avatar;
     private String email;
-    private String phoneNumber;
-    private Boolean isOnline;
+    private String phone_number;
+    private Boolean is_online;
     private String type;
-    private String membershipName;
-    private List<Object> userPhoneNumbers = null;
+    private String membership_name;
+    private List<Object> user_phone_numbers = null;
 
-    public User(Integer id, String name, String avatar, String email, String phoneNumber, Boolean isOnline, String type, String membershipName, List<Object> userPhoneNumbers) {
+    public User(Integer id, String name, String avatar, String email, String phone_number, Boolean is_online, String type, String membership_name, List<Object> user_phone_numbers) {
         this.id = id;
         this.name = name;
         this.avatar = avatar;
         this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.isOnline = isOnline;
+        this.phone_number = phone_number;
+        this.is_online = is_online;
         this.type = type;
-        this.membershipName = membershipName;
-        this.userPhoneNumbers = userPhoneNumbers;
+        this.membership_name = membership_name;
+        this.user_phone_numbers = user_phone_numbers;
     }
 
     public User() {
@@ -44,23 +44,23 @@ public class User {
         return email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone_number() {
+        return phone_number;
     }
 
-    public Boolean getOnline() {
-        return isOnline;
+    public Boolean getIs_online() {
+        return is_online;
     }
 
     public String getType() {
         return type;
     }
 
-    public String getMembershipName() {
-        return membershipName;
+    public String getMembership_name() {
+        return membership_name;
     }
 
-    public List<Object> getUserPhoneNumbers() {
-        return userPhoneNumbers;
+    public List<Object> getUser_phone_numbers() {
+        return user_phone_numbers;
     }
 }
