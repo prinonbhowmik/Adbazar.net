@@ -2,29 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/login"
-            android:icon="@drawable/ic_outline_person_outline_24"
-            android:title="Log In" />
+
         <item
             android:id="@+id/home"
-            android:icon="@drawable/ic_home"
-            android:title="Home" />
+            android:title="All Ads" />
+
         <item
             android:id="@+id/bids"
-            android:icon="@drawable/bid_time"
             android:title="Bids" />
         <item
-            android:id="@+id/chat"
-            android:icon="@drawable/chat_icon"
-            android:title="Chat" />
+            android:id="@+id/bride"
+            android:title="Bride/Groom" />
         <item
-            android:id="@+id/account"
-            android:icon="@drawable/chat_icon"
-            android:title="Account" />
+            android:id="@+id/login"
+            android:title="Log In" />
+
+        <item
+            android:id="@+id/contact"
+            android:title="Contact" />
+
         <item
             android:id="@+id/logout"
-            android:icon="@drawable/ic_outline_exit_to_app_24"
             android:title="Log Out" />
 
 

@@ -67,16 +67,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 bids.commit();
                 drawerLayout.closeDrawers();
                 break;
-            case R.id.chat:
-                drawerLayout.closeDrawers();
-                break;
-            case R.id.account:
-                drawerLayout.closeDrawers();
-                break;
             case R.id.logout:
                 drawerLayout.closeDrawers();
                 break;
-
 
         }
         return false;

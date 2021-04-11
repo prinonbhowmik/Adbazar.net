@@ -10,4 +10,6 @@
     <color name="theme">#0b9876</color>
     <color name="themRed">#ED1D24</color>
     <color name="themDark">#232F3E</color>
+    <color name="gray">#424e4e</color>
+    <color name="Green">#0F9D58</color>
 </resources>
