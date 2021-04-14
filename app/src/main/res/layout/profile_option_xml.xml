@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#fff">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/dashboardTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Dashboard"
+                android:drawableLeft="@drawable/ic_dashboard"
+                android:textSize="15sp"
+                android:textColor="#000"
+                android:layout_marginLeft="40dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="30dp"/>
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_below="@+id/dashboardTv"
+                android:background="#AEAAAA"/>
+
+            <TextView
+                android:id="@+id/myAdsTv"
+                android:layout_below="@+id/view1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  My Ads"
+                android:drawableLeft="@drawable/ic_notes"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="30dp"/>
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_below="@+id/myAdsTv"
+                android:background="#AEAAAA"/>
+
+            <TextView
+                android:id="@+id/favouriteTv"
+                android:layout_below="@+id/view2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Favourite"
+                android:drawableLeft="@drawable/ic_favorite_heart_button"
+                android:textSize="15sp"
+                android:textColor="#000"
+                android:layout_marginLeft="40dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="30dp"/>
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_below="@+id/favouriteTv"
+                android:background="#AEAAAA"/>
+
+            <TextView
+                android:id="@+id/membershipTv"
+                android:layout_below="@+id/view3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Membership"
+                android:drawableLeft="@drawable/ic_press_pass"
+                android:textSize="15sp"
+                android:textColor="#000"
+                android:layout_marginLeft="40dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="30dp"/>
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_below="@+id/membershipTv"
+                android:background="#AEAAAA"/>
+
+            <TextView
+                android:id="@+id/profileTv"
+                android:layout_below="@+id/view4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Profile"
+                android:drawableLeft="@drawable/ic_information_button"
+                android:textSize="15sp"
+                android:textColor="#000"
+                android:layout_marginLeft="40dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="30dp"/>
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_below="@+id/profileTv"
+                android:background="#AEAAAA"/>
+
+            <TextView
+                android:id="@+id/logoutTv"
+                android:layout_below="@+id/view5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Logout"
+                android:drawableLeft="@drawable/ic_logout"
+                android:textSize="15sp"
+                android:layout_marginLeft="40dp"
+                android:textColor="#000"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="30dp"/>
+
+            <View
+                android:id="@+id/view6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/logoutTv"
+                android:background="#AEAAAA"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/closeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp"
+                android:layout_below="@+id/view6"
+                android:background="#6E6868"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Close"
+                    android:textColor="#fff"
+                    android:padding="10dp"/>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

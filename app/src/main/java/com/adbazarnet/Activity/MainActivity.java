@@ -2,25 +2,34 @@ package com.adbazarnet.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.adbazarnet.Fragments.BidsFragment;
+import com.adbazarnet.Fragments.FavouriteFragment;
 import com.adbazarnet.Fragments.HomeFragment;
 import com.adbazarnet.R;
 import com.google.android.material.navigation.NavigationView;
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private SharedPreferences sharedPreferences;
+    private ChipNavigationBar chipNavigationBar;
+    private int id,loggedIn;
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +38,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         init();
         sharedPreferences = getSharedPreferences("MyRef",MODE_PRIVATE);
-        int id = sharedPreferences.getInt("id",0);
+        id = sharedPreferences.getInt("id",0);
+        loggedIn = sharedPreferences.getInt("loggedIn",0);
         if (id==0){
             navigationView.getMenu().removeItem(R.id.logout);
         }
@@ -40,6 +50,54 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction home = getSupportFragmentManager().beginTransaction();
         home.replace(R.id.fragment_container, new HomeFragment());
         home.commit();
+
+        chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(int i) {
+                switch (i){
+
+                    case R.id.home:
+                        FragmentTransaction home = getSupportFragmentManager().beginTransaction();
+                        home.replace(R.id.fragment_container, new HomeFragment());
+                        home.commit();
+                        break;
+                    case R.id.favourite:
+                        FragmentTransaction favourite = getSupportFragmentManager().beginTransaction();
+                        favourite.replace(R.id.fragment_container, new FavouriteFragment());
+                        favourite.commit();
+                        break;
+                    case R.id.adPost:
+                        break;
+                    case R.id.chat:
+                        Toast.makeText(MainActivity.this, "Chat", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.account:
+                        if (loggedIn == 0 ){
+                            startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                            finish();
+                            break;
+                        }else{
+                            //pop-up will be shown
+                            dialog = new Dialog(MainActivity.this);
+                            dialog.setContentView(R.layout.profile_option_xml);
+                            CardView close  = dialog.findViewById(R.id.closeTv);
+                            TextView dashboard = dialog.findViewById(R.id.dashboardTv);
+                            TextView myAds = dialog.findViewById(R.id.myAdsTv);
+                            TextView favouriteTv = dialog.findViewById(R.id.favouriteTv);
+                            TextView membership = dialog.findViewById(R.id.membershipTv);
+                            TextView profile = dialog.findViewById(R.id.profileTv);
+                            TextView logout = dialog.findViewById(R.id.logoutTv);
+
+                            dialog.setCancelable(false);
+                            dialog.show();
+
+                            break;
+                        }
+                }
+
+            }
+        });
+
     }
 
     private void init() {
@@ -47,6 +105,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
+        chipNavigationBar=findViewById(R.id.bottom_menu);
+
     }
 
     @Override
@@ -66,6 +126,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 bids.replace(R.id.fragment_container, new BidsFragment());
                 bids.commit();
                 drawerLayout.closeDrawers();
+                break;
+            case R.id.contact:
+                Toast.makeText(this, "Contact", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.logout:
                 drawerLayout.closeDrawers();
