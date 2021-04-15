@@ -11,17 +11,27 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.adbazarnet.Api.ApiUtils;
 import com.adbazarnet.Fragments.BidsFragment;
 import com.adbazarnet.Fragments.FavouriteFragment;
 import com.adbazarnet.Fragments.HomeFragment;
+import com.adbazarnet.Models.UserDetailsModel;
 import com.adbazarnet.R;
 import com.google.android.material.navigation.NavigationView;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
@@ -87,6 +97,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             TextView membership = dialog.findViewById(R.id.membershipTv);
                             TextView profile = dialog.findViewById(R.id.profileTv);
                             TextView logout = dialog.findViewById(R.id.logoutTv);
+
+                            close.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                    finish();
+                                    startActivity(getIntent());
+                                }
+                            });
+
+                            profile.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                            logout.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Call<UserDetailsModel> call = ApiUtils.getUserService().logoutUser();
+                                    call.enqueue(new Callback<UserDetailsModel>() {
+                                        @Override
+                                        public void onResponse(Call<UserDetailsModel> call, Response<UserDetailsModel> response) {
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<UserDetailsModel> call, Throwable t) {
+
+                                        }
+                                    });
+                                    SharedPreferences sharedPreferences = getSharedPreferences("MyRef", MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("token", "");
+                                    editor.putInt("loggedIn", 0);
+                                    editor.putInt("id", 0);
+                                    editor.commit();
+                                    finish();
+                                    startActivity(getIntent());
+                                }
+                            });
 
                             dialog.setCancelable(false);
                             dialog.show();

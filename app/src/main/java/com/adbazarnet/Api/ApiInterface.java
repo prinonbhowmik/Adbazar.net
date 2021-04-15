@@ -43,4 +43,6 @@ public interface ApiInterface {
                             @Field("phone_number") String phone,
                             @Field("email") String email,
                             @Field("password") String password);
+    @GET("logout/")
+    Call<UserDetailsModel> logoutUser();
 }
