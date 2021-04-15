@@ -50,9 +50,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         sharedPreferences = getSharedPreferences("MyRef",MODE_PRIVATE);
         id = sharedPreferences.getInt("id",0);
         loggedIn = sharedPreferences.getInt("loggedIn",0);
-        if (id==0){
-            navigationView.getMenu().removeItem(R.id.logout);
-        }
         if(id!=0){
             navigationView.getMenu().removeItem(R.id.login);
         }
@@ -180,9 +177,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.contact:
                 Toast.makeText(this, "Contact", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.logout:
-                drawerLayout.closeDrawers();
                 break;
 
         }

@@ -21,10 +21,6 @@
             android:id="@+id/contact"
             android:title="Contact" />
 
-        <item
-            android:id="@+id/logout"
-            android:title="Log Out" />
-
 
     </group>
 
