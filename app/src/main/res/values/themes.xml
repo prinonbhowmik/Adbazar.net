@@ -19,7 +19,7 @@
     </style>
     <style name="Widget.BottomNavigationView"
         parent="Widget.Design.BottomNavigationView">
-        <item name="fontFamily">@font/comfortaa_light</item>
+        <item name="fontFamily">@font/comfortaa</item>
     </style>
 
 </resources>

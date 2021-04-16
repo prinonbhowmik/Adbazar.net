@@ -3,6 +3,7 @@ package com.adbazarnet.Api;
 
 import com.adbazarnet.Models.CategoriesModel;
 import com.adbazarnet.Models.CategorisQueryModel;
+import com.adbazarnet.Models.ProductModel;
 import com.adbazarnet.Models.SubCategoryProductModel;
 import com.adbazarnet.Models.User;
 import com.adbazarnet.Models.UserDetailsModel;
@@ -45,4 +46,9 @@ public interface ApiInterface {
                             @Field("password") String password);
     @GET("logout/")
     Call<UserDetailsModel> logoutUser();
+
+    @GET("posts")
+    Call<List<ProductModel>> getAllAds();
+
+
 }
