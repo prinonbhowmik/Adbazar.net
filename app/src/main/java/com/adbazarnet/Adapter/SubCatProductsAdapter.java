@@ -4,21 +4,26 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.adbazarnet.Fragments.HomeFragment;
 import com.adbazarnet.Interface.SubCategoryProductsInterface;
 import com.adbazarnet.Models.ProductModel;
 import com.adbazarnet.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SubCatProductsAdapter extends RecyclerView.Adapter<SubCatProductsAdapter.ViewHolder> {
     private List<ProductModel> list;
+    private List<ProductModel> filteredList;
+    private HomeFragment homeFragment;
     private Context context;
 
     public SubCatProductsAdapter(List<ProductModel> list, Context context) {
@@ -48,6 +53,37 @@ public class SubCatProductsAdapter extends RecyclerView.Adapter<SubCatProductsAd
         holder.locationTv.setText(model.getSub_location()+","+model.getLocation());
 
     }
+
+    public Filter getFilter() {
+        return exampleFilter;
+    }
+    private Filter exampleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<ProductModel> filteredList = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(filteredList);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (ProductModel item : list) {
+                    if (item.getAd_title().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            list.clear();
+            list.addAll((List) results.values);
+            homeFragment.adCountTv.setText("("+list.size()+") Ads");
+            notifyDataSetChanged();
+        }
+    };
+
 
     @Override
     public int getItemCount() {

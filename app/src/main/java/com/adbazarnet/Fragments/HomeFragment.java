@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,10 +39,12 @@ public class HomeFragment extends Fragment {
     private ImageView navIcon;
     private DrawerLayout drawerLayout;
     private List<ProductModel> adlist;
+    private EditText searchEt;
+    private ImageView searchBtn;
     private RecyclerView adsRecycler;
     private SubCatProductsAdapter adapter;
     private ApiInterface apiInterface;
-    private TextView adCountTv;
+    public static TextView adCountTv;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -50,6 +53,19 @@ public class HomeFragment extends Fragment {
         init(view);
 
         getAllAds();
+
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newText = searchEt.getText().toString();
+                if (newText== null || newText.equals("")){
+                    getAllAds();
+                }else{
+                    adapter.getFilter().filter(newText);
+
+                }
+            }
+        });
 
         return view;
     }
@@ -77,6 +93,8 @@ public class HomeFragment extends Fragment {
 
     private void init(View view) {
         navIcon = view.findViewById(R.id.navIcon);
+        searchEt = view.findViewById(R.id.searchEt);
+        searchBtn = view.findViewById(R.id.searchBtn);
         drawerLayout=getActivity().findViewById(R.id.drawerLayout);
         navIcon.setOnClickListener(new View.OnClickListener() {
             @Override
