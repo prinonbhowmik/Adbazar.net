@@ -75,6 +75,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" Location"
+                        android:id="@+id/locationTv"
                         android:layout_centerHorizontal="true"
                         android:textAlignment="center"
                         android:drawableLeft="@drawable/ic_baseline_location_on_24"
@@ -94,6 +95,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/theme">
                     <TextView
+                        android:id="@+id/categoryTv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" Category"

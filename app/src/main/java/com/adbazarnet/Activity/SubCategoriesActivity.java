@@ -50,23 +50,7 @@ public class SubCategoriesActivity extends AppCompatActivity implements SubCateg
     }
 
     private void getSubCategories() {
-      Call<CategorisQueryModel> call = ApiUtils.getUserService().getSubCategories(1,0,ad_type,title);
-      call.enqueue(new Callback<CategorisQueryModel>() {
-          @Override
-          public void onResponse(Call<CategorisQueryModel> call, Response<CategorisQueryModel> response) {
-              if (response.isSuccessful()){
-                  List<SubCategoryModel> subCat = response.body().getResults().get(0).getSub_categories();
-                  adapter = new SubCategoriesAdapter(subCat,SubCategoriesActivity.this);
-                  subCategoryRecyclerView.setAdapter(adapter);
-              }
-              adapter.notifyDataSetChanged();
-          }
 
-          @Override
-          public void onFailure(Call<CategorisQueryModel> call, Throwable t) {
-              Log.d("ErrorKi",t.getMessage());
-          }
-      });
     }
 
     private void init() {
@@ -82,23 +66,6 @@ public class SubCategoriesActivity extends AppCompatActivity implements SubCateg
 
     @Override
     public void onClick(String slug) {
-        Call<SubCategoryProductModel> call = ApiUtils.getUserService().getSubCategoriesProduct(50,0,slug);
-        call.enqueue(new Callback<SubCategoryProductModel>() {
-            @Override
-            public void onResponse(Call<SubCategoryProductModel> call, Response<SubCategoryProductModel> response) {
-                if (response.isSuccessful()){
-                    List<ProductModel> list = response.body().getResults();
-                    subProductAdapter = new SubCatProductsAdapter(list,SubCategoriesActivity.this);
-                    productRecycler.setAdapter(subProductAdapter);
-                }
-                subProductAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<SubCategoryProductModel> call, Throwable t) {
-                Log.d("ErrorKi",t.getMessage());
-            }
-        });
 
     }
 }

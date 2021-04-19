@@ -25,6 +25,10 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
         this.subCategoryProductsInterface = subCategoryProductsInterface;
     }
 
+    public SubCategoriesAdapter(List<SubCategoryModel> list) {
+        this.list = list;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
