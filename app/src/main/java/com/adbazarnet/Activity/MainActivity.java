@@ -54,9 +54,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.getMenu().removeItem(R.id.login);
         }
 
-        FragmentTransaction home = getSupportFragmentManager().beginTransaction();
-        home.replace(R.id.fragment_container, new HomeFragment());
-        home.commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
+        chipNavigationBar.setItemSelected(R.id.home,true);
 
         chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override

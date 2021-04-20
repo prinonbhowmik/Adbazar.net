@@ -1,6 +1,7 @@
 package com.adbazarnet.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,8 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
             public void onClick(View v) {
                 if (subCategoryProductsInterface!=null){
                     subCategoryProductsInterface.onClick(model.getSlug());
+                }else{
+                    Log.d("InterfaceNull","Yes");
                 }
             }
         });

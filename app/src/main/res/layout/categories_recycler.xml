@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#fff"
     xmlns:tools="http://schemas.android.com/tools">
    <RelativeLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
+       android:id="@+id/recycerlayout1"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
        android:background="@color/white">
        <ImageView
            android:id="@+id/imageIV"
@@ -17,7 +19,7 @@
            android:layout_centerVertical="true"
            tools:ignore="ContentDescription" />
        <TextView
-           android:layout_width="wrap_content"
+           android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:id="@+id/categoryName"
            android:textColor="@color/black"
@@ -33,7 +35,7 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:id="@+id/ad_count"
-           android:textColor="#534D4D"
+           android:textColor="@color/black"
             android:layout_alignParentRight="true"
            android:textSize="18sp"
            android:layout_marginLeft="5dp"
@@ -51,16 +53,20 @@
            android:layout_below="@+id/categoryName"
            />
 
-       <androidx.recyclerview.widget.RecyclerView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:id="@+id/subCatRecycler"
-           android:visibility="gone"
-           android:layout_below="@+id/view"/>
-
-
-
    </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/subcatLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recycerlayout1"
+        android:visibility="gone">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/subCatRecycler"
+            android:layout_marginTop="1dp" />
+    </RelativeLayout>
 
-</androidx.cardview.widget.CardView>
+
+</RelativeLayout>

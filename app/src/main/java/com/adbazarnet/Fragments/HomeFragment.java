@@ -1,5 +1,6 @@
 package com.adbazarnet.Fragments;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -29,9 +30,12 @@ import com.adbazarnet.Adapter.SubCatProductsAdapter;
 import com.adbazarnet.Adapter.SubCategoriesAdapter;
 import com.adbazarnet.Api.ApiInterface;
 import com.adbazarnet.Api.ApiUtils;
+import com.adbazarnet.Interface.SubCategoryClick;
 import com.adbazarnet.Interface.SubCategoryProductsInterface;
 import com.adbazarnet.Models.CategoriesModel;
+import com.adbazarnet.Models.CategorisQueryModel;
 import com.adbazarnet.Models.ProductModel;
+import com.adbazarnet.Models.SubCategoryModel;
 import com.adbazarnet.Models.SubCategoryProductModel;
 import com.adbazarnet.R;
 
@@ -42,7 +46,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment extends Fragment implements SubCategoryProductsInterface {
+public class HomeFragment extends Fragment implements SubCategoryProductsInterface, SubCategoryClick {
     private ImageView navIcon;
     private DrawerLayout drawerLayout;
     private List<ProductModel> adlist;
@@ -184,6 +188,7 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
 
     @Override
     public void onClick(String slug) {
+        Log.d("checkCall","Yes");
         Call<SubCategoryProductModel> call = ApiUtils.getUserService().getSubCategoriesProduct(50,0,slug);
         call.enqueue(new Callback<SubCategoryProductModel>() {
             @Override
@@ -203,5 +208,28 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
             }
         });
 
+    }
+
+    @Override
+    public void clickData(String ad_type, String categoryName) {
+        Call<CategorisQueryModel> call = ApiUtils.getUserService()
+                .getSubCategories(1,0,ad_type,categoryName);
+        call.enqueue(new Callback<CategorisQueryModel>() {
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onResponse(Call<CategorisQueryModel> call, Response<CategorisQueryModel> response) {
+                if (response.isSuccessful()){
+                    List<SubCategoryModel> subCat = response.body().getResults().get(0).getSub_categories();
+                    adapter2 = new SubCategoriesAdapter(subCat);
+                    holder.subCatRecycler.setAdapter(adapter);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<CategorisQueryModel> call, Throwable t) {
+                Log.d("ErrorKi",t.getMessage());
+            }
+        });
     }
 }

@@ -64,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/categoryHeader"
-            android:drawableLeft="@drawable/ic_outline_dashboard_24"
+            android:drawableLeft="@drawable/ic_dashboard_1_"
             android:text=" All Category"
             android:layout_centerVertical="true"
             android:padding="10dp"
