@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -46,19 +47,21 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment extends Fragment implements SubCategoryProductsInterface, SubCategoryClick {
+public class HomeFragment extends Fragment implements SubCategoryProductsInterface {
     private ImageView navIcon;
     private DrawerLayout drawerLayout;
     private List<ProductModel> adlist;
     private EditText searchEt;
+    private Context context;
     private ImageView searchBtn;
-    private RecyclerView adsRecycler;
+    public static RecyclerView adsRecycler;
     private CategoryNamesAdapter categoryNamesAdapter;
     private TextView categoryTv,locationTv;
     private SubCatProductsAdapter adapter;
+    private SubCategoriesAdapter adapter2;
     private ApiInterface apiInterface;
     public static TextView adCountTv;
-    private Dialog dialog;
+    public static Dialog dialog;
     private SubCatProductsAdapter subProductAdapter;
 
     @Override
@@ -125,7 +128,7 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
             public void onResponse(Call<List<CategoriesModel>> call, Response<List<CategoriesModel>> response) {
                 if (response.isSuccessful()){
                     List<CategoriesModel> list = response.body();
-                    categoryNamesAdapter = new CategoryNamesAdapter(list,getContext());
+                    categoryNamesAdapter = new CategoryNamesAdapter(list, context);
                     categoriesRecycler.setAdapter(categoryNamesAdapter);
                 }
                 categoryNamesAdapter.notifyDataSetChanged();
@@ -188,48 +191,8 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
 
     @Override
     public void onClick(String slug) {
-        Log.d("checkCall","Yes");
-        Call<SubCategoryProductModel> call = ApiUtils.getUserService().getSubCategoriesProduct(50,0,slug);
-        call.enqueue(new Callback<SubCategoryProductModel>() {
-            @Override
-            public void onResponse(Call<SubCategoryProductModel> call, Response<SubCategoryProductModel> response) {
-                if (response.isSuccessful()){
-                    adlist.clear();
-                    adlist = response.body().getResults();
-                    subProductAdapter = new SubCatProductsAdapter(adlist, getContext());
-                    adsRecycler.setAdapter(subProductAdapter);
-                }
-                subProductAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<SubCategoryProductModel> call, Throwable t) {
-                Log.d("ErrorKi",t.getMessage());
-            }
-        });
 
     }
 
-    @Override
-    public void clickData(String ad_type, String categoryName) {
-        Call<CategorisQueryModel> call = ApiUtils.getUserService()
-                .getSubCategories(1,0,ad_type,categoryName);
-        call.enqueue(new Callback<CategorisQueryModel>() {
-            @SuppressLint("ResourceAsColor")
-            @Override
-            public void onResponse(Call<CategorisQueryModel> call, Response<CategorisQueryModel> response) {
-                if (response.isSuccessful()){
-                    List<SubCategoryModel> subCat = response.body().getResults().get(0).getSub_categories();
-                    adapter2 = new SubCategoriesAdapter(subCat);
-                    holder.subCatRecycler.setAdapter(adapter);
-                }
-                adapter.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onFailure(Call<CategorisQueryModel> call, Throwable t) {
-                Log.d("ErrorKi",t.getMessage());
-            }
-        });
-    }
 }

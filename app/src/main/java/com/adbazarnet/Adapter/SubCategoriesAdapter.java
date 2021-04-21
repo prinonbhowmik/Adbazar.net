@@ -10,24 +10,35 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.adbazarnet.Api.ApiUtils;
+import com.adbazarnet.Fragments.HomeFragment;
+import com.adbazarnet.Interface.SubCategoryClick;
 import com.adbazarnet.Interface.SubCategoryProductsInterface;
 import com.adbazarnet.Models.CategorisQueryModel;
+import com.adbazarnet.Models.ProductModel;
 import com.adbazarnet.Models.SubCategoryModel;
+import com.adbazarnet.Models.SubCategoryProductModel;
 import com.adbazarnet.R;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdapter.ViewHolder> {
     private List<SubCategoryModel> list;
     private SubCategoryProductsInterface subCategoryProductsInterface;
+    private Context context;
+    private HomeFragment fragment;
+    private List<ProductModel> adlist = new ArrayList<>();
+    private SubCatProductsAdapter subProductAdapter;
 
-    public SubCategoriesAdapter(List<SubCategoryModel> list, SubCategoryProductsInterface subCategoryProductsInterface) {
+    public SubCategoriesAdapter(List<SubCategoryModel> list, Context context) {
         this.list = list;
-        this.subCategoryProductsInterface = subCategoryProductsInterface;
-    }
-
-    public SubCategoriesAdapter(List<SubCategoryModel> list) {
-        this.list = list;
+        this.context = context;
+        subCategoryProductsInterface = (SubCategoryProductsInterface) context;
     }
 
     @NonNull
@@ -46,11 +57,26 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (subCategoryProductsInterface!=null){
-                    subCategoryProductsInterface.onClick(model.getSlug());
-                }else{
-                    Log.d("InterfaceNull","Yes");
-                }
+                Call<SubCategoryProductModel> call = ApiUtils.getUserService().getSubCategoriesProduct(50,0,model.getSlug());
+                call.enqueue(new Callback<SubCategoryProductModel>() {
+                    @Override
+                    public void onResponse(Call<SubCategoryProductModel> call, Response<SubCategoryProductModel> response) {
+                        if (response.isSuccessful()){
+                            adlist.clear();
+                            adlist = response.body().getResults();
+                            subProductAdapter = new SubCatProductsAdapter(adlist, context);
+                            fragment.adsRecycler.setAdapter(subProductAdapter);
+                            fragment.adCountTv.setText("("+adlist.size()+") Ads ,"+model.getName());
+                            fragment.dialog.dismiss();
+                        }
+                        subProductAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFailure(Call<SubCategoryProductModel> call, Throwable t) {
+                        Log.d("ErrorKi",t.getMessage());
+                    }
+                });
             }
         });
     }

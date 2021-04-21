@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.adbazarnet.Activity.MainActivity;
 import com.adbazarnet.Activity.SubCategoriesActivity;
 import com.adbazarnet.Api.ApiUtils;
+import com.adbazarnet.Fragments.HomeFragment;
 import com.adbazarnet.Interface.SubCategoryClick;
 import com.adbazarnet.Interface.SubCategoryProductsInterface;
 import com.adbazarnet.Models.CategoriesModel;
@@ -39,13 +40,14 @@ import static java.security.AccessController.getContext;
 
 public class CategoryNamesAdapter extends RecyclerView.Adapter<CategoryNamesAdapter.ViewHolder> {
     private List<CategoriesModel> categoriesModels;
-    private Context context;
-    private SubCategoriesAdapter adapter;
     private SubCategoryClick click;
+    private SubCategoriesAdapter adapter2;
+    private Context context;
 
     public CategoryNamesAdapter(List<CategoriesModel> categoriesModels, Context context) {
         this.categoriesModels = categoriesModels;
         this.context = context;
+        click = (SubCategoryClick) context;
     }
 
     @NonNull
@@ -79,9 +81,26 @@ public class CategoryNamesAdapter extends RecyclerView.Adapter<CategoryNamesAdap
                     holder.recycerlayout1.setBackgroundColor(Color.parseColor("#048F6E"));
                     holder.categoryName.setTextColor(Color.parseColor("#FFFFFF"));
                     holder.ad_count.setTextColor(Color.parseColor("#FFFFFF"));
-                    if (click!=null){
+                    Call<CategorisQueryModel> call = ApiUtils.getUserService()
+                            .getSubCategories(1,0,list.getAd_type(),list.getName());
+                    call.enqueue(new Callback<CategorisQueryModel>() {
+                        @SuppressLint("ResourceAsColor")
+                        @Override
+                        public void onResponse(Call<CategorisQueryModel> call, Response<CategorisQueryModel> response) {
+                            if (response.isSuccessful()){
+                                List<SubCategoryModel> subCat = response.body().getResults().get(0).getSub_categories();
+                                adapter2 = new SubCategoriesAdapter(subCat,context);
+                                holder.subCatRecycler.setAdapter(adapter2);
+                            }
+                            adapter2.notifyDataSetChanged();
+                        }
 
-                    }
+                        @Override
+                        public void onFailure(Call<CategorisQueryModel> call, Throwable t) {
+                            Log.d("ErrorKi",t.getMessage());
+                        }
+                    });
+
 
                 }else{
                     holder.subcatLayout.setVisibility(View.GONE);
