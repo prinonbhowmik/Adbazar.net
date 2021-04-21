@@ -3,6 +3,7 @@ package com.adbazarnet.Api;
 
 import com.adbazarnet.Models.CategoriesModel;
 import com.adbazarnet.Models.CategorisQueryModel;
+import com.adbazarnet.Models.LocationsModel;
 import com.adbazarnet.Models.ProductModel;
 import com.adbazarnet.Models.SubCategoryProductModel;
 import com.adbazarnet.Models.User;
@@ -50,5 +51,7 @@ public interface ApiInterface {
     @GET("posts")
     Call<List<ProductModel>> getAllAds();
 
+    @GET("locations/")
+    Call<List<LocationsModel>> getAllLocations();
 
 }

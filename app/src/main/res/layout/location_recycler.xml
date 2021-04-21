@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#fff"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:id="@+id/locationlayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+        <ImageView
+            android:id="@+id/imageIV"
+            android:layout_width="24sp"
+            android:layout_height="24sp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/location_theme_color"
+            android:layout_centerVertical="true"
+            tools:ignore="ContentDescription" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/locationName"
+            android:textColor="@color/black"
+            android:layout_toEndOf="@id/imageIV"
+            android:layout_toStartOf="@id/ad_count"
+            android:textSize="18sp"
+            android:padding="10dp"
+            android:maxLines="1"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            tools:ignore="SmallSp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ad_count"
+            android:textColor="@color/black"
+            android:layout_alignParentRight="true"
+            android:textSize="18sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:maxLines="1"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            tools:ignore="SmallSp" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#838080"
+            android:layout_below="@+id/categoryName"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/subLocLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recycerlayout1"
+        android:visibility="gone">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/subLocRecycler"
+            android:layout_marginTop="1dp" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff">
+
+    <TextView
+        android:id="@+id/locationTitleTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Location"
+        android:fontFamily="@font/roboto"
+        android:textSize="23sp"
+        android:textColor="#777474"
+        android:layout_margin="15dp"
+        android:layout_alignParentLeft="true"/>
+
+    <ImageView
+        android:id="@+id/closeCatPopL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_close_24"
+        android:layout_alignParentRight="true"
+        android:layout_margin="20dp"/>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#CCCFD1"
+        android:layout_below="@+id/locationTitleTv"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/view1"
+        android:background="@drawable/category_layout_design">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/locationHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/category_header_layout">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/roboto"
+                    android:padding="10dp"
+                    android:textColor="#000"
+                    android:text=" Locations"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/allLocationTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/locationHeader"
+            android:drawableLeft="@drawable/location_theme_color"
+            android:text=" All Location"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:textColor="#000"/>
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/allLocationTv"
+            android:background="#838080"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view2"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:id="@+id/locationRecycler"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

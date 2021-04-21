@@ -6,7 +6,7 @@ public class LocationsModel {
 
     private int id;
     private String name;
-    private String ad_count;
+    private int ad_count;
     private String slug;
     private List<SubLocationsModel> sub_locations;
 
@@ -18,7 +18,7 @@ public class LocationsModel {
         return name;
     }
 
-    public String getAd_count() {
+    public int getAd_count() {
         return ad_count;
     }
 

@@ -27,6 +27,7 @@ import android.widget.TextView;
 import com.adbazarnet.Activity.MainActivity;
 import com.adbazarnet.Activity.SubCategoriesActivity;
 import com.adbazarnet.Adapter.CategoryNamesAdapter;
+import com.adbazarnet.Adapter.LocationAdapter;
 import com.adbazarnet.Adapter.SubCatProductsAdapter;
 import com.adbazarnet.Adapter.SubCategoriesAdapter;
 import com.adbazarnet.Api.ApiInterface;
@@ -35,6 +36,7 @@ import com.adbazarnet.Interface.SubCategoryClick;
 import com.adbazarnet.Interface.SubCategoryProductsInterface;
 import com.adbazarnet.Models.CategoriesModel;
 import com.adbazarnet.Models.CategorisQueryModel;
+import com.adbazarnet.Models.LocationsModel;
 import com.adbazarnet.Models.ProductModel;
 import com.adbazarnet.Models.SubCategoryModel;
 import com.adbazarnet.Models.SubCategoryProductModel;
@@ -59,6 +61,7 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
     private TextView categoryTv,locationTv;
     private SubCatProductsAdapter adapter;
     private SubCategoriesAdapter adapter2;
+    private LocationAdapter locationAdapter;
     private ApiInterface apiInterface;
     public static TextView adCountTv;
     public static Dialog dialog;
@@ -118,7 +121,59 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
             }
         });
 
+        locationTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.select_location_xml);
+                ImageView closeCatPop = dialog.findViewById(R.id.closeCatPopL);
+                TextView allLocationTv = dialog.findViewById(R.id.allLocationTv);
+                RecyclerView locationRecycler = dialog.findViewById(R.id.locationRecycler);
+                locationRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                closeCatPop.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                allLocationTv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        getAllAds();
+                    }
+                });
+
+                getAllLocations(locationRecycler);
+
+                dialog.setCancelable(false);
+                dialog.show();
+            }
+        });
+
         return view;
+    }
+
+    private void getAllLocations(RecyclerView locationRecycler) {
+        Call<List<LocationsModel>> call = apiInterface.getAllLocations();
+        call.enqueue(new Callback<List<LocationsModel>>() {
+            @Override
+            public void onResponse(Call<List<LocationsModel>> call, Response<List<LocationsModel>> response) {
+                if (response.isSuccessful()){
+                    List<LocationsModel> list = response.body();
+                    locationAdapter = new LocationAdapter(list,getContext());
+                    locationRecycler.setAdapter(locationAdapter);
+                }
+                locationAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<LocationsModel>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void getCategoriesList(RecyclerView categoriesRecycler) {
