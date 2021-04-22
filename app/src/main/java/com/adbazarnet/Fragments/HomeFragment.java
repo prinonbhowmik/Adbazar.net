@@ -1,12 +1,10 @@
 package com.adbazarnet.Fragments;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 
-import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -14,32 +12,24 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.adbazarnet.Activity.MainActivity;
-import com.adbazarnet.Activity.SubCategoriesActivity;
 import com.adbazarnet.Adapter.CategoryNamesAdapter;
 import com.adbazarnet.Adapter.LocationAdapter;
 import com.adbazarnet.Adapter.SubCatProductsAdapter;
 import com.adbazarnet.Adapter.SubCategoriesAdapter;
 import com.adbazarnet.Api.ApiInterface;
 import com.adbazarnet.Api.ApiUtils;
-import com.adbazarnet.Interface.SubCategoryClick;
 import com.adbazarnet.Interface.SubCategoryProductsInterface;
 import com.adbazarnet.Models.CategoriesModel;
-import com.adbazarnet.Models.CategorisQueryModel;
 import com.adbazarnet.Models.LocationsModel;
 import com.adbazarnet.Models.ProductModel;
-import com.adbazarnet.Models.SubCategoryModel;
-import com.adbazarnet.Models.SubCategoryProductModel;
 import com.adbazarnet.R;
 
 import java.util.ArrayList;

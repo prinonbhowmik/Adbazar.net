@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -46,19 +47,23 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (holder.subLocRecycler.getVisibility() == View.GONE) {
-                    holder.subLocRecycler.setVisibility(View.VISIBLE);
-                    holder.locationlayout1.setBackgroundColor(Color.parseColor("#FFFFFF"));
-                    holder.locationName.setTextColor(Color.parseColor("#048F6E"));
-                    holder.ad_count.setTextColor(Color.parseColor("#048F6E"));
+                if (holder.subLocLayout.getVisibility() == View.GONE) {
+                    holder.subLocLayout.setVisibility(View.VISIBLE);
+                    holder.imageIV.setBackgroundResource(R.drawable.ic_baseline_location_on_24);
+                    holder.locationlayout1.setBackgroundColor(Color.parseColor("#048F6E"));
+                    holder.locationName.setTextColor(Color.parseColor("#FFFFFF"));
+                    holder.ad_count.setTextColor(Color.parseColor("#FFFFFF"));
                     List<SubLocationsModel> location = list.getSub_locations();
                     adapter = new SubLocationAdapter(location, context);
                     holder.subLocRecycler.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
 
                 } else {
-                    holder.subLocRecycler.setVisibility(View.GONE);
-                    // holder.locationName.setTextColor(Color.parseColor("#000000"));
+                    holder.subLocLayout.setVisibility(View.GONE);
+                    holder.locationName.setTextColor(Color.parseColor("#000000"));
+                    holder.ad_count.setTextColor(Color.parseColor("#000000"));
+                    holder.locationlayout1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    holder.imageIV.setBackgroundResource(R.drawable.location_theme_color);
                 }
 
             }
@@ -73,6 +78,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView locationName, ad_count;
         private RecyclerView subLocRecycler;
+        private ImageView imageIV;
         private RelativeLayout subLocLayout, locationlayout1;
 
         public ViewHolder(@NonNull View itemView) {
@@ -82,6 +88,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
             ad_count = itemView.findViewById(R.id.locad_count);
             locationlayout1 = itemView.findViewById(R.id.locationlayout1);
             subLocLayout = itemView.findViewById(R.id.subLocLayout);
+            imageIV = itemView.findViewById(R.id.imageIV);
             subLocRecycler = itemView.findViewById(R.id.subLocRecycler);
         }
     }

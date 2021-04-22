@@ -1,9 +1,7 @@
 package com.adbazarnet.Adapter;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,26 +15,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.adbazarnet.Activity.MainActivity;
-import com.adbazarnet.Activity.SubCategoriesActivity;
-import com.adbazarnet.Api.ApiUtils;
-import com.adbazarnet.Fragments.HomeFragment;
 import com.adbazarnet.Interface.SubCategoryClick;
-import com.adbazarnet.Interface.SubCategoryProductsInterface;
 import com.adbazarnet.Models.CategoriesModel;
-import com.adbazarnet.Models.CategorisQueryModel;
 import com.adbazarnet.Models.SubCategoryModel;
 import com.adbazarnet.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-import java.util.Locale;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static java.security.AccessController.getContext;
 
 public class CategoryNamesAdapter extends RecyclerView.Adapter<CategoryNamesAdapter.ViewHolder> {
     private List<CategoriesModel> categoriesModels;

@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#fff"
     xmlns:tools="http://schemas.android.com/tools">
     <RelativeLayout
         android:id="@+id/locationlayout1"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/white">
         <ImageView
             android:id="@+id/imageIV"
-            android:layout_width="24sp"
-            android:layout_height="24sp"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/location_theme_color"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="5dp"
             android:layout_centerVertical="true"
             tools:ignore="ContentDescription" />
         <TextView
@@ -24,7 +23,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/locationName"
             android:textColor="@color/black"
-            android:layout_toEndOf="@id/imageIV"
+            android:layout_toEndOf="@+id/imageIV"
             android:layout_toStartOf="@id/locad_count"
             android:textSize="18sp"
             android:padding="10dp"
@@ -61,13 +60,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/recycerlayout1"
-        >
+        android:visibility="gone">
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/subLocRecycler"
-            android:visibility="gone"
-            android:nestedScrollingEnabled="false"
             android:layout_marginTop="1dp" />
     </RelativeLayout>
 
