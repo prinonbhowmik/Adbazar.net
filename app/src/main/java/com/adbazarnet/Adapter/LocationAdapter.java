@@ -1,6 +1,7 @@
 package com.adbazarnet.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.adbazarnet.Models.LocationsModel;
+import com.adbazarnet.Models.SubLocationsModel;
 import com.adbazarnet.R;
 
 import java.util.List;
@@ -19,6 +21,7 @@ import java.util.List;
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder> {
     private List<LocationsModel> locationsModels;
     private Context context;
+    private SubLocationAdapter adapter;
 
     public LocationAdapter(List<LocationsModel> locationsModels, Context context) {
         this.locationsModels = locationsModels;
@@ -37,8 +40,29 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         LocationsModel list = locationsModels.get(position);
 
         holder.locationName.setText(list.getName());
-        holder.ad_count.setText("("+list.getAd_count()+")");
+        holder.ad_count.setText("(" + list.getAd_count() + ")");
         holder.subLocRecycler.setLayoutManager(new LinearLayoutManager(context));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.subLocRecycler.getVisibility() == View.GONE) {
+                    holder.subLocRecycler.setVisibility(View.VISIBLE);
+                    holder.locationlayout1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    holder.locationName.setTextColor(Color.parseColor("#048F6E"));
+                    holder.ad_count.setTextColor(Color.parseColor("#048F6E"));
+                    List<SubLocationsModel> location = list.getSub_locations();
+                    adapter = new SubLocationAdapter(location, context);
+                    holder.subLocRecycler.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+
+                } else {
+                    holder.subLocRecycler.setVisibility(View.GONE);
+                    // holder.locationName.setTextColor(Color.parseColor("#000000"));
+                }
+
+            }
+        });
     }
 
     @Override
@@ -47,14 +71,15 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView locationName,ad_count;
+        private TextView locationName, ad_count;
         private RecyclerView subLocRecycler;
-        private RelativeLayout subLocLayout,locationlayout1;
+        private RelativeLayout subLocLayout, locationlayout1;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             locationName = itemView.findViewById(R.id.locationName);
-            ad_count = itemView.findViewById(R.id.ad_count);
+            ad_count = itemView.findViewById(R.id.locad_count);
             locationlayout1 = itemView.findViewById(R.id.locationlayout1);
             subLocLayout = itemView.findViewById(R.id.subLocLayout);
             subLocRecycler = itemView.findViewById(R.id.subLocRecycler);

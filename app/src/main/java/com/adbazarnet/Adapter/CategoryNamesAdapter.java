@@ -81,25 +81,12 @@ public class CategoryNamesAdapter extends RecyclerView.Adapter<CategoryNamesAdap
                     holder.recycerlayout1.setBackgroundColor(Color.parseColor("#048F6E"));
                     holder.categoryName.setTextColor(Color.parseColor("#FFFFFF"));
                     holder.ad_count.setTextColor(Color.parseColor("#FFFFFF"));
-                    Call<CategorisQueryModel> call = ApiUtils.getUserService()
-                            .getSubCategories(1,0,list.getAd_type(),list.getName());
-                    call.enqueue(new Callback<CategorisQueryModel>() {
-                        @SuppressLint("ResourceAsColor")
-                        @Override
-                        public void onResponse(Call<CategorisQueryModel> call, Response<CategorisQueryModel> response) {
-                            if (response.isSuccessful()){
-                                List<SubCategoryModel> subCat = response.body().getResults().get(0).getSub_categories();
-                                adapter2 = new SubCategoriesAdapter(subCat,context);
-                                holder.subCatRecycler.setAdapter(adapter2);
-                            }
-                            adapter2.notifyDataSetChanged();
-                        }
+                    Log.d("CheckCalling",list.getAd_type()+"'"+list.getName());
 
-                        @Override
-                        public void onFailure(Call<CategorisQueryModel> call, Throwable t) {
-                            Log.d("ErrorKi",t.getMessage());
-                        }
-                    });
+                    List<SubCategoryModel> subCat = list.getSub_categories();
+                    adapter2 = new SubCategoriesAdapter(subCat,context);
+                    holder.subCatRecycler.setAdapter(adapter2);
+
 
 
                 }else{

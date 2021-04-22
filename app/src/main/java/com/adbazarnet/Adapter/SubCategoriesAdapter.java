@@ -29,7 +29,6 @@ import retrofit2.Response;
 
 public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdapter.ViewHolder> {
     private List<SubCategoryModel> list;
-    private SubCategoryProductsInterface subCategoryProductsInterface;
     private Context context;
     private HomeFragment fragment;
     private List<ProductModel> adlist = new ArrayList<>();
@@ -38,7 +37,6 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
     public SubCategoriesAdapter(List<SubCategoryModel> list, Context context) {
         this.list = list;
         this.context = context;
-        subCategoryProductsInterface = (SubCategoryProductsInterface) context;
     }
 
     @NonNull
