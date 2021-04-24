@@ -12,10 +12,15 @@ import com.adbazarnet.Models.UserDetailsModel;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
@@ -34,6 +39,11 @@ public interface ApiInterface {
                                                           @Query("offset") int offset,
                                                           @Query("category__slug") String ad_type);
 
+    @GET("posts/?limit=20&offset=0&location__slug=Bangshal")
+    Call<SubCategoryProductModel> getProductByLocation(@Query("limit") int limit,
+                                                          @Query("offset") int offset,
+                                                          @Query("location__slug") String slug);
+
     @POST("account/auth/")
     @FormUrlEncoded
     Call<UserDetailsModel> userLogin(@Field("username") String phone,
@@ -45,6 +55,7 @@ public interface ApiInterface {
                             @Field("phone_number") String phone,
                             @Field("email") String email,
                             @Field("password") String password);
+
     @GET("logout/")
     Call<UserDetailsModel> logoutUser();
 
@@ -53,5 +64,8 @@ public interface ApiInterface {
 
     @GET("locations/")
     Call<List<LocationsModel>> getAllLocations();
+
+    @PATCH("account/auth/profile/")
+    Call<User> updateProfile(@Header("Authorization") String token, @Body User user);
 
 }

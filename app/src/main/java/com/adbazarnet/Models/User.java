@@ -3,6 +3,7 @@ package com.adbazarnet.Models;
 import java.util.List;
 
 public class User {
+
     private Integer id;
     private String name;
     private String avatar;
@@ -23,6 +24,13 @@ public class User {
         this.type = type;
         this.membership_name = membership_name;
         this.user_phone_numbers = user_phone_numbers;
+    }
+
+    public User(String name, String avatar, String email, String phone_number) {
+        this.name = name;
+        this.avatar = avatar;
+        this.email = email;
+        this.phone_number = phone_number;
     }
 
     public User() {

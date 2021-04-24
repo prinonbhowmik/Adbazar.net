@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#646464"
+    tools:context=".Activity.ProfileActivity">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/theme">
+
+        <ImageView
+            android:id="@+id/navIcon"
+            android:layout_width="25sp"
+            android:layout_height="25sp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_menu" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/navIcon"
+            android:layout_toRightOf="@+id/navIcon"
+            android:fontFamily="@font/comfortaa"
+            android:gravity="center_vertical"
+            android:text="AdBazar.net"
+            android:textColor="@color/white"
+            android:textSize="21sp" />
+
+        <ImageView
+            android:id="@+id/homeSearchIV"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_home_search" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#D8D7D7"
+        android:layout_below="@+id/toolbar">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:backgroundTint="#fff"
+            android:background="@drawable/category_layout_design">
+            <TextView
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:padding="10dp"
+                android:background="@drawable/category_header_layout"
+                android:textColor="#000"
+                android:text="Your profile information"
+                android:textSize="20sp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileIv"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_below="@+id/header"
+                android:layout_margin="20dp"
+                android:layout_centerHorizontal="true"/>
+
+            <TextView
+                android:id="@+id/nameTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name :"
+                android:textSize="20sp"
+                android:layout_below="@+id/profileIv"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                android:textColor="#6C6767"/>
+
+            <EditText
+                android:id="@+id/nameEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nameTag"
+                android:layout_margin="10dp"
+                android:textColor="#000"
+                android:background="@drawable/edittex_design"
+                android:padding="10dp"/>
+
+            <TextView
+                android:id="@+id/phoneTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone Number :"
+                android:textSize="20sp"
+                android:layout_below="@+id/nameEt"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                android:textColor="#6C6767"/>
+
+            <EditText
+                android:id="@+id/phnEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phoneTag"
+                android:layout_margin="10dp"
+                android:textColor="#000"
+                android:inputType="phone"
+                android:background="@drawable/edittex_design"
+                android:padding="10dp"/>
+
+            <TextView
+                android:id="@+id/emailTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email :"
+                android:textSize="20sp"
+                android:layout_below="@+id/phnEt"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                android:textColor="#6C6767"/>
+
+            <EditText
+                android:id="@+id/emailEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/emailTag"
+                android:layout_margin="10dp"
+                android:textColor="#000"
+                android:inputType="textEmailAddress"
+                android:background="@drawable/edittex_design"
+                android:padding="10dp"/>
+
+            <Button
+                android:id="@+id/updateProfileBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/btn_background"
+                android:layout_below="@+id/emailEt"
+                android:text="Update Profile"
+                android:textAllCaps="false"
+                android:textSize="18sp"/>
+
+            <View
+                android:id="@+id/v1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CFCFCF"
+                android:layout_below="@+id/updateProfileBtn"
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:id="@+id/oldpassTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Old Password :"
+                android:textSize="20sp"
+                android:layout_below="@+id/v1"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                android:textColor="#6C6767"/>
+
+            <EditText
+                android:id="@+id/oldPassEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/oldpassTag"
+                android:layout_margin="10dp"
+                android:textColor="#000"
+                android:inputType="textPassword"
+                android:background="@drawable/edittex_design"
+                android:padding="10dp"/>
+
+            <TextView
+                android:id="@+id/newpassTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Password :"
+                android:textSize="20sp"
+                android:layout_below="@+id/oldPassEt"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                android:textColor="#6C6767"/>
+
+            <EditText
+                android:id="@+id/newPassEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/newpassTag"
+                android:layout_margin="10dp"
+                android:textColor="#000"
+                android:hint="New Password"
+                android:background="@drawable/edittex_design"
+                android:padding="10dp"/>
+
+            <TextView
+                android:id="@+id/confirmPassTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confirm Password :"
+                android:textSize="20sp"
+                android:layout_below="@+id/newPassEt"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                android:textColor="#6C6767"/>
+
+            <EditText
+                android:id="@+id/confirmPassEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/confirmPassTag"
+                android:layout_margin="10dp"
+                android:textColor="#000"
+                android:hint="Confirm new password"
+                android:inputType="textPassword"
+                android:background="@drawable/edittex_design"
+                android:padding="10dp"/>
+
+            <Button
+                android:id="@+id/updatePassBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn_background"
+                android:layout_below="@+id/confirmPassEt"
+                android:text="Change Password"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:layout_marginBottom="25dp"/>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

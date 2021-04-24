@@ -106,7 +106,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             profile.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(MainActivity.this,ProfileActivity.class));
+                                    finish();
                                 }
                             });
 

@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AdBazarnet">
-        <activity android:name=".Activity.AdDetailsActivity"></activity>
+        <activity android:name=".Activity.ProfileActivity"></activity>
+        <activity android:name=".Activity.AdDetailsActivity" />
         <activity android:name=".Activity.SignupActivity" />
         <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.SplashScreen">

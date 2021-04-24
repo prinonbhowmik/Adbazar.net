@@ -80,6 +80,10 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("token", token);
                         editor.putInt("loggedIn", 1);
                         editor.putInt("id", id);
+                        editor.putString("name", response.body().getUser().getName());
+                        editor.putString("avatar", response.body().getUser().getAvatar());
+                        editor.putString("email", response.body().getUser().getEmail());
+                        editor.putString("phone_number", response.body().getUser().getPhone_number());
                         editor.commit();
                         Log.d("ShowToken",token+","+id);
                         Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();

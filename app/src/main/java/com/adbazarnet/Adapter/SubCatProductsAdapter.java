@@ -1,6 +1,7 @@
 package com.adbazarnet.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,15 @@ public class SubCatProductsAdapter extends RecyclerView.Adapter<SubCatProductsAd
         holder.productNameTv.setText(model.getAd_title());
         holder.productPrice.setText(""+model.getPrice());
         holder.locationTv.setText(model.getSub_location()+","+model.getLocation());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("GetID", String.valueOf(model.getId()));
+            }
+        });
+
+
 
     }
 

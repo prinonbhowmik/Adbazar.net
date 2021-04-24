@@ -52,7 +52,7 @@ public class SubLocationAdapter extends RecyclerView.Adapter<SubLocationAdapter.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<SubCategoryProductModel> call = ApiUtils.getUserService().getSubCategoriesProduct(50,0,model.getSlug());
+                Call<SubCategoryProductModel> call = ApiUtils.getUserService().getProductByLocation(50,0,model.getSlug());
                 call.enqueue(new Callback<SubCategoryProductModel>() {
                     @Override
                     public void onResponse(Call<SubCategoryProductModel> call, Response<SubCategoryProductModel> response) {
