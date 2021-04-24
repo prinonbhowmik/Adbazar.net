@@ -41,8 +41,8 @@ public interface ApiInterface {
 
     @GET("posts/?limit=20&offset=0&location__slug=Bangshal")
     Call<SubCategoryProductModel> getProductByLocation(@Query("limit") int limit,
-                                                          @Query("offset") int offset,
-                                                          @Query("location__slug") String slug);
+                                                       @Query("offset") int offset,
+                                                       @Query("location__slug") String slug);
 
     @POST("account/auth/")
     @FormUrlEncoded
@@ -67,5 +67,8 @@ public interface ApiInterface {
 
     @PATCH("account/auth/profile/")
     Call<User> updateProfile(@Header("Authorization") String token, @Body User user);
+
+    @PATCH("account/auth/change-password/")
+    Call<UserDetailsModel> updatePassword(@Header("Authorization") String token, @Body UserDetailsModel user);
 
 }

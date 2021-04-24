@@ -26,9 +26,8 @@ public class User {
         this.user_phone_numbers = user_phone_numbers;
     }
 
-    public User(String name, String avatar, String email, String phone_number) {
+    public User(String name, String email, String phone_number) {
         this.name = name;
-        this.avatar = avatar;
         this.email = email;
         this.phone_number = phone_number;
     }
