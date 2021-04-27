@@ -43,7 +43,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (nameEt.getText().toString()==null){
                     nameEt.setError("Please provide name!");
-                }else if(emailEt.getText().toString()==null || !emailEt.getText().toString().contains("@") || emailEt.getText().toString().contains(".")){
+                }else if(emailEt.getText().toString()==null || !emailEt.getText().toString().contains("@") || !emailEt.getText().toString().contains(".")){
                     emailEt.setError("Please provide valid email address");
                 }else if(phnEt.getText().toString()==null || phnEt.getText().toString().length()<11){
                     phnEt.setError("Please provide valid phone no.");
@@ -91,17 +91,12 @@ public class ProfileActivity extends AppCompatActivity {
                     call.enqueue(new Callback<UserDetailsModel>() {
                         @Override
                         public void onResponse(Call<UserDetailsModel> call, Response<UserDetailsModel> response) {
-                            if (response.isSuccessful()){
+                            if (response.code()==200) {
                                 Toast.makeText(ProfileActivity.this, "Password Updated", Toast.LENGTH_SHORT).show();
                                 startActivity(getIntent());
                                 finish();
-                                /*if (response.body().getStatus().equals("success")){
-                                    Toast.makeText(ProfileActivity.this, "Password Updated", Toast.LENGTH_SHORT).show();
-                                    startActivity(getIntent());
-                                    finish();
-                                }else{
-                                    Toast.makeText(ProfileActivity.this, "Wrong Password", Toast.LENGTH_SHORT).show();
-                                }*/
+                            }else if(response.code()==400){
+                                Toast.makeText(ProfileActivity.this, "Password Update Failed", Toast.LENGTH_SHORT).show();
                             }
                         }
 

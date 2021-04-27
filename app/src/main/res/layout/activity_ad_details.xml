@@ -50,26 +50,300 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#D8D7D7"
-        android:layout_below="@+id/toolbar">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:background="#D8D7D7">
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:backgroundTint="#fff"
-            android:background="@drawable/category_layout_design">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/header"
+
+            <RelativeLayout
+                android:id="@+id/layout1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:padding="10dp"
-                android:background="@drawable/category_header_layout"
-                android:textColor="#000"
-                android:text=" Ad Details"
-                android:textSize="20sp" />
+                android:layout_margin="15dp"
+                android:background="@drawable/category_layout_design"
+                android:backgroundTint="#fff">
+
+                <TextView
+                    android:id="@+id/header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/category_header_layout"
+                    android:fontFamily="@font/roboto"
+                    android:padding="10dp"
+                    android:text=" Ad Details"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/sliderCardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/header"
+                    app:cardCornerRadius="6dp">
+
+                    <com.smarteist.autoimageslider.SliderView
+                        android:id="@+id/imageSlider"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        app:sliderAnimationDuration="2000"
+                        app:sliderAutoCycleDirection="back_and_forth"
+                        app:sliderAutoCycleEnabled="true"
+                        app:sliderIndicatorAnimationDuration="600"
+                        app:sliderIndicatorGravity="center_horizontal|bottom"
+                        app:sliderIndicatorMargin="15dp"
+                        app:sliderIndicatorOrientation="horizontal"
+                        app:sliderIndicatorPadding="3dp"
+                        app:sliderIndicatorRadius="2dp"
+                        app:sliderIndicatorSelectedColor="#5A5A5A"
+                        app:sliderIndicatorUnselectedColor="#FFF"
+                        app:sliderScrollTimeInSec="4"
+                        app:sliderStartAutoCycle="true" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/productName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/sliderCardView"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="Apple Iphone 11"
+                    android:textColor="#343a40"
+                    android:textFontWeight="700"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/productPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/productName"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="99,000"
+                    android:textColor="#ff4500"
+                    android:textFontWeight="700"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/uploadTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/productPrice"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="2 months ago"
+                    android:textColor="#646464"
+                    android:textFontWeight="700"
+                    android:textSize="16sp" />
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/uploadTime"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="#e5e5e5" />
+
+                <TextView
+                    android:id="@+id/txt1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/view1"
+                    android:layout_margin="10dp"
+                    android:drawableLeft="@drawable/ic_next"
+                    android:fontFamily="@font/roboto"
+                    android:text="  Category :"
+                    android:textColor="#646464"
+                    android:textFontWeight="700"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/categoryTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/view1"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@+id/txt1"
+                    android:fontFamily="@font/roboto"
+                    android:text=" Mobile"
+                    android:textColor="#646464"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/txt2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt1"
+                    android:layout_margin="10dp"
+                    android:drawableLeft="@drawable/ic_next"
+                    android:fontFamily="@font/roboto"
+                    android:text="  Condition :"
+                    android:textColor="#646464"
+                    android:textFontWeight="700"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/conditionTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt1"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@+id/txt2"
+                    android:fontFamily="@font/roboto"
+                    android:text=" New"
+                    android:textColor="#646464"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/txt3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt2"
+                    android:layout_margin="10dp"
+                    android:drawableLeft="@drawable/ic_next"
+                    android:fontFamily="@font/roboto"
+                    android:text="  Warranty :"
+                    android:textColor="#646464"
+                    android:textFontWeight="700"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/warrantyTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt2"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@+id/txt3"
+                    android:fontFamily="@font/roboto"
+                    android:text=" 1"
+                    android:textColor="#646464"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/txt4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt3"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/roboto"
+                    android:text=" Product Description:"
+                    android:textColor="#646464"
+                    android:textSize="18sp" />
+
+                <RelativeLayout
+                    android:id="@+id/descriptionLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt4"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/category_layout_design">
+
+                    <TextView
+                        android:id="@+id/descriptionTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:textColor="#000"
+                        android:textSize="20sp" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/favouriteTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/descriptionLayout"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/textview_design"
+                    android:drawableLeft="@drawable/ic_favorite_heart_button"
+                    android:fontFamily="@font/roboto"
+                    android:padding="10dp"
+                    android:text="  Favourite"
+                    android:textColor="#646464"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/shareTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/descriptionLayout"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/textview_design"
+                    android:drawableLeft="@drawable/ic_baseline_share_24"
+                    android:fontFamily="@font/roboto"
+                    android:layout_toEndOf="@+id/favouriteTv"
+                    android:padding="10dp"
+                    android:text="  Share"
+                    android:textColor="#646464"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout1"
+                android:layout_margin="15dp"
+                android:background="@drawable/category_layout_design">
+
+                <TextView
+                    android:id="@+id/header2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/category_header_layout"
+                    android:fontFamily="@font/roboto"
+                    android:padding="10dp"
+                    android:text=" Related Ads"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/relatedProductRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/header2"
+                     />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sellerLayout"
+                android:layout_below="@+id/layout2"
+                android:layout_margin="15dp"
+                android:background="@drawable/category_layout_design">
+                <TextView
+                    android:id="@+id/sellerHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/category_header_layout"
+                    android:fontFamily="@font/roboto"
+                    android:padding="10dp"
+                    android:text=" Seller Information"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
+
+
+            </RelativeLayout>
 
         </RelativeLayout>
     </ScrollView>

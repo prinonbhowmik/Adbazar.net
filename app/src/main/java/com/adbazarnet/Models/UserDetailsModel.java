@@ -4,13 +4,13 @@ public class UserDetailsModel {
     private String token;
     private String error;
     private String status;
-    private String oldPass;
-    private String newPass;
+    private String old_password;
+    private String new_password;
     private User user;
 
-    public UserDetailsModel(String oldPass, String newPass) {
-        this.oldPass = oldPass;
-        this.newPass = newPass;
+    public UserDetailsModel(String old_password, String new_password) {
+        this.old_password = old_password;
+        this.new_password = new_password;
     }
 
     public String getToken() {
@@ -25,15 +25,15 @@ public class UserDetailsModel {
         return user;
     }
 
-    public String getOldPass() {
-        return oldPass;
-    }
-
     public String getStatus() {
         return status;
     }
 
-    public String getNewPass() {
-        return newPass;
+    public String getOld_password() {
+        return old_password;
+    }
+
+    public String getNew_password() {
+        return new_password;
     }
 }

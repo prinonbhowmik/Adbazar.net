@@ -1,6 +1,7 @@
 package com.adbazarnet.Api;
 
 
+import com.adbazarnet.Models.AdDetails;
 import com.adbazarnet.Models.CategoriesModel;
 import com.adbazarnet.Models.CategorisQueryModel;
 import com.adbazarnet.Models.LocationsModel;
@@ -70,5 +71,9 @@ public interface ApiInterface {
 
     @PATCH("account/auth/change-password/")
     Call<UserDetailsModel> updatePassword(@Header("Authorization") String token, @Body UserDetailsModel user);
+
+    @GET("posts/{id}/")
+    Call<AdDetails> getAdDetails(@Path("id") int id);
+
 
 }

@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
         call.enqueue(new Callback<UserDetailsModel>() {
             @Override
             public void onResponse(Call<UserDetailsModel> call, Response<UserDetailsModel> response) {
-                if (response.isSuccessful()){
+                if (response.code()==200){
                     String token = response.body().getToken();
                     if (token!=null){
                         int id = response.body().getUser().getId();
@@ -89,10 +89,9 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(LoginActivity.this,MainActivity.class));
                         finish();
-                    }else{
-                        String error = response.body().getError();
-                        Toast.makeText(LoginActivity.this, ""+error, Toast.LENGTH_SHORT).show();
                     }
+                }else if(response.code()==400 || response.code()==404){
+                    Toast.makeText(LoginActivity.this, "Login Failed!", Toast.LENGTH_SHORT).show();
                 }
             }
 

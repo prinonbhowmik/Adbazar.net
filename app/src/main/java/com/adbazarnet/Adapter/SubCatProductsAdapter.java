@@ -1,6 +1,7 @@
 package com.adbazarnet.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +13,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.adbazarnet.Activity.AdDetailsActivity;
 import com.adbazarnet.Fragments.HomeFragment;
 import com.adbazarnet.Interface.SubCategoryProductsInterface;
+import com.adbazarnet.Models.AdDetails;
 import com.adbazarnet.Models.ProductModel;
 import com.adbazarnet.R;
 import com.squareup.picasso.Picasso;
@@ -57,10 +60,9 @@ public class SubCatProductsAdapter extends RecyclerView.Adapter<SubCatProductsAd
             @Override
             public void onClick(View v) {
                 Log.d("GetID", String.valueOf(model.getId()));
+                context.startActivity(new Intent(context, AdDetailsActivity.class).putExtra("id",model.getId()));
             }
         });
-
-
 
     }
 
