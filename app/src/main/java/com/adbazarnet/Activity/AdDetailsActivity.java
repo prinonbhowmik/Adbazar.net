@@ -19,9 +19,11 @@ import com.adbazarnet.R;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,7 +33,9 @@ public class AdDetailsActivity extends AppCompatActivity {
     private int id;
     private SliderView imageSlider;
     private ImageSliderAdapter sliderAdapter;
-    private TextView productName,productPrice,uploadTime,categoryTv,conditionTv,warrantyTv,descriptionTv;
+    private CircleImageView sellerProfileIv;
+    private TextView productName,productPrice,uploadTime,categoryTv,conditionTv,
+            warrantyTv,descriptionTv,sellerNameTv,locationTv,noDataTv,membershipTV;
     private RecyclerView relatedProductRecycler;
     private RelatedProductAdapter relatedProductAdapter;
 
@@ -59,6 +63,22 @@ public class AdDetailsActivity extends AppCompatActivity {
                             +response.body().getCategory().getName());
                     conditionTv.setText(response.body().getCondition());
                     descriptionTv.setText(response.body().getDescription());
+                    sellerNameTv.setText(response.body().getUser().getName());
+                    locationTv.setText(response.body().getLocation().getName()+", "+
+                            response.body().getLocation().getLocation_name());
+                    membershipTV.setText(response.body().getUser().getMembership_name()+" Member");
+
+                    if (response.body().getUser().getAvatar()!=null) {
+                        try {
+                            Picasso.get()
+                                    .load(response.body().getUser().getAvatar())
+                                    .into(sellerProfileIv);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }else{
+                        sellerProfileIv.setImageResource(R.drawable.ic_user);
+                    }
                     if (response.body().getWarranty()==null) {
                         warrantyTv.setVisibility(View.GONE);
                     }else{
@@ -79,9 +99,14 @@ public class AdDetailsActivity extends AppCompatActivity {
     }
 
     private void getRelatedProduct(List<RelatedAds> relatedAds) {
-        relatedProductAdapter = new RelatedProductAdapter(relatedAds,this);
-        relatedProductRecycler.setAdapter(relatedProductAdapter);
-        relatedProductAdapter.notifyDataSetChanged();
+        if (relatedAds.size()>0) {
+            relatedProductAdapter = new RelatedProductAdapter(relatedAds, this);
+            relatedProductRecycler.setAdapter(relatedProductAdapter);
+            relatedProductAdapter.notifyDataSetChanged();
+        }else{
+            relatedProductRecycler.setVisibility(View.GONE);
+            noDataTv.setVisibility(View.VISIBLE);
+        }
     }
 
     private void getSliderImage(List<AdImages> images) {
@@ -102,6 +127,11 @@ public class AdDetailsActivity extends AppCompatActivity {
         conditionTv = findViewById(R.id.conditionTv);
         warrantyTv = findViewById(R.id.warrantyTv);
         descriptionTv = findViewById(R.id.descriptionTv);
+        sellerProfileIv = findViewById(R.id.sellerProfileIv);
+        locationTv = findViewById(R.id.LocationTv);
+        noDataTv = findViewById(R.id.noDataTv);
+        membershipTV = findViewById(R.id.membershipTV);
+        sellerNameTv = findViewById(R.id.sellerNameTv);
         relatedProductRecycler = findViewById(R.id.relatedProductRecycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         relatedProductRecycler.setLayoutManager(layoutManager);
