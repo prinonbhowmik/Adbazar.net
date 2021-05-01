@@ -1,0 +1,31 @@
+package com.adbazarnet.Models;
+
+public class FavouriteAds {
+    private int id;
+    private AdDetails ad_detail;
+    private int user;
+    private int ad;
+
+    public FavouriteAds(int id, AdDetails ad_detail, int user, int ad) {
+        this.id = id;
+        this.ad_detail = ad_detail;
+        this.user = user;
+        this.ad = ad;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public AdDetails getAd_detail() {
+        return ad_detail;
+    }
+
+    public int getUser() {
+        return user;
+    }
+
+    public int getAd() {
+        return ad;
+    }
+}

@@ -5,15 +5,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.adbazarnet.Adapter.ImageSliderAdapter;
 import com.adbazarnet.Adapter.RelatedProductAdapter;
 import com.adbazarnet.Api.ApiUtils;
 import com.adbazarnet.Models.AdDetails;
 import com.adbazarnet.Models.AdImages;
+import com.adbazarnet.Models.FavouriteAds;
 import com.adbazarnet.Models.RelatedAds;
 import com.adbazarnet.R;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
@@ -30,14 +35,17 @@ import retrofit2.Response;
 
 public class AdDetailsActivity extends AppCompatActivity {
 
-    private int id;
+    private int id,userId;
     private SliderView imageSlider;
     private ImageSliderAdapter sliderAdapter;
     private CircleImageView sellerProfileIv;
     private TextView productName,productPrice,uploadTime,categoryTv,conditionTv,
-            warrantyTv,descriptionTv,sellerNameTv,locationTv,noDataTv,membershipTV;
+            warrantyTv,descriptionTv,sellerNameTv,locationTv,noDataTv,membershipTV,
+            favouriteTv,callNowTV;
     private RecyclerView relatedProductRecycler;
     private RelatedProductAdapter relatedProductAdapter;
+    private SharedPreferences sharedPreferences;
+    private String token,userPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +75,7 @@ public class AdDetailsActivity extends AppCompatActivity {
                     locationTv.setText(response.body().getLocation().getName()+", "+
                             response.body().getLocation().getLocation_name());
                     membershipTV.setText(response.body().getUser().getMembership_name()+" Member");
+                    userPhone = response.body().getUser().getPhone_number();
 
                     if (response.body().getUser().getAvatar()!=null) {
                         try {
@@ -93,6 +102,34 @@ public class AdDetailsActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<AdDetails> call, Throwable t) {
 
+            }
+        });
+
+        favouriteTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Call<List<FavouriteAds>> call1 = ApiUtils.getUserService().addToFav("Token "+token,userId,id);
+                call1.enqueue(new Callback<List<FavouriteAds>>() {
+                    @Override
+                    public void onResponse(Call<List<FavouriteAds>> call, Response<List<FavouriteAds>> response) {
+                        Toast.makeText(AdDetailsActivity.this, "Added to Favourite", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<FavouriteAds>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+
+        callNowTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                callIntent.setData(Uri.parse("tel:"+userPhone));
+                startActivity(callIntent);
             }
         });
 
@@ -124,6 +161,7 @@ public class AdDetailsActivity extends AppCompatActivity {
         productPrice = findViewById(R.id.productPrice);
         uploadTime = findViewById(R.id.uploadTime);
         categoryTv = findViewById(R.id.categoryTv);
+        callNowTV = findViewById(R.id.callNowTV);
         conditionTv = findViewById(R.id.conditionTv);
         warrantyTv = findViewById(R.id.warrantyTv);
         descriptionTv = findViewById(R.id.descriptionTv);
@@ -131,11 +169,15 @@ public class AdDetailsActivity extends AppCompatActivity {
         locationTv = findViewById(R.id.LocationTv);
         noDataTv = findViewById(R.id.noDataTv);
         membershipTV = findViewById(R.id.membershipTV);
+        favouriteTv = findViewById(R.id.favouriteTv);
         sellerNameTv = findViewById(R.id.sellerNameTv);
         relatedProductRecycler = findViewById(R.id.relatedProductRecycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         relatedProductRecycler.setLayoutManager(layoutManager);
         sliderAdapter = new ImageSliderAdapter(this);
-
+        sharedPreferences = getSharedPreferences("MyRef", MODE_PRIVATE);
+        token = sharedPreferences.getString("token",null);
+        userId = sharedPreferences.getInt("id",0);
+        Log.d("ShowToken",userId+","+id);
     }
 }
