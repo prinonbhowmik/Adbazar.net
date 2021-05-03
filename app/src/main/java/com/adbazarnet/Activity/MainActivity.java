@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         init();
+        Intent intent = getIntent();
+        String loadFragment = intent.getStringExtra("fragment");
         sharedPreferences = getSharedPreferences("MyRef",MODE_PRIVATE);
         id = sharedPreferences.getInt("id",0);
         loggedIn = sharedPreferences.getInt("loggedIn",0);
@@ -54,8 +56,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.getMenu().removeItem(R.id.login);
         }
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
-        chipNavigationBar.setItemSelected(R.id.home,true);
+        chipNavigationBar.setItemSelected(R.id.home, true);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+
+        navigationView.getMenu().getItem(0).setChecked(true);
+        navigationView.getMenu().getItem(1).setChecked(false);
+        navigationView.getMenu().getItem(2).setChecked(false);
+        navigationView.getMenu().getItem(3).setChecked(false);
 
         chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override
@@ -100,6 +107,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     dialog.dismiss();
                                     finish();
                                     startActivity(getIntent());
+                                }
+                            });
+
+                            myAds.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(MainActivity.this,MyAdsActivity.class));
+                                }
+                            });
+
+                            favouriteTv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    chipNavigationBar.setItemSelected(R.id.favourite, true);
+                                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FavouriteFragment()).commit();
+                                    dialog.dismiss();
                                 }
                             });
 

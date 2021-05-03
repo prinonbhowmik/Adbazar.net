@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    tools:context=".Fragments.FavouriteFragment">
+    tools:context=".Activity.MyAdsActivity">
 
     <RelativeLayout
         android:id="@+id/toolbar"
@@ -49,25 +50,22 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
         android:layout_margin="15dp"
-        android:background="@drawable/category_layout_design"
-        android:backgroundTint="#fff">
-
+        android:backgroundTint="#fff"
+        android:layout_below="@+id/toolbar"
+        android:background="@drawable/category_layout_design">
         <TextView
             android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/category_header_layout"
             android:fontFamily="@font/roboto"
             android:padding="10dp"
-            android:text="Favourite Ads"
+            android:background="@drawable/category_header_layout"
             android:textColor="#000"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:text="My Ads"
+            android:textSize="20sp" />
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -147,10 +145,42 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/expiretxt"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/statustxt"
+                        android:background="@drawable/category_layout_design"
+                        android:fontFamily="@font/roboto"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="15dp"
+                        android:paddingRight="20dp"
+                        android:paddingBottom="15dp"
+                        android:text="Expire"
+                        android:textColor="#000"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/topAdtxt"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/expiretxt"
+                        android:background="@drawable/category_layout_design"
+                        android:fontFamily="@font/roboto"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="15dp"
+                        android:paddingRight="20dp"
+                        android:paddingBottom="15dp"
+                        android:text="Expire"
+                        android:textColor="#000"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+
+                    <TextView
                         android:id="@+id/actiontxt"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:layout_toEndOf="@+id/statustxt"
+                        android:layout_toEndOf="@+id/topAdtxt"
                         android:background="@drawable/category_layout_design"
                         android:fontFamily="@font/roboto"
                         android:paddingLeft="15dp"

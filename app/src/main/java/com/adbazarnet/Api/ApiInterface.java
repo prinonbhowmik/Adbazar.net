@@ -83,5 +83,8 @@ public interface ApiInterface {
                                       @Field("user") int userId,
                                       @Field("ad") int adId);
 
+    @GET("favourite-posts/")
+    Call<List<FavouriteAds>> getFavouriteAds(@Header("Authorization") String token);
+
 
 }

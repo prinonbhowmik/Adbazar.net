@@ -112,7 +112,6 @@ public class AdDetailsActivity extends AppCompatActivity {
                 call1.enqueue(new Callback<List<FavouriteAds>>() {
                     @Override
                     public void onResponse(Call<List<FavouriteAds>> call, Response<List<FavouriteAds>> response) {
-                        Toast.makeText(AdDetailsActivity.this, "Added to Favourite", Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -121,6 +120,7 @@ public class AdDetailsActivity extends AppCompatActivity {
 
                     }
                 });
+                Toast.makeText(AdDetailsActivity.this, "Added to Favourite", Toast.LENGTH_SHORT).show();
             }
         });
 
