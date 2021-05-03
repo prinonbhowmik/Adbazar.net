@@ -1,8 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="400dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#fff">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/successLottie"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:lottie_autoPlay="true"
+        android:layout_margin="25dp"
+        android:layout_centerHorizontal="true"
+        app:lottie_fileName="correct.json"
+        app:lottie_loop="true"
+        tools:ignore="MissingConstraints" />
 
+    <TextView
+        android:id="@+id/successTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/successLottie"
+        android:text="Success!"
+        android:textSize="31sp"
+        android:textColor="#000"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/successTxt"
+        android:fontFamily="@font/roboto"
+        android:textSize="21sp"
+        android:layout_margin="10dp"
+        android:textColor="#646464"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/okBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ok"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:layout_margin="10dp"
+        android:backgroundTint="#007bff"
+        android:layout_below="@id/textview"
+        android:padding="10dp"
+        android:textAllCaps="false"
+        android:textColor="#fff"/>
 
 </RelativeLayout>

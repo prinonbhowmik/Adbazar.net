@@ -8,6 +8,7 @@ public class FavouriteAdDetails {
     private String category;
     private String sub_category;
     private String location;
+    private String publish_status;
     private String sub_location;
     private int price;
     private String created;
@@ -15,7 +16,7 @@ public class FavouriteAdDetails {
     private boolean is_bid;
     private boolean is_job;
 
-    public FavouriteAdDetails(int id, String thumbnail, String ad_title, boolean top_ad, String category, String sub_category, String location, String sub_location, int price, String created, int bid_count, boolean is_bid, boolean is_job) {
+    public FavouriteAdDetails(int id, String thumbnail, String ad_title, boolean top_ad, String category, String sub_category, String location, String publish_status, String sub_location, int price, String created, int bid_count, boolean is_bid, boolean is_job) {
         this.id = id;
         this.thumbnail = thumbnail;
         this.ad_title = ad_title;
@@ -23,6 +24,7 @@ public class FavouriteAdDetails {
         this.category = category;
         this.sub_category = sub_category;
         this.location = location;
+        this.publish_status = publish_status;
         this.sub_location = sub_location;
         this.price = price;
         this.created = created;
@@ -68,6 +70,10 @@ public class FavouriteAdDetails {
 
     public int getPrice() {
         return price;
+    }
+
+    public String getPublish_status() {
+        return publish_status;
     }
 
     public String getCreated() {

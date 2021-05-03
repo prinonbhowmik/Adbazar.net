@@ -4,6 +4,7 @@ package com.adbazarnet.Api;
 import com.adbazarnet.Models.AdDetails;
 import com.adbazarnet.Models.CategoriesModel;
 import com.adbazarnet.Models.CategorisQueryModel;
+import com.adbazarnet.Models.FavouriteAdDetails;
 import com.adbazarnet.Models.FavouriteAds;
 import com.adbazarnet.Models.LocationsModel;
 import com.adbazarnet.Models.ProductModel;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -85,6 +87,13 @@ public interface ApiInterface {
 
     @GET("favourite-posts/")
     Call<List<FavouriteAds>> getFavouriteAds(@Header("Authorization") String token);
+
+    @GET("myposts/")
+    Call<List<FavouriteAdDetails>> getMyAds(@Header("Authorization") String token);
+
+    @DELETE("favourite-posts/{id}/")
+    Call<FavouriteAds> deleteFavourites(@Header("Authorization") String token,
+                                        @Path("id") int id);
 
 
 }

@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -120,7 +122,21 @@ public class AdDetailsActivity extends AppCompatActivity {
 
                     }
                 });
-                Toast.makeText(AdDetailsActivity.this, "Added to Favourite", Toast.LENGTH_SHORT).show();
+                Dialog dialog2 = new Dialog(AdDetailsActivity.this);
+                dialog2.setContentView(R.layout.success_popup);
+                dialog2.setCancelable(false);
+                dialog2.show();
+                TextView textView = dialog2.findViewById(R.id.textview);
+                Button okBtn = dialog2.findViewById(R.id.okBtn);
+                textView.setText("Ad Saved Successfully.");
+
+                okBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog2.dismiss();
+
+                    }
+                });
             }
         });
 

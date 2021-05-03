@@ -130,7 +130,7 @@
 
                     <TextView
                         android:id="@+id/statustxt"
-                        android:layout_width="80dp"
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:layout_toEndOf="@+id/pricetxt"
                         android:background="@drawable/category_layout_design"
@@ -146,7 +146,7 @@
 
                     <TextView
                         android:id="@+id/expiretxt"
-                        android:layout_width="100dp"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
                         android:layout_toEndOf="@+id/statustxt"
                         android:background="@drawable/category_layout_design"
@@ -170,11 +170,10 @@
                         android:paddingTop="15dp"
                         android:paddingRight="20dp"
                         android:paddingBottom="15dp"
-                        android:text="Expire"
+                        android:text="Top Ad"
                         android:textColor="#000"
                         android:textSize="14sp"
                         android:textStyle="bold" />
-
 
                     <TextView
                         android:id="@+id/actiontxt"
@@ -202,7 +201,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/favouriteRecycler"
+                        android:id="@+id/myAdsRecycler"
                         android:nestedScrollingEnabled="false"/>
 
                 </RelativeLayout>
