@@ -91,9 +91,8 @@
                                 android:id="@+id/totalAdsTv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="1"
                                 android:textColor="#fff"
-                                android:textSize="50sp"
+                                android:textSize="40sp"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginRight="15dp"
                                 android:layout_alignParentRight="true"/>
@@ -103,7 +102,6 @@
                                 android:layout_below="@+id/totalAdsTv"
                                 android:textColor="#fff"
                                 android:hint="Total Ads"
-                                android:textColorHint="#F8F6F6"
                                 android:textSize="20sp"
                                 android:textFontWeight="-60"
                                 android:layout_marginBottom="20dp"
@@ -129,9 +127,8 @@
                                 android:id="@+id/pendingAdsTv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="1"
                                 android:textColor="#fff"
-                                android:textSize="50sp"
+                                android:textSize="40sp"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginRight="15dp"
                                 android:layout_alignParentRight="true"/>
@@ -140,7 +137,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/pendingAdsTv"
                                 android:hint="Pending Ads"
-                                android:textColorHint="#F8F6F6"
                                 android:textSize="20sp"
                                 android:textFontWeight="-60"
                                 android:layout_marginBottom="20dp"
@@ -174,9 +170,8 @@
                                 android:id="@+id/liveAdsTv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="1"
                                 android:textColor="#fff"
-                                android:textSize="50sp"
+                                android:textSize="40sp"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginRight="15dp"
                                 android:layout_alignParentRight="true"/>
@@ -186,7 +181,6 @@
                                 android:layout_below="@+id/liveAdsTv"
                                 android:textColor="#fff"
                                 android:hint="Live Ads"
-                                android:textColorHint="#F8F6F6"
                                 android:textSize="20sp"
                                 android:textFontWeight="-60"
                                 android:layout_marginBottom="20dp"
@@ -212,9 +206,8 @@
                                 android:id="@+id/expiredAdsTv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="1"
                                 android:textColor="#fff"
-                                android:textSize="50sp"
+                                android:textSize="40sp"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginRight="15dp"
                                 android:layout_alignParentRight="true"/>
@@ -223,7 +216,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/expiredAdsTv"
                                 android:hint="Expired Ads"
-                                android:textColorHint="#F8F6F6"
                                 android:textSize="20sp"
                                 android:textFontWeight="-60"
                                 android:layout_marginBottom="20dp"
@@ -239,12 +231,192 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/txt1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="User Information"
                 android:layout_below="@+id/layout1"
                 android:textColor="#000"
+                android:layout_marginLeft="15dp"
                 android:textSize="20sp"/>
+
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt1"
+                android:background="#fff">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#fff">
+
+                    <RelativeLayout
+                        android:id="@+id/headerLayot"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#fff">
+
+                        <TextView
+                            android:id="@+id/memberTxt"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/category_layout_design"
+                            android:fontFamily="@font/roboto"
+                            android:padding="15dp"
+                            android:text="Membership"
+                            android:textColor="#000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/expireTxt"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@+id/memberTxt"
+                            android:background="@drawable/category_layout_design"
+                            android:fontFamily="@font/roboto"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="15dp"
+                            android:paddingRight="40dp"
+                            android:paddingBottom="15dp"
+                            android:text="Expire at"
+                            android:textColor="#000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/credittxt"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@+id/expireTxt"
+                            android:background="@drawable/category_layout_design"
+                            android:fontFamily="@font/roboto"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="15dp"
+                            android:paddingRight="20dp"
+                            android:paddingBottom="15dp"
+                            android:text="Credit/Month"
+                            android:textColor="#000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/remaingtxt"
+                            android:layout_width="110dp"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@+id/credittxt"
+                            android:background="@drawable/category_layout_design"
+                            android:fontFamily="@font/roboto"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="15dp"
+                            android:paddingRight="20dp"
+                            android:paddingBottom="15dp"
+                            android:text="Remaining"
+                            android:textColor="#000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/headerLayot2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/headerLayot"
+                        android:background="#fff">
+
+                        <RelativeLayout
+                            android:id="@+id/memberLayout"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/category_layout_design">
+                            <TextView
+                                android:id="@+id/memberTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#007bff"
+                                android:fontFamily="@font/roboto"
+                                android:padding="5dp"
+                                android:layout_margin="10dp"
+                                android:layout_centerInParent="true"
+                                android:textColor="#fff"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/expireLayout"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@+id/memberLayout"
+                            android:background="@drawable/category_layout_design">
+
+                            <TextView
+                                android:id="@+id/expireTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#17a2b8"
+                                android:fontFamily="@font/roboto"
+                                android:padding="5dp"
+                                android:layout_margin="10dp"
+                                android:layout_centerInParent="true"
+                                android:textColor="#fff"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/creditLayout"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@+id/expireLayout"
+                            android:background="@drawable/category_layout_design">
+
+                            <TextView
+                                android:id="@+id/creditTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#ffc107"
+                                android:fontFamily="@font/roboto"
+                                android:padding="5dp"
+                                android:layout_margin="10dp"
+                                android:layout_centerInParent="true"
+                                android:textColor="#000"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/remainingLayout"
+                            android:layout_width="110dp"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@+id/creditLayout"
+                            android:background="@drawable/category_layout_design">
+
+                            <TextView
+                                android:id="@+id/remaingTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#dc3545"
+                                android:fontFamily="@font/roboto"
+                                android:padding="5dp"
+                                android:layout_margin="10dp"
+                                android:textColor="#fff"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </HorizontalScrollView>
 
         </RelativeLayout>
 
