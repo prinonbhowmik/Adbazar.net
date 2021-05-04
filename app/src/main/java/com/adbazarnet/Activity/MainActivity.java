@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ChipNavigationBar chipNavigationBar;
     private int id,loggedIn;
     private Dialog dialog;
+    private String loadFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         init();
         Intent intent = getIntent();
-        String loadFragment = intent.getStringExtra("fragment");
+        loadFragment = intent.getStringExtra("fragment");
         sharedPreferences = getSharedPreferences("MyRef",MODE_PRIVATE);
         id = sharedPreferences.getInt("id",0);
         loggedIn = sharedPreferences.getInt("loggedIn",0);
@@ -56,13 +57,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.getMenu().removeItem(R.id.login);
         }
 
-        chipNavigationBar.setItemSelected(R.id.home, true);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
-
-        navigationView.getMenu().getItem(0).setChecked(true);
-        navigationView.getMenu().getItem(1).setChecked(false);
-        navigationView.getMenu().getItem(2).setChecked(false);
-        navigationView.getMenu().getItem(3).setChecked(false);
+        if (loadFragment.equals("home")) {
+            chipNavigationBar.setItemSelected(R.id.home, true);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+        }else if(loadFragment.equals("favourite")){
+            chipNavigationBar.setItemSelected(R.id.favourite, true);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FavouriteFragment()).commit();
+        }
 
         chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override

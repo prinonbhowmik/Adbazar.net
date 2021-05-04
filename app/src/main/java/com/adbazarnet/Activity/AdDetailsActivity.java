@@ -23,6 +23,7 @@ import com.adbazarnet.Models.AdImages;
 import com.adbazarnet.Models.FavouriteAds;
 import com.adbazarnet.Models.RelatedAds;
 import com.adbazarnet.R;
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -48,6 +49,8 @@ public class AdDetailsActivity extends AppCompatActivity {
     private RelatedProductAdapter relatedProductAdapter;
     private SharedPreferences sharedPreferences;
     private String token,userPhone;
+
+    private ChipNavigationBar chipNavigationBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,6 +197,6 @@ public class AdDetailsActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("MyRef", MODE_PRIVATE);
         token = sharedPreferences.getString("token",null);
         userId = sharedPreferences.getInt("id",0);
-        Log.d("ShowToken",userId+","+id);
+        chipNavigationBar=findViewById(R.id.bottom_menu);
     }
 }
