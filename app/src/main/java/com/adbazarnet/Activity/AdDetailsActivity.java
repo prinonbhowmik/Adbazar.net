@@ -71,9 +71,6 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
 
         init();
 
-        id = sharedPreferences.getInt("id",0);
-        loggedIn = sharedPreferences.getInt("loggedIn",0);
-
         Call<AdDetails> call = ApiUtils.getUserService().getAdDetails(id);
         call.enqueue(new Callback<AdDetails>() {
             @Override
@@ -170,28 +167,28 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                 switch (i){
 
                     case R.id.home:
-                        FragmentTransaction home = getSupportFragmentManager().beginTransaction();
-                        home.replace(R.id.fragment_container, new HomeFragment());
-                        home.commit();
+                        startActivity(new Intent(AdDetailsActivity.this,MainActivity.class)
+                                .putExtra("fragment","home"));
+                        finish();
                         break;
                     case R.id.favourite:
-                        FragmentTransaction favourite = getSupportFragmentManager().beginTransaction();
-                        favourite.replace(R.id.fragment_container, new FavouriteFragment());
-                        favourite.commit();
+                        startActivity(new Intent(AdDetailsActivity.this,MainActivity.class)
+                                .putExtra("fragment","favourite"));
+                        finish();
                         break;
                     case R.id.adPost:
                         break;
                     case R.id.chat:
-                        Toast.makeText(MainActivity.this, "Chat", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AdDetailsActivity.this, "Chat", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.account:
                         if (loggedIn == 0 ){
-                            startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                            startActivity(new Intent(AdDetailsActivity.this,LoginActivity.class));
                             finish();
                             break;
                         }else{
                             //pop-up will be shown
-                            dialog = new Dialog(MainActivity.this);
+                            dialog = new Dialog(AdDetailsActivity.this);
                             dialog.setContentView(R.layout.profile_option_xml);
                             CardView close  = dialog.findViewById(R.id.closeTv);
                             TextView dashboard = dialog.findViewById(R.id.dashboardTv);
@@ -213,7 +210,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                             myAds.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(MainActivity.this,MyAdsActivity.class));
+                                    startActivity(new Intent(AdDetailsActivity.this,MyAdsActivity.class));
                                 }
                             });
 
@@ -229,7 +226,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                             dashboard.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(MainActivity.this,DashboardActivity.class));
+                                    startActivity(new Intent(AdDetailsActivity.this,DashboardActivity.class));
                                     finish();
                                 }
                             });
@@ -237,7 +234,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                             profile.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(MainActivity.this,ProfileActivity.class));
+                                    startActivity(new Intent(AdDetailsActivity.this,ProfileActivity.class));
                                     finish();
                                 }
                             });
@@ -321,7 +318,9 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
         sliderAdapter = new ImageSliderAdapter(this);
         sharedPreferences = getSharedPreferences("MyRef", MODE_PRIVATE);
         token = sharedPreferences.getString("token",null);
+
         userId = sharedPreferences.getInt("id",0);
+        loggedIn = sharedPreferences.getInt("loggedIn",0);
         chipNavigationBar=findViewById(R.id.bottom_menu);
     }
 

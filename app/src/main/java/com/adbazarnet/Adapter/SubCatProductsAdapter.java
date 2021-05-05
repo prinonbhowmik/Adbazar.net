@@ -1,5 +1,6 @@
 package com.adbazarnet.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -61,6 +62,7 @@ public class SubCatProductsAdapter extends RecyclerView.Adapter<SubCatProductsAd
             public void onClick(View v) {
                 Log.d("GetID", String.valueOf(model.getId()));
                 context.startActivity(new Intent(context, AdDetailsActivity.class).putExtra("id",model.getId()));
+                ((Activity)context).finish();
             }
         });
 
