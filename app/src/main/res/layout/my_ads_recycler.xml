@@ -46,6 +46,8 @@
                    android:fontFamily="@font/roboto"
                    android:layout_centerHorizontal="true"
                    android:layout_below="@+id/adPic"
+                   android:layout_marginLeft="5dp"
+                   android:layout_marginRight="5dp"
                    android:textColor="#007bff"
                    android:textSize="14sp" />
            </RelativeLayout>
