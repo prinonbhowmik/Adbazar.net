@@ -1,7 +1,279 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff">
+            <LinearLayout
+                android:id="@+id/layout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="4"
+                    android:text="Let's post an ad. Choose any option below"
+                    android:textColor="#646464"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/closeIv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:src="@drawable/ic_baseline_close_24"
+                    android:textColor="#646464"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/layout1"
+                android:background="#dee2e6" />
+
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view1"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="15dp"
+                android:text="@string/sell_item"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/text1"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#dee2e6" />
+
+            <TextView
+                android:id="@+id/sellItemTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view2"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:text="Sell an item or service"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/sellItemTv"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#dee2e6" />
+
+            <TextView
+                android:id="@+id/rentTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view3"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:text="Rent Something"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/rentTv"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#dee2e6" />
+
+            <TextView
+                android:id="@+id/auctionTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view4"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:text="Auction Something"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/auctionTv"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#dee2e6" />
+
+            <TextView
+                android:id="@+id/exchangeTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view5"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:text="Exchange Something"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/exchangeTv"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#dee2e6" />
+
+            <TextView
+                android:id="@+id/jobTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view6"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:text="Post a job circular"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view7"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/jobTv"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#dee2e6" />
+
+            <TextView
+                android:id="@+id/brideTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view7"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:text="Bride Groom Ad"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view8"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/brideTv"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#dee2e6" />
+
+
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view8"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="15dp"
+                android:text="@string/buy_item"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view9"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/text2"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#dee2e6" />
+
+            <TextView
+                android:id="@+id/lookforbuyTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view9"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:text="Look for something to buy"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view10"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/lookforbuyTv"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#dee2e6" />
+
+            <TextView
+                android:id="@+id/lookforRentTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view10"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="25dp"
+                android:text="Look for something to rent"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view11"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/lookforRentTv"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#dee2e6" />
+
+            <Button
+                android:id="@+id/closeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Close"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:layout_below="@+id/view11"
+                android:layout_alignParentRight="true"
+                android:layout_margin="10dp"
+                android:backgroundTint="#6c757d"
+                android:padding="15dp"/>
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

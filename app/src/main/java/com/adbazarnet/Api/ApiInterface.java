@@ -100,7 +100,7 @@ public interface ApiInterface {
     Call<FavouriteAds> deleteFavourites(@Header("Authorization") String token,
                                         @Path("id") int id);
 
-    @DELETE("favourite-posts/{id}/")
+    @DELETE("posts/{id}/")
     Call<FavouriteAdDetails> deleteMyAd(@Header("Authorization") String token,
                                         @Path("id") int id);
 

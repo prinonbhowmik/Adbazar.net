@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,6 +82,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         favourite.commit();
                         break;
                     case R.id.adPost:
+                        dialog = new Dialog(MainActivity.this);
+                        dialog.setContentView(R.layout.post_ad_popup);
+                        ImageView closeIv = dialog.findViewById(R.id.closeIv);
+                        TextView sellItemTv = dialog.findViewById(R.id.sellItemTv);
+                        TextView rentTv = dialog.findViewById(R.id.rentTv);
+                        TextView auctionTv = dialog.findViewById(R.id.auctionTv);
+                        TextView exchangeTv = dialog.findViewById(R.id.exchangeTv);
+                        TextView jobTv = dialog.findViewById(R.id.jobTv);
+                        TextView brideTv = dialog.findViewById(R.id.brideTv);
+                        TextView lookforbuyTv = dialog.findViewById(R.id.lookforbuyTv);
+                        TextView lookforRentTv = dialog.findViewById(R.id.lookforRentTv);
+                        Button closeBtn = dialog.findViewById(R.id.closeBtn);
+
+                        closeIv.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                                chipNavigationBar.setItemSelected(R.id.home, true);
+                            }
+                        });
+
+                        closeBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                                chipNavigationBar.setItemSelected(R.id.home, true);
+                            }
+                        });
+                        dialog.show();
                         break;
                     case R.id.chat:
                         Toast.makeText(MainActivity.this, "Chat", Toast.LENGTH_SHORT).show();
