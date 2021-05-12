@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -52,102 +51,111 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#D8D7D7"
-        android:layout_below="@+id/toolbar">
+        android:layout_below="@+id/toolbar"
+        android:background="#D8D7D7">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:backgroundTint="#fff"
-            android:background="@drawable/category_layout_design">
+            android:background="@drawable/category_layout_design"
+            android:backgroundTint="#fff">
+
             <TextView
                 android:id="@+id/header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/category_header_layout"
                 android:fontFamily="@font/roboto"
                 android:padding="10dp"
-                android:background="@drawable/category_header_layout"
-                android:textColor="#000"
                 android:text="Post An Ad"
+                android:textColor="#000"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/header2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Ad Information"
-                android:textSize="21sp"
-                android:layout_marginBottom="20dp"
                 android:layout_below="@+id/header"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
-                android:textStyle="bold"
-                android:textColor="#000"/>
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:text=" Ad Information"
+                android:textColor="#000"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
             <View
                 android:id="@+id/view1"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="#dadada"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_below="@id/header2"
                 android:layout_marginLeft="10dp"
-                android:layout_below="@id/header2"/>
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="#dadada" />
 
             <LinearLayout
                 android:id="@+id/btnlayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_below="@+id/header2"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
                 android:orientation="horizontal"
                 android:weightSum="2">
+
                 <androidx.cardview.widget.CardView
-                    android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
+                    android:layout_weight="1"
                     app:cardCornerRadius="5dp">
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/theme">
+
                         <TextView
                             android:id="@+id/categoryTv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=" Select Category"
-                            android:textAlignment="center"
                             android:layout_centerHorizontal="true"
                             android:drawableLeft="@drawable/ic_baseline_format_list_bulleted_24"
+                            android:padding="10dp"
+                            android:text=" Select Category"
+                            android:textAlignment="center"
                             android:textColor="#fff"
-                            android:textSize="18sp"
-                            android:padding="10dp"/>
+                            android:textSize="18sp" />
                     </RelativeLayout>
 
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
-                    android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
+                    android:layout_weight="1"
                     app:cardCornerRadius="5dp">
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/theme">
+
                         <TextView
+                            android:id="@+id/locationTv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=" Select Location"
-                            android:id="@+id/locationTv"
                             android:layout_centerHorizontal="true"
-                            android:textAlignment="center"
                             android:drawableLeft="@drawable/ic_baseline_location_on_24"
+                            android:padding="10dp"
+                            android:text=" Select Location"
+                            android:textAlignment="center"
                             android:textColor="#fff"
-                            android:textSize="18sp"
-                            android:padding="10dp"/>
+                            android:textSize="18sp" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -158,90 +166,326 @@
                 android:id="@+id/txt1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Ad Title*:"
-                android:textSize="21sp"
-                android:layout_marginBottom="10dp"
                 android:layout_below="@+id/btnlayout"
-                android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"
-                android:textStyle="bold"
-                android:textColor="#646464"/>
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:text=" Ad Title*:"
+                android:textColor="#646464"
+                android:textSize="21sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/titleEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txt1"
-                android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
-                android:hint=" Enter Ad Title"
-                android:textColor="#000"
                 android:background="@drawable/edittex_design"
-                android:padding="10dp"/>
+                android:hint=" Enter Ad Title"
+                android:padding="10dp"
+                android:textColor="#000" />
 
             <TextView
                 android:id="@+id/txt2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Other Information::"
-                android:textSize="21sp"
-                android:layout_marginBottom="10dp"
                 android:layout_below="@+id/titleEt"
-                android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"
-                android:textStyle="bold"
-                android:textColor="#646464"/>
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:text=" Other Information::"
+                android:textColor="#646464"
+                android:textSize="21sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/otherInfoEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txt2"
-                android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
-                android:hint=" Other Information"
-                android:textColor="#000"
                 android:background="@drawable/edittex_design"
-                android:padding="10dp"/>
+                android:hint=" Other Information"
+                android:padding="10dp"
+                android:textColor="#000" />
 
             <TextView
                 android:id="@+id/txt3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Price*:"
-                android:textSize="21sp"
-                android:layout_marginBottom="10dp"
                 android:layout_below="@+id/otherInfoEt"
-                android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"
-                android:textStyle="bold"
-                android:textColor="#646464"/>
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:text=" Price*:"
+                android:textColor="#646464"
+                android:textSize="21sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/priceEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txt3"
-                android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
-                android:hint=" Enter Price"
-                android:textColor="#000"
                 android:background="@drawable/edittex_design"
-                android:padding="10dp"/>
+                android:hint=" Enter Price"
+                android:padding="10dp"
+                android:textColor="#000" />
 
             <Switch
                 android:id="@+id/negotiableBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/priceEt"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:layout_below="@+id/priceEt"
-                android:text="Negotiable"
+                android:layoutDirection="rtl"
+                android:onClick="setNegotiable"
+                android:text=" Negotiable"
+                android:textColor="#646464"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/phnnoLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/negotiableBtn"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text=" Phone Number 1:"
+                    android:textColor="#646464"
+                    android:textSize="21sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <EditText
+                    android:id="@+id/phnnoEt1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edittex_design"
+                    android:hint=" Enter Phone Number "
+                    android:padding="10dp"
+                    android:textColor="#000"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/txt5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text=" Phone Number 2:"
+                    android:textColor="#646464"
+                    android:textSize="21sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <EditText
+                    android:id="@+id/phnnoEt2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edittex_design"
+                    android:hint=" Enter Phone Number"
+                    android:padding="10dp"
+                    android:textColor="#000"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/txt6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text=" Phone Number 3:"
+                    android:textColor="#646464"
+                    android:textSize="21sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <EditText
+                    android:id="@+id/phnnoEt3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edittex_design"
+                    android:hint=" Enter Phone Number"
+                    android:padding="10dp"
+                    android:textColor="#000"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/addPhnBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phnnoLayout"
+                android:layout_margin="10dp"
+                android:backgroundTint="#007bff"
+                android:drawableLeft="@drawable/ic_pluss"
+                android:padding="10dp"
+                android:text="Add Phone"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/hidePhnBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/addPhnBtn"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:layoutDirection="rtl"
+                android:text=" Hide Phone"
+                android:textColor="#646464"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/hidePhnBtn"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:text=" Description*:"
+                android:textColor="#646464"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/descriptionEt"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@+id/txt7"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edittex_design"
+                android:hint=" Enter Description"
+                android:padding="10dp"
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/txt8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/descriptionEt"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:text=" Add Images (Max: 5):"
+                android:textColor="#646464"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/addImgBtn"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_below="@+id/txt8"
+                android:layout_margin="10dp"
+                android:backgroundTint="#e3e0d8"
+                android:fontFamily="@font/roboto"
+                android:padding="10dp"
+                android:text="Click here to Select Image"
+                android:textAllCaps="false"
                 android:textColor="#000"
-                android:onClick="setNegotiable" />
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:id="@+id/imgLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/addImgBtn"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="30dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/img1"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/img2"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/img3"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/img4"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/img5"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:visibility="gone" />
+
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp"
+                android:layout_margin="10dp"
+                android:layout_below="@+id/imgLayout"
+                app:cardBackgroundColor="@color/theme">
+
+                <TextView
+                    android:id="@+id/submitBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Submit"
+                    android:textAllCaps="false"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/ic_baseline_add_circle_outline_24"
+                    android:padding="10dp"
+                    android:textSize="18sp"
+                    android:textColor="#fff"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
 
 
         </RelativeLayout>

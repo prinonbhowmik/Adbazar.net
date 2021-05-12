@@ -87,7 +87,8 @@ public class LoginActivity extends AppCompatActivity {
                         editor.commit();
                         Log.d("ShowToken",token+","+id);
                         Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                        startActivity(new Intent(LoginActivity.this,MainActivity.class).
+                                putExtra("fragment","home"));
                         finish();
                     }
                 }else if(response.code()==400 || response.code()==404){

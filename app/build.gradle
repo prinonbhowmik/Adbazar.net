@@ -63,5 +63,7 @@ dependencies {
     //lottie animation
     implementation 'com.airbnb.android:lottie:3.4.0'
 
+    //image crop api
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
 
 }

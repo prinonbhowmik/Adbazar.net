@@ -16,16 +16,22 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.adbazarnet.Adapter.BidsShowAdapter;
 import com.adbazarnet.Adapter.ImageSliderAdapter;
 import com.adbazarnet.Adapter.RelatedProductAdapter;
 import com.adbazarnet.Api.ApiUtils;
 import com.adbazarnet.Fragments.FavouriteFragment;
 import com.adbazarnet.Fragments.HomeFragment;
+import com.adbazarnet.Interface.GetBiderIdInterface;
 import com.adbazarnet.Models.AdDetails;
 import com.adbazarnet.Models.AdImages;
+import com.adbazarnet.Models.BidModel;
 import com.adbazarnet.Models.FavouriteAds;
 import com.adbazarnet.Models.RelatedAds;
 import com.adbazarnet.Models.UserDetailsModel;
@@ -44,22 +50,27 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AdDetailsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class AdDetailsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GetBiderIdInterface {
 
-    private int id,userId;
+    private int id,userId,sellerId;
     private SliderView imageSlider;
     private ImageSliderAdapter sliderAdapter;
     private CircleImageView sellerProfileIv;
     private TextView productName,productPrice,uploadTime,categoryTv,conditionTv,
             warrantyTv,descriptionTv,sellerNameTv,locationTv,noDataTv,membershipTV,
-            favouriteTv,callNowTV;
-    private RecyclerView relatedProductRecycler;
+            favouriteTv,callNowTV,noBidTv,bidBtn;
+    private RecyclerView relatedProductRecycler,bidRecycler;
     private RelatedProductAdapter relatedProductAdapter;
+    private BidsShowAdapter bidAdapter;
     private SharedPreferences sharedPreferences;
     private String token,userPhone;
     private Dialog dialog;
     private ChipNavigationBar chipNavigationBar;
     private int loggedIn;
+    private RelativeLayout relatedLayout,bidLayout;
+    private boolean is_bid;
+    private EditText bidEt;
+    private FrameLayout contactLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +100,17 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                     locationTv.setText(response.body().getLocation().getName()+", "+
                             response.body().getLocation().getLocation_name());
                     membershipTV.setText(response.body().getUser().getMembership_name()+" Member");
+                    sellerId = response.body().getUser().getId();
                     userPhone = response.body().getUser().getPhone_number();
+                    is_bid = response.body().isIs_bid();
+
+                    if (is_bid==true){
+                        relatedLayout.setVisibility(View.GONE);
+                        bidLayout.setVisibility(View.VISIBLE);
+                        contactLayout.setVisibility(View.GONE);
+
+                        showBids(id);
+                    }
 
                     if (response.body().getUser().getAvatar()!=null) {
                         try {
@@ -158,6 +179,36 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                 Intent callIntent = new Intent(Intent.ACTION_DIAL);
                 callIntent.setData(Uri.parse("tel:"+userPhone));
                 startActivity(callIntent);
+            }
+        });
+
+        bidBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String bidMsg = bidEt.getText().toString();
+                if (bidMsg.equals("")){
+                    bidEt.setError("Please Enter bid amount");
+                }else{
+                    if (loggedIn == 0){
+                        startActivity(new Intent(AdDetailsActivity.this,LoginActivity.class));
+                        finish();
+                    }else{
+                        Call<BidModel> modelCall = ApiUtils.getUserService().postBids("Token "+token,id,bidMsg,id);
+                        modelCall.enqueue(new Callback<BidModel>() {
+                            @Override
+                            public void onResponse(Call<BidModel> call, Response<BidModel> response) {
+                                if (response.isSuccessful()){
+                                    startActivity(getIntent());
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<BidModel> call, Throwable t) {
+                                Log.d("kiprob",t.getMessage());
+                            }
+                        });
+                    }
+                }
             }
         });
 
@@ -276,6 +327,32 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
 
     }
 
+    private void showBids(int id) {
+        Toast.makeText(this, ""+id, Toast.LENGTH_SHORT).show();
+        Call<List<BidModel>> call = ApiUtils.getUserService().getBids(id);
+        call.enqueue(new Callback<List<BidModel>>() {
+            @Override
+            public void onResponse(Call<List<BidModel>> call, Response<List<BidModel>> response) {
+                if (response.isSuccessful()){
+                    List<BidModel> bids = response.body();
+                    if (bids.size()>0){
+                        bidAdapter = new BidsShowAdapter(bids,AdDetailsActivity.this);
+                        bidRecycler.setAdapter(bidAdapter);
+                        bidAdapter.notifyDataSetChanged();
+                    }else{
+                        bidRecycler.setVisibility(View.GONE);
+                        noBidTv.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<BidModel>> call, Throwable t) {
+
+            }
+        });
+    }
+
     private void getRelatedProduct(List<RelatedAds> relatedAds) {
         if (relatedAds.size()>0) {
             relatedProductAdapter = new RelatedProductAdapter(relatedAds, this);
@@ -312,9 +389,15 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
         membershipTV = findViewById(R.id.membershipTV);
         favouriteTv = findViewById(R.id.favouriteTv);
         sellerNameTv = findViewById(R.id.sellerNameTv);
+        contactLayout = findViewById(R.id.contactLayout);
+
         relatedProductRecycler = findViewById(R.id.relatedProductRecycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         relatedProductRecycler.setLayoutManager(layoutManager);
+        bidRecycler = findViewById(R.id.bidRecycler);
+        LinearLayoutManager layoutManager1 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        bidRecycler.setLayoutManager(layoutManager1);
+
         sliderAdapter = new ImageSliderAdapter(this);
         sharedPreferences = getSharedPreferences("MyRef", MODE_PRIVATE);
         token = sharedPreferences.getString("token",null);
@@ -322,10 +405,63 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
         userId = sharedPreferences.getInt("id",0);
         loggedIn = sharedPreferences.getInt("loggedIn",0);
         chipNavigationBar=findViewById(R.id.bottom_menu);
+        relatedLayout=findViewById(R.id.relatedLayout);
+        bidLayout=findViewById(R.id.bidLayout);
+        noBidTv=findViewById(R.id.noBidTv);
+        bidBtn=findViewById(R.id.bidBtn);
+        bidEt=findViewById(R.id.bidEt);
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         return false;
+    }
+
+    @Override
+    public void clickData(int biderId,String name,String email,String phnNo) {
+
+        if (sellerId==userId){
+            dialog = new Dialog(AdDetailsActivity.this);
+            dialog.setContentView(R.layout.bider_details_popup);
+            TextView nameTv = dialog.findViewById(R.id.nameTv);
+            TextView emailTv = dialog.findViewById(R.id.emailTv);
+            TextView phnTv = dialog.findViewById(R.id.phnTv);
+            Button callBtn = dialog.findViewById(R.id.callBtn);
+            Button smsBtn = dialog.findViewById(R.id.smsBtn);
+            Button closeBtn = dialog.findViewById(R.id.closeBtn);
+
+            nameTv.setText(name);
+            emailTv.setText(email);
+            phnTv.setText(phnNo);
+
+            callBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                    callIntent.setData(Uri.parse("tel:"+phnNo));
+                    startActivity(callIntent);
+                }
+            });
+
+            smsBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", phnNo, null)));
+                }
+            });
+
+            closeBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.setCancelable(false);
+            dialog.show();
+
+        }else{
+            Toast.makeText(this, "Not Granted", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -299,36 +299,137 @@
                 android:layout_margin="15dp"
                 android:background="@drawable/category_layout_design">
 
-                <TextView
-                    android:id="@+id/header2"
+                <RelativeLayout
+                    android:id="@+id/relatedLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/category_header_layout"
-                    android:fontFamily="@font/roboto"
-                    android:padding="10dp"
-                    android:text=" Related Ads"
-                    android:textColor="#000"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:layout_margin="15dp"
+                    android:background="@drawable/category_layout_design">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/relatedProductRecycler"
+                    <TextView
+                        android:id="@+id/header2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/category_header_layout"
+                        android:fontFamily="@font/roboto"
+                        android:padding="10dp"
+                        android:text=" Related Ads"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/relatedProductRecycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/header2" />
+
+                    <TextView
+                        android:id="@+id/noDataTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/header2"
+                        android:layout_margin="20dp"
+                        android:text="No Related ad found !"
+                        android:textColor="#222"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/bidLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/header2" />
+                    android:layout_margin="15dp"
+                    android:visibility="gone"
+                    android:background="@drawable/category_layout_design">
 
-                <TextView
-                    android:id="@+id/noDataTv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/header2"
-                    android:layout_margin="20dp"
-                    android:text="No Related ad found !"
-                    android:textColor="#222"
-                    android:textSize="20sp"
-                    android:visibility="gone" />
+                    <TextView
+                        android:id="@+id/bidHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/category_header_layout"
+                        android:fontFamily="@font/roboto"
+                        android:padding="10dp"
+                        android:text=" Place Bid"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
+                   <RelativeLayout
+                       android:id="@+id/l2"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/bidHeader">
+
+                       <androidx.recyclerview.widget.RecyclerView
+                           android:id="@+id/bidRecycler"
+                           android:layout_width="match_parent"
+                           android:layout_height="400dp" />
+
+                       <TextView
+                           android:id="@+id/noBidTv"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_margin="20dp"
+                           android:text="No Bid found !"
+                           android:textColor="#222"
+                           android:textSize="20sp"
+                           android:visibility="gone" />
+                   </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/l2"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/theme">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:background="#fff"
+                            app:cardCornerRadius="10dp"
+                            android:layout_margin="5dp">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="#fff"
+                                android:weightSum="5">
+                                <EditText
+                                    android:id="@+id/bidEt"
+                                    android:layout_weight="3.5"
+                                    android:layout_width="0dp"
+                                    android:hint="Bid Here (max: 20)"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/edittext_background"
+                                    android:textSize="18sp"
+                                    android:textColor="#000"
+                                    android:textColorHint="#AFABAB"
+                                    android:padding="10dp" />
+                                <TextView
+                                    android:id="@+id/bidBtn"
+                                    android:layout_weight="1.5"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:text="Submit"
+                                    android:textAllCaps="false"
+                                    android:textSize="18sp"
+                                    android:background="#dc3545"
+                                    android:textColor="#fff"
+                                    android:padding="10dp" />
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
             </RelativeLayout>
+
+
+
 
             <RelativeLayout
                 android:id="@+id/sellerLayout"
@@ -549,6 +650,7 @@
     </ScrollView>
 
     <FrameLayout
+        android:id="@+id/contactLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottom_menu"

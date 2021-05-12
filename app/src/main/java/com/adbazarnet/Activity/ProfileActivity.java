@@ -1,8 +1,11 @@
 package com.adbazarnet.Activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,8 +18,15 @@ import com.adbazarnet.Models.User;
 import com.adbazarnet.Models.UserDetailsModel;
 import com.adbazarnet.R;
 import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
+
+import java.io.File;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,6 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
     private CircleImageView profileIv;
     private SharedPreferences sharedPreferences;
     private String name,email,phone,password,avatar,token;
+    private Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +120,17 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             }
         });
+
+        profileIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CropImage.activity()
+                        .setFixAspectRatio(true)
+                        .setGuidelines(CropImageView.Guidelines.ON)
+                        .setCropShape(CropImageView.CropShape.OVAL)
+                        .start(ProfileActivity.this);
+            }
+        });
     }
 
     private void getData() {
@@ -119,19 +141,21 @@ public class ProfileActivity extends AppCompatActivity {
         avatar = sharedPreferences.getString("avatar",null);
         token = sharedPreferences.getString("token",null);
 
-        Log.d("avatar",avatar);
-
         nameEt.setText(name);
         phnEt.setText(phone);
         emailEt.setText(email);
         oldPassEt.setText(password);
 
-        try {
-            Picasso.get()
-                    .load(avatar)
-                    .into(profileIv);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (avatar!=null) {
+            try {
+                Picasso.get()
+                        .load(avatar)
+                        .into(profileIv);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else{
+            profileIv.setImageResource(R.drawable.ic_user);
         }
 
     }
@@ -147,5 +171,42 @@ public class ProfileActivity extends AppCompatActivity {
         updatePassBtn = findViewById(R.id.updatePassBtn);
         profileIv = findViewById(R.id.profileIv);
         sharedPreferences = getSharedPreferences("MyRef", MODE_PRIVATE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                Uri resultUri = result.getUri();
+                imageUri = resultUri;
+                File file = new File(imageUri.getPath());
+                RequestBody userImage = RequestBody.create(MediaType.parse("image/*"), file);
+
+                MultipartBody.Part user_photo = MultipartBody.Part.createFormData("avatar", file.getName(), userImage);
+
+                Call<User> call = ApiUtils.getUserService().updateImage("Token "+token,user_photo);
+                call.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        if (response.code()==200){
+                            profileIv.setImageURI(imageUri);
+                            Toast.makeText(ProfileActivity.this, "Image Updated!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+
+                    }
+                });
+
+
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+                Toast.makeText(ProfileActivity.this, "Failed"+error, Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

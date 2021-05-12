@@ -95,6 +95,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         TextView lookforRentTv = dialog.findViewById(R.id.lookforRentTv);
                         Button closeBtn = dialog.findViewById(R.id.closeBtn);
 
+                        sellItemTv.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startActivity(new Intent(MainActivity.this,PostAdActivity.class));
+                                finish();
+                            }
+                        });
+
                         closeIv.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

@@ -2,6 +2,7 @@ package com.adbazarnet.Api;
 
 
 import com.adbazarnet.Models.AdDetails;
+import com.adbazarnet.Models.BidModel;
 import com.adbazarnet.Models.CategoriesModel;
 import com.adbazarnet.Models.CategorisQueryModel;
 import com.adbazarnet.Models.DashboardModel;
@@ -15,6 +16,7 @@ import com.adbazarnet.Models.UserDetailsModel;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -26,6 +28,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -74,11 +77,25 @@ public interface ApiInterface {
     @PATCH("account/auth/profile/")
     Call<User> updateProfile(@Header("Authorization") String token, @Body User user);
 
+    @PATCH("account/auth/profile/")
+    Call<User> updateImage(@Header("Authorization") String token, @Part MultipartBody.Part avatar);
+
     @PATCH("account/auth/change-password/")
     Call<UserDetailsModel> updatePassword(@Header("Authorization") String token, @Body UserDetailsModel user);
 
     @GET("posts/{id}/")
     Call<AdDetails> getAdDetails(@Path("id") int id);
+
+    @GET("posts/{id}/bids")
+    Call<List<BidModel>> getBids(@Path("id") int id);
+
+    @POST("posts/{id}/bids/")
+    @FormUrlEncoded
+    Call<BidModel> postBids(@Header("Authorization") String token,
+                            @Path("id") int id,
+                            @Field("amount") String amount,
+                            @Field("ad") int ad);
+
 
     @POST("favourite-posts/")
     @FormUrlEncoded

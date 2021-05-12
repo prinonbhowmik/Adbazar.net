@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/biderImg"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_user"
+        android:layout_below="@+id/sellerHeader"
+        android:layout_centerVertical="true"
+        android:layout_margin="20dp" />
+
+    <TextView
+        android:id="@+id/biderName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sellerHeader"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@+id/biderImg"
+        android:fontFamily="@font/roboto"
+        android:text="Prinon bhowmik"
+        android:textColor="#646464"
+        android:textFontWeight="400"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/bidTimeTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/biderName"
+        android:layout_toEndOf="@+id/biderImg"
+        android:fontFamily="@font/roboto"
+        android:text="a month ago"
+        android:textColor="#646464"
+        android:textFontWeight="400"
+        android:textSize="16sp" />
+    <TextView
+        android:id="@+id/bidMsgTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bidTimeTv"
+        android:layout_toEndOf="@+id/biderImg"
+        android:fontFamily="@font/roboto_bold"
+        android:text="a month ago"
+        android:textStyle="bold"
+        android:textColor="#ff7f50"
+        android:textFontWeight="400"
+        android:textSize="16sp" />
+
+
+</RelativeLayout>

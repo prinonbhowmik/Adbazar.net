@@ -64,10 +64,13 @@ public class SignupActivity extends AppCompatActivity {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if (response.isSuccessful()){
+                if (response.code()==201){
                     List<Object> data = response.body().getUser_phone_numbers();
                     Toast.makeText(SignupActivity.this, "User Successfully Registered!", Toast.LENGTH_SHORT).show();
                     finish();
+                }else{
+                    Toast.makeText(SignupActivity.this, "Email or phone no matched with other user!", Toast.LENGTH_LONG).show();
+
                 }
             }
 
