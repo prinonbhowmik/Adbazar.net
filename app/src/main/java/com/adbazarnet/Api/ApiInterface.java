@@ -26,6 +26,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -78,6 +79,7 @@ public interface ApiInterface {
     Call<User> updateProfile(@Header("Authorization") String token, @Body User user);
 
     @PATCH("account/auth/profile/")
+    @Multipart
     Call<User> updateImage(@Header("Authorization") String token, @Part MultipartBody.Part avatar);
 
     @PATCH("account/auth/change-password/")
