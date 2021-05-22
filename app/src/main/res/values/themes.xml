@@ -13,6 +13,10 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="spinnerTheme">
+        <item name="android:textColor">@color/black</item>
+
+    </style>
 
     <style name="NavigationView" >
         <item name="fontFamily">@font/comfortaa</item>

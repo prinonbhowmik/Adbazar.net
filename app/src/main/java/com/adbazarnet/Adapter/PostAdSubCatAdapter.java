@@ -10,43 +10,33 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.adbazarnet.Activity.PostAdActivity;
 import com.adbazarnet.Api.ApiUtils;
-import com.adbazarnet.Fragments.HomeFragment;
-import com.adbazarnet.Interface.SubCategoryClick;
-import com.adbazarnet.Interface.SubCategoryProductsInterface;
-import com.adbazarnet.Models.CategorisQueryModel;
-import com.adbazarnet.Models.ProductModel;
 import com.adbazarnet.Models.SubCategoryModel;
 import com.adbazarnet.Models.SubCategoryProductModel;
 import com.adbazarnet.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdapter.ViewHolder> {
+public class PostAdSubCatAdapter extends RecyclerView.Adapter<PostAdSubCatAdapter.ViewHolder> {
     private List<SubCategoryModel> list;
     private Context context;
-    private HomeFragment fragment;
-    private List<ProductModel> adlist = new ArrayList<>();
-    private SubCatProductsAdapter subProductAdapter;
-    private SubCategoryClick click;
+    private PostAdActivity activity;
 
-    public SubCategoriesAdapter(List<SubCategoryModel> list, Context context) {
+    public PostAdSubCatAdapter(List<SubCategoryModel> list, Context context) {
         this.list = list;
         this.context = context;
     }
-
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.subcategories_recycler, parent, false);
-        return new ViewHolder(view);
-    }
+        return new ViewHolder(view);    }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
@@ -62,16 +52,11 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
                     @Override
                     public void onResponse(Call<SubCategoryProductModel> call, Response<SubCategoryProductModel> response) {
                         if (response.isSuccessful()){
-                            adlist.clear();
-                            adlist = response.body().getResults();
-                            subProductAdapter = new SubCatProductsAdapter(adlist, context);
-                            fragment.adsRecycler.setAdapter(subProductAdapter);
-                            fragment.adCountTv.setText("("+adlist.size()+") Ads ,"+model.getName());
-                            fragment.dialog.dismiss();
-
+                            activity.categoryTv.setText(model.getName());
+                            activity.dialog.dismiss();
 
                         }
-                        subProductAdapter.notifyDataSetChanged();
+
                     }
 
                     @Override
@@ -81,6 +66,7 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
                 });
             }
         });
+
     }
 
     @Override

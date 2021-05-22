@@ -48,6 +48,7 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
     private ImageView searchBtn;
     public static RecyclerView adsRecycler;
     private CategoryNamesAdapter categoryNamesAdapter;
+    public int homeCount = 0;
     private TextView categoryTv,locationTv;
     private SubCatProductsAdapter adapter;
     private SubCategoriesAdapter adapter2;
@@ -175,6 +176,7 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
                     List<CategoriesModel> list = response.body();
                     categoryNamesAdapter = new CategoryNamesAdapter(list, context);
                     categoriesRecycler.setAdapter(categoryNamesAdapter);
+
                 }
                 categoryNamesAdapter.notifyDataSetChanged();
             }

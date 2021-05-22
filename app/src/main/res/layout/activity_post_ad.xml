@@ -215,7 +215,7 @@
                         android:textSize="21sp"
                         android:textStyle="bold" />
 
-                    <Spinner
+                    <AutoCompleteTextView
                         android:id="@+id/conditionSpinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -223,11 +223,11 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
-                        android:background="@drawable/edittex_design"
-                        android:hint=" Other Information"
-                        android:padding="10dp"
                         android:textColor="#000"
-                        android:textColorHint="#BAB6B6" />
+                        android:padding="10dp"
+                        android:inputType="none"
+                        android:theme="@style/spinnerTheme"
+                        android:background="@drawable/edittex_design" />
                 </RelativeLayout>
 
                 <TextView

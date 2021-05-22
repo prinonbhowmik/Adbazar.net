@@ -23,26 +23,26 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class CategoryNamesAdapter extends RecyclerView.Adapter<CategoryNamesAdapter.ViewHolder> {
+public class PostAdCategoryAdapter extends RecyclerView.Adapter<PostAdCategoryAdapter.ViewHolder>{
     private List<CategoriesModel> categoriesModels;
     private SubCategoryClick click;
-    private SubCategoriesAdapter adapter2;
+    private PostAdSubCatAdapter adapter2;
     private Context context;
 
-    public CategoryNamesAdapter(List<CategoriesModel> categoriesModels, Context context) {
+    public PostAdCategoryAdapter(List<CategoriesModel> categoriesModels, Context context) {
         this.categoriesModels = categoriesModels;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PostAdCategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.categories_recycler, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PostAdCategoryAdapter.ViewHolder holder, int position) {
         CategoriesModel list = categoriesModels.get(position);
 
         try {
@@ -68,7 +68,7 @@ public class CategoryNamesAdapter extends RecyclerView.Adapter<CategoryNamesAdap
                     Log.d("CheckCalling",list.getAd_type()+"'"+list.getName());
 
                     List<SubCategoryModel> subCat = list.getSub_categories();
-                    adapter2 = new SubCategoriesAdapter(subCat,context);
+                    adapter2 = new PostAdSubCatAdapter(subCat,context);
                     holder.subCatRecycler.setAdapter(adapter2);
 
 

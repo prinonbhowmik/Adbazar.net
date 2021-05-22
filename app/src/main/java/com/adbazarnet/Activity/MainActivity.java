@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             public void onClick(View v) {
                                 startActivity(new Intent(MainActivity.this,PostAdActivity.class));
                                 finish();
+                                dialog.dismiss();
                             }
                         });
 
