@@ -10,11 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.adbazarnet.Activity.PostAdActivity;
 import com.adbazarnet.Interface.SubCategoryClick;
 import com.adbazarnet.Models.CategoriesModel;
 import com.adbazarnet.Models.SubCategoryModel;
@@ -27,6 +29,7 @@ public class PostAdCategoryAdapter extends RecyclerView.Adapter<PostAdCategoryAd
     private List<CategoriesModel> categoriesModels;
     private SubCategoryClick click;
     private PostAdSubCatAdapter adapter2;
+    private PostAdActivity activity;
     private Context context;
 
     public PostAdCategoryAdapter(List<CategoriesModel> categoriesModels, Context context) {
@@ -60,6 +63,13 @@ public class PostAdCategoryAdapter extends RecyclerView.Adapter<PostAdCategoryAd
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
+                activity.ad_Type = list.getAd_type();
+                if (activity.ad_Type.equals("electronics") || activity.ad_Type.equals("vehicle")){
+                    activity.txtC.setVisibility(View.VISIBLE);
+                    activity.txtW.setVisibility(View.VISIBLE);
+                    activity.conditionSpinner.setVisibility(View.VISIBLE);
+                    activity.warrantyEt.setVisibility(View.VISIBLE);
+                }
                 if (holder.subcatLayout.getVisibility()==View.GONE){
                     holder.subcatLayout.setVisibility(View.VISIBLE);
                     holder.recycerlayout1.setBackgroundColor(Color.parseColor("#048F6E"));

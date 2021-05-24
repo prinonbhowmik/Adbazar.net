@@ -9,6 +9,7 @@ import com.adbazarnet.Models.DashboardModel;
 import com.adbazarnet.Models.FavouriteAdDetails;
 import com.adbazarnet.Models.FavouriteAds;
 import com.adbazarnet.Models.LocationsModel;
+import com.adbazarnet.Models.PostAdModel;
 import com.adbazarnet.Models.ProductModel;
 import com.adbazarnet.Models.SubCategoryProductModel;
 import com.adbazarnet.Models.User;
@@ -122,6 +123,13 @@ public interface ApiInterface {
     @DELETE("posts/{id}/")
     Call<FavouriteAdDetails> deleteMyAd(@Header("Authorization") String token,
                                         @Path("id") int id);
+
+    @POST("posts/create/")
+    Call<PostAdModel> postsellAd(@Header("Authorization") String token,
+                                 @Field("ad_title")String ad_title,
+                                 @Field("condition")String condition,
+                                 @Field("price")String price,
+                                 @Field("warranty")String warranty);
 
 
 }

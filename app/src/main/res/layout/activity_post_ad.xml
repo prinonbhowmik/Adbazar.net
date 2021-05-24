@@ -169,7 +169,6 @@
 
                 </LinearLayout>
 
-
                 <TextView
                     android:id="@+id/txt1"
                     android:layout_width="wrap_content"
@@ -182,7 +181,6 @@
                     android:textColor="#646464"
                     android:textSize="21sp"
                     android:textStyle="bold" />
-
 
                 <EditText
                     android:id="@+id/titleEt"
@@ -211,6 +209,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="10dp"
                         android:text=" Condition:"
+                        android:visibility="gone"
                         android:textColor="#646464"
                         android:textSize="21sp"
                         android:textStyle="bold" />
@@ -226,6 +225,7 @@
                         android:textColor="#000"
                         android:padding="10dp"
                         android:inputType="none"
+                        android:visibility="gone"
                         android:theme="@style/spinnerTheme"
                         android:background="@drawable/edittex_design" />
                 </RelativeLayout>
@@ -280,6 +280,7 @@
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/edittex_design"
                     android:hint=" Enter Price"
+                    android:inputType="number"
                     android:padding="10dp"
                     android:textColor="#000"
                     android:textColorHint="#BAB6B6" />
@@ -298,11 +299,46 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
+                <RelativeLayout
+                    android:id="@+id/warrantyLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/negotiableBtn">
+                    <TextView
+                        android:id="@+id/txtW"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Warranty:"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/warrantyEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtW"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:hint=" Warranty information"
+                        android:inputType="number"
+                        android:visibility="gone"
+                        android:padding="10dp"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6" />
+                </RelativeLayout>
+
                 <LinearLayout
                     android:id="@+id/phnnoLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/negotiableBtn"
+                    android:layout_below="@+id/warrantyLayout"
                     android:orientation="vertical">
 
                     <TextView
@@ -328,6 +364,7 @@
                         android:background="@drawable/edittex_design"
                         android:hint=" Enter Phone Number "
                         android:padding="10dp"
+                        android:inputType="phone"
                         android:textColor="#000"
                         android:textColorHint="#BAB6B6"
                         android:visibility="gone" />
@@ -356,6 +393,7 @@
                         android:hint=" Enter Phone Number"
                         android:padding="10dp"
                         android:textColor="#000"
+                        android:inputType="phone"
                         android:textColorHint="#BAB6B6"
                         android:visibility="gone" />
 
@@ -382,6 +420,7 @@
                         android:background="@drawable/edittex_design"
                         android:hint=" Enter Phone Number"
                         android:padding="10dp"
+                        android:inputType="phone"
                         android:textColor="#000"
                         android:textColorHint="#BAB6B6"
                         android:visibility="gone" />
@@ -482,36 +521,42 @@
                         android:id="@+id/img1"
                         android:layout_width="250dp"
                         android:layout_height="250dp"
+                        android:src="@drawable/ic_baseline_image_24"
                         android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/img2"
                         android:layout_width="250dp"
                         android:layout_height="250dp"
+                        android:src="@drawable/ic_baseline_image_24"
                         android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/img3"
                         android:layout_width="250dp"
                         android:layout_height="250dp"
+                        android:src="@drawable/ic_baseline_image_24"
                         android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/img4"
                         android:layout_width="250dp"
                         android:layout_height="250dp"
+                        android:src="@drawable/ic_baseline_image_24"
                         android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/img5"
                         android:layout_width="250dp"
                         android:layout_height="250dp"
+                        android:src="@drawable/ic_baseline_image_24"
                         android:visibility="gone" />
 
 
                 </LinearLayout>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/submitBtn"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_below="@+id/imgLayout"
@@ -524,7 +569,6 @@
                         android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/submitBtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"

@@ -1,12 +1,16 @@
 package com.adbazarnet.Activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.adbazarnet.Adapter.CategoryNamesAdapter;
 import com.adbazarnet.Adapter.LocationAdapter;
@@ -27,29 +32,49 @@ import com.adbazarnet.Api.ApiUtils;
 import com.adbazarnet.Models.CategoriesModel;
 import com.adbazarnet.Models.LocationsModel;
 import com.adbazarnet.R;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
+import org.json.JSONArray;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PostAdActivity extends AppCompatActivity {
 
-    public static TextView locationTv,categoryTv;
-    public static String ad_Type;
-    private EditText titleEt,otherInfoEt,priceEt,phnnoEt1,phnnoEt2,phnnoEt3,descriptionEt;
-    private Switch negotiableBtn,hidePhnBtn;
-    private Button addPhnBtn,addImgBtn;
-    private ImageView img1,img2,img3,img4,img5;
+    public static TextView locationTv, categoryTv;
+    public static String ad_Type = null;
+    public static TextView txt4, txt5, txt6, txtC, txtW;
+    public static EditText titleEt, otherInfoEt, priceEt, phnnoEt1, phnnoEt2, phnnoEt3, descriptionEt, warrantyEt;
+    private Switch negotiableBtn, hidePhnBtn;
+    private Button addPhnBtn, addImgBtn;
+    private ImageView img1, img2, img3, img4, img5;
     private Uri imageUri;
+    private CardView submitBtn;
     public static Dialog dialog;
     private ApiInterface apiInterface;
     private PostAdCategoryAdapter categoryNamesAdapter;
     private PostAdLocationAdapter locationAdapter;
-    private AutoCompleteTextView conditionSpinner;
+    public static AutoCompleteTextView conditionSpinner;
     private String[] conditionArray = {"Used", "New", "Recondition"};
-    private String condition;
+    private String condition, warranty, phn1, phn2, phn3;
+    private int phnCounter = 0, imgCounter = 0, imgSelect = 0;
+    private Uri uri1, uri2, uri3, uri4, uri5;
+    private JSONArray array = new JSONArray();
+    private ArrayList<JSONArray> phnNoList = new ArrayList<>();
+    private List<Map<String, String>> list1 = new ArrayList<>();
+    private Map<String, String> parms = new HashMap<String, String>();
+    private RequestBody requestFile1;
+    private boolean negotiable = false, hidePhone = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,9 +98,9 @@ public class PostAdActivity extends AppCompatActivity {
                 call.enqueue(new Callback<List<CategoriesModel>>() {
                     @Override
                     public void onResponse(Call<List<CategoriesModel>> call, Response<List<CategoriesModel>> response) {
-                        if (response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             List<CategoriesModel> list = response.body();
-                            categoryNamesAdapter = new PostAdCategoryAdapter(list,PostAdActivity.this);
+                            categoryNamesAdapter = new PostAdCategoryAdapter(list, PostAdActivity.this);
                             categoriesRecycler.setAdapter(categoryNamesAdapter);
                         }
                         categoryNamesAdapter.notifyDataSetChanged();
@@ -124,9 +149,9 @@ public class PostAdActivity extends AppCompatActivity {
                 call.enqueue(new Callback<List<LocationsModel>>() {
                     @Override
                     public void onResponse(Call<List<LocationsModel>> call, Response<List<LocationsModel>> response) {
-                        if (response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             List<LocationsModel> list = response.body();
-                            locationAdapter = new PostAdLocationAdapter(list,PostAdActivity.this);
+                            locationAdapter = new PostAdLocationAdapter(list, PostAdActivity.this);
                             locationRecycler.setAdapter(locationAdapter);
                         }
                         locationAdapter.notifyDataSetChanged();
@@ -143,8 +168,126 @@ public class PostAdActivity extends AppCompatActivity {
             }
         });
 
-    }
+        addPhnBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                phnCounter++;
+                if (phnCounter == 1) {
+                    phnnoEt1.setVisibility(View.VISIBLE);
+                    txt4.setVisibility(View.VISIBLE);
+                } else if (phnCounter == 2) {
+                    phnnoEt2.setVisibility(View.VISIBLE);
+                    txt5.setVisibility(View.VISIBLE);
+                } else if (phnCounter == 3) {
+                    phnnoEt3.setVisibility(View.VISIBLE);
+                    txt6.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
+        addImgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imgCounter++;
+                if (imgCounter == 1) {
+                    img1.setVisibility(View.VISIBLE);
+                } else if (imgCounter == 2) {
+                    img2.setVisibility(View.VISIBLE);
+                } else if (imgCounter == 3) {
+                    img3.setVisibility(View.VISIBLE);
+                } else if (imgCounter == 4) {
+                    img4.setVisibility(View.VISIBLE);
+                } else if (imgCounter == 5) {
+                    img5.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        img1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CropImage.activity()
+                        .setFixAspectRatio(false)
+                        .setGuidelines(CropImageView.Guidelines.OFF)
+                        .start(PostAdActivity.this);
+                imgSelect = 1;
+            }
+        });
+        img2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CropImage.activity()
+                        .setFixAspectRatio(false)
+                        .setGuidelines(CropImageView.Guidelines.OFF)
+                        .start(PostAdActivity.this);
+                imgSelect = 2;
+            }
+        });
+        img3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CropImage.activity()
+                        .setFixAspectRatio(false)
+                        .setGuidelines(CropImageView.Guidelines.OFF)
+                        .start(PostAdActivity.this);
+                imgSelect = 3;
+            }
+        });
+        img4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CropImage.activity()
+                        .setFixAspectRatio(false)
+                        .setGuidelines(CropImageView.Guidelines.OFF)
+                        .start(PostAdActivity.this);
+                imgSelect = 4;
+            }
+        });
+        img5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CropImage.activity()
+                        .setFixAspectRatio(false)
+                        .setGuidelines(CropImageView.Guidelines.OFF)
+                        .start(PostAdActivity.this);
+                imgSelect = 5;
+            }
+        });
+
+        submitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String adTitle = titleEt.getText().toString();
+                if (conditionSpinner.getVisibility() == View.VISIBLE) {
+                    condition = conditionSpinner.getText().toString();
+                } else {
+                    condition = null;
+                }
+                String otherInfo = otherInfoEt.getText().toString();
+                String price = priceEt.getText().toString();
+                if (warrantyEt.getVisibility() == View.VISIBLE) {
+                    warranty = warrantyEt.getText().toString();
+                } else {
+                    warranty = null;
+                }
+                phn1 = phnnoEt1.getText().toString();
+                phn2 = phnnoEt2.getText().toString();
+                phn3 = phnnoEt3.getText().toString();
+
+                parms.put("phone", phn1);
+                list1.add(parms);
+                parms.put("phone", phn2);
+                list1.add(parms);
+                parms.put("phone", phn3);
+                list1.add(parms);
+                array = new JSONArray(list1);
+                phnNoList.add(array);
+
+                Log.d("phnNoList", String.valueOf(list1));
+            }
+        });
+
+    }
 
     private void init() {
         locationTv = findViewById(R.id.locationTv);
@@ -155,13 +298,22 @@ public class PostAdActivity extends AppCompatActivity {
         phnnoEt1 = findViewById(R.id.phnnoEt1);
         phnnoEt2 = findViewById(R.id.phnnoEt2);
         phnnoEt3 = findViewById(R.id.phnnoEt3);
+        txt4 = findViewById(R.id.txt4);
+        txt5 = findViewById(R.id.txt5);
+        txt6 = findViewById(R.id.txt6);
+        txtC = findViewById(R.id.txtC);
+        txtW = findViewById(R.id.txtW);
         descriptionEt = findViewById(R.id.descriptionEt);
+        warrantyEt = findViewById(R.id.warrantyEt);
         addImgBtn = findViewById(R.id.addImgBtn);
         addPhnBtn = findViewById(R.id.addPhnBtn);
+        submitBtn = findViewById(R.id.submitBtn);
         conditionSpinner = findViewById(R.id.conditionSpinner);
+        negotiableBtn = findViewById(R.id.negotiableBtn);
+        hidePhnBtn = findViewById(R.id.hidePhnBtn);
         ArrayAdapter<String> product_color = new ArrayAdapter<String>(this, R.layout.spinner_item_design, R.id.simpleSpinner, conditionArray);
         product_color.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        conditionSpinner.setText(product_color.getItem(0),false);
+        conditionSpinner.setText(product_color.getItem(0), false);
         conditionSpinner.setAdapter(product_color);
         conditionSpinner.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,5 +330,44 @@ public class PostAdActivity extends AppCompatActivity {
     }
 
     public void setNegotiable(View view) {
+        if (negotiableBtn.isChecked()) {
+            negotiable = true;
+        } else {
+            negotiable = false;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                Uri resultUri = result.getUri();
+                if (imgSelect == 1) {
+                    uri1 = resultUri;
+                    img1.setImageURI(uri1);
+
+                } else if (imgSelect == 2) {
+                    uri2 = resultUri;
+                    img2.setImageURI(uri2);
+                } else if (imgSelect == 3) {
+                    uri3 = resultUri;
+                    img3.setImageURI(uri3);
+                } else if (imgSelect == 4) {
+                    uri4 = resultUri;
+                    img4.setImageURI(uri4);
+                } else if (imgSelect == 5) {
+                    uri5 = resultUri;
+                    img5.setImageURI(uri5);
+                }
+
+
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+                // progressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
