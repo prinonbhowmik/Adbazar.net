@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.adbazarnet.Activity.PostAdActivity;
 import com.adbazarnet.Models.LocationsModel;
 import com.adbazarnet.Models.SubLocationsModel;
 import com.adbazarnet.R;
@@ -23,6 +24,7 @@ public class PostAdLocationAdapter extends RecyclerView.Adapter<PostAdLocationAd
     private List<LocationsModel> locationsModels;
     private Context context;
     private PostAdSubLocationAdapter adapter;
+    private PostAdActivity activity;
 
     public PostAdLocationAdapter(List<LocationsModel> locationsModels, Context context) {
         this.locationsModels = locationsModels;
@@ -47,6 +49,7 @@ public class PostAdLocationAdapter extends RecyclerView.Adapter<PostAdLocationAd
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                activity.locationId = list.getId();
                 if (holder.subLocLayout.getVisibility() == View.GONE) {
                     holder.subLocLayout.setVisibility(View.VISIBLE);
                     holder.imageIV.setBackgroundResource(R.drawable.ic_baseline_location_on_24);

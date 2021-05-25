@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/receiverimg"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/sellerHeader"
+        android:layout_centerVertical="true"
+        android:layout_margin="20dp" />
+
+    <TextView
+        android:id="@+id/receiverNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/receiverimg"
+        android:fontFamily="@font/roboto"
+        android:text="Md Robi"
+        android:textColor="#000"
+        android:textFontWeight="400"
+        android:textSize="21sp" />
+
+    <TextView
+        android:id="@+id/productNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/receiverNameTv"
+        android:layout_marginBottom="25dp"
+        android:layout_toEndOf="@+id/receiverimg"
+        android:fontFamily="@font/roboto"
+        android:text="Apple 11 pro"
+        android:textColor="#969696"
+        android:textFontWeight="400"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/timeTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_toEndOf="@+id/receiverNameTv"
+        android:fontFamily="@font/roboto"
+        android:text="Md Robi"
+        android:layout_alignParentRight="true"
+        android:textAlignment="textEnd"
+        android:textColor="#969696"
+        android:textFontWeight="400"
+        android:textSize="18sp" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/productNameTv"
+        android:background="#e5e5e5" />
+
+
+</RelativeLayout>

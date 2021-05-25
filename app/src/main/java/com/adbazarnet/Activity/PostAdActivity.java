@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,11 +32,14 @@ import com.adbazarnet.Api.ApiInterface;
 import com.adbazarnet.Api.ApiUtils;
 import com.adbazarnet.Models.CategoriesModel;
 import com.adbazarnet.Models.LocationsModel;
+import com.adbazarnet.Models.PostAdModel;
 import com.adbazarnet.R;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -58,6 +62,7 @@ public class PostAdActivity extends AppCompatActivity {
     private Switch negotiableBtn, hidePhnBtn;
     private Button addPhnBtn, addImgBtn;
     private ImageView img1, img2, img3, img4, img5;
+    public static int categoryId,locationId;
     private Uri imageUri;
     private CardView submitBtn;
     public static Dialog dialog;
@@ -66,15 +71,15 @@ public class PostAdActivity extends AppCompatActivity {
     private PostAdLocationAdapter locationAdapter;
     public static AutoCompleteTextView conditionSpinner;
     private String[] conditionArray = {"Used", "New", "Recondition"};
-    private String condition, warranty, phn1, phn2, phn3;
+    private String condition, warranty =null, phn1, phn2, phn3,token;
     private int phnCounter = 0, imgCounter = 0, imgSelect = 0;
     private Uri uri1, uri2, uri3, uri4, uri5;
     private JSONArray array = new JSONArray();
-    private ArrayList<JSONArray> phnNoList = new ArrayList<>();
-    private List<Map<String, String>> list1 = new ArrayList<>();
-    private Map<String, String> parms = new HashMap<String, String>();
+    private JSONArray imgArray = new JSONArray();
+
     private RequestBody requestFile1;
     private boolean negotiable = false, hidePhone = false;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -268,22 +273,97 @@ public class PostAdActivity extends AppCompatActivity {
                 if (warrantyEt.getVisibility() == View.VISIBLE) {
                     warranty = warrantyEt.getText().toString();
                 } else {
-                    warranty = null;
+                    warranty = "No warranty";
                 }
                 phn1 = phnnoEt1.getText().toString();
                 phn2 = phnnoEt2.getText().toString();
                 phn3 = phnnoEt3.getText().toString();
 
-                parms.put("phone", phn1);
-                list1.add(parms);
-                parms.put("phone", phn2);
-                list1.add(parms);
-                parms.put("phone", phn3);
-                list1.add(parms);
-                array = new JSONArray(list1);
-                phnNoList.add(array);
+                JSONObject obj1 = new JSONObject();
+                try {
+                    obj1.put("phone",phn1);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
-                Log.d("phnNoList", String.valueOf(list1));
+                JSONObject obj2 = new JSONObject();
+                try {
+                    obj2.put("phone",phn2);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                JSONObject obj3 = new JSONObject();
+                try {
+                    obj3.put("phone",phn3);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                array.put(obj1);
+                array.put(obj2);
+                array.put(obj3);
+
+                Log.d("phnNoList", String.valueOf(array));
+
+                String description = descriptionEt.getText().toString();
+
+
+
+                JSONObject object = new JSONObject();
+                try {
+                    object.put("ad_title",adTitle);
+                    object.put("condition",condition);
+                    object.put("price",price);
+                    object.put("warranty",warranty);
+                    object.put("other_information",otherInfo);
+                    object.put("ad_phone_numbers",array);
+                    object.put("description",description);
+                    object.put("category",categoryId);
+                    object.put("location",locationId);
+                    object.put("images",imgArray);
+                    object.put("negotiable",negotiable);
+                    object.put("ad_type",ad_Type);
+                    object.put("hide_phone",hidePhone);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Log.d("kikorbo", String.valueOf(object));
+
+                Call<JSONObject> call = apiInterface.postsellAd("Token "+token,object);
+                call.enqueue(new Callback<JSONObject>() {
+                    @Override
+                    public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
+                       if (response.isSuccessful()){
+                           Dialog dialog2 = new Dialog(PostAdActivity.this);
+                           dialog2.setContentView(R.layout.success_popup);
+                           dialog2.setCancelable(false);
+                           dialog2.show();
+                           TextView textView = dialog2.findViewById(R.id.textview);
+                           Button okBtn = dialog2.findViewById(R.id.okBtn);
+                           textView.setText("Ad created Successfully");
+
+                           okBtn.setOnClickListener(new View.OnClickListener() {
+                               @Override
+                               public void onClick(View v) {
+                                   dialog2.dismiss();
+                                   Intent intent = new Intent(PostAdActivity.this,MainActivity.class);
+                                   intent.putExtra("fragment","home");
+                                   startActivity(intent);
+                                   finish();
+                               }
+                           });
+                       }
+                    }
+
+                    @Override
+                    public void onFailure(Call<JSONObject> call, Throwable t) {
+                        Log.d("somossa",t.getMessage());
+                    }
+                });
+
+
             }
         });
 
@@ -327,6 +407,8 @@ public class PostAdActivity extends AppCompatActivity {
         img4 = findViewById(R.id.img4);
         img5 = findViewById(R.id.img5);
         apiInterface = ApiUtils.getUserService();
+        sharedPreferences = getSharedPreferences("MyRef",MODE_PRIVATE);
+        token = sharedPreferences.getString("token",null);
     }
 
     public void setNegotiable(View view) {

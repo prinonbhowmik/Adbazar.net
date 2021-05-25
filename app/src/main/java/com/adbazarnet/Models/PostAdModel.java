@@ -11,13 +11,15 @@ public class PostAdModel {
     private String warranty;
     private String other_information;
     private String description;
-    private String location;
+    private int location;
     private int category;
     private boolean negotiable;
     private String ad_type;
     private boolean hide_phone;
 
-    public PostAdModel(String ad_title, String condition, String price, String warranty, String other_information, String description, String location, int category, boolean negotiable, String ad_type, boolean hide_phone) {
+    public PostAdModel(String ad_title, String condition, String price, String warranty, String other_information,
+                       String description, int location, int category, boolean negotiable, String ad_type,
+                       boolean hide_phone) {
         this.ad_title = ad_title;
         this.condition = condition;
         this.price = price;
@@ -58,7 +60,7 @@ public class PostAdModel {
         return description;
     }
 
-    public String getLocation() {
+    public int getLocation() {
         return location;
     }
 

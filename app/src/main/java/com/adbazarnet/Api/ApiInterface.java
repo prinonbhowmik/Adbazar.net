@@ -5,6 +5,7 @@ import com.adbazarnet.Models.AdDetails;
 import com.adbazarnet.Models.BidModel;
 import com.adbazarnet.Models.CategoriesModel;
 import com.adbazarnet.Models.CategorisQueryModel;
+import com.adbazarnet.Models.ChatModel;
 import com.adbazarnet.Models.DashboardModel;
 import com.adbazarnet.Models.FavouriteAdDetails;
 import com.adbazarnet.Models.FavouriteAds;
@@ -14,6 +15,11 @@ import com.adbazarnet.Models.ProductModel;
 import com.adbazarnet.Models.SubCategoryProductModel;
 import com.adbazarnet.Models.User;
 import com.adbazarnet.Models.UserDetailsModel;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -125,11 +131,9 @@ public interface ApiInterface {
                                         @Path("id") int id);
 
     @POST("posts/create/")
-    Call<PostAdModel> postsellAd(@Header("Authorization") String token,
-                                 @Field("ad_title")String ad_title,
-                                 @Field("condition")String condition,
-                                 @Field("price")String price,
-                                 @Field("warranty")String warranty);
+    Call<JSONObject> postsellAd(@Header("Authorization") String token,@Body JSONObject object);
 
 
+    @GET("chat/channels/")
+    Call<List<ChatModel>> getChatList(@Header("Authorization")String token);
 }

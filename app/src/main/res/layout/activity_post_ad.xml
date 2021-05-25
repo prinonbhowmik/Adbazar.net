@@ -327,7 +327,7 @@
                         android:layout_marginBottom="10dp"
                         android:background="@drawable/edittex_design"
                         android:hint=" Warranty information"
-                        android:inputType="number"
+                        android:inputType="text"
                         android:visibility="gone"
                         android:padding="10dp"
                         android:textColor="#000"

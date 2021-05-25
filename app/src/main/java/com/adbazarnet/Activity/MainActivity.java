@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.adbazarnet.Api.ApiUtils;
 import com.adbazarnet.Fragments.BidsFragment;
+import com.adbazarnet.Fragments.ChatFragment;
 import com.adbazarnet.Fragments.FavouriteFragment;
 import com.adbazarnet.Fragments.HomeFragment;
 import com.adbazarnet.Models.UserDetailsModel;
@@ -122,7 +123,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         dialog.show();
                         break;
                     case R.id.chat:
-                        Toast.makeText(MainActivity.this, "Chat", Toast.LENGTH_SHORT).show();
+                        FragmentTransaction chat = getSupportFragmentManager().beginTransaction();
+                        chat.replace(R.id.fragment_container, new ChatFragment());
+                        chat.commit();
                         break;
                     case R.id.account:
                         if (loggedIn == 0 ){

@@ -64,6 +64,7 @@ public class PostAdCategoryAdapter extends RecyclerView.Adapter<PostAdCategoryAd
             @Override
             public void onClick(View v) {
                 activity.ad_Type = list.getAd_type();
+                activity.categoryId = list.getId();
                 if (activity.ad_Type.equals("electronics") || activity.ad_Type.equals("vehicle")){
                     activity.txtC.setVisibility(View.VISIBLE);
                     activity.txtW.setVisibility(View.VISIBLE);
