@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/msgCard"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        app:cardCornerRadius="10dp"
+        android:layout_margin="10dp"
+        >
+
+        <RelativeLayout
+            android:id="@+id/cardLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#D8D4D4">
+            <TextView
+                android:id="@+id/msgTv"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:layout_marginLeft="10dp"
+                android:padding="10dp"
+                android:textSize="21sp"
+                android:text="hi"/>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/timeTv"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/msgCard"
+        android:textSize="18sp"
+        android:text="12-00 pm,12-12-2020"
+        android:layout_marginLeft="10dp"
+        android:textColor="#969696"
+        android:layout_marginBottom="10dp"/>
+
+</RelativeLayout>

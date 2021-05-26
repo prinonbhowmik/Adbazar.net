@@ -18,11 +18,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.adbazarnet.Adapter.BidsShowAdapter;
+import com.adbazarnet.Adapter.ChatMsgAdapter;
 import com.adbazarnet.Adapter.ImageSliderAdapter;
 import com.adbazarnet.Adapter.RelatedProductAdapter;
 import com.adbazarnet.Api.ApiUtils;
@@ -32,6 +34,9 @@ import com.adbazarnet.Interface.GetBiderIdInterface;
 import com.adbazarnet.Models.AdDetails;
 import com.adbazarnet.Models.AdImages;
 import com.adbazarnet.Models.BidModel;
+import com.adbazarnet.Models.ChatChannelModel;
+import com.adbazarnet.Models.ChatModel;
+import com.adbazarnet.Models.ChatModel2;
 import com.adbazarnet.Models.FavouriteAds;
 import com.adbazarnet.Models.RelatedAds;
 import com.adbazarnet.Models.UserDetailsModel;
@@ -43,6 +48,7 @@ import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -58,15 +64,15 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
     private CircleImageView sellerProfileIv;
     private TextView productName,productPrice,uploadTime,categoryTv,conditionTv,
             warrantyTv,descriptionTv,sellerNameTv,locationTv,noDataTv,membershipTV,
-            favouriteTv,callNowTV,noBidTv,bidBtn;
+            favouriteTv,callNowTV,noBidTv,bidBtn,chatTV;
     private RecyclerView relatedProductRecycler,bidRecycler;
     private RelatedProductAdapter relatedProductAdapter;
     private BidsShowAdapter bidAdapter;
     private SharedPreferences sharedPreferences;
-    private String token,userPhone;
+    private String token,userPhone,location,prductimg,category;
     private Dialog dialog;
     private ChipNavigationBar chipNavigationBar;
-    private int loggedIn;
+    private int loggedIn,receiver;
     private RelativeLayout relatedLayout,bidLayout;
     private boolean is_bid;
     private EditText bidEt;
@@ -94,15 +100,18 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                     uploadTime.setText(response.body().getCreated());
                     categoryTv.setText(""+response.body().getCategory().getCategory_name()+","
                             +response.body().getCategory().getName());
+                    category = response.body().getCategory().getCategory_name();
                     conditionTv.setText(response.body().getCondition());
                     descriptionTv.setText(response.body().getDescription());
                     sellerNameTv.setText(response.body().getUser().getName());
                     locationTv.setText(response.body().getLocation().getName()+", "+
                             response.body().getLocation().getLocation_name());
+                    location = response.body().getLocation().getName();
                     membershipTV.setText(response.body().getUser().getMembership_name()+" Member");
                     sellerId = response.body().getUser().getId();
                     userPhone = response.body().getUser().getPhone_number();
                     is_bid = response.body().isIs_bid();
+                    receiver = response.body().getUser().getId();
 
                     if (is_bid==true){
                         relatedLayout.setVisibility(View.GONE);
@@ -120,6 +129,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                        prductimg = response.body().getUser().getAvatar();
                     }else{
                         sellerProfileIv.setImageResource(R.drawable.ic_user);
                     }
@@ -179,6 +189,81 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                 Intent callIntent = new Intent(Intent.ACTION_DIAL);
                 callIntent.setData(Uri.parse("tel:"+userPhone));
                 startActivity(callIntent);
+            }
+        });
+
+        chatTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog dialog2 = new Dialog(AdDetailsActivity.this);
+                Call<ChatModel> call = ApiUtils.getUserService().createChannel("Token "+token,id,receiver);
+                call.enqueue(new Callback<ChatModel>() {
+                    @Override
+                    public void onResponse(Call<ChatModel> call, Response<ChatModel> response) {
+                        if (response.isSuccessful()){
+                            int channelID = response.body().getId();
+                            dialog2.setContentView(R.layout.ad_chat_dialog);
+                            dialog2.show();
+                            ImageView productIv = dialog2.findViewById(R.id.productIv);
+                            TextView headerTv = dialog2.findViewById(R.id.header);
+                            TextView productNameTv = dialog2.findViewById(R.id.productNameTv);
+                            TextView locationNameTv = dialog2.findViewById(R.id.locationNameTv);
+                            TextView priceTv = dialog2.findViewById(R.id.priceTv);
+                            RecyclerView msgRecycler = dialog2.findViewById(R.id.msgRecycler);
+                            msgRecycler.setLayoutManager(new LinearLayoutManager(AdDetailsActivity.this));
+                            EditText msgEt = dialog2.findViewById(R.id.msgEt);
+                            ImageView msgBtn = dialog2.findViewById(R.id.msgBtn);
+
+                            headerTv.setText("Chat With "+sellerNameTv.getText().toString());
+                            try {
+                                Picasso.get()
+                                        .load(prductimg)
+                                        .into(productIv);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            productNameTv.setText(productName.getText().toString());
+                            locationNameTv.setText(location+","+category);
+                            priceTv.setText(productPrice.getText().toString());
+
+                            msgBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    String msg = msgEt.getText().toString();
+
+                                    Call<ChatChannelModel> chatcall = ApiUtils.getUserService().sendMsg
+                                            ("Token "+token,channelID,msg);
+                                    chatcall.enqueue(new Callback<ChatChannelModel>() {
+                                        @Override
+                                        public void onResponse(Call<ChatChannelModel> call, Response<ChatChannelModel> response) {
+                                            if (response.isSuccessful()){
+                                                msgEt.setText("");
+                                                List<ChatModel2> list = new ArrayList<>();
+                                                ChatModel2 model2 = new ChatModel2(msg);
+                                                list.add(model2);
+                                                ChatMsgAdapter adapter = new ChatMsgAdapter(list);
+                                                msgRecycler.setAdapter(adapter);
+                                                adapter.notifyDataSetChanged();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<ChatChannelModel> call, Throwable t) {
+
+                                        }
+                                    });
+                                }
+                            });
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ChatModel> call, Throwable t) {
+
+                    }
+                });
+
             }
         });
 
@@ -390,6 +475,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
         favouriteTv = findViewById(R.id.favouriteTv);
         sellerNameTv = findViewById(R.id.sellerNameTv);
         contactLayout = findViewById(R.id.contactLayout);
+        chatTV = findViewById(R.id.chatTV);
 
         relatedProductRecycler = findViewById(R.id.relatedProductRecycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);

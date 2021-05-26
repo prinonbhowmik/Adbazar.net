@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AdBazarnet">
-        <activity android:name=".Activity.PostAdActivity"></activity>
+        <activity android:name=".Activity.ChatDetailsActivity"></activity>
+        <activity android:name=".Activity.PostAdActivity" />
         <activity android:name=".Activity.DashboardActivity" />
         <activity android:name=".Activity.MyAdsActivity" />
         <activity android:name=".Activity.ProfileActivity" />
@@ -28,10 +29,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.MainActivity" />
-
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

@@ -5,6 +5,7 @@ import com.adbazarnet.Models.AdDetails;
 import com.adbazarnet.Models.BidModel;
 import com.adbazarnet.Models.CategoriesModel;
 import com.adbazarnet.Models.CategorisQueryModel;
+import com.adbazarnet.Models.ChatChannelModel;
 import com.adbazarnet.Models.ChatModel;
 import com.adbazarnet.Models.DashboardModel;
 import com.adbazarnet.Models.FavouriteAdDetails;
@@ -131,9 +132,27 @@ public interface ApiInterface {
                                         @Path("id") int id);
 
     @POST("posts/create/")
-    Call<JSONObject> postsellAd(@Header("Authorization") String token,@Body JSONObject object);
+    Call<JSONObject> postsellAd(@Header("Authorization") String token, @Body JSONObject object);
 
 
     @GET("chat/channels/")
-    Call<List<ChatModel>> getChatList(@Header("Authorization")String token);
+    Call<List<ChatModel>> getChatList(@Header("Authorization") String token);
+
+    @POST("chat/channels/")
+    @FormUrlEncoded
+    Call<ChatModel> createChannel(@Header("Authorization") String token,
+                                  @Field("ad") int ad,
+                                  @Field("receiver") int receiver);
+
+    @POST("chat/create/")
+    @FormUrlEncoded
+    Call<ChatChannelModel> sendMsg(@Header("Authorization") String token,
+                                   @Field("channel") int channel,
+                                   @Field("message") String message);
+
+    @GET("chat/channels/{id}/")
+    Call<List<ChatChannelModel>> getChatDetails(@Header("Authorization") String token,
+                                                @Path("id") int id);
+
+
 }

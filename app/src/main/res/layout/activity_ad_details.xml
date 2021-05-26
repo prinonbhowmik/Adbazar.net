@@ -679,7 +679,7 @@
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/addToCartTV"
+                android:id="@+id/chatTV"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="5dp"

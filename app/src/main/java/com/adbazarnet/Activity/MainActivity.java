@@ -78,54 +78,69 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         home.commit();
                         break;
                     case R.id.favourite:
-                        FragmentTransaction favourite = getSupportFragmentManager().beginTransaction();
-                        favourite.replace(R.id.fragment_container, new FavouriteFragment());
-                        favourite.commit();
+                        if (loggedIn==0){
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                            finish();
+                        }else {
+                            FragmentTransaction favourite = getSupportFragmentManager().beginTransaction();
+                            favourite.replace(R.id.fragment_container, new FavouriteFragment());
+                            favourite.commit();
+                        }
                         break;
                     case R.id.adPost:
-                        dialog = new Dialog(MainActivity.this);
-                        dialog.setContentView(R.layout.post_ad_popup);
-                        ImageView closeIv = dialog.findViewById(R.id.closeIv);
-                        TextView sellItemTv = dialog.findViewById(R.id.sellItemTv);
-                        TextView rentTv = dialog.findViewById(R.id.rentTv);
-                        TextView auctionTv = dialog.findViewById(R.id.auctionTv);
-                        TextView exchangeTv = dialog.findViewById(R.id.exchangeTv);
-                        TextView jobTv = dialog.findViewById(R.id.jobTv);
-                        TextView brideTv = dialog.findViewById(R.id.brideTv);
-                        TextView lookforbuyTv = dialog.findViewById(R.id.lookforbuyTv);
-                        TextView lookforRentTv = dialog.findViewById(R.id.lookforRentTv);
-                        Button closeBtn = dialog.findViewById(R.id.closeBtn);
+                        if (loggedIn==0){
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                            finish();
+                        }else {
+                            dialog = new Dialog(MainActivity.this);
+                            dialog.setContentView(R.layout.post_ad_popup);
+                            ImageView closeIv = dialog.findViewById(R.id.closeIv);
+                            TextView sellItemTv = dialog.findViewById(R.id.sellItemTv);
+                            TextView rentTv = dialog.findViewById(R.id.rentTv);
+                            TextView auctionTv = dialog.findViewById(R.id.auctionTv);
+                            TextView exchangeTv = dialog.findViewById(R.id.exchangeTv);
+                            TextView jobTv = dialog.findViewById(R.id.jobTv);
+                            TextView brideTv = dialog.findViewById(R.id.brideTv);
+                            TextView lookforbuyTv = dialog.findViewById(R.id.lookforbuyTv);
+                            TextView lookforRentTv = dialog.findViewById(R.id.lookforRentTv);
+                            Button closeBtn = dialog.findViewById(R.id.closeBtn);
 
-                        sellItemTv.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                startActivity(new Intent(MainActivity.this,PostAdActivity.class));
-                                finish();
-                                dialog.dismiss();
-                            }
-                        });
+                            sellItemTv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(MainActivity.this, PostAdActivity.class));
+                                    finish();
+                                    dialog.dismiss();
+                                }
+                            });
 
-                        closeIv.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                dialog.dismiss();
-                                chipNavigationBar.setItemSelected(R.id.home, true);
-                            }
-                        });
+                            closeIv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                    chipNavigationBar.setItemSelected(R.id.home, true);
+                                }
+                            });
 
-                        closeBtn.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                dialog.dismiss();
-                                chipNavigationBar.setItemSelected(R.id.home, true);
-                            }
-                        });
-                        dialog.show();
+                            closeBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                    chipNavigationBar.setItemSelected(R.id.home, true);
+                                }
+                            });
+                            dialog.show();
+                        }
                         break;
                     case R.id.chat:
-                        FragmentTransaction chat = getSupportFragmentManager().beginTransaction();
-                        chat.replace(R.id.fragment_container, new ChatFragment());
-                        chat.commit();
+                        if (loggedIn==0){
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                            finish();
+                        }else {
+                            FragmentTransaction chat = getSupportFragmentManager().beginTransaction();
+                            chat.replace(R.id.fragment_container, new ChatFragment());
+                            chat.commit();
+                        }
                         break;
                     case R.id.account:
                         if (loggedIn == 0 ){

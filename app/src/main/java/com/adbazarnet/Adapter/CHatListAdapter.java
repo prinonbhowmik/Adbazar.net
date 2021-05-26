@@ -1,6 +1,8 @@
 package com.adbazarnet.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.adbazarnet.Activity.ChatDetailsActivity;
 import com.adbazarnet.Models.ChatModel;
 import com.adbazarnet.R;
 import com.squareup.picasso.Picasso;
@@ -61,6 +64,17 @@ public class CHatListAdapter extends RecyclerView.Adapter<CHatListAdapter.ViewHo
         time = time.split("T")[0];
 
         holder.timeTv.setText(time);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, ChatDetailsActivity.class);
+                i.putExtra("channel",list.getId());
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                context.startActivity(i);
+                ((Activity)context).finish();
+            }
+        });
 
 
     }
