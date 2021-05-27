@@ -65,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }else if(loadFragment.equals("favourite")){
             chipNavigationBar.setItemSelected(R.id.favourite, true);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FavouriteFragment()).commit();
+        }else if(loadFragment.equals("chat")){
+            chipNavigationBar.setItemSelected(R.id.chat, true);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ChatFragment()).commit();
         }
 
         chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {

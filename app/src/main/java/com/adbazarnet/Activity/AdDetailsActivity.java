@@ -313,10 +313,54 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         finish();
                         break;
                     case R.id.adPost:
+                        if (loggedIn==0){
+                            startActivity(new Intent(AdDetailsActivity.this, LoginActivity.class));
+                            finish();
+                        }
+                        else {
+                            dialog = new Dialog(AdDetailsActivity.this);
+                            dialog.setContentView(R.layout.post_ad_popup);
+                            ImageView closeIv = dialog.findViewById(R.id.closeIv);
+                            TextView sellItemTv = dialog.findViewById(R.id.sellItemTv);
+                            TextView rentTv = dialog.findViewById(R.id.rentTv);
+                            TextView auctionTv = dialog.findViewById(R.id.auctionTv);
+                            TextView exchangeTv = dialog.findViewById(R.id.exchangeTv);
+                            TextView jobTv = dialog.findViewById(R.id.jobTv);
+                            TextView brideTv = dialog.findViewById(R.id.brideTv);
+                            TextView lookforbuyTv = dialog.findViewById(R.id.lookforbuyTv);
+                            TextView lookforRentTv = dialog.findViewById(R.id.lookforRentTv);
+                            Button closeBtn = dialog.findViewById(R.id.closeBtn);
+
+                            sellItemTv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(AdDetailsActivity.this, PostAdActivity.class));
+                                    finish();
+                                    dialog.dismiss();
+                                }
+                            });
+
+                            closeIv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+
+                                }
+                            });
+
+                            closeBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            dialog.show();
+                        }
                         break;
                     case R.id.chat:
-                        Toast.makeText(AdDetailsActivity.this, "Chat", Toast.LENGTH_SHORT).show();
-                        break;
+                        startActivity(new Intent(AdDetailsActivity.this,MainActivity.class)
+                                .putExtra("fragment","chat"));
+                        finish();                        break;
                     case R.id.account:
                         if (loggedIn == 0 ){
                             startActivity(new Intent(AdDetailsActivity.this,LoginActivity.class));
@@ -396,7 +440,9 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                                     editor.putInt("id", 0);
                                     editor.commit();
                                     finish();
-                                    startActivity(getIntent());
+                                    startActivity(new Intent(AdDetailsActivity.this,MainActivity.class)
+                                            .putExtra("fragment","home"));
+                                    dialog.dismiss();
                                 }
                             });
 

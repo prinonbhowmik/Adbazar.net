@@ -1,5 +1,6 @@
 package com.adbazarnet.Models;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -10,24 +11,28 @@ public class PostAdModel {
     private String price;
     private String warranty;
     private String other_information;
+    private JSONArray ad_phone_numbers;
     private String description;
     private int location;
     private int category;
+    private JSONArray images;
     private boolean negotiable;
     private String ad_type;
     private boolean hide_phone;
 
     public PostAdModel(String ad_title, String condition, String price, String warranty, String other_information,
-                       String description, int location, int category, boolean negotiable, String ad_type,
-                       boolean hide_phone) {
+                       JSONArray ad_phone_numbers, String description, int location, int category, JSONArray images, boolean negotiable, String ad_type, boolean hide_phone) {
+
         this.ad_title = ad_title;
         this.condition = condition;
         this.price = price;
         this.warranty = warranty;
         this.other_information = other_information;
+        this.ad_phone_numbers = ad_phone_numbers;
         this.description = description;
         this.location = location;
         this.category = category;
+        this.images = images;
         this.negotiable = negotiable;
         this.ad_type = ad_type;
         this.hide_phone = hide_phone;
@@ -78,5 +83,13 @@ public class PostAdModel {
 
     public boolean isHide_phone() {
         return hide_phone;
+    }
+
+    public JSONArray getAd_phone_numbers() {
+        return ad_phone_numbers;
+    }
+
+    public JSONArray getImages() {
+        return images;
     }
 }
