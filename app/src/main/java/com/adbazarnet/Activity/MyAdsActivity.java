@@ -152,6 +152,14 @@ public class MyAdsActivity extends AppCompatActivity {
                                 }
                             });
 
+                            membership.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(MyAdsActivity.this,MembershipActivity.class));
+                                    finish();
+                                }
+                            });
+
                             myAds.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {

@@ -387,6 +387,14 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                                 }
                             });
 
+                            membership.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(AdDetailsActivity.this,MembershipActivity.class));
+                                    finish();
+                                }
+                            });
+
                             myAds.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {

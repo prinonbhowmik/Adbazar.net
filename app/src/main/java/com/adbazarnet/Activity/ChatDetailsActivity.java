@@ -173,6 +173,14 @@ public class ChatDetailsActivity extends AppCompatActivity {
                                 }
                             });
 
+                            membership.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(ChatDetailsActivity.this,MembershipActivity.class));
+                                    finish();
+                                }
+                            });
+
                             myAds.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {

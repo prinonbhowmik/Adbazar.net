@@ -130,10 +130,7 @@ public interface ApiInterface {
     @DELETE("posts/{id}/")
     Call<FavouriteAdDetails> deleteMyAd(@Header("Authorization") String token,
                                         @Path("id") int id);
-    @Headers({
-            "Accept: application/json",
-            "Content-Type: application/json"
-    })
+
     @POST("posts/create/")
     Call<JSONObject> postsellAd(@Header("Authorization") String token, @Body JSONObject object);
 

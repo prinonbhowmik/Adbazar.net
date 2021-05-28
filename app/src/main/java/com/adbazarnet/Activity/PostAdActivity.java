@@ -74,7 +74,7 @@ public class PostAdActivity extends AppCompatActivity {
     private PostAdCategoryAdapter categoryNamesAdapter;
     private PostAdLocationAdapter locationAdapter;
     public static AutoCompleteTextView conditionSpinner;
-    private String[] conditionArray = {"Used", "New", "Recondition"};
+    private String[] conditionArray = {"used", "new", "recondition"};
     private String condition, warranty =null, phn1, phn2, phn3,token;
     private int phnCounter = 0, imgCounter = 0, imgSelect = 0;
     private Uri uri1, uri2, uri3, uri4, uri5;
@@ -313,9 +313,6 @@ public class PostAdActivity extends AppCompatActivity {
 
                 String description = descriptionEt.getText().toString();
 
-                PostAdModel model = new PostAdModel(adTitle,condition,price,warranty,otherInfo,array,
-                        description,categoryId,locationId,imgArray,negotiable,ad_Type,hidePhone);
-
                 JSONObject object = new JSONObject();
                 try {
                     object.put("ad_title",adTitle);
@@ -323,11 +320,11 @@ public class PostAdActivity extends AppCompatActivity {
                     object.put("price",price);
                     object.put("warranty",warranty);
                     object.put("other_information",otherInfo);
-                    object.put("ad_phone_numbers",array);
+                    object.putOpt("ad_phone_numbers",array);
                     object.put("description",description);
                     object.put("category",categoryId);
                     object.put("location",locationId);
-                    object.put("images",imgArray);
+                    object.putOpt("images",imgArray);
                     object.put("negotiable",negotiable);
                     object.put("ad_type",ad_Type);
                     object.put("hide_phone",hidePhone);
@@ -361,6 +358,7 @@ public class PostAdActivity extends AppCompatActivity {
                                 }
                             });
                         }
+
                     }
 
                     @Override
@@ -459,6 +457,14 @@ public class PostAdActivity extends AppCompatActivity {
                                     dialog.dismiss();
                                     finish();
                                     startActivity(getIntent());
+                                }
+                            });
+
+                            membership.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(PostAdActivity.this,MembershipActivity.class));
+                                    finish();
                                 }
                             });
 
