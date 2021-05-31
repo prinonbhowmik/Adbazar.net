@@ -9,8 +9,14 @@ public class PostAdModel {
     private boolean is_bid;
     private String ad_title;
     private String condition;
+    private String jobType;
+    private int vacancy;
     private String price;
+    private String requirment;
+    private String deadline;
+    private String employeer;
     private String warranty;
+    private String website;
     private String other_information;
     private List<PhoneNoModel> ad_phone_numbers;
     private String description;
@@ -26,6 +32,7 @@ public class PostAdModel {
     private String ad_type;
     private boolean hide_phone;
     private boolean is_sell;
+    private boolean is_job;
 
     //sell
     public PostAdModel(String ad_title, String condition, String price, String warranty,
@@ -136,6 +143,23 @@ public class PostAdModel {
         this.is_bid = is_bid;
     }
 
+    public PostAdModel(String ad_title, String jobType, int vacancy, String requirment, String deadline, String employeer, String website, String other_information, String description, int location, String address, int category, List<PostImageModel> images, String ad_type, boolean is_job) {
+        this.ad_title = ad_title;
+        this.jobType = jobType;
+        this.vacancy = vacancy;
+        this.requirment = requirment;
+        this.deadline = deadline;
+        this.employeer = employeer;
+        this.website = website;
+        this.other_information = other_information;
+        this.description = description;
+        this.location = location;
+        this.address = address;
+        this.category = category;
+        this.images = images;
+        this.ad_type = ad_type;
+        this.is_job = is_job;
+    }
 
     public PostAdModel() {
     }

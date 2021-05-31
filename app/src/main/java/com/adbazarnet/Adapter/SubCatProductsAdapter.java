@@ -60,6 +60,8 @@ public class SubCatProductsAdapter extends RecyclerView.Adapter<SubCatProductsAd
         if (model.isIs_bid()==true){
             holder.productPrice.setVisibility(View.GONE);
             holder.bidTv.setVisibility(View.VISIBLE);
+        }else if(model.isIs_job()==true){
+            holder.productPrice.setText("Job");
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,10 +24,12 @@ import com.adbazarnet.Models.SubCategoryModel;
 import com.adbazarnet.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PostAdCategoryAdapter extends RecyclerView.Adapter<PostAdCategoryAdapter.ViewHolder>{
     private List<CategoriesModel> categoriesModels;
+    private List<CategoriesModel> categoriesModelFiltered;
     private SubCategoryClick click;
     private PostAdSubCatAdapter adapter2;
     private PostAdActivity activity;
@@ -61,6 +64,7 @@ public class PostAdCategoryAdapter extends RecyclerView.Adapter<PostAdCategoryAd
         holder.ad_count.setText("("+list.getAd_count()+")");
         holder.subCatRecycler.setLayoutManager(new LinearLayoutManager(context));
 
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
@@ -73,7 +77,8 @@ public class PostAdCategoryAdapter extends RecyclerView.Adapter<PostAdCategoryAd
                         activity.txtW.setVisibility(View.VISIBLE);
                         activity.conditionSpinner.setVisibility(View.VISIBLE);
                         activity.warrantyEt.setVisibility(View.VISIBLE);
-                    }else if(activity.ad_Type.equals("vehicle")){
+                    }
+                    else if(activity.ad_Type.equals("vehicle")){
                         activity.txtC.setVisibility(View.VISIBLE);
                         activity.txtW.setVisibility(View.VISIBLE);
                         activity.conditionSpinner.setVisibility(View.VISIBLE);
@@ -82,12 +87,14 @@ public class PostAdCategoryAdapter extends RecyclerView.Adapter<PostAdCategoryAd
                         activity.txtMY.setVisibility(View.VISIBLE);
                         activity.modelYearEt.setVisibility(View.VISIBLE);
                         activity.mileageEt.setVisibility(View.VISIBLE);
-                    }else if(activity.ad_Type.equals("property")){
+                    }
+                    else if(activity.ad_Type.equals("property")){
                         activity.txtA.setVisibility(View.VISIBLE);
                         activity.txtL.setVisibility(View.VISIBLE);
                         activity.addressEt.setVisibility(View.VISIBLE);
                         activity.landEt.setVisibility(View.VISIBLE);
-                    }else if(activity.ad_Type.equals("service")){
+                    }
+                    else if(activity.ad_Type.equals("service")){
                         activity.txtA.setVisibility(View.VISIBLE);
                         activity.addressEt.setVisibility(View.VISIBLE);
                         activity.txtS.setVisibility(View.VISIBLE);
@@ -123,6 +130,36 @@ public class PostAdCategoryAdapter extends RecyclerView.Adapter<PostAdCategoryAd
     public int getItemCount() {
         return categoriesModels.size();
     }
+
+    public Filter getFilter() {
+        return exampleFilter;
+    }
+    private Filter exampleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<CategoriesModel> filteredList = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.clear();
+                filteredList.addAll(categoriesModelFiltered);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (CategoriesModel item : categoriesModels) {
+                    if (item.getAd_type().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            categoriesModels.clear();
+            categoriesModels.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageIv;

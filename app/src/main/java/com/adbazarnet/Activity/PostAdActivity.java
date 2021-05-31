@@ -6,6 +6,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -52,7 +54,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,13 +73,11 @@ public class PostAdActivity extends AppCompatActivity {
 
     public static TextView locationTv, categoryTv;
     public static String ad_Type = null;
-    public static TextView txt3, txt4, txt5, txt6, txtC, txtW, txtMY, txtM, txtL, txtA, txtS, txtF,txtJT,txtVC
-            ,txtMR,txtD,txtCE,txtWeb,txtAtt,txt87;
+    public static TextView txt3, txt4, txt5, txt6, txtC, txtW, txtMY, txtM, txtL, txtA, txtS, txtF, txtJT, txtVC, txtMR, txtD, txtCE, txtWeb, txtAtt, txt87;
     public static EditText titleEt, otherInfoEt, priceEt, phnnoEt1, phnnoEt2, phnnoEt3, descriptionEt,
-            warrantyEt, modelYearEt, mileageEt, addressEt, landEt, featureEt,vacancyEt,deadlineEt
-            ,employeerEt,websiteEt;
+            warrantyEt, modelYearEt, mileageEt, addressEt, landEt, featureEt, vacancyEt, deadlineEt, employeerEt, websiteEt;
     private Switch negotiableBtn, hidePhnBtn;
-    private Button addPhnBtn, addImgBtn,browseBtn;
+    private Button addPhnBtn, addImgBtn, browseBtn;
     private ImageView img1, img2, img3, img4, img5;
     public static int categoryId, subCategoryId, locationId, subLocationId;
     private Uri imageUri;
@@ -82,14 +86,14 @@ public class PostAdActivity extends AppCompatActivity {
     private ApiInterface apiInterface;
     private PostAdCategoryAdapter categoryNamesAdapter;
     private PostAdLocationAdapter locationAdapter;
-    public static AutoCompleteTextView conditionSpinner, serviceSpinner,jobTypeSpinner,requirmetntSpinner;
+    public static AutoCompleteTextView conditionSpinner, serviceSpinner, jobTypeSpinner, requirmetntSpinner;
     private String[] conditionArray = {"used", "new", "recondition"};
     private String[] serviceArray = {"computer & laptop", "courier", "electronics and engineering", "facility management"
             , "marketing & social media", "printing", "security", "software & web development"};
-    private String [] jobTypeArray = {"full time","part time","contract","internship"};
-    private String [] requirmentArray = {"primary school","high school","ssc/O level","hsc/A level"
-            ,"diploma","bachelors/honours","PhD/Doctorate"};
-    private String condition, service, warranty = null, phn1, phn2, phn3, token;
+    private String[] jobTypeArray = {"full time", "part time", "contract", "internship"};
+    private String[] requirmentArray = {"primary school", "high school", "ssc/O level", "hsc/A level"
+            , "diploma", "bachelors/honours", "PhD/Doctorate"};
+    private String condition, service, warranty = null, phn1, phn2, phn3, token, jobType, requirment;
     private int phnCounter = 0, imgCounter = 0, imgSelect = 0;
     private Uri uri1, uri2, uri3, uri4, uri5;
     private List<PostImageModel> imgArray = new ArrayList<>();
@@ -97,10 +101,10 @@ public class PostAdActivity extends AppCompatActivity {
     private boolean negotiable = false, hidePhone = false, is_sell;
     private SharedPreferences sharedPreferences;
     private ChipNavigationBar chipNavigationBar;
-    private int loggedIn;
+    private int loggedIn, vacancy;
     private PostAdModel model;
     public String postType;
-    private File file1,file2,file3,file4,file5;
+    private File file1, file2, file3, file4, file5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,14 +124,14 @@ public class PostAdActivity extends AppCompatActivity {
             hidePhnBtn.setVisibility(View.GONE);
             txtF.setVisibility(View.VISIBLE);
             featureEt.setVisibility(View.VISIBLE);
-        }else if (postType.equals("job")){
+        } else if (postType.equals("job")) {
             txt3.setVisibility(View.GONE);
             priceEt.setVisibility(View.GONE);
             negotiableBtn.setVisibility(View.GONE);
             addPhnBtn.setVisibility(View.GONE);
             hidePhnBtn.setVisibility(View.GONE);
-           txtJT.setVisibility(View.VISIBLE);
-           jobTypeSpinner.setVisibility(View.VISIBLE);
+            txtJT.setVisibility(View.VISIBLE);
+            jobTypeSpinner.setVisibility(View.VISIBLE);
             txtVC.setVisibility(View.VISIBLE);
             vacancyEt.setVisibility(View.VISIBLE);
             txtMR.setVisibility(View.VISIBLE);
@@ -139,6 +143,7 @@ public class PostAdActivity extends AppCompatActivity {
             txtA.setVisibility(View.VISIBLE);
             addressEt.setVisibility(View.VISIBLE);
             txtWeb.setVisibility(View.VISIBLE);
+            websiteEt.setVisibility(View.VISIBLE);
             txt87.setVisibility(View.VISIBLE);
             browseBtn.setVisibility(View.VISIBLE);
             txtAtt.setVisibility(View.VISIBLE);
@@ -163,6 +168,9 @@ public class PostAdActivity extends AppCompatActivity {
                             List<CategoriesModel> list = response.body();
                             categoryNamesAdapter = new PostAdCategoryAdapter(list, PostAdActivity.this);
                             categoriesRecycler.setAdapter(categoryNamesAdapter);
+                            if (postType.equals("job")){
+                                categoryNamesAdapter.getFilter().filter(postType);
+                            }
                         }
                         categoryNamesAdapter.notifyDataSetChanged();
                     }
@@ -315,6 +323,13 @@ public class PostAdActivity extends AppCompatActivity {
             }
         });
 
+        deadlineEt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getDate();
+            }
+        });
+
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -336,6 +351,16 @@ public class PostAdActivity extends AppCompatActivity {
                 } else {
                     warranty = "No warranty";
                 }
+                if (jobTypeSpinner.getVisibility() == View.VISIBLE) {
+                    jobType = jobTypeSpinner.getText().toString();
+                } else {
+                    jobType = null;
+                }
+                if (requirmetntSpinner.getVisibility() == View.VISIBLE) {
+                    requirment = requirmetntSpinner.getText().toString();
+                } else {
+                    requirment = null;
+                }
                 phn1 = phnnoEt1.getText().toString();
                 phn2 = phnnoEt2.getText().toString();
                 phn3 = phnnoEt3.getText().toString();
@@ -356,6 +381,11 @@ public class PostAdActivity extends AppCompatActivity {
                 String description = descriptionEt.getText().toString();
                 String address = addressEt.getText().toString();
                 String land = landEt.getText().toString();
+                vacancy = Integer.parseInt(vacancyEt.getText().toString());
+                String deadline = deadlineEt.getText().toString();
+                String employeer = employeerEt.getText().toString();
+                String website = websiteEt.getText().toString();
+
 
                 if (postType.equals("sell") || postType.equals("exchange")) {
                     if (TextUtils.isEmpty(adTitle)) {
@@ -387,7 +417,8 @@ public class PostAdActivity extends AppCompatActivity {
                         }
                     }
                 }
-                else if (postType.equals("rent") || postType.equals("lookforbuy") || postType.equals("lookforrent")) {
+                else if (postType.equals("rent") || postType.equals("lookforbuy")
+                        || postType.equals("lookforrent")) {
                     if (TextUtils.isEmpty(adTitle)) {
                         titleEt.setError("Ad title");
                     } else if (TextUtils.isEmpty(price)) {
@@ -426,12 +457,24 @@ public class PostAdActivity extends AppCompatActivity {
                         model = new PostAdModel(adTitle, otherInfo, description, locationId, categoryId, imgArray, ad_Type, true);
                     }
                 }
+                else if (postType.equals("job")){
+                    if (TextUtils.isEmpty(adTitle)) {
+                        titleEt.setError("Ad title");
+                    } else if (TextUtils.isEmpty(description)) {
+                        descriptionEt.setError("Enter description");
+                    }else if (TextUtils.isEmpty(deadline)) {
+                        deadlineEt.setError("Enter description");
+                    }else{
+                        model = new PostAdModel(adTitle,jobType,vacancy,requirment,deadline,employeer,website
+                                ,otherInfo,description,locationId,address,categoryId,imgArray,ad_Type,true);
+                    }
+                }
 
                 Call<AdDetails> call = ApiUtils.getUserService().postsellAd("Token " + token, model);
                 call.enqueue(new Callback<AdDetails>() {
                     @Override
                     public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
-                        if (response.code()==201) {
+                        if (response.code() == 201) {
                             Dialog dialog2 = new Dialog(PostAdActivity.this);
                             dialog2.setContentView(R.layout.success_popup);
                             dialog2.setCancelable(false);
@@ -500,7 +543,7 @@ public class PostAdActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(PostAdActivity.this,
-                                            PostAdActivity.class).putExtra("type","sell"));
+                                            PostAdActivity.class).putExtra("type", "sell"));
                                     finish();
                                     dialog.dismiss();
                                 }
@@ -509,7 +552,7 @@ public class PostAdActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(PostAdActivity.this,
-                                            PostAdActivity.class).putExtra("type","rent"));
+                                            PostAdActivity.class).putExtra("type", "rent"));
                                     finish();
                                     dialog.dismiss();
                                 }
@@ -518,7 +561,7 @@ public class PostAdActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(PostAdActivity.this,
-                                            PostAdActivity.class).putExtra("type","bid"));
+                                            PostAdActivity.class).putExtra("type", "bid"));
                                     finish();
                                     dialog.dismiss();
                                 }
@@ -527,7 +570,7 @@ public class PostAdActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(PostAdActivity.this,
-                                            PostAdActivity.class).putExtra("type","exchange"));
+                                            PostAdActivity.class).putExtra("type", "exchange"));
                                     finish();
                                     dialog.dismiss();
                                 }
@@ -768,6 +811,39 @@ public class PostAdActivity extends AppCompatActivity {
             negotiable = false;
         }
     }
+
+    private void getDate() {
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                String currentDate = year + "-" + month + "-" + day;
+                datePicker.setMinDate(System.currentTimeMillis() - 1000);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = null;
+
+                try {
+                    date = dateFormat.parse(currentDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                deadlineEt.setText(dateFormat.format(date));
+
+            }
+        };
+
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(PostAdActivity.this, dateSetListener, year, month, day);
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        datePickerDialog.setCanceledOnTouchOutside(false);
+        datePickerDialog.setCancelable(false);
+        datePickerDialog.show();
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
