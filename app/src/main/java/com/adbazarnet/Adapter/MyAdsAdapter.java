@@ -54,6 +54,10 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.ViewHolder> 
         holder.titleTV.setText(""+ads.getAd_title());
         holder.priceTv.setText(""+ads.getPrice());
         holder.statusTv.setText(""+ads.getPublish_status());
+
+        if (ads.isIs_bid()==true){
+            holder.priceTv.setText(ads.getBid_count()+" bids");
+        }
         //holder.expireTv.setText(""+ads.getPrice());
         if (ads.isTop_ad()==true){
             holder.topAdTv.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.ic_correct,0,0);

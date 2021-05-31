@@ -120,7 +120,35 @@ public class ChatDetailsActivity extends AppCompatActivity {
                             sellItemTv.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(ChatDetailsActivity.this, PostAdActivity.class));
+                                    startActivity(new Intent(ChatDetailsActivity.this,
+                                            PostAdActivity.class).putExtra("type","sell"));
+                                    finish();
+                                    dialog.dismiss();
+                                }
+                            });
+                            rentTv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(ChatDetailsActivity.this,
+                                            PostAdActivity.class).putExtra("type","rent"));
+                                    finish();
+                                    dialog.dismiss();
+                                }
+                            });
+                            auctionTv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(ChatDetailsActivity.this,
+                                            PostAdActivity.class).putExtra("type","bid"));
+                                    finish();
+                                    dialog.dismiss();
+                                }
+                            });
+                            exchangeTv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(ChatDetailsActivity.this,
+                                            PostAdActivity.class).putExtra("type","exchange"));
                                     finish();
                                     dialog.dismiss();
                                 }

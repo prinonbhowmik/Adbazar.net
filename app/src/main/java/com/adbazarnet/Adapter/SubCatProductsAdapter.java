@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.adbazarnet.Activity.AdDetailsActivity;
@@ -54,8 +55,12 @@ public class SubCatProductsAdapter extends RecyclerView.Adapter<SubCatProductsAd
             e.printStackTrace();
         }
         holder.productNameTv.setText(model.getAd_title());
-        holder.productPrice.setText(""+model.getPrice());
+        holder.productPrice.setText("৳ "+model.getPrice());
         holder.locationTv.setText(model.getSub_location()+","+model.getLocation());
+        if (model.isIs_bid()==true){
+            holder.productPrice.setVisibility(View.GONE);
+            holder.bidTv.setVisibility(View.VISIBLE);
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,13 +111,14 @@ public class SubCatProductsAdapter extends RecyclerView.Adapter<SubCatProductsAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView productIv;
-        private TextView productNameTv,productPrice,locationTv;
+        private TextView productNameTv,productPrice,locationTv,bidTv;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             productIv = itemView.findViewById(R.id.productImage);
             productNameTv = itemView.findViewById(R.id.productName);
             productPrice = itemView.findViewById(R.id.productUnitPrice);
             locationTv = itemView.findViewById(R.id.locationTv);
+            bidTv = itemView.findViewById(R.id.bidTv);
         }
     }
 }

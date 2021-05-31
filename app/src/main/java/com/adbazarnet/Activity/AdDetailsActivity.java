@@ -117,6 +117,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         relatedLayout.setVisibility(View.GONE);
                         bidLayout.setVisibility(View.VISIBLE);
                         contactLayout.setVisibility(View.GONE);
+                        productPrice.setVisibility(View.GONE);
 
                         showBids(id);
                     }
@@ -334,7 +335,35 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                             sellItemTv.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(AdDetailsActivity.this, PostAdActivity.class));
+                                    startActivity(new Intent(AdDetailsActivity.this,
+                                            PostAdActivity.class).putExtra("type","sell"));
+                                    finish();
+                                    dialog.dismiss();
+                                }
+                            });
+                            rentTv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(AdDetailsActivity.this,
+                                            PostAdActivity.class).putExtra("type","rent"));
+                                    finish();
+                                    dialog.dismiss();
+                                }
+                            });
+                            auctionTv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(AdDetailsActivity.this,
+                                            PostAdActivity.class).putExtra("type","bid"));
+                                    finish();
+                                    dialog.dismiss();
+                                }
+                            });
+                            exchangeTv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(AdDetailsActivity.this,
+                                            PostAdActivity.class).putExtra("type","exchange"));
                                     finish();
                                     dialog.dismiss();
                                 }
@@ -467,7 +496,6 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
     }
 
     private void showBids(int id) {
-        Toast.makeText(this, ""+id, Toast.LENGTH_SHORT).show();
         Call<List<BidModel>> call = ApiUtils.getUserService().getBids(id);
         call.enqueue(new Callback<List<BidModel>>() {
             @Override

@@ -48,6 +48,8 @@ public class PostAdCategoryAdapter extends RecyclerView.Adapter<PostAdCategoryAd
     public void onBindViewHolder(@NonNull PostAdCategoryAdapter.ViewHolder holder, int position) {
         CategoriesModel list = categoriesModels.get(position);
 
+        String getType = ((PostAdActivity)context).postType;
+
         try {
             Picasso.get()
                     .load(list.getIcon())
@@ -64,13 +66,35 @@ public class PostAdCategoryAdapter extends RecyclerView.Adapter<PostAdCategoryAd
             @Override
             public void onClick(View v) {
                 activity.ad_Type = list.getAd_type();
-                activity.categoryId = list.getId();
-                if (activity.ad_Type.equals("electronics") || activity.ad_Type.equals("vehicle")){
-                    activity.txtC.setVisibility(View.VISIBLE);
-                    activity.txtW.setVisibility(View.VISIBLE);
-                    activity.conditionSpinner.setVisibility(View.VISIBLE);
-                    activity.warrantyEt.setVisibility(View.VISIBLE);
+                if(getType.equals("sell") || getType.equals("rent") || getType.equals("exchange")
+                        || getType.equals("lookforbuy")|| getType.equals("lookforrent")){
+                    if (activity.ad_Type.equals("electronics")){
+                        activity.txtC.setVisibility(View.VISIBLE);
+                        activity.txtW.setVisibility(View.VISIBLE);
+                        activity.conditionSpinner.setVisibility(View.VISIBLE);
+                        activity.warrantyEt.setVisibility(View.VISIBLE);
+                    }else if(activity.ad_Type.equals("vehicle")){
+                        activity.txtC.setVisibility(View.VISIBLE);
+                        activity.txtW.setVisibility(View.VISIBLE);
+                        activity.conditionSpinner.setVisibility(View.VISIBLE);
+                        activity.warrantyEt.setVisibility(View.VISIBLE);
+                        activity.txtM.setVisibility(View.VISIBLE);
+                        activity.txtMY.setVisibility(View.VISIBLE);
+                        activity.modelYearEt.setVisibility(View.VISIBLE);
+                        activity.mileageEt.setVisibility(View.VISIBLE);
+                    }else if(activity.ad_Type.equals("property")){
+                        activity.txtA.setVisibility(View.VISIBLE);
+                        activity.txtL.setVisibility(View.VISIBLE);
+                        activity.addressEt.setVisibility(View.VISIBLE);
+                        activity.landEt.setVisibility(View.VISIBLE);
+                    }else if(activity.ad_Type.equals("service")){
+                        activity.txtA.setVisibility(View.VISIBLE);
+                        activity.addressEt.setVisibility(View.VISIBLE);
+                        activity.txtS.setVisibility(View.VISIBLE);
+                        activity.serviceSpinner.setVisibility(View.VISIBLE);
+                    }
                 }
+
                 if (holder.subcatLayout.getVisibility()==View.GONE){
                     holder.subcatLayout.setVisibility(View.VISIBLE);
                     holder.recycerlayout1.setBackgroundColor(Color.parseColor("#048F6E"));

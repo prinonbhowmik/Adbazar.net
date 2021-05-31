@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,9 +32,14 @@ import com.adbazarnet.Adapter.PostAdLocationAdapter;
 import com.adbazarnet.Api.ApiInterface;
 import com.adbazarnet.Api.ApiUtils;
 import com.adbazarnet.Fragments.FavouriteFragment;
+import com.adbazarnet.Models.AdDetails;
+import com.adbazarnet.Models.AdImages;
+import com.adbazarnet.Models.AdPhoneNumbers;
 import com.adbazarnet.Models.CategoriesModel;
 import com.adbazarnet.Models.LocationsModel;
+import com.adbazarnet.Models.PhoneNoModel;
 import com.adbazarnet.Models.PostAdModel;
+import com.adbazarnet.Models.PostImageModel;
 import com.adbazarnet.Models.UserDetailsModel;
 import com.adbazarnet.R;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
@@ -61,37 +67,82 @@ public class PostAdActivity extends AppCompatActivity {
 
     public static TextView locationTv, categoryTv;
     public static String ad_Type = null;
-    public static TextView txt4, txt5, txt6, txtC, txtW;
-    public static EditText titleEt, otherInfoEt, priceEt, phnnoEt1, phnnoEt2, phnnoEt3, descriptionEt, warrantyEt;
+    public static TextView txt3, txt4, txt5, txt6, txtC, txtW, txtMY, txtM, txtL, txtA, txtS, txtF,txtJT,txtVC
+            ,txtMR,txtD,txtCE,txtWeb,txtAtt,txt87;
+    public static EditText titleEt, otherInfoEt, priceEt, phnnoEt1, phnnoEt2, phnnoEt3, descriptionEt,
+            warrantyEt, modelYearEt, mileageEt, addressEt, landEt, featureEt,vacancyEt,deadlineEt
+            ,employeerEt,websiteEt;
     private Switch negotiableBtn, hidePhnBtn;
-    private Button addPhnBtn, addImgBtn;
+    private Button addPhnBtn, addImgBtn,browseBtn;
     private ImageView img1, img2, img3, img4, img5;
-    public static int categoryId,locationId;
+    public static int categoryId, subCategoryId, locationId, subLocationId;
     private Uri imageUri;
     private CardView submitBtn;
     public static Dialog dialog;
     private ApiInterface apiInterface;
     private PostAdCategoryAdapter categoryNamesAdapter;
     private PostAdLocationAdapter locationAdapter;
-    public static AutoCompleteTextView conditionSpinner;
+    public static AutoCompleteTextView conditionSpinner, serviceSpinner,jobTypeSpinner,requirmetntSpinner;
     private String[] conditionArray = {"used", "new", "recondition"};
-    private String condition, warranty =null, phn1, phn2, phn3,token;
+    private String[] serviceArray = {"computer & laptop", "courier", "electronics and engineering", "facility management"
+            , "marketing & social media", "printing", "security", "software & web development"};
+    private String [] jobTypeArray = {"full time","part time","contract","internship"};
+    private String [] requirmentArray = {"primary school","high school","ssc/O level","hsc/A level"
+            ,"diploma","bachelors/honours","PhD/Doctorate"};
+    private String condition, service, warranty = null, phn1, phn2, phn3, token;
     private int phnCounter = 0, imgCounter = 0, imgSelect = 0;
     private Uri uri1, uri2, uri3, uri4, uri5;
-    private JSONArray array = new JSONArray();
-    private JSONArray imgArray = new JSONArray();
+    private List<PostImageModel> imgArray = new ArrayList<>();
     private RequestBody requestFile1;
-    private boolean negotiable = false, hidePhone = false;
+    private boolean negotiable = false, hidePhone = false, is_sell;
     private SharedPreferences sharedPreferences;
     private ChipNavigationBar chipNavigationBar;
     private int loggedIn;
+    private PostAdModel model;
+    public String postType;
+    private File file1,file2,file3,file4,file5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_ad);
 
+        Intent i = getIntent();
+        postType = i.getStringExtra("type");
+
         init();
+
+        if (postType.equals("bid")) {
+            txt3.setVisibility(View.GONE);
+            priceEt.setVisibility(View.GONE);
+            negotiableBtn.setVisibility(View.GONE);
+            addPhnBtn.setVisibility(View.GONE);
+            hidePhnBtn.setVisibility(View.GONE);
+            txtF.setVisibility(View.VISIBLE);
+            featureEt.setVisibility(View.VISIBLE);
+        }else if (postType.equals("job")){
+            txt3.setVisibility(View.GONE);
+            priceEt.setVisibility(View.GONE);
+            negotiableBtn.setVisibility(View.GONE);
+            addPhnBtn.setVisibility(View.GONE);
+            hidePhnBtn.setVisibility(View.GONE);
+           txtJT.setVisibility(View.VISIBLE);
+           jobTypeSpinner.setVisibility(View.VISIBLE);
+            txtVC.setVisibility(View.VISIBLE);
+            vacancyEt.setVisibility(View.VISIBLE);
+            txtMR.setVisibility(View.VISIBLE);
+            requirmetntSpinner.setVisibility(View.VISIBLE);
+            txtD.setVisibility(View.VISIBLE);
+            deadlineEt.setVisibility(View.VISIBLE);
+            txtCE.setVisibility(View.VISIBLE);
+            employeerEt.setVisibility(View.VISIBLE);
+            txtA.setVisibility(View.VISIBLE);
+            addressEt.setVisibility(View.VISIBLE);
+            txtWeb.setVisibility(View.VISIBLE);
+            txt87.setVisibility(View.VISIBLE);
+            browseBtn.setVisibility(View.VISIBLE);
+            txtAtt.setVisibility(View.VISIBLE);
+        }
 
         categoryTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -273,6 +324,11 @@ public class PostAdActivity extends AppCompatActivity {
                 } else {
                     condition = null;
                 }
+                if (serviceSpinner.getVisibility() == View.VISIBLE) {
+                    service = serviceSpinner.getText().toString();
+                } else {
+                    service = null;
+                }
                 String otherInfo = otherInfoEt.getText().toString();
                 String price = priceEt.getText().toString();
                 if (warrantyEt.getVisibility() == View.VISIBLE) {
@@ -283,62 +339,99 @@ public class PostAdActivity extends AppCompatActivity {
                 phn1 = phnnoEt1.getText().toString();
                 phn2 = phnnoEt2.getText().toString();
                 phn3 = phnnoEt3.getText().toString();
-
-                JSONObject obj1 = new JSONObject();
-                try {
-                    obj1.put("phone",phn1);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                PhoneNoModel phn = new PhoneNoModel(phn1);
+                PhoneNoModel phnn = new PhoneNoModel(phn2);
+                PhoneNoModel phnnn = new PhoneNoModel(phn3);
+                List<PhoneNoModel> phoneNumbers = new ArrayList<>();
+                if (phn1 != null) {
+                    phoneNumbers.add(phn);
+                } else if (phn2 != null) {
+                    phoneNumbers.add(phnn);
+                } else if (phn3 != null) {
+                    phoneNumbers.add(phnnn);
                 }
 
-                JSONObject obj2 = new JSONObject();
-                try {
-                    obj2.put("phone",phn2);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                JSONObject obj3 = new JSONObject();
-                try {
-                    obj3.put("phone",phn3);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                array.put(obj1);
-                array.put(obj2);
-                array.put(obj3);
-
-                Log.d("phnNoList", String.valueOf(array));
-
+                String mileage = mileageEt.getText().toString();
+                String modelYear = modelYearEt.getText().toString();
                 String description = descriptionEt.getText().toString();
+                String address = addressEt.getText().toString();
+                String land = landEt.getText().toString();
 
-                JSONObject object = new JSONObject();
-                try {
-                    object.put("ad_title",adTitle);
-                    object.put("condition",condition);
-                    object.put("price",price);
-                    object.put("warranty",warranty);
-                    object.put("other_information",otherInfo);
-                    object.putOpt("ad_phone_numbers",array);
-                    object.put("description",description);
-                    object.put("category",categoryId);
-                    object.put("location",locationId);
-                    object.putOpt("images",imgArray);
-                    object.put("negotiable",negotiable);
-                    object.put("ad_type",ad_Type);
-                    object.put("hide_phone",hidePhone);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if (postType.equals("sell") || postType.equals("exchange")) {
+                    if (TextUtils.isEmpty(adTitle)) {
+                        titleEt.setError("Ad title");
+                    } else if (TextUtils.isEmpty(price)) {
+                        priceEt.setError("Enter price");
+                    } else if (TextUtils.isEmpty(description)) {
+                        descriptionEt.setError("Enter description");
+                    } else if (TextUtils.isEmpty(phn1)) {
+                        Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
+                    } else {
+                        if (ad_Type.equals("electronics")) {
+                            model = new PostAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers, description,
+                                    locationId, subCategoryId, imgArray, negotiable, ad_Type, hidePhone, true);
+                        } else if (ad_Type.equals("vehicle")) {
+                            model = new PostAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers, description,
+                                    locationId, modelYear, mileage, categoryId, imgArray, negotiable, ad_Type, hidePhone, true);
+                        } else if (ad_Type.equals("property")) {
+                            model = new PostAdModel(adTitle, condition, price, otherInfo, phoneNumbers, description,
+                                    locationId, address, land, categoryId, imgArray, negotiable, ad_Type, hidePhone,
+                                    true);
+                        } else if (ad_Type.equals("general")) {
+                            model = new PostAdModel(adTitle, price, otherInfo, phoneNumbers, description,
+                                    locationId, categoryId, imgArray, negotiable, ad_Type, hidePhone,
+                                    true);
+                        } else if (ad_Type.equals("service")) {
+                            model = new PostAdModel(adTitle, price, otherInfo, phoneNumbers, description, locationId, address,
+                                    service, categoryId, imgArray, negotiable, ad_Type, hidePhone, true);
+                        }
+                    }
+                }
+                else if (postType.equals("rent") || postType.equals("lookforbuy") || postType.equals("lookforrent")) {
+                    if (TextUtils.isEmpty(adTitle)) {
+                        titleEt.setError("Ad title");
+                    } else if (TextUtils.isEmpty(price)) {
+                        priceEt.setError("Enter price");
+                    } else if (TextUtils.isEmpty(description)) {
+                        descriptionEt.setError("Enter description");
+                    } else if (TextUtils.isEmpty(phn1)) {
+                        Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
+                    } else {
+                        if (ad_Type.equals("electronics")) {
+                            model = new PostAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers, description,
+                                    locationId, subCategoryId, imgArray, negotiable, ad_Type, hidePhone, false);
+                        } else if (ad_Type.equals("vehicle")) {
+                            model = new PostAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers, description,
+                                    locationId, modelYear, mileage, categoryId, imgArray, negotiable, ad_Type, hidePhone, false);
+                        } else if (ad_Type.equals("property")) {
+                            model = new PostAdModel(adTitle, condition, price, otherInfo, phoneNumbers, description,
+                                    locationId, address, land, categoryId, imgArray, negotiable, ad_Type, hidePhone,
+                                    false);
+                        } else if (ad_Type.equals("general")) {
+                            model = new PostAdModel(adTitle, price, otherInfo, phoneNumbers, description,
+                                    locationId, categoryId, imgArray, negotiable, ad_Type, hidePhone,
+                                    false);
+                        } else if (ad_Type.equals("service")) {
+                            model = new PostAdModel(adTitle, price, otherInfo, phoneNumbers, description, locationId, address,
+                                    service, categoryId, imgArray, negotiable, ad_Type, hidePhone, false);
+                        }
+                    }
+                }
+                else if (postType.equals("bid")) {
+                    if (TextUtils.isEmpty(adTitle)) {
+                        titleEt.setError("Ad title");
+                    } else if (TextUtils.isEmpty(description)) {
+                        descriptionEt.setError("Enter description");
+                    } else {
+                        model = new PostAdModel(adTitle, otherInfo, description, locationId, categoryId, imgArray, ad_Type, true);
+                    }
                 }
 
-                Log.d("kikorbo", String.valueOf(object));
-
-                Call<JSONObject> call = apiInterface.postsellAd("Token "+token,object);
-                call.enqueue(new Callback<JSONObject>() {
+                Call<AdDetails> call = ApiUtils.getUserService().postsellAd("Token " + token, model);
+                call.enqueue(new Callback<AdDetails>() {
                     @Override
-                    public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
-                        if (response.isSuccessful()){
+                    public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
+                        if (response.code()==201) {
                             Dialog dialog2 = new Dialog(PostAdActivity.this);
                             dialog2.setContentView(R.layout.success_popup);
                             dialog2.setCancelable(false);
@@ -351,8 +444,8 @@ public class PostAdActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(View v) {
                                     dialog2.dismiss();
-                                    Intent intent = new Intent(PostAdActivity.this,MainActivity.class);
-                                    intent.putExtra("fragment","home");
+                                    Intent intent = new Intent(PostAdActivity.this, MainActivity.class);
+                                    intent.putExtra("fragment", "home");
                                     startActivity(intent);
                                     finish();
                                 }
@@ -362,8 +455,8 @@ public class PostAdActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<JSONObject> call, Throwable t) {
-                        Toast.makeText(PostAdActivity.this, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
+                    public void onFailure(Call<AdDetails> call, Throwable t) {
+
                     }
                 });
 
@@ -373,24 +466,23 @@ public class PostAdActivity extends AppCompatActivity {
         chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int i) {
-                switch (i){
+                switch (i) {
 
                     case R.id.home:
-                        startActivity(new Intent(PostAdActivity.this,MainActivity.class)
-                                .putExtra("fragment","home"));
+                        startActivity(new Intent(PostAdActivity.this, MainActivity.class)
+                                .putExtra("fragment", "home"));
                         finish();
                         break;
                     case R.id.favourite:
-                        startActivity(new Intent(PostAdActivity.this,MainActivity.class)
-                                .putExtra("fragment","favourite"));
+                        startActivity(new Intent(PostAdActivity.this, MainActivity.class)
+                                .putExtra("fragment", "favourite"));
                         finish();
                         break;
                     case R.id.adPost:
-                        if (loggedIn==0){
+                        if (loggedIn == 0) {
                             startActivity(new Intent(PostAdActivity.this, LoginActivity.class));
                             finish();
-                        }
-                        else {
+                        } else {
                             dialog = new Dialog(PostAdActivity.this);
                             dialog.setContentView(R.layout.post_ad_popup);
                             ImageView closeIv = dialog.findViewById(R.id.closeIv);
@@ -407,12 +499,39 @@ public class PostAdActivity extends AppCompatActivity {
                             sellItemTv.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(PostAdActivity.this, PostAdActivity.class));
+                                    startActivity(new Intent(PostAdActivity.this,
+                                            PostAdActivity.class).putExtra("type","sell"));
                                     finish();
                                     dialog.dismiss();
                                 }
                             });
-
+                            rentTv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(PostAdActivity.this,
+                                            PostAdActivity.class).putExtra("type","rent"));
+                                    finish();
+                                    dialog.dismiss();
+                                }
+                            });
+                            auctionTv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(PostAdActivity.this,
+                                            PostAdActivity.class).putExtra("type","bid"));
+                                    finish();
+                                    dialog.dismiss();
+                                }
+                            });
+                            exchangeTv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(PostAdActivity.this,
+                                            PostAdActivity.class).putExtra("type","exchange"));
+                                    finish();
+                                    dialog.dismiss();
+                                }
+                            });
                             closeIv.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -430,20 +549,20 @@ public class PostAdActivity extends AppCompatActivity {
                         }
                         break;
                     case R.id.chat:
-                        startActivity(new Intent(PostAdActivity.this,MainActivity.class)
-                                .putExtra("fragment","chat"));
+                        startActivity(new Intent(PostAdActivity.this, MainActivity.class)
+                                .putExtra("fragment", "chat"));
                         finish();
                         break;
                     case R.id.account:
-                        if (loggedIn == 0 ){
-                            startActivity(new Intent(PostAdActivity.this,LoginActivity.class));
+                        if (loggedIn == 0) {
+                            startActivity(new Intent(PostAdActivity.this, LoginActivity.class));
                             finish();
                             break;
-                        }else{
+                        } else {
                             //pop-up will be shown
                             dialog = new Dialog(PostAdActivity.this);
                             dialog.setContentView(R.layout.profile_option_xml);
-                            CardView close  = dialog.findViewById(R.id.closeTv);
+                            CardView close = dialog.findViewById(R.id.closeTv);
                             TextView dashboard = dialog.findViewById(R.id.dashboardTv);
                             TextView myAds = dialog.findViewById(R.id.myAdsTv);
                             TextView favouriteTv = dialog.findViewById(R.id.favouriteTv);
@@ -463,7 +582,7 @@ public class PostAdActivity extends AppCompatActivity {
                             membership.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(PostAdActivity.this,MembershipActivity.class));
+                                    startActivity(new Intent(PostAdActivity.this, MembershipActivity.class));
                                     finish();
                                 }
                             });
@@ -471,7 +590,7 @@ public class PostAdActivity extends AppCompatActivity {
                             myAds.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(PostAdActivity.this,MyAdsActivity.class));
+                                    startActivity(new Intent(PostAdActivity.this, MyAdsActivity.class));
                                 }
                             });
 
@@ -487,7 +606,7 @@ public class PostAdActivity extends AppCompatActivity {
                             dashboard.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(PostAdActivity.this,DashboardActivity.class));
+                                    startActivity(new Intent(PostAdActivity.this, DashboardActivity.class));
                                     finish();
                                 }
                             });
@@ -495,7 +614,7 @@ public class PostAdActivity extends AppCompatActivity {
                             profile.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(PostAdActivity.this,ProfileActivity.class));
+                                    startActivity(new Intent(PostAdActivity.this, ProfileActivity.class));
                                     finish();
                                 }
                             });
@@ -521,8 +640,8 @@ public class PostAdActivity extends AppCompatActivity {
                                     editor.putInt("id", 0);
                                     editor.commit();
                                     finish();
-                                    startActivity(new Intent(PostAdActivity.this,MainActivity.class)
-                                            .putExtra("fragment","home"));
+                                    startActivity(new Intent(PostAdActivity.this, MainActivity.class)
+                                            .putExtra("fragment", "home"));
                                 }
                             });
 
@@ -548,17 +667,45 @@ public class PostAdActivity extends AppCompatActivity {
         phnnoEt1 = findViewById(R.id.phnnoEt1);
         phnnoEt2 = findViewById(R.id.phnnoEt2);
         phnnoEt3 = findViewById(R.id.phnnoEt3);
+        modelYearEt = findViewById(R.id.modelYearEt);
+        mileageEt = findViewById(R.id.mileageEt);
+        addressEt = findViewById(R.id.addressEt);
+        landEt = findViewById(R.id.landEt);
+        featureEt = findViewById(R.id.featureEt);
+        vacancyEt = findViewById(R.id.vacancyEt);
+        employeerEt = findViewById(R.id.employeerEt);
+        websiteEt = findViewById(R.id.websiteEt);
+        txt3 = findViewById(R.id.txt3);
         txt4 = findViewById(R.id.txt4);
         txt5 = findViewById(R.id.txt5);
         txt6 = findViewById(R.id.txt6);
         txtC = findViewById(R.id.txtC);
         txtW = findViewById(R.id.txtW);
+        txtM = findViewById(R.id.txtM);
+        txtMY = findViewById(R.id.txtMY);
+        txtA = findViewById(R.id.txtA);
+        txtL = findViewById(R.id.txtL);
+        txtS = findViewById(R.id.txtS);
+        txtF = findViewById(R.id.txtF);
+        txtJT = findViewById(R.id.txtJT);
+        txtVC = findViewById(R.id.txtVC);
+        txtMR = findViewById(R.id.txtMR);
+        txtD = findViewById(R.id.txtD);
+        txtCE = findViewById(R.id.txtCE);
+        txtWeb = findViewById(R.id.txtWeb);
+        txtAtt = findViewById(R.id.txtAtt);
+        txt87 = findViewById(R.id.txt87);
         descriptionEt = findViewById(R.id.descriptionEt);
         warrantyEt = findViewById(R.id.warrantyEt);
+        deadlineEt = findViewById(R.id.deadlineEt);
         addImgBtn = findViewById(R.id.addImgBtn);
         addPhnBtn = findViewById(R.id.addPhnBtn);
         submitBtn = findViewById(R.id.submitBtn);
+        browseBtn = findViewById(R.id.browseBtn);
         conditionSpinner = findViewById(R.id.conditionSpinner);
+        serviceSpinner = findViewById(R.id.serviceSpinner);
+        jobTypeSpinner = findViewById(R.id.jobTypeSpinner);
+        requirmetntSpinner = findViewById(R.id.requirmetntSpinner);
         negotiableBtn = findViewById(R.id.negotiableBtn);
         hidePhnBtn = findViewById(R.id.hidePhnBtn);
         ArrayAdapter<String> product_color = new ArrayAdapter<String>(this, R.layout.spinner_item_design, R.id.simpleSpinner, conditionArray);
@@ -571,6 +718,37 @@ public class PostAdActivity extends AppCompatActivity {
                 conditionSpinner.showDropDown();
             }
         });
+        ArrayAdapter<String> services = new ArrayAdapter<String>(this, R.layout.spinner_item_design, R.id.simpleSpinner, serviceArray);
+        product_color.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        serviceSpinner.setText(services.getItem(0), false);
+        serviceSpinner.setAdapter(services);
+        serviceSpinner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                serviceSpinner.showDropDown();
+            }
+        });
+        ArrayAdapter<String> jobType = new ArrayAdapter<String>(this, R.layout.spinner_item_design, R.id.simpleSpinner, jobTypeArray);
+        product_color.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        jobTypeSpinner.setText(jobType.getItem(0), false);
+        jobTypeSpinner.setAdapter(jobType);
+        jobTypeSpinner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                jobTypeSpinner.showDropDown();
+            }
+        });
+        ArrayAdapter<String> requirment = new ArrayAdapter<String>(this, R.layout.spinner_item_design, R.id.simpleSpinner, requirmentArray);
+        product_color.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        requirmetntSpinner.setText(requirment.getItem(0), false);
+        requirmetntSpinner.setAdapter(requirment);
+        requirmetntSpinner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requirmetntSpinner.showDropDown();
+            }
+        });
+
         img1 = findViewById(R.id.img1);
         img2 = findViewById(R.id.img2);
         img3 = findViewById(R.id.img3);
@@ -578,9 +756,9 @@ public class PostAdActivity extends AppCompatActivity {
         img5 = findViewById(R.id.img5);
         apiInterface = ApiUtils.getUserService();
         chipNavigationBar = findViewById(R.id.bottom_menu);
-        sharedPreferences = getSharedPreferences("MyRef",MODE_PRIVATE);
-        token = sharedPreferences.getString("token",null);
-        loggedIn = sharedPreferences.getInt("loggedIn",0);
+        sharedPreferences = getSharedPreferences("MyRef", MODE_PRIVATE);
+        token = sharedPreferences.getString("token", null);
+        loggedIn = sharedPreferences.getInt("loggedIn", 0);
     }
 
     public void setNegotiable(View view) {

@@ -54,6 +54,7 @@ public class PostAdSubLocationAdapter  extends RecyclerView.Adapter<PostAdSubLoc
                     public void onResponse(Call<SubCategoryProductModel> call, Response<SubCategoryProductModel> response) {
                         if (response.isSuccessful()){
                           activity.locationTv.setText(model.getName());
+                          activity.locationId = model.getId();
                           activity.dialog.dismiss();
                         }
                     }

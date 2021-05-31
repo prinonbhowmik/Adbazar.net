@@ -53,12 +53,12 @@ public class PostAdSubCatAdapter extends RecyclerView.Adapter<PostAdSubCatAdapte
                     public void onResponse(Call<SubCategoryProductModel> call, Response<SubCategoryProductModel> response) {
                         if (response.isSuccessful()){
                             activity.categoryTv.setText(model.getName());
+                            activity.categoryId = model.getId();
+                            Log.d("checkData", String.valueOf(model.getId()));
                             activity.dialog.dismiss();
-
                         }
 
                     }
-
                     @Override
                     public void onFailure(Call<SubCategoryProductModel> call, Throwable t) {
                         Log.d("ErrorKi",t.getMessage());

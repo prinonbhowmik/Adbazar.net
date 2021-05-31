@@ -11,9 +11,11 @@ import com.adbazarnet.Models.DashboardModel;
 import com.adbazarnet.Models.FavouriteAdDetails;
 import com.adbazarnet.Models.FavouriteAds;
 import com.adbazarnet.Models.LocationsModel;
+import com.adbazarnet.Models.MembershipPackage;
 import com.adbazarnet.Models.PostAdModel;
 import com.adbazarnet.Models.ProductModel;
 import com.adbazarnet.Models.SubCategoryProductModel;
+import com.adbazarnet.Models.TransactionModel;
 import com.adbazarnet.Models.User;
 import com.adbazarnet.Models.UserDetailsModel;
 import com.google.gson.JsonArray;
@@ -132,7 +134,7 @@ public interface ApiInterface {
                                         @Path("id") int id);
 
     @POST("posts/create/")
-    Call<JSONObject> postsellAd(@Header("Authorization") String token, @Body JSONObject object);
+    Call<AdDetails> postsellAd(@Header("Authorization") String token, @Body PostAdModel object);
 
 
     @GET("chat/channels/")
@@ -153,6 +155,16 @@ public interface ApiInterface {
     @GET("chat/channels/{id}/")
     Call<List<ChatChannelModel>> getChatDetails(@Header("Authorization") String token,
                                                 @Path("id") int id);
+
+    @Headers("Content-Type: application/json")
+    @GET("account/membership/packages/")
+    Call<List<MembershipPackage>> getPackages(@Header("Authorization") String token);
+
+    @GET("account/payment-methods/")
+    Call<List<MembershipPackage>> getBkash(@Header("Authorization") String token);
+
+    @POST("account/membership-request/")
+    Call<TransactionModel> membershipUpgrade(@Header("Authorization") String token, @Body TransactionModel object);
 
 
 }

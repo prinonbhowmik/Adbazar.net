@@ -49,7 +49,6 @@ public class PostAdLocationAdapter extends RecyclerView.Adapter<PostAdLocationAd
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.locationId = list.getId();
                 if (holder.subLocLayout.getVisibility() == View.GONE) {
                     holder.subLocLayout.setVisibility(View.VISIBLE);
                     holder.imageIV.setBackgroundResource(R.drawable.ic_baseline_location_on_24);

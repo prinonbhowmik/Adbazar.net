@@ -94,7 +94,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         if (loggedIn==0){
                             startActivity(new Intent(MainActivity.this, LoginActivity.class));
                             finish();
-                        }else {
+                        }
+                        else {
                             dialog = new Dialog(MainActivity.this);
                             dialog.setContentView(R.layout.post_ad_popup);
                             ImageView closeIv = dialog.findViewById(R.id.closeIv);
@@ -111,7 +112,62 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             sellItemTv.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(MainActivity.this, PostAdActivity.class));
+                                    startActivity(new Intent(MainActivity.this,
+                                            PostAdActivity.class).putExtra("type","sell"));
+                                    finish();
+                                    dialog.dismiss();
+                                }
+                            });
+                            rentTv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(MainActivity.this,
+                                            PostAdActivity.class).putExtra("type","rent"));
+                                    finish();
+                                    dialog.dismiss();
+                                }
+                            });
+                            auctionTv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(MainActivity.this,
+                                            PostAdActivity.class).putExtra("type","bid"));
+                                    finish();
+                                    dialog.dismiss();
+                                }
+                            });
+                            exchangeTv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(MainActivity.this,
+                                            PostAdActivity.class).putExtra("type","exchange"));
+                                    finish();
+                                    dialog.dismiss();
+                                }
+                            });
+                            jobTv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(MainActivity.this,
+                                            PostAdActivity.class).putExtra("type","job"));
+                                    finish();
+                                    dialog.dismiss();
+                                }
+                            });
+                            lookforbuyTv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(MainActivity.this,
+                                            PostAdActivity.class).putExtra("type","lookforbuy"));
+                                    finish();
+                                    dialog.dismiss();
+                                }
+                            });
+                            lookforRentTv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(MainActivity.this,
+                                            PostAdActivity.class).putExtra("type","lookforrent"));
                                     finish();
                                     dialog.dismiss();
                                 }

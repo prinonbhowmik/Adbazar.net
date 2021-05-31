@@ -194,7 +194,7 @@
                     android:hint=" Enter Ad Title"
                     android:padding="10dp"
                     android:textColor="#000"
-                    android:textColorHint="#BAB6B6" />
+                    android:textColorHint="#E6E4E4" />
 
                 <RelativeLayout
                     android:id="@+id/conditionLayout"
@@ -230,15 +230,224 @@
                         android:background="@drawable/edittex_design" />
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:id="@+id/jobTypeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/conditionLayout">
+                    <TextView
+                        android:id="@+id/txtJT"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Job Type:"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <AutoCompleteTextView
+                        android:id="@+id/jobTypeSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtJT"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="#000"
+                        android:padding="10dp"
+                        android:inputType="none"
+                        android:visibility="gone"
+                        android:theme="@style/spinnerTheme"
+                        android:background="@drawable/edittex_design" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/vacancyLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/jobTypeLayout">
+                    <TextView
+                        android:id="@+id/txtVC"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Total Vacancies:"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/vacancyEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtVC"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:visibility="gone"
+                        android:inputType="number"
+                        android:padding="10dp"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/requirmentLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/vacancyLayout">
+                    <TextView
+                        android:id="@+id/txtMR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Minimum Requirement:"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <AutoCompleteTextView
+                        android:id="@+id/requirmetntSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtMR"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="#000"
+                        android:padding="10dp"
+                        android:inputType="none"
+                        android:visibility="gone"
+                        android:theme="@style/spinnerTheme"
+                        android:background="@drawable/edittex_design" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/featureLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/requirmentLayout">
+                    <TextView
+                        android:id="@+id/txtF"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Feature:"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/featureEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtF"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:hint=" Features"
+                        android:visibility="gone"
+                        android:padding="10dp"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/deadlineLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/featureLayout">
+                    <TextView
+                        android:id="@+id/txtD"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Application Deadline :"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/deadlineEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtD"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:inputType="none"
+                        android:background="@drawable/edittex_design"
+                        android:hint=" Deadline"
+                        android:visibility="gone"
+                        android:padding="10dp"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/aboutCompanyLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/deadlineLayout">
+                    <TextView
+                        android:id="@+id/txtCE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" About Company / Employer:"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/employeerEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtCE"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:inputType="none"
+                        android:background="@drawable/edittex_design"
+                        android:hint=" About Company/Employeer"
+                        android:visibility="gone"
+                        android:padding="10dp"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6" />
+                </RelativeLayout>
+
+
                 <TextView
                     android:id="@+id/txt2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/conditionLayout"
+                    android:layout_below="@+id/aboutCompanyLayout"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
-                    android:text=" Other Information::"
+                    android:text=" Other Information:"
                     android:textColor="#646464"
                     android:textSize="21sp"
                     android:textStyle="bold" />
@@ -257,53 +466,204 @@
                     android:textColor="#000"
                     android:textColorHint="#BAB6B6" />
 
-                <TextView
-                    android:id="@+id/txt3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/otherInfoEt"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:text=" Price*:"
-                    android:textColor="#646464"
-                    android:textSize="21sp"
-                    android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/priceEt"
+               <RelativeLayout
+                   android:id="@+id/priceLayout"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_below="@+id/otherInfoEt">
+
+                   <TextView
+                       android:id="@+id/txt3"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginLeft="10dp"
+                       android:layout_marginTop="20dp"
+                       android:layout_marginBottom="10dp"
+                       android:text=" Price*:"
+                       android:textColor="#646464"
+                       android:textSize="21sp"
+                       android:textStyle="bold" />
+
+                   <EditText
+                       android:id="@+id/priceEt"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/txt3"
+                       android:layout_marginLeft="10dp"
+                       android:layout_marginRight="10dp"
+                       android:layout_marginBottom="10dp"
+                       android:background="@drawable/edittex_design"
+                       android:hint=" Enter Price"
+                       android:inputType="number"
+                       android:padding="10dp"
+                       android:textColor="#000"
+                       android:textColorHint="#BAB6B6" />
+               </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/addressLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt3"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/edittex_design"
-                    android:hint=" Enter Price"
-                    android:inputType="number"
-                    android:padding="10dp"
-                    android:textColor="#000"
-                    android:textColorHint="#BAB6B6" />
+                    android:layout_below="@+id/priceLayout">
 
-                <Switch
-                    android:id="@+id/negotiableBtn"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/txtA"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Address:"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/addressEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtA"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:hint=" Enter Address"
+                        android:visibility="gone"
+                        android:padding="10dp"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/landLayout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/priceEt"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:layoutDirection="rtl"
-                    android:onClick="setNegotiable"
-                    android:text=" Negotiable"
-                    android:textColor="#646464"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:layout_below="@+id/addressLayout">
+
+                    <TextView
+                        android:id="@+id/txtL"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Land/Plot Size:"
+                        android:textColor="#646464"
+                        android:visibility="gone"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/landEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtL"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:hint=" Enter land/plot no"
+                        android:visibility="gone"
+                        android:padding="10dp"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/websiteLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/landLayout">
+
+                    <TextView
+                        android:id="@+id/txtWeb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Company Website (If Any):"
+                        android:textColor="#646464"
+                        android:visibility="gone"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/websiteEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtWeb"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:hint=" Company website(If have)"
+                        android:visibility="gone"
+                        android:padding="10dp"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/serviceLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/websiteLayout">
+                    <TextView
+                        android:id="@+id/txtS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Service Type:"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <AutoCompleteTextView
+                        android:id="@+id/serviceSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtS"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="#000"
+                        android:padding="10dp"
+                        android:inputType="none"
+                        android:visibility="gone"
+                        android:theme="@style/spinnerTheme"
+                        android:background="@drawable/edittex_design" />
+                </RelativeLayout>
+
+               <RelativeLayout
+                   android:id="@+id/negotiableLayout"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_below="@+id/serviceLayout">
+                   <Switch
+                       android:id="@+id/negotiableBtn"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center"
+                       android:layout_margin="10dp"
+                       android:layoutDirection="rtl"
+                       android:onClick="setNegotiable"
+                       android:text=" Negotiable"
+                       android:textColor="#646464"
+                       android:textSize="18sp"
+                       android:textStyle="bold" />
+               </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/warrantyLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/negotiableBtn">
+                    android:layout_below="@+id/negotiableLayout">
                     <TextView
                         android:id="@+id/txtW"
                         android:layout_width="wrap_content"
@@ -334,11 +694,77 @@
                         android:textColorHint="#BAB6B6" />
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:id="@+id/mileageLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/warrantyLayout">
+                    <TextView
+                        android:id="@+id/txtMY"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Model and Year:"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/modelYearEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_below="@+id/txtMY"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:hint=" Model and Year "
+                        android:padding="10dp"
+                        android:inputType="phone"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/txtM"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_below="@+id/modelYearEt"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Mileage:"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/mileageEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_below="@+id/txtM"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:hint=" Total Kilometer(Skip if not applicable) "
+                        android:padding="10dp"
+                        android:inputType="phone"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
                 <LinearLayout
                     android:id="@+id/phnnoLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/warrantyLayout"
+                    android:layout_below="@+id/mileageLayout"
                     android:orientation="vertical">
 
                     <TextView
@@ -427,38 +853,43 @@
 
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/addPhnBtn"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/hidePhnLayout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/phnnoLayout"
-                    android:layout_margin="10dp"
-                    android:backgroundTint="#007bff"
-                    android:drawableLeft="@drawable/ic_pluss"
-                    android:padding="10dp"
-                    android:text="Add Phone"
-                    android:textAllCaps="false"
-                    android:textColor="#fff"
-                    android:textSize="18sp" />
-
-                <Switch
-                    android:id="@+id/hidePhnBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/addPhnBtn"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:layoutDirection="rtl"
-                    android:text=" Hide Phone"
-                    android:textColor="#646464"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    >
+                    <Button
+                        android:id="@+id/addPhnBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:backgroundTint="#007bff"
+                        android:drawableLeft="@drawable/ic_pluss"
+                        android:padding="10dp"
+                        android:text="Add Phone"
+                        android:textAllCaps="false"
+                        android:textColor="#fff"
+                        android:textSize="18sp" />
+                    <Switch
+                        android:id="@+id/hidePhnBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_below="@+id/addPhnBtn"
+                        android:layout_margin="10dp"
+                        android:layoutDirection="rtl"
+                        android:text=" Hide Phone"
+                        android:textColor="#646464"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/txt7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/hidePhnBtn"
+                    android:layout_below="@+id/hidePhnLayout"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
@@ -481,11 +912,58 @@
                     android:textColor="#000"
                     android:textColorHint="#BAB6B6" />
 
+                <RelativeLayout
+                    android:id="@+id/attachLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/descriptionEt">
+                    <TextView
+                        android:id="@+id/txt87"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Attachment:"
+                        android:textColor="#646464"
+                        android:visibility="gone"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+                    <Button
+                        android:id="@+id/browseBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" Choose File "
+                        android:layout_below="@+id/txt87"
+                        android:textAllCaps="false"
+                        android:textColor="#000"
+                        android:visibility="gone"
+                        android:layout_marginLeft="10dp"
+                        android:backgroundTint="#D1CFC9"/>
+                    <TextView
+                        android:id="@+id/txtAtt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" No file selected"
+                        android:layout_below="@+id/txt87"
+                        android:layout_toEndOf="@+id/browseBtn"
+                        android:visibility="gone"
+                        android:layout_centerVertical="true"
+                        android:textColor="#BAB6B6"
+                        android:textSize="18sp"
+                         />
+
+                </RelativeLayout>
+
+
                 <TextView
                     android:id="@+id/txt8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/descriptionEt"
+                    android:layout_below="@+id/attachLayout"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"

@@ -10,7 +10,7 @@ public class AdDetails {
     private User user;
     private List<RelatedAds> related_ads;
     private int bid_count;
-    private List<Object> ad_phone_numbers;
+    private List<AdPhoneNumbers> ad_phone_numbers;
     private String thumbnail;
     private String ad_title;
     private String ad_type;
@@ -77,7 +77,7 @@ public class AdDetails {
         return bid_count;
     }
 
-    public List<Object> getAd_phone_numbers() {
+    public List<AdPhoneNumbers> getAd_phone_numbers() {
         return ad_phone_numbers;
     }
 
