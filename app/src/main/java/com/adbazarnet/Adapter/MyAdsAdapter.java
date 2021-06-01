@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.adbazarnet.Activity.AdDetailsActivity;
+import com.adbazarnet.Activity.EditMyAdsActivity;
 import com.adbazarnet.Api.ApiUtils;
 import com.adbazarnet.Models.FavouriteAdDetails;
 import com.adbazarnet.Models.FavouriteAds;
@@ -76,6 +77,13 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.ViewHolder> 
             public void onClick(View v) {
                 context.startActivity(new Intent(context, AdDetailsActivity.class).putExtra("id",ads.getId()));
 
+            }
+        });
+
+        holder.editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(new Intent(context, EditMyAdsActivity.class).putExtra("id",ads.getId()));
             }
         });
 

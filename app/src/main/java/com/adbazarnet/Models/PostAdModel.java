@@ -143,8 +143,9 @@ public class PostAdModel {
         this.is_bid = is_bid;
     }
 
-    public PostAdModel(String ad_title, String jobType, int vacancy, String requirment, String deadline, String employeer, String website, String other_information, String description, int location, String address, int category, List<PostImageModel> images, String ad_type, boolean is_job) {
+    public PostAdModel(String ad_title,boolean is_job, String jobType, int vacancy, String requirment, String deadline, String employeer, String website, String other_information, String description, int location, String address, int category, List<PostImageModel> images, String ad_type) {
         this.ad_title = ad_title;
+        this.is_job = is_job;
         this.jobType = jobType;
         this.vacancy = vacancy;
         this.requirment = requirment;
@@ -158,7 +159,7 @@ public class PostAdModel {
         this.category = category;
         this.images = images;
         this.ad_type = ad_type;
-        this.is_job = is_job;
+
     }
 
     public PostAdModel() {

@@ -2,20 +2,14 @@ package com.adbazarnet.Models;
 
 import java.io.File;
 
+import okhttp3.MultipartBody;
+import retrofit2.http.Multipart;
+
 public class PostImageModel {
+
     private String image;
-    private String file;
 
-    public PostImageModel(String image, String file) {
+    public PostImageModel(String image) {
         this.image = image;
-        this.file = file;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public String getFile() {
-        return file;
     }
 }

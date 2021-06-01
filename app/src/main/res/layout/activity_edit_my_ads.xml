@@ -1,0 +1,1184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.PostAdActivity">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/theme">
+
+        <ImageView
+            android:id="@+id/navIcon"
+            android:layout_width="25sp"
+            android:layout_height="25sp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_menu" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/navIcon"
+            android:layout_toRightOf="@+id/navIcon"
+            android:fontFamily="@font/comfortaa"
+            android:gravity="center_vertical"
+            android:text="AdBazar.net"
+            android:textColor="@color/white"
+            android:textSize="21sp" />
+
+        <ImageView
+            android:id="@+id/homeSearchIV"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_home_search" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:background="#D8D7D7">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/postAdLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/category_layout_design"
+                android:backgroundTint="#fff">
+
+                <TextView
+                    android:id="@+id/header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/category_header_layout"
+                    android:fontFamily="@font/roboto"
+                    android:padding="10dp"
+                    android:text="Post An Ad"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/header2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/header"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:text=" Ad Information"
+                    android:textColor="#000"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@id/header2"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#dadada" />
+
+                <LinearLayout
+                    android:id="@+id/btnlayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/header2"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="5dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/theme">
+
+                            <TextView
+                                android:id="@+id/categoryTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:drawableLeft="@drawable/ic_baseline_format_list_bulleted_24"
+                                android:padding="10dp"
+                                android:text=" Select Category"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="5dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/theme">
+
+                            <TextView
+                                android:id="@+id/locationTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:drawableLeft="@drawable/ic_baseline_location_on_24"
+                                android:padding="10dp"
+                                android:text=" Select Location"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txt1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/btnlayout"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text=" Ad Title*:"
+                    android:textColor="#646464"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/titleEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edittex_design"
+                    android:hint=" Enter Ad Title"
+                    android:padding="10dp"
+                    android:textColor="#000"
+                    android:textColorHint="#E6E4E4" />
+
+                <RelativeLayout
+                    android:id="@+id/conditionLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/titleEt">
+                    <TextView
+                        android:id="@+id/txtC"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Condition:"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <AutoCompleteTextView
+                        android:id="@+id/conditionSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtC"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="#000"
+                        android:padding="10dp"
+                        android:inputType="none"
+                        android:visibility="gone"
+                        android:theme="@style/spinnerTheme"
+                        android:background="@drawable/edittex_design" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/jobTypeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/conditionLayout">
+                    <TextView
+                        android:id="@+id/txtJT"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Job Type:"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <AutoCompleteTextView
+                        android:id="@+id/jobTypeSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtJT"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="#000"
+                        android:padding="10dp"
+                        android:inputType="none"
+                        android:visibility="gone"
+                        android:theme="@style/spinnerTheme"
+                        android:background="@drawable/edittex_design" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/vacancyLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/jobTypeLayout">
+                    <TextView
+                        android:id="@+id/txtVC"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Total Vacancies:"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/vacancyEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtVC"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:visibility="gone"
+                        android:inputType="number"
+                        android:padding="10dp"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/requirmentLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/vacancyLayout">
+                    <TextView
+                        android:id="@+id/txtMR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Minimum Requirement:"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <AutoCompleteTextView
+                        android:id="@+id/requirmetntSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtMR"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="#000"
+                        android:padding="10dp"
+                        android:inputType="none"
+                        android:visibility="gone"
+                        android:theme="@style/spinnerTheme"
+                        android:background="@drawable/edittex_design" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/featureLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/requirmentLayout">
+                    <TextView
+                        android:id="@+id/txtF"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Feature:"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/featureEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtF"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:hint=" Features"
+                        android:visibility="gone"
+                        android:padding="10dp"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/deadlineLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/featureLayout">
+                    <TextView
+                        android:id="@+id/txtD"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Application Deadline :"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/deadlineEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtD"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:inputType="none"
+                        android:background="@drawable/edittex_design"
+                        android:hint=" Deadline"
+                        android:visibility="gone"
+                        android:padding="10dp"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/aboutCompanyLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/deadlineLayout">
+                    <TextView
+                        android:id="@+id/txtCE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" About Company / Employer:"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/employeerEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtCE"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:inputType="none"
+                        android:background="@drawable/edittex_design"
+                        android:hint=" About Company/Employeer"
+                        android:visibility="gone"
+                        android:padding="10dp"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6" />
+                </RelativeLayout>
+
+
+                <TextView
+                    android:id="@+id/txt2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/aboutCompanyLayout"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text=" Other Information:"
+                    android:textColor="#646464"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/otherInfoEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt2"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edittex_design"
+                    android:hint=" Other Information"
+                    android:padding="10dp"
+                    android:textColor="#000"
+                    android:textColorHint="#BAB6B6" />
+
+
+                <RelativeLayout
+                    android:id="@+id/priceLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/otherInfoEt">
+
+                    <TextView
+                        android:id="@+id/txt3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Price*:"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/priceEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt3"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:hint=" Enter Price"
+                        android:inputType="number"
+                        android:padding="10dp"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/addressLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/priceLayout">
+
+                    <TextView
+                        android:id="@+id/txtA"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Address:"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/addressEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtA"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:hint=" Enter Address"
+                        android:visibility="gone"
+                        android:padding="10dp"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/landLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/addressLayout">
+
+                    <TextView
+                        android:id="@+id/txtL"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Land/Plot Size:"
+                        android:textColor="#646464"
+                        android:visibility="gone"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/landEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtL"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:hint=" Enter land/plot no"
+                        android:visibility="gone"
+                        android:padding="10dp"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/websiteLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/landLayout">
+
+                    <TextView
+                        android:id="@+id/txtWeb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Company Website (If Any):"
+                        android:textColor="#646464"
+                        android:visibility="gone"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/websiteEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtWeb"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:hint=" Company website(If have)"
+                        android:visibility="gone"
+                        android:padding="10dp"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/serviceLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/websiteLayout">
+                    <TextView
+                        android:id="@+id/txtS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Service Type:"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <AutoCompleteTextView
+                        android:id="@+id/serviceSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtS"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="#000"
+                        android:padding="10dp"
+                        android:inputType="none"
+                        android:visibility="gone"
+                        android:theme="@style/spinnerTheme"
+                        android:background="@drawable/edittex_design" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/negotiableLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/serviceLayout">
+                    <Switch
+                        android:id="@+id/negotiableBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:layoutDirection="rtl"
+                        android:onClick="setNegotiable"
+                        android:text=" Negotiable"
+                        android:textColor="#646464"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/warrantyLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/negotiableLayout">
+                    <TextView
+                        android:id="@+id/txtW"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Warranty:"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/warrantyEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtW"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:hint=" Warranty information"
+                        android:inputType="text"
+                        android:visibility="gone"
+                        android:padding="10dp"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/mileageLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/warrantyLayout">
+                    <TextView
+                        android:id="@+id/txtMY"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Model and Year:"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/modelYearEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_below="@+id/txtMY"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:hint=" Model and Year "
+                        android:padding="10dp"
+                        android:inputType="phone"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/txtM"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_below="@+id/modelYearEt"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Mileage:"
+                        android:visibility="gone"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/mileageEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_below="@+id/txtM"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:hint=" Total Kilometer(Skip if not applicable) "
+                        android:padding="10dp"
+                        android:inputType="phone"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/phnnoLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/mileageLayout"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Phone Number 1:"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <EditText
+                        android:id="@+id/phnnoEt1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:hint=" Enter Phone Number "
+                        android:padding="10dp"
+                        android:inputType="phone"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/txt5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Phone Number 2:"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <EditText
+                        android:id="@+id/phnnoEt2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:hint=" Enter Phone Number"
+                        android:padding="10dp"
+                        android:textColor="#000"
+                        android:inputType="phone"
+                        android:textColorHint="#BAB6B6"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/txt6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Phone Number 3:"
+                        android:textColor="#646464"
+                        android:textSize="21sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <EditText
+                        android:id="@+id/phnnoEt3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:hint=" Enter Phone Number"
+                        android:padding="10dp"
+                        android:inputType="phone"
+                        android:textColor="#000"
+                        android:textColorHint="#BAB6B6"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/hidePhnLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/phnnoLayout"
+                    >
+                    <Button
+                        android:id="@+id/addPhnBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:backgroundTint="#007bff"
+                        android:drawableLeft="@drawable/ic_pluss"
+                        android:padding="10dp"
+                        android:text="Add Phone"
+                        android:textAllCaps="false"
+                        android:textColor="#fff"
+                        android:textSize="18sp" />
+                    <Switch
+                        android:id="@+id/hidePhnBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_below="@+id/addPhnBtn"
+                        android:layout_margin="10dp"
+                        android:layoutDirection="rtl"
+                        android:text=" Hide Phone"
+                        android:textColor="#646464"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/txt7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/hidePhnLayout"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text=" Description*:"
+                    android:textColor="#646464"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/descriptionEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/txt7"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edittex_design"
+                    android:hint=" Enter Description"
+                    android:padding="10dp"
+                    android:textColor="#000"
+                    android:textColorHint="#BAB6B6" />
+
+                <RelativeLayout
+                    android:id="@+id/attachLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/descriptionEt">
+                    <TextView
+                        android:id="@+id/txt87"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" Attachment:"
+                        android:textColor="#646464"
+                        android:visibility="gone"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+                    <Button
+                        android:id="@+id/browseBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" Choose File "
+                        android:layout_below="@+id/txt87"
+                        android:textAllCaps="false"
+                        android:textColor="#000"
+                        android:visibility="gone"
+                        android:layout_marginLeft="10dp"
+                        android:backgroundTint="#D1CFC9"/>
+                    <TextView
+                        android:id="@+id/txtAtt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=" No file selected"
+                        android:layout_below="@+id/txt87"
+                        android:layout_toEndOf="@+id/browseBtn"
+                        android:visibility="gone"
+                        android:layout_centerVertical="true"
+                        android:textColor="#BAB6B6"
+                        android:textSize="18sp"
+                        />
+
+                </RelativeLayout>
+
+
+                <TextView
+                    android:id="@+id/txt8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/attachLayout"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text=" Add Images (Max: 5):"
+                    android:textColor="#646464"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/addImgBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_below="@+id/txt8"
+                    android:layout_margin="10dp"
+                    android:backgroundTint="#e3e0d8"
+                    android:fontFamily="@font/roboto"
+                    android:padding="10dp"
+                    android:text="Click here to Select Image"
+                    android:textAllCaps="false"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:id="@+id/imgLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/addImgBtn"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="30dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/img1"
+                        android:layout_width="250dp"
+                        android:layout_height="250dp"
+                        android:src="@drawable/ic_baseline_image_24"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/img2"
+                        android:layout_width="250dp"
+                        android:layout_height="250dp"
+                        android:src="@drawable/ic_baseline_image_24"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/img3"
+                        android:layout_width="250dp"
+                        android:layout_height="250dp"
+                        android:src="@drawable/ic_baseline_image_24"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/img4"
+                        android:layout_width="250dp"
+                        android:layout_height="250dp"
+                        android:src="@drawable/ic_baseline_image_24"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/img5"
+                        android:layout_width="250dp"
+                        android:layout_height="250dp"
+                        android:src="@drawable/ic_baseline_image_24"
+                        android:visibility="gone" />
+
+
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/submitBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/imgLayout"
+                    android:layout_margin="10dp"
+                    app:cardBackgroundColor="@color/theme"
+                    app:cardCornerRadius="5dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:backgroundTint="@color/theme"
+                            android:drawableLeft="@drawable/ic_baseline_add_circle_outline_24"
+                            android:padding="10dp"
+                            android:text=" Submit"
+                            android:textAllCaps="false"
+                            android:textColor="#fff"
+                            android:textSize="21sp" />
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/postAdLayout"
+                android:layout_margin="15dp"
+                android:background="@drawable/category_layout_design"
+                android:backgroundTint="#fff">
+
+                <TextView
+                    android:id="@+id/headerT"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/category_header_layout"
+                    android:fontFamily="@font/roboto"
+                    android:padding="10dp"
+                    android:text="How To Sell Quickly?"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/help1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/headerT"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="25dp"
+                    android:drawableLeft="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:fontFamily="@font/roboto"
+                    android:text="  Use a brief title and description of the item."
+                    android:textColor="#000"
+                    android:textFontWeight="400"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/help2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/help1"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="25dp"
+                    android:drawableLeft="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:fontFamily="@font/roboto"
+                    android:text="  Make sure you post in the correct category"
+                    android:textColor="#000"
+                    android:textFontWeight="400"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/help3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/help2"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="25dp"
+                    android:drawableLeft="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:fontFamily="@font/roboto"
+                    android:text="  Add nice photos to your ad"
+                    android:textColor="#000"
+                    android:textFontWeight="400"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/help4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/help3"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="25dp"
+                    android:drawableLeft="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:fontFamily="@font/roboto"
+                    android:text="  Put a reasonable price"
+                    android:textColor="#000"
+                    android:textFontWeight="400"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/help5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/help4"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="25dp"
+                    android:drawableLeft="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:fontFamily="@font/roboto"
+                    android:text="  Check the item before publish"
+                    android:textColor="#000"
+                    android:textFontWeight="400"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:id="@+id/bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#fff"
+        android:layout_alignParentBottom="true"
+        app:cnb_menuResource="@menu/bottom_drawer_menu"
+        app:cnb_orientationMode="horizontal"
+        app:cnb_addLeftInset="false"
+        app:cnb_addRightInset="false"
+        app:cnb_addTopInset="false"
+        app:cnb_radius="8dp"
+        app:cnb_iconSize="24dp"
+        android:theme="@style/Widget.BottomNavigationView"/>
+
+
+</RelativeLayout>

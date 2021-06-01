@@ -65,6 +65,8 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
     private TextView productName,productPrice,uploadTime,categoryTv,conditionTv,
             warrantyTv,descriptionTv,sellerNameTv,locationTv,noDataTv,membershipTV,
             favouriteTv,callNowTV,noBidTv,bidBtn,chatTV;
+    private TextView txt3,txt2,vacancyTv,txtV,txtD,deadlineTv,txtR,requirmentTv,txtA,addressTv
+            ,txtO,otherTv,txtW,websiteTv,txtAtt,attchmetnTv,jobTv,jobTypeTv,txtMY,modelYearTv,txtM,mileageTv;
     private RecyclerView relatedProductRecycler,bidRecycler;
     private RelatedProductAdapter relatedProductAdapter;
     private BidsShowAdapter bidAdapter;
@@ -77,6 +79,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
     private boolean is_bid;
     private EditText bidEt;
     private FrameLayout contactLayout;
+    private String downloadLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,11 +100,24 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                     List<RelatedAds> relatedAds = response.body().getRelated_ads();
                     productName.setText(response.body().getAd_title());
                     productPrice.setText("৳ "+response.body().getPrice());
-                    uploadTime.setText(response.body().getCreated());
+                    String date = String.valueOf(response.body().getCreated());
+                    String time = String.valueOf(response.body().getCreated());
+                    date = date.split("T")[0];
+                    time = time.substring(0, time.indexOf("."));
+                    time = time.substring(time.indexOf("T")+1);
+
+                    uploadTime.setText(date+","+time);
                     categoryTv.setText(""+response.body().getCategory().getCategory_name()+","
                             +response.body().getCategory().getName());
                     category = response.body().getCategory().getCategory_name();
-                    conditionTv.setText(response.body().getCondition());
+                    if (response.body().getCondition()==null) {
+                        conditionTv.setVisibility(View.GONE);
+                        txt2.setVisibility(View.GONE);
+                    }else{
+                        conditionTv.setText(response.body().getCondition());
+                        conditionTv.setText(response.body().getCondition());
+                        txt2.setVisibility(View.VISIBLE);
+                    }
                     descriptionTv.setText(response.body().getDescription());
                     sellerNameTv.setText(response.body().getUser().getName());
                     locationTv.setText(response.body().getLocation().getName()+", "+
@@ -136,9 +152,94 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                     }
                     if (response.body().getWarranty()==null) {
                         warrantyTv.setVisibility(View.GONE);
+                        txt3.setVisibility(View.GONE);
                     }else{
+                        warrantyTv.setVisibility(View.VISIBLE);
                         warrantyTv.setText(response.body().getWarranty());
+                        txt3.setVisibility(View.VISIBLE);
                     }
+                    if (response.body().getTotal_vacancies()==0) {
+                        vacancyTv.setVisibility(View.GONE);
+                        txtV.setVisibility(View.GONE);
+                    }else{
+                        vacancyTv.setText(""+response.body().getTotal_vacancies());
+                        vacancyTv.setVisibility(View.VISIBLE);
+                        txtV.setVisibility(View.VISIBLE);
+                    }
+                    if (response.body().getApplication_deadline()==null) {
+                        txtD.setVisibility(View.GONE);
+                        deadlineTv.setVisibility(View.GONE);
+                    }else{
+                        deadlineTv.setText(""+response.body().getApplication_deadline());
+                        txtD.setVisibility(View.VISIBLE);
+                        deadlineTv.setVisibility(View.VISIBLE);
+                    }
+                    if (response.body().getMinimum_requirement()==null) {
+                        txtR.setVisibility(View.GONE);
+                        requirmentTv.setVisibility(View.GONE);
+                    }else{
+                        requirmentTv.setText(""+response.body().getMinimum_requirement());
+                        txtR.setVisibility(View.VISIBLE);
+                        requirmentTv.setVisibility(View.VISIBLE);
+                    }
+                    if (response.body().getAddress()==null) {
+                        txtA.setVisibility(View.GONE);
+                        addressTv.setVisibility(View.GONE);
+                    }else{
+                        addressTv.setText(""+response.body().getAddress());
+                        txtA.setVisibility(View.VISIBLE);
+                        addressTv.setVisibility(View.VISIBLE);
+                    }
+                    if (response.body().getOther_information()==null) {
+                        txtO.setVisibility(View.GONE);
+                        otherTv.setVisibility(View.GONE);
+                    }else{
+                        otherTv.setText(""+response.body().getOther_information());
+                        txtO.setVisibility(View.VISIBLE);
+                        otherTv.setVisibility(View.VISIBLE);
+                    }
+                    if (response.body().getCompany_website()==null) {
+                        txtW.setVisibility(View.GONE);
+                        websiteTv.setVisibility(View.GONE);
+                    }else{
+                        websiteTv.setText(""+response.body().getCompany_website());
+                        txtW.setVisibility(View.VISIBLE);
+                        websiteTv.setVisibility(View.VISIBLE);
+                    }
+                    if (response.body().getAttached_file()==null) {
+                        txtAtt.setVisibility(View.GONE);
+                        attchmetnTv.setVisibility(View.GONE);
+                    }else{
+                        txtAtt.setVisibility(View.VISIBLE);
+                        attchmetnTv.setVisibility(View.VISIBLE);
+                        downloadLink = response.body().getAttached_file();
+                    }
+                    if (response.body().getJob_type()==null) {
+                        jobTv.setVisibility(View.GONE);
+                        jobTypeTv.setVisibility(View.GONE);
+                    }else{
+                        jobTv.setVisibility(View.VISIBLE);
+                        jobTypeTv.setVisibility(View.VISIBLE);
+                        jobTypeTv.setText(response.body().getJob_type());
+                    }
+                    if (response.body().getModel_and_year()==null) {
+                        txtMY.setVisibility(View.GONE);
+                        modelYearTv.setVisibility(View.GONE);
+                    }else{
+                        modelYearTv.setVisibility(View.VISIBLE);
+                        txtMY.setVisibility(View.VISIBLE);
+                        modelYearTv.setText(response.body().getModel_and_year());
+                    }
+                    if (response.body().getMileage()==null) {
+                        txtM.setVisibility(View.GONE);
+                        mileageTv.setVisibility(View.GONE);
+                    }else{
+                        mileageTv.setVisibility(View.VISIBLE);
+                        txtM.setVisibility(View.VISIBLE);
+                        mileageTv.setText(response.body().getMileage());
+                    }
+
+
 
                     getSliderImage(images);
                     getRelatedProduct(relatedAds);
@@ -150,6 +251,26 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
 
             }
         });
+        websiteTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = websiteTv.getText().toString();
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
+
+        attchmetnTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(downloadLink));
+                startActivity(i);
+            }
+        });
+
+
 
         favouriteTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -558,6 +679,28 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
         sellerNameTv = findViewById(R.id.sellerNameTv);
         contactLayout = findViewById(R.id.contactLayout);
         chatTV = findViewById(R.id.chatTV);
+        txt2 = findViewById(R.id.txt2);
+        txt3 = findViewById(R.id.txt3);
+        txtV = findViewById(R.id.txtV);
+        vacancyTv = findViewById(R.id.vacancyTv);
+        txtD = findViewById(R.id.txtD);
+        deadlineTv = findViewById(R.id.deadlineTv);
+        txtR = findViewById(R.id.txtR);
+        requirmentTv = findViewById(R.id.requirmentTv);
+        txtA = findViewById(R.id.txtA);
+        addressTv = findViewById(R.id.addressTv);
+        txtO = findViewById(R.id.txtO);
+        otherTv = findViewById(R.id.otherTv);
+        txtW = findViewById(R.id.txtW);
+        websiteTv = findViewById(R.id.websiteTv);
+        txtAtt = findViewById(R.id.txtAtt);
+        attchmetnTv = findViewById(R.id.attachmentTv);
+        jobTv = findViewById(R.id.jobTv);
+        jobTypeTv = findViewById(R.id.jobTypeTv);
+        txtMY = findViewById(R.id.txtMY);
+        modelYearTv = findViewById(R.id.modelYearTv);
+        txtM = findViewById(R.id.modelYearTv);
+        mileageTv = findViewById(R.id.modelYearTv);
 
         relatedProductRecycler = findViewById(R.id.relatedProductRecycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);

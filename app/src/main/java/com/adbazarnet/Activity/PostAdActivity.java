@@ -1,20 +1,34 @@
 package com.adbazarnet.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -53,7 +67,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -64,6 +81,7 @@ import java.util.List;
 import java.util.Map;
 
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -77,10 +95,9 @@ public class PostAdActivity extends AppCompatActivity {
     public static EditText titleEt, otherInfoEt, priceEt, phnnoEt1, phnnoEt2, phnnoEt3, descriptionEt,
             warrantyEt, modelYearEt, mileageEt, addressEt, landEt, featureEt, vacancyEt, deadlineEt, employeerEt, websiteEt;
     private Switch negotiableBtn, hidePhnBtn;
-    private Button addPhnBtn, addImgBtn, browseBtn;
+    public static Button addPhnBtn, addImgBtn, browseBtn;
     private ImageView img1, img2, img3, img4, img5;
-    public static int categoryId, subCategoryId, locationId, subLocationId;
-    private Uri imageUri;
+    public static int categoryId, locationId;
     private CardView submitBtn;
     public static Dialog dialog;
     private ApiInterface apiInterface;
@@ -97,7 +114,6 @@ public class PostAdActivity extends AppCompatActivity {
     private int phnCounter = 0, imgCounter = 0, imgSelect = 0;
     private Uri uri1, uri2, uri3, uri4, uri5;
     private List<PostImageModel> imgArray = new ArrayList<>();
-    private RequestBody requestFile1;
     private boolean negotiable = false, hidePhone = false, is_sell;
     private SharedPreferences sharedPreferences;
     private ChipNavigationBar chipNavigationBar;
@@ -105,6 +121,10 @@ public class PostAdActivity extends AppCompatActivity {
     private PostAdModel model;
     public String postType;
     private File file1, file2, file3, file4, file5;
+    private static final int PERMISSION_REQUEST_CODE = 1;
+    private static final int REQUEST_GALLERY = 200;
+    private String file_path;
+    private Bitmap bitmap1,bitmap2,bitmap3,bitmap4,bitmap5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,6 +168,13 @@ public class PostAdActivity extends AppCompatActivity {
             browseBtn.setVisibility(View.VISIBLE);
             txtAtt.setVisibility(View.VISIBLE);
         }
+
+        deadlineEt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         categoryTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -323,9 +350,28 @@ public class PostAdActivity extends AppCompatActivity {
             }
         });
 
+        browseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Build.VERSION.SDK_INT>=23){
+                    if(checkPermission()){
+                        filePicker();
+                    }
+                    else{
+                        requestPermission();
+                    }
+                }
+                else{
+                    filePicker();
+                }
+            }
+
+        });
+
         deadlineEt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hideKeyboard(PostAdActivity.this);
                 getDate();
             }
         });
@@ -376,12 +422,66 @@ public class PostAdActivity extends AppCompatActivity {
                     phoneNumbers.add(phnnn);
                 }
 
+                if (uri1!=null){
+                    bitmap1 = decodeUriToBitmap(PostAdActivity.this,uri1);
+
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    bitmap1.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                    byte[] byteArray = byteArrayOutputStream .toByteArray();
+
+                    String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                    PostImageModel imageModel = new PostImageModel(encoded);
+                    imgArray.add(imageModel);
+                }else if(uri2!=null){
+                    bitmap2 = decodeUriToBitmap(PostAdActivity.this,uri2);
+
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    bitmap2.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                    byte[] byteArray = byteArrayOutputStream .toByteArray();
+
+                    String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                    PostImageModel imageModel2 = new PostImageModel(encoded);
+                    imgArray.add(imageModel2);
+                }else if(uri3!=null){
+                    bitmap3 = decodeUriToBitmap(PostAdActivity.this,uri3);
+
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    bitmap3.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                    byte[] byteArray = byteArrayOutputStream .toByteArray();
+
+                    String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                    PostImageModel imageModel3 = new PostImageModel(encoded);
+                    imgArray.add(imageModel3);
+                }else if(uri4!=null){
+                    Bitmap bitmap4 = decodeUriToBitmap(PostAdActivity.this,uri4);
+
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    bitmap4.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                    byte[] byteArray = byteArrayOutputStream .toByteArray();
+
+                    String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                    PostImageModel imageModel4 = new PostImageModel(encoded);
+                    imgArray.add(imageModel4);
+                }else if(uri5!=null){
+                    bitmap5 = decodeUriToBitmap(PostAdActivity.this,uri5);
+
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    bitmap5.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                    byte[] byteArray = byteArrayOutputStream .toByteArray();
+
+                    String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                    PostImageModel imageModel5 = new PostImageModel(encoded);
+                    imgArray.add(imageModel5);
+                }
+
+                Log.d("imgArray", String.valueOf(imgArray));
+
                 String mileage = mileageEt.getText().toString();
                 String modelYear = modelYearEt.getText().toString();
                 String description = descriptionEt.getText().toString();
                 String address = addressEt.getText().toString();
                 String land = landEt.getText().toString();
-                vacancy = Integer.parseInt(vacancyEt.getText().toString());
+
                 String deadline = deadlineEt.getText().toString();
                 String employeer = employeerEt.getText().toString();
                 String website = websiteEt.getText().toString();
@@ -399,7 +499,8 @@ public class PostAdActivity extends AppCompatActivity {
                     } else {
                         if (ad_Type.equals("electronics")) {
                             model = new PostAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers, description,
-                                    locationId, subCategoryId, imgArray, negotiable, ad_Type, hidePhone, true);
+                                    locationId, categoryId, imgArray, negotiable, ad_Type, hidePhone, true);
+                            Log.d("CheckCall","Yes");
                         } else if (ad_Type.equals("vehicle")) {
                             model = new PostAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers, description,
                                     locationId, modelYear, mileage, categoryId, imgArray, negotiable, ad_Type, hidePhone, true);
@@ -430,7 +531,7 @@ public class PostAdActivity extends AppCompatActivity {
                     } else {
                         if (ad_Type.equals("electronics")) {
                             model = new PostAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers, description,
-                                    locationId, subCategoryId, imgArray, negotiable, ad_Type, hidePhone, false);
+                                    locationId, categoryId, imgArray, negotiable, ad_Type, hidePhone, false);
                         } else if (ad_Type.equals("vehicle")) {
                             model = new PostAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers, description,
                                     locationId, modelYear, mileage, categoryId, imgArray, negotiable, ad_Type, hidePhone, false);
@@ -458,6 +559,7 @@ public class PostAdActivity extends AppCompatActivity {
                     }
                 }
                 else if (postType.equals("job")){
+                    vacancy = Integer.parseInt(vacancyEt.getText().toString());
                     if (TextUtils.isEmpty(adTitle)) {
                         titleEt.setError("Ad title");
                     } else if (TextUtils.isEmpty(description)) {
@@ -465,8 +567,8 @@ public class PostAdActivity extends AppCompatActivity {
                     }else if (TextUtils.isEmpty(deadline)) {
                         deadlineEt.setError("Enter description");
                     }else{
-                        model = new PostAdModel(adTitle,jobType,vacancy,requirment,deadline,employeer,website
-                                ,otherInfo,description,locationId,address,categoryId,imgArray,ad_Type,true);
+                        model = new PostAdModel(adTitle,true,jobType,vacancy,requirment,deadline,employeer,website
+                                ,otherInfo,description,locationId,address,categoryId,imgArray,ad_Type);
                     }
                 }
 
@@ -474,28 +576,30 @@ public class PostAdActivity extends AppCompatActivity {
                 call.enqueue(new Callback<AdDetails>() {
                     @Override
                     public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
-                        if (response.code() == 201) {
-                            Dialog dialog2 = new Dialog(PostAdActivity.this);
-                            dialog2.setContentView(R.layout.success_popup);
-                            dialog2.setCancelable(false);
-                            dialog2.show();
-                            TextView textView = dialog2.findViewById(R.id.textview);
-                            Button okBtn = dialog2.findViewById(R.id.okBtn);
-                            textView.setText("Ad created Successfully");
+                         if (response.code()==201){
+                             Dialog dialog2 = new Dialog(PostAdActivity.this);
+                             dialog2.setContentView(R.layout.success_popup);
+                             dialog2.setCancelable(false);
+                             dialog2.show();
+                             TextView textView = dialog2.findViewById(R.id.textview);
+                             Button okBtn = dialog2.findViewById(R.id.okBtn);
+                             textView.setText("Ad created Successfully");
 
-                            okBtn.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dialog2.dismiss();
-                                    Intent intent = new Intent(PostAdActivity.this, MainActivity.class);
-                                    intent.putExtra("fragment", "home");
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            });
-                        }
-
-                    }
+                             okBtn.setOnClickListener(new View.OnClickListener() {
+                                 @Override
+                                 public void onClick(View v) {
+                                     dialog2.dismiss();
+                                     Intent intent = new Intent(PostAdActivity.this, MainActivity.class);
+                                     intent.putExtra("fragment", "home");
+                                     startActivity(intent);
+                                     finish();
+                                 }
+                             });
+                         }
+                         else{
+                             Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                         }
+                      }
 
                     @Override
                     public void onFailure(Call<AdDetails> call, Throwable t) {
@@ -698,7 +802,14 @@ public class PostAdActivity extends AppCompatActivity {
             }
         });
 
+    }
 
+    private void filePicker() {
+        Toast.makeText(PostAdActivity.this, "File Picker Call", Toast.LENGTH_SHORT).show();
+        //Let's Pick File
+        Intent opengallery=new Intent(Intent.ACTION_PICK);
+        opengallery.setType("image/*");
+        startActivityForResult(opengallery,REQUEST_GALLERY);
     }
 
     private void init() {
@@ -868,6 +979,16 @@ public class PostAdActivity extends AppCompatActivity {
                 } else if (imgSelect == 5) {
                     uri5 = resultUri;
                     img5.setImageURI(uri5);
+                } else if(requestCode==REQUEST_GALLERY && resultCode== Activity.RESULT_OK){
+                    String filePath=getRealPathFromUri(data.getData(),PostAdActivity.this);
+                    Log.d("File Path : "," "+filePath);
+                    //now we will upload the file
+                    //lets import okhttp first
+                    this.file_path=filePath;
+
+                    File file=new File(filePath);
+                    txtAtt.setText(file.getName());
+
                 }
 
 
@@ -877,5 +998,78 @@ public class PostAdActivity extends AppCompatActivity {
                 Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void requestPermission(){
+        if(ActivityCompat.shouldShowRequestPermissionRationale(PostAdActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+            Toast.makeText(PostAdActivity.this, "Please Give Permission to Upload File", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            ActivityCompat.requestPermissions(PostAdActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},PERMISSION_REQUEST_CODE);
+        }
+    }
+
+    private boolean checkPermission(){
+        int result= ContextCompat.checkSelfPermission(PostAdActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if(result== PackageManager.PERMISSION_GRANTED){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public String getRealPathFromUri(Uri uri,Activity activity){
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor cursor=activity.getContentResolver().query(uri,proj,null,null,null);
+        if(cursor==null){
+            return uri.getPath();
+        }
+        else{
+            cursor.moveToFirst();
+            int id=cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            return cursor.getString(id);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode){
+            case PERMISSION_REQUEST_CODE:
+                if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                    Toast.makeText(PostAdActivity.this, "Permission Successfull", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(PostAdActivity.this, "Permission Failed", Toast.LENGTH_SHORT).show();
+                }
+        }
+    }
+
+    public static Bitmap decodeUriToBitmap(Context mContext, Uri sendUri) {
+        Bitmap getBitmap = null;
+        try {
+            InputStream image_stream;
+            try {
+                image_stream = mContext.getContentResolver().openInputStream(sendUri);
+                getBitmap = BitmapFactory.decodeStream(image_stream);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return getBitmap;
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

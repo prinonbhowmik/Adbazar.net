@@ -55,6 +55,7 @@
         android:layout_margin="15dp"
         android:backgroundTint="#fff"
         android:layout_below="@+id/toolbar"
+        android:layout_above="@+id/bottom_menu"
         android:background="@drawable/category_layout_design">
         <TextView
             android:id="@+id/header"

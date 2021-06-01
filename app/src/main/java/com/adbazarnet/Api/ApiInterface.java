@@ -92,6 +92,11 @@ public interface ApiInterface {
     @Multipart
     Call<User> updateImage(@Header("Authorization") String token, @Part MultipartBody.Part avatar);
 
+    @PATCH("posts/{id}/")
+    @Multipart
+    Call<AdDetails> attachedFileUpload(@Header("Authorization") String token,@Path("id") int id ,@Part MultipartBody.Part file);
+
+
     @PATCH("account/auth/change-password/")
     Call<UserDetailsModel> updatePassword(@Header("Authorization") String token, @Body UserDetailsModel user);
 
