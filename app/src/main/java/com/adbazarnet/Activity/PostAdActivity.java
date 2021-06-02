@@ -13,7 +13,9 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -23,6 +25,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Base64;
@@ -432,7 +435,8 @@ public class PostAdActivity extends AppCompatActivity {
                     String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
                     PostImageModel imageModel = new PostImageModel(encoded);
                     imgArray.add(imageModel);
-                }else if(uri2!=null){
+                }
+                if(uri2!=null){
                     bitmap2 = decodeUriToBitmap(PostAdActivity.this,uri2);
 
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -442,7 +446,8 @@ public class PostAdActivity extends AppCompatActivity {
                     String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
                     PostImageModel imageModel2 = new PostImageModel(encoded);
                     imgArray.add(imageModel2);
-                }else if(uri3!=null){
+                }
+                if(uri3!=null){
                     bitmap3 = decodeUriToBitmap(PostAdActivity.this,uri3);
 
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -452,7 +457,8 @@ public class PostAdActivity extends AppCompatActivity {
                     String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
                     PostImageModel imageModel3 = new PostImageModel(encoded);
                     imgArray.add(imageModel3);
-                }else if(uri4!=null){
+                }
+                if(uri4!=null){
                     Bitmap bitmap4 = decodeUriToBitmap(PostAdActivity.this,uri4);
 
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -462,7 +468,8 @@ public class PostAdActivity extends AppCompatActivity {
                     String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
                     PostImageModel imageModel4 = new PostImageModel(encoded);
                     imgArray.add(imageModel4);
-                }else if(uri5!=null){
+                }
+                if(uri5!=null){
                     bitmap5 = decodeUriToBitmap(PostAdActivity.this,uri5);
 
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -473,8 +480,7 @@ public class PostAdActivity extends AppCompatActivity {
                     PostImageModel imageModel5 = new PostImageModel(encoded);
                     imgArray.add(imageModel5);
                 }
-
-                Log.d("imgArray", String.valueOf(imgArray));
+                
 
                 String mileage = mileageEt.getText().toString();
                 String modelYear = modelYearEt.getText().toString();
@@ -577,24 +583,7 @@ public class PostAdActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
                          if (response.code()==201){
-                             Dialog dialog2 = new Dialog(PostAdActivity.this);
-                             dialog2.setContentView(R.layout.success_popup);
-                             dialog2.setCancelable(false);
-                             dialog2.show();
-                             TextView textView = dialog2.findViewById(R.id.textview);
-                             Button okBtn = dialog2.findViewById(R.id.okBtn);
-                             textView.setText("Ad created Successfully");
 
-                             okBtn.setOnClickListener(new View.OnClickListener() {
-                                 @Override
-                                 public void onClick(View v) {
-                                     dialog2.dismiss();
-                                     Intent intent = new Intent(PostAdActivity.this, MainActivity.class);
-                                     intent.putExtra("fragment", "home");
-                                     startActivity(intent);
-                                     finish();
-                                 }
-                             });
                          }
                          else{
                              Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
@@ -606,6 +595,49 @@ public class PostAdActivity extends AppCompatActivity {
 
                     }
                 });
+
+                ProgressDialog progressDialog = new ProgressDialog(PostAdActivity.this);
+                progressDialog.setTitle("Uploading");
+                progressDialog.setMessage("Loading...");
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+                final Handler handler  = new Handler();
+                final Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        if (progressDialog.isShowing()) {
+                            progressDialog.dismiss();
+                            Dialog dialog2 = new Dialog(PostAdActivity.this);
+                            dialog2.setContentView(R.layout.success_popup);
+                            dialog2.setCancelable(false);
+                            dialog2.show();
+                            TextView textView = dialog2.findViewById(R.id.textview);
+                            Button okBtn = dialog2.findViewById(R.id.okBtn);
+                            textView.setText("Ad created Successfully");
+
+                            okBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog2.dismiss();
+                                    Intent intent = new Intent(PostAdActivity.this, MainActivity.class);
+                                    intent.putExtra("fragment", "home");
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            });
+                        }
+                    }
+                };
+
+                progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        handler.removeCallbacks(runnable);
+                    }
+                });
+
+                handler.postDelayed(runnable, 10000);
 
             }
         });
