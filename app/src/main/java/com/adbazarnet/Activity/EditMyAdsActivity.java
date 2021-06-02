@@ -93,7 +93,7 @@ public class EditMyAdsActivity extends AppCompatActivity {
     private int phnCounter = 0, imgCounter = 0, imgSelect = 0;
     private Uri uri1, uri2, uri3, uri4, uri5;
     private List<PostImageModel> imgArray = new ArrayList<>();
-    private boolean negotiable = false, hidePhone = false, is_sell;
+    private boolean negotiable = false, hidePhone = false;
     private SharedPreferences sharedPreferences;
     private ChipNavigationBar chipNavigationBar;
     private int loggedIn, vacancy, adId;
@@ -105,6 +105,8 @@ public class EditMyAdsActivity extends AppCompatActivity {
     private String file_path;
     private Bitmap bitmap1, bitmap2, bitmap3, bitmap4, bitmap5;
     private ProgressDialog progressDialog;
+    private boolean is_sell =false,is_bid = false,is_job=false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,7 +139,7 @@ public class EditMyAdsActivity extends AppCompatActivity {
                             List<CategoriesModel> list = response.body();
                             categoryNamesAdapter = new PostAdCategoryAdapter(list, EditMyAdsActivity.this);
                             categoriesRecycler.setAdapter(categoryNamesAdapter);
-                            if (postType.equals("job")){
+                            if (ad_Type.equals("job")){
                                 categoryNamesAdapter.getFilter().filter(postType);
                             }
                             getData();
@@ -611,24 +613,26 @@ public class EditMyAdsActivity extends AppCompatActivity {
                 String employeer = employeerEt.getText().toString();
                 String website = websiteEt.getText().toString();
 
+                Log.d("checkPhnNoArray", String.valueOf(phoneNumbers));
+
                 if (ad_Type.equals("electronics")) {
                     model = new EditAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers, description,
-                            locationId, categoryId, imgArray, negotiable, ad_Type, hidePhone);
+                            locationId, categoryId, imgArray, negotiable, ad_Type, hidePhone, is_sell,is_bid,is_job);
                 } else if (ad_Type.equals("vehicle")) {
                     model = new EditAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers, description,
-                            locationId, modelYear, mileage, categoryId, imgArray, negotiable, ad_Type, hidePhone);
+                            locationId, modelYear, mileage, categoryId, imgArray, negotiable, ad_Type, hidePhone,is_sell,is_bid,is_job);
                 } else if (ad_Type.equals("property")) {
-                    model = new EditAdModel(adTitle, condition, price, otherInfo, phoneNumbers, description,
-                            locationId,address,land, categoryId, imgArray, negotiable, ad_Type, hidePhone);
+                    model = new EditAdModel(adTitle, price, otherInfo, phoneNumbers, description,
+                            locationId,address,land, categoryId, imgArray, negotiable, ad_Type, hidePhone,is_sell,is_bid,is_job);
                 } else if (ad_Type.equals("general")) {
                     model = new EditAdModel(adTitle, price, otherInfo, phoneNumbers, description,
-                            locationId, categoryId, imgArray, negotiable, ad_Type, hidePhone);
+                            locationId, categoryId, imgArray, negotiable, ad_Type, hidePhone,is_sell,is_bid,is_job);
                 } else if (ad_Type.equals("service")) {
                     model = new EditAdModel(adTitle, price, otherInfo, phoneNumbers, description, locationId, address,
-                            service, categoryId, imgArray, negotiable, ad_Type, hidePhone);
+                            service, categoryId, imgArray, negotiable, ad_Type, hidePhone,is_sell,is_bid,is_job);
                 }else  if (ad_Type.equals("job")){
                     model = new EditAdModel(adTitle,jobType,vacancy,requirment,deadline,employeer,website
-                            ,otherInfo,description,locationId,address,categoryId,imgArray,ad_Type);
+                            ,otherInfo,description,locationId,address,categoryId,imgArray,ad_Type,is_sell,is_bid,is_job);
                 }
                 Call<AdDetails> call = ApiUtils.getUserService().editMyAds("Token " + token, adId ,model);
                 call.enqueue(new Callback<AdDetails>() {
@@ -676,7 +680,11 @@ public class EditMyAdsActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     categoryId = response.body().getCategory().getId();
                     locationId = response.body().getLocation().getId();
+                    is_sell=response.body().isIs_sell();
+                    is_bid=response.body().isIs_bid();
+                    is_job=response.body().isIs_job();
                     ad_Type = response.body().getAd_type();
+                    Log.d("ad_type",ad_Type);
                     if (ad_Type.equals("electronics")) {
                         txtC.setVisibility(View.VISIBLE);
                         txtW.setVisibility(View.VISIBLE);
@@ -1501,7 +1509,8 @@ public class EditMyAdsActivity extends AppCompatActivity {
                             txt5.setVisibility(View.VISIBLE);
                             phnnoEt2.setVisibility(View.VISIBLE);
                             phnnoEt2.setText(response.body().getAd_phone_numbers().get(1).getPhone());
-                        } else if (response.body().getAd_phone_numbers().size() == 3) {
+                        }
+                        else if (response.body().getAd_phone_numbers().size() == 3) {
                             txt4.setVisibility(View.VISIBLE);
                             phnnoEt1.setVisibility(View.VISIBLE);
                             phnnoEt1.setText(response.body().getAd_phone_numbers().get(0).getPhone());
@@ -1523,7 +1532,8 @@ public class EditMyAdsActivity extends AppCompatActivity {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                        } else if (response.body().getAd_images().size() == 2) {
+                        }
+                        else if (response.body().getAd_images().size() == 2) {
                             img1.setVisibility(View.VISIBLE);
                             try {
                                 Picasso.get()
@@ -1540,7 +1550,8 @@ public class EditMyAdsActivity extends AppCompatActivity {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                        } else if (response.body().getAd_images().size() == 3) {
+                        }
+                        else if (response.body().getAd_images().size() == 3) {
                             img1.setVisibility(View.VISIBLE);
                             try {
                                 Picasso.get()
@@ -1565,7 +1576,8 @@ public class EditMyAdsActivity extends AppCompatActivity {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                        } else if (response.body().getAd_images().size() == 4) {
+                        }
+                        else if (response.body().getAd_images().size() == 4) {
                             img1.setVisibility(View.VISIBLE);
                             try {
                                 Picasso.get()
@@ -1598,7 +1610,8 @@ public class EditMyAdsActivity extends AppCompatActivity {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                        } else if (response.body().getAd_images().size() == 5) {
+                        }
+                        else if (response.body().getAd_images().size() == 5) {
                             img1.setVisibility(View.VISIBLE);
                             try {
                                 Picasso.get()
@@ -1650,12 +1663,11 @@ public class EditMyAdsActivity extends AppCompatActivity {
                         txtMY.setVisibility(View.GONE);
                         modelYearEt.setVisibility(View.GONE);
                         txtM.setVisibility(View.GONE);
-                        txtM.setVisibility(View.GONE);
                         mileageEt.setVisibility(View.GONE);
                         txtL.setVisibility(View.GONE);
                         landEt.setVisibility(View.GONE);
-                        txtA.setVisibility(View.GONE);
-                        addressEt.setVisibility(View.GONE);
+                        txtA.setVisibility(View.VISIBLE);
+                        addressEt.setVisibility(View.VISIBLE);
                         txtS.setVisibility(View.GONE);
                         serviceSpinner.setVisibility(View.GONE);
                         txtF.setVisibility(View.GONE);
@@ -1675,6 +1687,150 @@ public class EditMyAdsActivity extends AppCompatActivity {
                         txtAtt.setVisibility(View.GONE);
                         browseBtn.setVisibility(View.GONE);
                         txt87.setVisibility(View.GONE);
+
+                        categoryTv.setText(response.body().getCategory().getName());
+                        locationTv.setText(response.body().getLocation().getName());
+                        titleEt.setText(response.body().getAd_title());
+                        jobTypeSpinner.setText(response.body().getJob_type());
+                        Log.d("ad_type",response.body().getJob_type());
+                        vacancyEt.setText(""+response.body().getTotal_vacancies());
+                        requirmetntSpinner.setText(response.body().getMinimum_requirement());
+                        deadlineEt.setText(response.body().getApplication_deadline());
+                        otherInfoEt.setText(response.body().getOther_information());
+                        addressEt.setText(response.body().getAddress());
+                        websiteEt.setText(response.body().getCompany_website());
+                        descriptionEt.setText(response.body().getDescription());
+
+                        if (response.body().getAd_images().size() == 1) {
+                            img1.setVisibility(View.VISIBLE);
+                            try {
+                                Picasso.get()
+                                        .load(response.body().getAd_images().get(0).getImage())
+                                        .into(img1);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        else if (response.body().getAd_images().size() == 2) {
+                            img1.setVisibility(View.VISIBLE);
+                            try {
+                                Picasso.get()
+                                        .load(response.body().getAd_images().get(0).getImage())
+                                        .into(img1);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            img2.setVisibility(View.VISIBLE);
+                            try {
+                                Picasso.get()
+                                        .load(response.body().getAd_images().get(1).getImage())
+                                        .into(img2);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        else if (response.body().getAd_images().size() == 3) {
+                            img1.setVisibility(View.VISIBLE);
+                            try {
+                                Picasso.get()
+                                        .load(response.body().getAd_images().get(0).getImage())
+                                        .into(img1);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            img2.setVisibility(View.VISIBLE);
+                            try {
+                                Picasso.get()
+                                        .load(response.body().getAd_images().get(1).getImage())
+                                        .into(img1);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            img3.setVisibility(View.VISIBLE);
+                            try {
+                                Picasso.get()
+                                        .load(response.body().getAd_images().get(2).getImage())
+                                        .into(img3);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        else if (response.body().getAd_images().size() == 4) {
+                            img1.setVisibility(View.VISIBLE);
+                            try {
+                                Picasso.get()
+                                        .load(response.body().getAd_images().get(0).getImage())
+                                        .into(img1);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            img2.setVisibility(View.VISIBLE);
+                            try {
+                                Picasso.get()
+                                        .load(response.body().getAd_images().get(1).getImage())
+                                        .into(img2);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            img3.setVisibility(View.VISIBLE);
+                            try {
+                                Picasso.get()
+                                        .load(response.body().getAd_images().get(2).getImage())
+                                        .into(img3);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            img4.setVisibility(View.VISIBLE);
+                            try {
+                                Picasso.get()
+                                        .load(response.body().getAd_images().get(3).getImage())
+                                        .into(img4);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        else if (response.body().getAd_images().size() == 5) {
+                            img1.setVisibility(View.VISIBLE);
+                            try {
+                                Picasso.get()
+                                        .load(response.body().getAd_images().get(0).getImage())
+                                        .into(img1);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            img2.setVisibility(View.VISIBLE);
+                            try {
+                                Picasso.get()
+                                        .load(response.body().getAd_images().get(1).getImage())
+                                        .into(img2);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            img3.setVisibility(View.VISIBLE);
+                            try {
+                                Picasso.get()
+                                        .load(response.body().getAd_images().get(2).getImage())
+                                        .into(img3);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            img4.setVisibility(View.VISIBLE);
+                            try {
+                                Picasso.get()
+                                        .load(response.body().getAd_images().get(3).getImage())
+                                        .into(img4);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            img5.setVisibility(View.VISIBLE);
+                            try {
+                                Picasso.get()
+                                        .load(response.body().getAd_images().get(4).getImage())
+                                        .into(img5);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
                 }
             }

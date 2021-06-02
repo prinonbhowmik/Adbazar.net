@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,6 +85,7 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 context.startActivity(new Intent(context, EditMyAdsActivity.class).putExtra("id",ads.getId()));
+                Log.d("CheckData", String.valueOf(ads.getId()));
             }
         });
 

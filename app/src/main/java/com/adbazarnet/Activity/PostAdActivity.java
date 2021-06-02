@@ -1004,16 +1004,6 @@ public class PostAdActivity extends AppCompatActivity {
                 } else if (imgSelect == 5) {
                     uri5 = resultUri;
                     img5.setImageURI(uri5);
-                } else if(requestCode==REQUEST_GALLERY && resultCode== Activity.RESULT_OK){
-                    String filePath=getRealPathFromUri(data.getData(),PostAdActivity.this);
-                    Log.d("File Path : "," "+filePath);
-                    //now we will upload the file
-                    //lets import okhttp first
-                    this.file_path=filePath;
-
-                    File file=new File(filePath);
-                    txtAtt.setText(file.getName());
-
                 }
 
 
@@ -1022,6 +1012,17 @@ public class PostAdActivity extends AppCompatActivity {
                 // progressBar.setVisibility(View.INVISIBLE);
                 Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
             }
+        }
+        else if(requestCode==REQUEST_GALLERY && resultCode== Activity.RESULT_OK){
+            String filePath=getRealPathFromUri(data.getData(),PostAdActivity.this);
+            Log.d("File Path : "," "+filePath);
+            //now we will upload the file
+            //lets import okhttp first
+            this.file_path=filePath;
+
+            File file=new File(filePath);
+            txtAtt.setText(file.getName());
+
         }
     }
 
