@@ -515,6 +515,10 @@ public class PostAdActivity extends AppCompatActivity {
                         } else if (ad_Type.equals("service")) {
                             model = new PostAdModel(adTitle, price, otherInfo, phoneNumbers, description, locationId, address,
                                     service, categoryId, imgArray, negotiable, ad_Type, hidePhone, true);
+                        }else if (ad_Type.equals("job")) {
+                            vacancy = Integer.parseInt(vacancyEt.getText().toString());
+                            model = new PostAdModel(adTitle,true,jobType,vacancy,requirment,deadline,employeer,website
+                                    ,otherInfo,description,locationId,address,categoryId,imgArray,ad_Type);
                         }
                     }
                 }
@@ -565,10 +569,11 @@ public class PostAdActivity extends AppCompatActivity {
                     } else if (TextUtils.isEmpty(description)) {
                         descriptionEt.setError("Enter description");
                     }else if (TextUtils.isEmpty(deadline)) {
-                        deadlineEt.setError("Enter description");
+                        deadlineEt.setError("Enter deadline");
                     }else{
                         model = new PostAdModel(adTitle,true,jobType,vacancy,requirment,deadline,employeer,website
                                 ,otherInfo,description,locationId,address,categoryId,imgArray,ad_Type);
+                        Log.d("start",""+vacancy);
                     }
                 }
 
@@ -898,30 +903,30 @@ public class PostAdActivity extends AppCompatActivity {
                 conditionSpinner.showDropDown();
             }
         });
-        ArrayAdapter<String> services = new ArrayAdapter<String>(this, R.layout.spinner_item_design, R.id.simpleSpinner, serviceArray);
+        ArrayAdapter<String> servicess = new ArrayAdapter<String>(this, R.layout.spinner_item_design, R.id.simpleSpinner, serviceArray);
         product_color.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        serviceSpinner.setText(services.getItem(0), false);
-        serviceSpinner.setAdapter(services);
+        serviceSpinner.setText(servicess.getItem(0), false);
+        serviceSpinner.setAdapter(servicess);
         serviceSpinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 serviceSpinner.showDropDown();
             }
         });
-        ArrayAdapter<String> jobType = new ArrayAdapter<String>(this, R.layout.spinner_item_design, R.id.simpleSpinner, jobTypeArray);
+        ArrayAdapter<String> jobTypee = new ArrayAdapter<String>(this, R.layout.spinner_item_design, R.id.simpleSpinner, jobTypeArray);
         product_color.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        jobTypeSpinner.setText(jobType.getItem(0), false);
-        jobTypeSpinner.setAdapter(jobType);
+        jobTypeSpinner.setText(jobTypee.getItem(0), false);
+        jobTypeSpinner.setAdapter(jobTypee);
         jobTypeSpinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 jobTypeSpinner.showDropDown();
             }
         });
-        ArrayAdapter<String> requirment = new ArrayAdapter<String>(this, R.layout.spinner_item_design, R.id.simpleSpinner, requirmentArray);
+        ArrayAdapter<String> requirmenttt = new ArrayAdapter<String>(this, R.layout.spinner_item_design, R.id.simpleSpinner, requirmentArray);
         product_color.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        requirmetntSpinner.setText(requirment.getItem(0), false);
-        requirmetntSpinner.setAdapter(requirment);
+        requirmetntSpinner.setText(requirmenttt.getItem(0), false);
+        requirmetntSpinner.setAdapter(requirmenttt);
         requirmetntSpinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
