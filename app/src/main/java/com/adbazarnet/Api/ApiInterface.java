@@ -8,6 +8,7 @@ import com.adbazarnet.Models.CategorisQueryModel;
 import com.adbazarnet.Models.ChatChannelModel;
 import com.adbazarnet.Models.ChatModel;
 import com.adbazarnet.Models.DashboardModel;
+import com.adbazarnet.Models.EditAdModel;
 import com.adbazarnet.Models.FavouriteAdDetails;
 import com.adbazarnet.Models.FavouriteAds;
 import com.adbazarnet.Models.LocationsModel;
@@ -93,8 +94,7 @@ public interface ApiInterface {
     Call<User> updateImage(@Header("Authorization") String token, @Part MultipartBody.Part avatar);
 
     @PATCH("posts/{id}/")
-    @Multipart
-    Call<AdDetails> attachedFileUpload(@Header("Authorization") String token,@Path("id") int id ,@Part MultipartBody.Part file);
+    Call<AdDetails> editMyAds(@Header("Authorization") String token,@Path("id") int id ,@Body EditAdModel file);
 
 
     @PATCH("account/auth/change-password/")

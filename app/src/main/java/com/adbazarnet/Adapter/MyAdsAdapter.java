@@ -120,6 +120,7 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.ViewHolder> 
                                     @Override
                                     public void onClick(View v) {
                                         dialog2.dismiss();
+                                        okBtn.setFocusable(false);
                                         list.remove(position);
                                         notifyDataSetChanged();
                                     }

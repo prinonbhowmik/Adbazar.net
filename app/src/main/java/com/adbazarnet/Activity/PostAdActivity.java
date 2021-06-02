@@ -147,7 +147,8 @@ public class PostAdActivity extends AppCompatActivity {
             hidePhnBtn.setVisibility(View.GONE);
             txtF.setVisibility(View.VISIBLE);
             featureEt.setVisibility(View.VISIBLE);
-        } else if (postType.equals("job")) {
+        }
+        else if (postType.equals("job")) {
             txt3.setVisibility(View.GONE);
             priceEt.setVisibility(View.GONE);
             negotiableBtn.setVisibility(View.GONE);
@@ -171,13 +172,6 @@ public class PostAdActivity extends AppCompatActivity {
             browseBtn.setVisibility(View.VISIBLE);
             txtAtt.setVisibility(View.VISIBLE);
         }
-
-        deadlineEt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         categoryTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -480,7 +474,7 @@ public class PostAdActivity extends AppCompatActivity {
                     PostImageModel imageModel5 = new PostImageModel(encoded);
                     imgArray.add(imageModel5);
                 }
-                
+
 
                 String mileage = mileageEt.getText().toString();
                 String modelYear = modelYearEt.getText().toString();
@@ -986,7 +980,6 @@ public class PostAdActivity extends AppCompatActivity {
         datePickerDialog.setCancelable(false);
         datePickerDialog.show();
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

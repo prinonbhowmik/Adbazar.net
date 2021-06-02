@@ -202,6 +202,74 @@ public class PostAdCategoryAdapter extends RecyclerView.Adapter<PostAdCategoryAd
                         activity.browseBtn.setVisibility(View.GONE);
                         activity.txt87.setVisibility(View.GONE);
                     }
+                    else if (activity.ad_Type.equals("general")){
+                        activity.txtC.setVisibility(View.GONE);
+                        activity.txtW.setVisibility(View.GONE);
+                        activity.conditionSpinner.setVisibility(View.GONE);
+                        activity.warrantyEt.setVisibility(View.GONE);
+                        activity.txtMY.setVisibility(View.GONE);
+                        activity.modelYearEt.setVisibility(View.GONE);
+                        activity.txtM.setVisibility(View.GONE);
+                        activity.txtM.setVisibility(View.GONE);
+                        activity.mileageEt.setVisibility(View.GONE);
+                        activity.txtL.setVisibility(View.GONE);
+                        activity.landEt.setVisibility(View.GONE);
+                        activity.txtA.setVisibility(View.GONE);
+                        activity.addressEt.setVisibility(View.GONE);
+                        activity.txtS.setVisibility(View.GONE);
+                        activity.serviceSpinner.setVisibility(View.GONE);
+                        activity.txtF.setVisibility(View.GONE);
+                        activity.featureEt.setVisibility(View.GONE);
+                        activity.txtJT.setVisibility(View.GONE);
+                        activity.jobTypeSpinner.setVisibility(View.GONE);
+                        activity.txtVC.setVisibility(View.GONE);
+                        activity.vacancyEt.setVisibility(View.GONE);
+                        activity.txtMR.setVisibility(View.GONE);
+                        activity.requirmetntSpinner.setVisibility(View.GONE);
+                        activity.txtD.setVisibility(View.GONE);
+                        activity.deadlineEt.setVisibility(View.GONE);
+                        activity.txtCE.setVisibility(View.GONE);
+                        activity.employeerEt.setVisibility(View.GONE);
+                        activity.txtWeb.setVisibility(View.GONE);
+                        activity.websiteEt.setVisibility(View.GONE);
+                        activity.txtAtt.setVisibility(View.GONE);
+                        activity.browseBtn.setVisibility(View.GONE);
+                        activity.txt87.setVisibility(View.GONE);
+                    }
+                    else if (activity.ad_Type.equals("job")){
+                        activity.txtC.setVisibility(View.GONE);
+                        activity.txtW.setVisibility(View.GONE);
+                        activity.conditionSpinner.setVisibility(View.GONE);
+                        activity.warrantyEt.setVisibility(View.GONE);
+                        activity.txtMY.setVisibility(View.GONE);
+                        activity.modelYearEt.setVisibility(View.GONE);
+                        activity.txtM.setVisibility(View.GONE);
+                        activity.txtM.setVisibility(View.GONE);
+                        activity.mileageEt.setVisibility(View.GONE);
+                        activity.txtL.setVisibility(View.GONE);
+                        activity.landEt.setVisibility(View.GONE);
+                        activity.txtA.setVisibility(View.GONE);
+                        activity.addressEt.setVisibility(View.GONE);
+                        activity.txtS.setVisibility(View.GONE);
+                        activity.serviceSpinner.setVisibility(View.GONE);
+                        activity.txtF.setVisibility(View.GONE);
+                        activity.featureEt.setVisibility(View.GONE);
+                        activity.txtJT.setVisibility(View.VISIBLE);
+                        activity.jobTypeSpinner.setVisibility(View.VISIBLE);
+                        activity.txtVC.setVisibility(View.VISIBLE);
+                        activity.vacancyEt.setVisibility(View.VISIBLE);
+                        activity.txtMR.setVisibility(View.VISIBLE);
+                        activity.requirmetntSpinner.setVisibility(View.VISIBLE);
+                        activity.txtD.setVisibility(View.VISIBLE);
+                        activity.deadlineEt.setVisibility(View.VISIBLE);
+                        activity.txtCE.setVisibility(View.VISIBLE);
+                        activity.employeerEt.setVisibility(View.VISIBLE);
+                        activity.txtWeb.setVisibility(View.VISIBLE);
+                        activity.websiteEt.setVisibility(View.VISIBLE);
+                        activity.txtAtt.setVisibility(View.VISIBLE);
+                        activity.browseBtn.setVisibility(View.VISIBLE);
+                        activity.txt87.setVisibility(View.VISIBLE);
+                    }
                 }
 
                 if (holder.subcatLayout.getVisibility()==View.GONE){
