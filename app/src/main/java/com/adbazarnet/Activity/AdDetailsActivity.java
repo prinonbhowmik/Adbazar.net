@@ -66,7 +66,8 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
             warrantyTv,descriptionTv,sellerNameTv,locationTv,noDataTv,membershipTV,
             favouriteTv,callNowTV,noBidTv,bidBtn,chatTV;
     private TextView txt3,txt2,vacancyTv,txtV,txtD,deadlineTv,txtR,requirmentTv,txtA,addressTv
-            ,txtO,otherTv,txtW,websiteTv,txtAtt,attchmetnTv,jobTv,jobTypeTv,txtMY,modelYearTv,txtM,mileageTv;
+            ,txtO,otherTv,txtW,websiteTv,txtAtt,attchmetnTv,jobTv,jobTypeTv,txtMY,modelYearTv,
+            txtM,mileageTv,txtL,landEt;
     private RecyclerView relatedProductRecycler,bidRecycler;
     private RelatedProductAdapter relatedProductAdapter;
     private BidsShowAdapter bidAdapter;
@@ -181,6 +182,14 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         requirmentTv.setText(""+response.body().getMinimum_requirement());
                         txtR.setVisibility(View.VISIBLE);
                         requirmentTv.setVisibility(View.VISIBLE);
+                    }
+                    if (response.body().getPlot_size()==null) {
+                        txtL.setVisibility(View.GONE);
+                        landEt.setVisibility(View.GONE);
+                    }else{
+                        landEt.setText(""+response.body().getPlot_size());
+                        txtL.setVisibility(View.VISIBLE);
+                        landEt.setVisibility(View.VISIBLE);
                     }
                     if (response.body().getAddress()==null) {
                         txtA.setVisibility(View.GONE);
@@ -699,8 +708,10 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
         jobTypeTv = findViewById(R.id.jobTypeTv);
         txtMY = findViewById(R.id.txtMY);
         modelYearTv = findViewById(R.id.modelYearTv);
-        txtM = findViewById(R.id.modelYearTv);
-        mileageTv = findViewById(R.id.modelYearTv);
+        txtM = findViewById(R.id.txtM);
+        mileageTv = findViewById(R.id.mileageTv);
+        txtL = findViewById(R.id.txtL);
+        landEt = findViewById(R.id.landTv);
 
         relatedProductRecycler = findViewById(R.id.relatedProductRecycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);

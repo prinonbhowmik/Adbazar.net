@@ -556,7 +556,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/landEt"
+                        android:id="@+id/landEtt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/txtL"

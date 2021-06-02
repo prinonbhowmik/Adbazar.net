@@ -110,8 +110,8 @@ public class PostAdActivity extends AppCompatActivity {
     private String[] conditionArray = {"used", "new", "recondition"};
     private String[] serviceArray = {"computer & laptop", "courier", "electronics and engineering", "facility management"
             , "marketing & social media", "printing", "security", "software & web development"};
-    private String[] jobTypeArray = {"full time", "part time", "contract", "internship"};
-    private String[] requirmentArray = {"primary school", "high school", "ssc/O level", "hsc/A level"
+    private String[] jobTypeArray = {"full_time", "part_time", "contract", "internship"};
+    private String[] requirmentArray = {"primary_school", "high_school", "ssc/O level", "hsc/A level"
             , "diploma", "bachelors/honours", "PhD/Doctorate"};
     private String condition, service, warranty = null, phn1, phn2, phn3, token, jobType, requirment;
     private int phnCounter = 0, imgCounter = 0, imgSelect = 0;
@@ -127,7 +127,7 @@ public class PostAdActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 1;
     private static final int REQUEST_GALLERY = 200;
     private String file_path;
-    private Bitmap bitmap1,bitmap2,bitmap3,bitmap4,bitmap5;
+    private Bitmap bitmap1, bitmap2, bitmap3, bitmap4, bitmap5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,8 +147,7 @@ public class PostAdActivity extends AppCompatActivity {
             hidePhnBtn.setVisibility(View.GONE);
             txtF.setVisibility(View.VISIBLE);
             featureEt.setVisibility(View.VISIBLE);
-        }
-        else if (postType.equals("job")) {
+        } else if (postType.equals("job")) {
             txt3.setVisibility(View.GONE);
             priceEt.setVisibility(View.GONE);
             negotiableBtn.setVisibility(View.GONE);
@@ -192,7 +191,7 @@ public class PostAdActivity extends AppCompatActivity {
                             List<CategoriesModel> list = response.body();
                             categoryNamesAdapter = new PostAdCategoryAdapter(list, PostAdActivity.this);
                             categoriesRecycler.setAdapter(categoryNamesAdapter);
-                            if (postType.equals("job")){
+                            if (postType.equals("job")) {
                                 categoryNamesAdapter.getFilter().filter(postType);
                             }
                         }
@@ -350,15 +349,13 @@ public class PostAdActivity extends AppCompatActivity {
         browseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Build.VERSION.SDK_INT>=23){
-                    if(checkPermission()){
+                if (Build.VERSION.SDK_INT >= 23) {
+                    if (checkPermission()) {
                         filePicker();
-                    }
-                    else{
+                    } else {
                         requestPermission();
                     }
-                }
-                else{
+                } else {
                     filePicker();
                 }
             }
@@ -419,56 +416,56 @@ public class PostAdActivity extends AppCompatActivity {
                     phoneNumbers.add(phnnn);
                 }
 
-                if (uri1!=null){
-                    bitmap1 = decodeUriToBitmap(PostAdActivity.this,uri1);
+                if (uri1 != null) {
+                    bitmap1 = decodeUriToBitmap(PostAdActivity.this, uri1);
 
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                     bitmap1.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-                    byte[] byteArray = byteArrayOutputStream .toByteArray();
+                    byte[] byteArray = byteArrayOutputStream.toByteArray();
 
                     String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
                     PostImageModel imageModel = new PostImageModel(encoded);
                     imgArray.add(imageModel);
                 }
-                if(uri2!=null){
-                    bitmap2 = decodeUriToBitmap(PostAdActivity.this,uri2);
+                if (uri2 != null) {
+                    bitmap2 = decodeUriToBitmap(PostAdActivity.this, uri2);
 
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                     bitmap2.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-                    byte[] byteArray = byteArrayOutputStream .toByteArray();
+                    byte[] byteArray = byteArrayOutputStream.toByteArray();
 
                     String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
                     PostImageModel imageModel2 = new PostImageModel(encoded);
                     imgArray.add(imageModel2);
                 }
-                if(uri3!=null){
-                    bitmap3 = decodeUriToBitmap(PostAdActivity.this,uri3);
+                if (uri3 != null) {
+                    bitmap3 = decodeUriToBitmap(PostAdActivity.this, uri3);
 
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                     bitmap3.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-                    byte[] byteArray = byteArrayOutputStream .toByteArray();
+                    byte[] byteArray = byteArrayOutputStream.toByteArray();
 
                     String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
                     PostImageModel imageModel3 = new PostImageModel(encoded);
                     imgArray.add(imageModel3);
                 }
-                if(uri4!=null){
-                    Bitmap bitmap4 = decodeUriToBitmap(PostAdActivity.this,uri4);
+                if (uri4 != null) {
+                    Bitmap bitmap4 = decodeUriToBitmap(PostAdActivity.this, uri4);
 
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                     bitmap4.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-                    byte[] byteArray = byteArrayOutputStream .toByteArray();
+                    byte[] byteArray = byteArrayOutputStream.toByteArray();
 
                     String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
                     PostImageModel imageModel4 = new PostImageModel(encoded);
                     imgArray.add(imageModel4);
                 }
-                if(uri5!=null){
-                    bitmap5 = decodeUriToBitmap(PostAdActivity.this,uri5);
+                if (uri5 != null) {
+                    bitmap5 = decodeUriToBitmap(PostAdActivity.this, uri5);
 
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                     bitmap5.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-                    byte[] byteArray = byteArrayOutputStream .toByteArray();
+                    byte[] byteArray = byteArrayOutputStream.toByteArray();
 
                     String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
                     PostImageModel imageModel5 = new PostImageModel(encoded);
@@ -488,68 +485,169 @@ public class PostAdActivity extends AppCompatActivity {
 
 
                 if (postType.equals("sell") || postType.equals("exchange")) {
-                    if (TextUtils.isEmpty(adTitle)) {
-                        titleEt.setError("Ad title");
-                    } else if (TextUtils.isEmpty(price)) {
-                        priceEt.setError("Enter price");
-                    } else if (TextUtils.isEmpty(description)) {
-                        descriptionEt.setError("Enter description");
-                    } else if (TextUtils.isEmpty(phn1)) {
-                        Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
-                    } else {
-                        if (ad_Type.equals("electronics")) {
+
+                    if (ad_Type.equals("electronics")) {
+                        if (TextUtils.isEmpty(adTitle)) {
+                            titleEt.setError("Ad title");
+                        } else if (TextUtils.isEmpty(price)) {
+                            priceEt.setError("Enter price");
+                        } else if (TextUtils.isEmpty(description)) {
+                            descriptionEt.setError("Enter description");
+                        } else if (TextUtils.isEmpty(phn1)) {
+                            Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
+                        } else {
                             model = new PostAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers, description,
                                     locationId, categoryId, imgArray, negotiable, ad_Type, hidePhone, true);
-                            Log.d("CheckCall","Yes");
-                        } else if (ad_Type.equals("vehicle")) {
-                            model = new PostAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers, description,
-                                    locationId, modelYear, mileage, categoryId, imgArray, negotiable, ad_Type, hidePhone, true);
-                        } else if (ad_Type.equals("property")) {
-                            model = new PostAdModel(adTitle, condition, price, otherInfo, phoneNumbers, description,
-                                    locationId, address, land, categoryId, imgArray, negotiable, ad_Type, hidePhone,
-                                    true);
-                        } else if (ad_Type.equals("general")) {
+                            Log.d("CheckCall", "Yes");
+                        }
+                    }
+                    else if (ad_Type.equals("vehicle")) {
+                        if (TextUtils.isEmpty(adTitle)) {
+                            titleEt.setError("Ad title");
+                        } else if (TextUtils.isEmpty(price)) {
+                            priceEt.setError("Enter price");
+                        } else if (TextUtils.isEmpty(description)) {
+                            descriptionEt.setError("Enter description");
+                        } else if (TextUtils.isEmpty(phn1)) {
+                            Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
+                        }
+                        model = new PostAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers,
+                                description, locationId, modelYear, mileage, categoryId, imgArray,
+                                negotiable, ad_Type, hidePhone, true);
+                    }
+                    else if (ad_Type.equals("property")) {
+                        if (TextUtils.isEmpty(adTitle)) {
+                            titleEt.setError("Ad title");
+                        } else if (TextUtils.isEmpty(price)) {
+                            priceEt.setError("Enter price");
+                        } else if (TextUtils.isEmpty(description)) {
+                            descriptionEt.setError("Enter description");
+                        } else if (TextUtils.isEmpty(phn1)) {
+                            Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
+                        } else {
+                            model = new PostAdModel(adTitle, price, otherInfo, phoneNumbers, description,
+                                    locationId, address, land, categoryId, imgArray, negotiable,
+                                    true, ad_Type, hidePhone);
+                        }
+                    }
+                    else if (ad_Type.equals("general")) {
+                        if (TextUtils.isEmpty(adTitle)) {
+                            titleEt.setError("Ad title");
+                        } else if (TextUtils.isEmpty(price)) {
+                            priceEt.setError("Enter price");
+                        } else if (TextUtils.isEmpty(description)) {
+                            descriptionEt.setError("Enter description");
+                        } else if (TextUtils.isEmpty(phn1)) {
+                            Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
+                        } else {
                             model = new PostAdModel(adTitle, price, otherInfo, phoneNumbers, description,
                                     locationId, categoryId, imgArray, negotiable, ad_Type, hidePhone,
                                     true);
-                        } else if (ad_Type.equals("service")) {
-                            model = new PostAdModel(adTitle, price, otherInfo, phoneNumbers, description, locationId, address,
-                                    service, categoryId, imgArray, negotiable, ad_Type, hidePhone, true);
-                        }else if (ad_Type.equals("job")) {
+                        }
+                    }
+                    else if (ad_Type.equals("service")) {
+                        if (TextUtils.isEmpty(adTitle)) {
+                            titleEt.setError("Ad title");
+                        } else if (TextUtils.isEmpty(price)) {
+                            priceEt.setError("Enter price");
+                        } else if (TextUtils.isEmpty(description)) {
+                            descriptionEt.setError("Enter description");
+                        } else if (TextUtils.isEmpty(phn1)) {
+                            Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
+                        } else {
+                            model = new PostAdModel(adTitle, price, otherInfo, phoneNumbers, description, locationId,
+                                    address, service, categoryId, imgArray, negotiable, ad_Type, hidePhone, true);
+                        }
+                    }
+                    else if (ad_Type.equals("job")) {
+                        if (TextUtils.isEmpty(adTitle)) {
+                            titleEt.setError("Ad title");
+                        } else if (TextUtils.isEmpty(deadline)) {
+                            deadlineEt.setError("Enter deadline");
+                        } else if (TextUtils.isEmpty(description)) {
+                            descriptionEt.setError("Enter description");
+                        } else {
                             vacancy = Integer.parseInt(vacancyEt.getText().toString());
-                            model = new PostAdModel(adTitle,true,jobType,vacancy,requirment,deadline,employeer,website
-                                    ,otherInfo,description,locationId,address,categoryId,imgArray,ad_Type);
+                            model = new PostAdModel(adTitle, true, jobType, vacancy, requirment, deadline, employeer, website
+                                    , otherInfo, description, locationId, address, categoryId, imgArray, ad_Type);
+                            Log.d("jobData", adTitle + "," + jobType + "," + vacancy + "," + requirment + "," + deadline + "," + employeer + "," + website
+                                    + " ," + otherInfo + "," + description + "," + locationId + "," + address + "," + categoryId + "," + imgArray + "," + ad_Type);
                         }
                     }
                 }
                 else if (postType.equals("rent") || postType.equals("lookforbuy")
                         || postType.equals("lookforrent")) {
-                    if (TextUtils.isEmpty(adTitle)) {
-                        titleEt.setError("Ad title");
-                    } else if (TextUtils.isEmpty(price)) {
-                        priceEt.setError("Enter price");
-                    } else if (TextUtils.isEmpty(description)) {
-                        descriptionEt.setError("Enter description");
-                    } else if (TextUtils.isEmpty(phn1)) {
-                        Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
-                    } else {
-                        if (ad_Type.equals("electronics")) {
+                    if (ad_Type.equals("electronics")) {
+                        if (TextUtils.isEmpty(adTitle)) {
+                            titleEt.setError("Ad title");
+                        } else if (TextUtils.isEmpty(price)) {
+                            priceEt.setError("Enter price");
+                        } else if (TextUtils.isEmpty(description)) {
+                            descriptionEt.setError("Enter description");
+                        } else if (TextUtils.isEmpty(phn1)) {
+                            Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
+                        } else {
                             model = new PostAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers, description,
                                     locationId, categoryId, imgArray, negotiable, ad_Type, hidePhone, false);
-                        } else if (ad_Type.equals("vehicle")) {
+                        }
+                    } else if (ad_Type.equals("vehicle")) {
+                        if (TextUtils.isEmpty(adTitle)) {
+                            titleEt.setError("Ad title");
+                        } else if (TextUtils.isEmpty(price)) {
+                            priceEt.setError("Enter price");
+                        } else if (TextUtils.isEmpty(description)) {
+                            descriptionEt.setError("Enter description");
+                        } else if (TextUtils.isEmpty(phn1)) {
+                            Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
+                        } else {
                             model = new PostAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers, description,
                                     locationId, modelYear, mileage, categoryId, imgArray, negotiable, ad_Type, hidePhone, false);
-                        } else if (ad_Type.equals("property")) {
-                            model = new PostAdModel(adTitle, condition, price, otherInfo, phoneNumbers, description,
+                        }
+                    } else if (ad_Type.equals("property")) {
+                        if (TextUtils.isEmpty(adTitle)) {
+                            titleEt.setError("Ad title");
+                        } else if (TextUtils.isEmpty(price)) {
+                            priceEt.setError("Enter price");
+                        } else if (TextUtils.isEmpty(description)) {
+                            descriptionEt.setError("Enter description");
+                        } else if (TextUtils.isEmpty(phn1)) {
+                            Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
+                        } else {
+                            model = new PostAdModel(adTitle, price, otherInfo, phoneNumbers, description,
                                     locationId, address, land, categoryId, imgArray, negotiable, ad_Type, hidePhone,
                                     false);
-                        } else if (ad_Type.equals("general")) {
+                        }
+                    } else if (ad_Type.equals("general")) {
+
+                        if (TextUtils.isEmpty(adTitle)) {
+                            titleEt.setError("Ad title");
+                        } else if (TextUtils.isEmpty(price)) {
+                            priceEt.setError("Enter price");
+                        } else if (TextUtils.isEmpty(description)) {
+                            descriptionEt.setError("Enter description");
+                        } else if (TextUtils.isEmpty(phn1)) {
+                            Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
+                        } else {
                             model = new PostAdModel(adTitle, price, otherInfo, phoneNumbers, description,
                                     locationId, categoryId, imgArray, negotiable, ad_Type, hidePhone,
                                     false);
-                        } else if (ad_Type.equals("service")) {
-                            model = new PostAdModel(adTitle, price, otherInfo, phoneNumbers, description, locationId, address,
-                                    service, categoryId, imgArray, negotiable, ad_Type, hidePhone, false);
+                        }
+                    } else if (ad_Type.equals("service")) {
+                        model = new PostAdModel(adTitle, price, otherInfo, phoneNumbers, description, locationId, address,
+                                service, categoryId, imgArray, negotiable, ad_Type, hidePhone, false);
+                    } else if (ad_Type.equals("job")) {
+                        if (TextUtils.isEmpty(adTitle)) {
+                            titleEt.setError("Ad title");
+                        } else if (TextUtils.isEmpty(deadline)) {
+                            deadlineEt.setError("Enter deadline");
+                        } else if (TextUtils.isEmpty(description)) {
+                            descriptionEt.setError("Enter description");
+                        } else {
+                            vacancy = Integer.parseInt(vacancyEt.getText().toString());
+                            model = new PostAdModel(adTitle, true, jobType, vacancy, requirment, deadline, employeer, website
+                                    , otherInfo, description, locationId, address, categoryId, imgArray, ad_Type);
+                            Log.d("jobData", adTitle + "," + jobType + "," + vacancy + "," + requirment + "," + deadline + "," + employeer + "," + website
+                                    + " ," + otherInfo + "," + description + "," + locationId + "," + address + "," + categoryId + "," + imgArray + "," + ad_Type);
                         }
                     }
                 }
@@ -562,18 +660,21 @@ public class PostAdActivity extends AppCompatActivity {
                         model = new PostAdModel(adTitle, otherInfo, description, locationId, categoryId, imgArray, ad_Type, true);
                     }
                 }
-                else if (postType.equals("job")){
+                else if (postType.equals("job")) {
                     vacancy = Integer.parseInt(vacancyEt.getText().toString());
                     if (TextUtils.isEmpty(adTitle)) {
                         titleEt.setError("Ad title");
                     } else if (TextUtils.isEmpty(description)) {
                         descriptionEt.setError("Enter description");
-                    }else if (TextUtils.isEmpty(deadline)) {
+                    } else if (TextUtils.isEmpty(deadline)) {
                         deadlineEt.setError("Enter deadline");
-                    }else{
-                        model = new PostAdModel(adTitle,true,jobType,vacancy,requirment,deadline,employeer,website
-                                ,otherInfo,description,locationId,address,categoryId,imgArray,ad_Type);
-                        Log.d("start",""+vacancy);
+                    } else {
+                        model = new PostAdModel(adTitle, true, jobType, vacancy, requirment, deadline, employeer, website
+                                , otherInfo, description, locationId, address, categoryId, imgArray, ad_Type);
+                        Log.d("jobData", "" + vacancy+" ho");
+                        Log.d("jobData", adTitle + "," + jobType + "," + vacancy + "," + requirment + "," + deadline + "," + employeer + "," + website
+                                + " ," + otherInfo + "," + description + "," + locationId + "," + address + "," + categoryId + "," + imgArray + "," + ad_Type);
+
                     }
                 }
 
@@ -581,13 +682,12 @@ public class PostAdActivity extends AppCompatActivity {
                 call.enqueue(new Callback<AdDetails>() {
                     @Override
                     public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
-                         if (response.code()==201){
+                        if (response.code() == 201) {
 
-                         }
-                         else{
-                             Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
-                         }
-                      }
+                        } else {
+                            Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
 
                     @Override
                     public void onFailure(Call<AdDetails> call, Throwable t) {
@@ -601,7 +701,7 @@ public class PostAdActivity extends AppCompatActivity {
                 progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 progressDialog.setCancelable(false);
                 progressDialog.show();
-                final Handler handler  = new Handler();
+                final Handler handler = new Handler();
                 final Runnable runnable = new Runnable() {
                     @Override
                     public void run() {
@@ -838,9 +938,9 @@ public class PostAdActivity extends AppCompatActivity {
     private void filePicker() {
         Toast.makeText(PostAdActivity.this, "File Picker Call", Toast.LENGTH_SHORT).show();
         //Let's Pick File
-        Intent opengallery=new Intent(Intent.ACTION_PICK);
+        Intent opengallery = new Intent(Intent.ACTION_PICK);
         opengallery.setType("image/*");
-        startActivityForResult(opengallery,REQUEST_GALLERY);
+        startActivityForResult(opengallery, REQUEST_GALLERY);
     }
 
     private void init() {
@@ -855,7 +955,7 @@ public class PostAdActivity extends AppCompatActivity {
         modelYearEt = findViewById(R.id.modelYearEt);
         mileageEt = findViewById(R.id.mileageEt);
         addressEt = findViewById(R.id.addressEt);
-        landEt = findViewById(R.id.landEt);
+        landEt = findViewById(R.id.landEtt);
         featureEt = findViewById(R.id.featureEt);
         vacancyEt = findViewById(R.id.vacancyEt);
         employeerEt = findViewById(R.id.employeerEt);
@@ -1017,48 +1117,44 @@ public class PostAdActivity extends AppCompatActivity {
                 // progressBar.setVisibility(View.INVISIBLE);
                 Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
             }
-        }
-        else if(requestCode==REQUEST_GALLERY && resultCode== Activity.RESULT_OK){
-            String filePath=getRealPathFromUri(data.getData(),PostAdActivity.this);
-            Log.d("File Path : "," "+filePath);
+        } else if (requestCode == REQUEST_GALLERY && resultCode == Activity.RESULT_OK) {
+            String filePath = getRealPathFromUri(data.getData(), PostAdActivity.this);
+            Log.d("File Path : ", " " + filePath);
             //now we will upload the file
             //lets import okhttp first
-            this.file_path=filePath;
+            this.file_path = filePath;
 
-            File file=new File(filePath);
+            File file = new File(filePath);
             txtAtt.setText(file.getName());
 
         }
     }
 
-    private void requestPermission(){
-        if(ActivityCompat.shouldShowRequestPermissionRationale(PostAdActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+    private void requestPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(PostAdActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             Toast.makeText(PostAdActivity.this, "Please Give Permission to Upload File", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            ActivityCompat.requestPermissions(PostAdActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},PERMISSION_REQUEST_CODE);
+        } else {
+            ActivityCompat.requestPermissions(PostAdActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
         }
     }
 
-    private boolean checkPermission(){
-        int result= ContextCompat.checkSelfPermission(PostAdActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if(result== PackageManager.PERMISSION_GRANTED){
+    private boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(PostAdActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (result == PackageManager.PERMISSION_GRANTED) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
 
-    public String getRealPathFromUri(Uri uri,Activity activity){
-        String[] proj = { MediaStore.Images.Media.DATA };
-        Cursor cursor=activity.getContentResolver().query(uri,proj,null,null,null);
-        if(cursor==null){
+    public String getRealPathFromUri(Uri uri, Activity activity) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = activity.getContentResolver().query(uri, proj, null, null, null);
+        if (cursor == null) {
             return uri.getPath();
-        }
-        else{
+        } else {
             cursor.moveToFirst();
-            int id=cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            int id = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
             return cursor.getString(id);
         }
     }
@@ -1066,12 +1162,11 @@ public class PostAdActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode){
+        switch (requestCode) {
             case PERMISSION_REQUEST_CODE:
-                if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(PostAdActivity.this, "Permission Successfull", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else {
                     Toast.makeText(PostAdActivity.this, "Permission Failed", Toast.LENGTH_SHORT).show();
                 }
         }

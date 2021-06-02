@@ -253,7 +253,7 @@
                         android:layout_margin="10dp"
                         android:drawableLeft="@drawable/ic_next"
                         android:fontFamily="@font/roboto"
-                        android:text="  Model and Year :"
+                        android:text="  Mileage :"
                         android:textColor="#646464"
                         android:visibility="gone"
                         android:textFontWeight="700"
@@ -443,6 +443,35 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_toEndOf="@+id/txtA"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="#646464"
+                        android:textSize="18sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/landLayout"
+                    android:layout_below="@+id/addressLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/txtL"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:drawableLeft="@drawable/ic_next"
+                        android:fontFamily="@font/roboto"
+                        android:text="  Address :"
+                        android:textColor="#646464"
+                        android:textFontWeight="700"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/landTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_toEndOf="@+id/txtL"
                         android:fontFamily="@font/roboto"
                         android:textColor="#646464"
                         android:textSize="18sp" />
