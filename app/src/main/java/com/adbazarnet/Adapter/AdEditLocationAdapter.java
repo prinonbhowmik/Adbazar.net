@@ -13,20 +13,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.adbazarnet.Activity.PostAdActivity;
 import com.adbazarnet.Models.LocationsModel;
 import com.adbazarnet.Models.SubLocationsModel;
 import com.adbazarnet.R;
 
 import java.util.List;
 
-public class PostAdLocationAdapter extends RecyclerView.Adapter<PostAdLocationAdapter.ViewHolder> {
+public class AdEditLocationAdapter extends RecyclerView.Adapter<AdEditLocationAdapter.ViewHolder> {
     private List<LocationsModel> locationsModels;
     private Context context;
-    private PostAdSubLocationAdapter adapter;
-    private PostAdActivity activity;
+    private AdEditSubLocAdapter adapter;
 
-    public PostAdLocationAdapter(List<LocationsModel> locationsModels, Context context) {
+    public AdEditLocationAdapter(List<LocationsModel> locationsModels, Context context) {
         this.locationsModels = locationsModels;
         this.context = context;
     }
@@ -36,10 +34,11 @@ public class PostAdLocationAdapter extends RecyclerView.Adapter<PostAdLocationAd
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.location_recycler, parent, false);
         return new ViewHolder(view);
-}
+    }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         LocationsModel list = locationsModels.get(position);
 
         holder.locationName.setText(list.getName());
@@ -56,7 +55,7 @@ public class PostAdLocationAdapter extends RecyclerView.Adapter<PostAdLocationAd
                     holder.locationName.setTextColor(Color.parseColor("#FFFFFF"));
                     holder.ad_count.setTextColor(Color.parseColor("#FFFFFF"));
                     List<SubLocationsModel> location = list.getSub_locations();
-                    adapter = new PostAdSubLocationAdapter(location, context);
+                    adapter = new AdEditSubLocAdapter(location, context);
                     holder.subLocRecycler.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
 
@@ -70,6 +69,7 @@ public class PostAdLocationAdapter extends RecyclerView.Adapter<PostAdLocationAd
 
             }
         });
+
     }
 
     @Override

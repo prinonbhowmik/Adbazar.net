@@ -3,16 +3,17 @@ package com.adbazarnet.Models;
 import java.util.List;
 
 public class EditAdModel {
+    private boolean is_bid;
     private String ad_title;
     private String condition;
-    private String jobType;
-    private int vacancy;
+    private String job_type;
+    private int total_vacancies;
     private String price;
-    private String requirment;
-    private String deadline;
-    private String employeer;
+    private String minimum_requirement;
+    private String application_deadline;
+    private String about_company;
     private String warranty;
-    private String website;
+    private String company_website;
     private String other_information;
     private List<PhoneNoModel> ad_phone_numbers;
     private String description;
@@ -20,21 +21,22 @@ public class EditAdModel {
     private String model_and_year;
     private String mileage;
     private String address;
-    private String land;
-    private String service;
+    private String plot_size;
+    private String service_type;
     private int category;
     private List<PostImageModel> images;
     private boolean negotiable;
     private String ad_type;
     private boolean hide_phone;
     private boolean is_sell;
-    private boolean is_bid;
     private boolean is_job;
 
+
+    //electronics
     public EditAdModel(String ad_title, String condition, String price, String warranty,
                        String other_information, List<PhoneNoModel> ad_phone_numbers, String description,
                        int location, int category, List<PostImageModel> images,
-                       boolean negotiable, String ad_type, boolean hide_phone, boolean is_sell, boolean is_bid, boolean is_job) {
+                       boolean negotiable, String ad_type, boolean hide_phone) {
         this.ad_title = ad_title;
         this.condition = condition;
         this.price = price;
@@ -48,17 +50,14 @@ public class EditAdModel {
         this.negotiable = negotiable;
         this.ad_type = ad_type;
         this.hide_phone = hide_phone;
-        this.is_sell = is_sell;
-        this.is_bid = is_bid;
-        this.is_job = is_job;
     }
 
-
+    //vehicle
     public EditAdModel(String ad_title, String condition, String price, String warranty,
                        String other_information, List<PhoneNoModel> ad_phone_numbers,
                        String description, int location, String model_and_year, String mileage,
                        int category, List<PostImageModel> images, boolean negotiable, String ad_type,
-                       boolean hide_phone, boolean is_sell, boolean is_bid, boolean is_job) {
+                       boolean hide_phone) {
         this.ad_title = ad_title;
         this.condition = condition;
         this.price = price;
@@ -74,54 +73,13 @@ public class EditAdModel {
         this.negotiable = negotiable;
         this.ad_type = ad_type;
         this.hide_phone = hide_phone;
-        this.is_sell = is_sell;
-        this.is_bid = is_bid;
-        this.is_job = is_job;
-    }
 
-    public EditAdModel(String ad_title, String condition, String price, String other_information, List<PhoneNoModel> ad_phone_numbers, String description,
-                       int location, String address, String land, int category, List<PostImageModel> images, boolean negotiable, String ad_type,
-                       boolean hide_phone, boolean is_sell, boolean is_bid, boolean is_job) {
-        this.ad_title = ad_title;
-        this.condition = condition;
-        this.price = price;
-        this.other_information = other_information;
-        this.ad_phone_numbers = ad_phone_numbers;
-        this.description = description;
-        this.location = location;
-        this.address = address;
-        this.land = land;
-        this.category = category;
-        this.images = images;
-        this.negotiable = negotiable;
-        this.ad_type = ad_type;
-        this.hide_phone = hide_phone;
-        this.is_sell = is_sell;
-        this.is_bid = is_bid;
-        this.is_job = is_job;
     }
-
-    public EditAdModel(String ad_title, String price, String other_information, List<PhoneNoModel> ad_phone_numbers, String description, int location, int category,
-                       List<PostImageModel> images, boolean negotiable, String ad_type, boolean hide_phone, boolean is_sell, boolean is_bid, boolean is_job) {
-        this.ad_title = ad_title;
-        this.price = price;
-        this.other_information = other_information;
-        this.ad_phone_numbers = ad_phone_numbers;
-        this.description = description;
-        this.location = location;
-        this.category = category;
-        this.images = images;
-        this.negotiable = negotiable;
-        this.ad_type = ad_type;
-        this.hide_phone = hide_phone;
-        this.is_sell = is_sell;
-        this.is_bid = is_bid;
-        this.is_job = is_job;
-    }
-
-    public EditAdModel(String ad_title, String price, String other_information, List<PhoneNoModel> ad_phone_numbers, String description, int location, String address,
-                       String service, int category, List<PostImageModel> images, boolean negotiable, String ad_type, boolean hide_phone,
-                       boolean is_sell, boolean is_bid, boolean is_job) {
+    //property
+    public EditAdModel(String ad_title, String price, String other_information,
+                       List<PhoneNoModel> ad_phone_numbers, String description, int location,
+                       String address, String plot_size, int category, List<PostImageModel> images,
+                       boolean negotiable, String ad_type, boolean hide_phone) {
         this.ad_title = ad_title;
         this.price = price;
         this.other_information = other_information;
@@ -129,21 +87,56 @@ public class EditAdModel {
         this.description = description;
         this.location = location;
         this.address = address;
-        this.service = service;
+        this.plot_size = plot_size;
         this.category = category;
         this.images = images;
         this.negotiable = negotiable;
         this.ad_type = ad_type;
         this.hide_phone = hide_phone;
-        this.is_sell = is_sell;
-        this.is_bid = is_bid;
-        this.is_job = is_job;
+
+    }
+
+    //general
+    public EditAdModel(String ad_title, String price, String other_information, List<PhoneNoModel> ad_phone_numbers,
+                       String description, int location, int category, List<PostImageModel> images, boolean negotiable,
+                       boolean hide_phone,String ad_type) {
+        this.ad_title = ad_title;
+        this.price = price;
+        this.other_information = other_information;
+        this.ad_phone_numbers = ad_phone_numbers;
+        this.description = description;
+        this.location = location;
+        this.category = category;
+        this.images = images;
+        this.negotiable = negotiable;
+        this.ad_type = ad_type;
+        this.hide_phone = hide_phone;
+    }
+
+    //service
+    public EditAdModel(String ad_title,boolean hide_phone, String price, String other_information, List<PhoneNoModel> ad_phone_numbers,
+                       String description, int location, String address, String service_type, int category,
+                       List<PostImageModel> images, boolean negotiable, String ad_type) {
+        this.ad_title = ad_title;
+        this.price = price;
+        this.other_information = other_information;
+        this.ad_phone_numbers = ad_phone_numbers;
+        this.description = description;
+        this.location = location;
+        this.address = address;
+        this.service_type = service_type;
+        this.category = category;
+        this.images = images;
+        this.negotiable = negotiable;
+        this.ad_type = ad_type;
+        this.hide_phone = hide_phone;
+
     }
 
     //bid
     public EditAdModel(String ad_title, String other_information, String description,
                        int location, int category, List<PostImageModel> images,
-                       String ad_type, boolean is_sell, boolean is_bid, boolean is_job) {
+                       String ad_type) {
         this.ad_title = ad_title;
         this.other_information = other_information;
         this.description = description;
@@ -151,21 +144,21 @@ public class EditAdModel {
         this.category = category;
         this.images = images;
         this.ad_type = ad_type;
-        this.is_sell = is_sell;
-        this.is_bid = is_bid;
-        this.is_job = is_job;
+
     }
 
-    public EditAdModel(String ad_title, String jobType, int vacancy, String requirment, String deadline, String employeer,
-                       String website, String other_information, String description, int location, String address, int category, List<PostImageModel> images,
-                       String ad_type,boolean is_sell, boolean is_bid, boolean is_job) {
+    //job
+    public EditAdModel(String ad_title, String job_type, int total_vacancies, String minimum_requirement,
+                       String application_deadline, String about_company, String company_website, String other_information,
+                       String description, int location, String address, int category, List<PostImageModel> images,
+                       String ad_type) {
         this.ad_title = ad_title;
-        this.jobType = jobType;
-        this.vacancy = vacancy;
-        this.requirment = requirment;
-        this.deadline = deadline;
-        this.employeer = employeer;
-        this.website = website;
+        this.job_type = job_type;
+        this.total_vacancies = total_vacancies;
+        this.minimum_requirement = minimum_requirement;
+        this.application_deadline = application_deadline;
+        this.about_company = about_company;
+        this.company_website = company_website;
         this.other_information = other_information;
         this.description = description;
         this.location = location;
@@ -173,13 +166,14 @@ public class EditAdModel {
         this.category = category;
         this.images = images;
         this.ad_type = ad_type;
-        this.is_sell = is_sell;
-        this.is_bid = is_bid;
-        this.is_job = is_job;
 
     }
 
     public EditAdModel() {
+    }
+
+    public boolean isIs_bid() {
+        return is_bid;
     }
 
     public String getAd_title() {
@@ -190,36 +184,36 @@ public class EditAdModel {
         return condition;
     }
 
-    public String getJobType() {
-        return jobType;
+    public String getJob_type() {
+        return job_type;
     }
 
-    public int getVacancy() {
-        return vacancy;
+    public int getTotal_vacancies() {
+        return total_vacancies;
     }
 
     public String getPrice() {
         return price;
     }
 
-    public String getRequirment() {
-        return requirment;
+    public String getMinimum_requirement() {
+        return minimum_requirement;
     }
 
-    public String getDeadline() {
-        return deadline;
+    public String getApplication_deadline() {
+        return application_deadline;
     }
 
-    public String getEmployeer() {
-        return employeer;
+    public String getAbout_company() {
+        return about_company;
     }
 
     public String getWarranty() {
         return warranty;
     }
 
-    public String getWebsite() {
-        return website;
+    public String getCompany_website() {
+        return company_website;
     }
 
     public String getOther_information() {
@@ -250,12 +244,12 @@ public class EditAdModel {
         return address;
     }
 
-    public String getLand() {
-        return land;
+    public String getPlot_size() {
+        return plot_size;
     }
 
-    public String getService() {
-        return service;
+    public String getService_type() {
+        return service_type;
     }
 
     public int getCategory() {
@@ -280,10 +274,6 @@ public class EditAdModel {
 
     public boolean isIs_sell() {
         return is_sell;
-    }
-
-    public boolean isIs_bid() {
-        return is_bid;
     }
 
     public boolean isIs_job() {

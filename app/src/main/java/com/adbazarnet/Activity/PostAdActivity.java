@@ -684,7 +684,8 @@ public class PostAdActivity extends AppCompatActivity {
                     public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
                         if (response.code() == 201) {
 
-                        } else {
+                        }
+                        else {
                             Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
                         }
                     }

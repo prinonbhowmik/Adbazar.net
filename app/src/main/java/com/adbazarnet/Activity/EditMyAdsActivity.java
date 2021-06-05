@@ -31,6 +31,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.adbazarnet.Adapter.AdEditCategoryAdapter;
+import com.adbazarnet.Adapter.AdEditLocationAdapter;
 import com.adbazarnet.Adapter.PostAdCategoryAdapter;
 import com.adbazarnet.Adapter.PostAdLocationAdapter;
 import com.adbazarnet.Api.ApiInterface;
@@ -80,8 +82,8 @@ public class EditMyAdsActivity extends AppCompatActivity {
     private CardView submitBtn;
     public static Dialog dialog;
     private ApiInterface apiInterface;
-    private PostAdCategoryAdapter categoryNamesAdapter;
-    private PostAdLocationAdapter locationAdapter;
+    private AdEditCategoryAdapter categoryNamesAdapter;
+    private AdEditLocationAdapter locationAdapter;
     public static AutoCompleteTextView conditionSpinner, serviceSpinner, jobTypeSpinner, requirmetntSpinner;
     private String[] conditionArray = {"used", "new", "recondition"};
     private String[] serviceArray = {"computer & laptop", "courier", "electronics and engineering", "facility management"
@@ -130,14 +132,13 @@ public class EditMyAdsActivity extends AppCompatActivity {
                 RecyclerView categoriesRecycler = dialog.findViewById(R.id.categoriesRecycler);
                 categoriesRecycler.setLayoutManager(new LinearLayoutManager(EditMyAdsActivity.this));
 
-
                 Call<List<CategoriesModel>> call = apiInterface.getProductsCategories();
                 call.enqueue(new Callback<List<CategoriesModel>>() {
                     @Override
                     public void onResponse(Call<List<CategoriesModel>> call, Response<List<CategoriesModel>> response) {
                         if (response.isSuccessful()) {
                             List<CategoriesModel> list = response.body();
-                            categoryNamesAdapter = new PostAdCategoryAdapter(list, EditMyAdsActivity.this);
+                            categoryNamesAdapter = new AdEditCategoryAdapter(list, EditMyAdsActivity.this);
                             categoriesRecycler.setAdapter(categoryNamesAdapter);
                             if (ad_Type.equals("job")){
                                 categoryNamesAdapter.getFilter().filter(postType);
@@ -192,7 +193,7 @@ public class EditMyAdsActivity extends AppCompatActivity {
                     public void onResponse(Call<List<LocationsModel>> call, Response<List<LocationsModel>> response) {
                         if (response.isSuccessful()) {
                             List<LocationsModel> list = response.body();
-                            locationAdapter = new PostAdLocationAdapter(list, EditMyAdsActivity.this);
+                            locationAdapter = new AdEditLocationAdapter(list, EditMyAdsActivity.this);
                             locationRecycler.setAdapter(locationAdapter);
                         }
                         locationAdapter.notifyDataSetChanged();
@@ -602,7 +603,6 @@ public class EditMyAdsActivity extends AppCompatActivity {
                     imgArray.add(imageModel5);
                 }
 
-
                 String mileage = mileageEt.getText().toString();
                 String modelYear = modelYearEt.getText().toString();
                 String description = descriptionEt.getText().toString();
@@ -617,22 +617,23 @@ public class EditMyAdsActivity extends AppCompatActivity {
 
                 if (ad_Type.equals("electronics")) {
                     model = new EditAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers, description,
-                            locationId, categoryId, imgArray, negotiable, ad_Type, hidePhone, is_sell,is_bid,is_job);
+                            locationId, categoryId, imgArray, negotiable, ad_Type, hidePhone);
                 } else if (ad_Type.equals("vehicle")) {
                     model = new EditAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers, description,
-                            locationId, modelYear, mileage, categoryId, imgArray, negotiable, ad_Type, hidePhone,is_sell,is_bid,is_job);
+                            locationId, modelYear, mileage, categoryId, imgArray, negotiable, ad_Type, hidePhone);
                 } else if (ad_Type.equals("property")) {
                     model = new EditAdModel(adTitle, price, otherInfo, phoneNumbers, description,
-                            locationId,address,land, categoryId, imgArray, negotiable, ad_Type, hidePhone,is_sell,is_bid,is_job);
+                            locationId,address,land, categoryId, imgArray, negotiable, ad_Type, hidePhone);
                 } else if (ad_Type.equals("general")) {
                     model = new EditAdModel(adTitle, price, otherInfo, phoneNumbers, description,
-                            locationId, categoryId, imgArray, negotiable, ad_Type, hidePhone,is_sell,is_bid,is_job);
+                            locationId, categoryId, imgArray, negotiable,hidePhone, ad_Type);
                 } else if (ad_Type.equals("service")) {
-                    model = new EditAdModel(adTitle, price, otherInfo, phoneNumbers, description, locationId, address,
-                            service, categoryId, imgArray, negotiable, ad_Type, hidePhone,is_sell,is_bid,is_job);
+                    model = new EditAdModel( adTitle,hidePhone ,price,  otherInfo,  phoneNumbers,
+                            description, locationId, address, service, categoryId,
+                            imgArray, negotiable, ad_Type);
                 }else  if (ad_Type.equals("job")){
                     model = new EditAdModel(adTitle,jobType,vacancy,requirment,deadline,employeer,website
-                            ,otherInfo,description,locationId,address,categoryId,imgArray,ad_Type,is_sell,is_bid,is_job);
+                            ,otherInfo,description,locationId,address,categoryId,imgArray,ad_Type);
                 }
                 Call<AdDetails> call = ApiUtils.getUserService().editMyAds("Token " + token, adId ,model);
                 call.enqueue(new Callback<AdDetails>() {
@@ -647,7 +648,7 @@ public class EditMyAdsActivity extends AppCompatActivity {
                             dialog2.show();
                             TextView textView = dialog2.findViewById(R.id.textview);
                             Button okBtn = dialog2.findViewById(R.id.okBtn);
-                            textView.setText("Ad created Successfully");
+                            textView.setText("Ad Updated Successfully");
 
                             okBtn.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -1970,6 +1971,8 @@ public class EditMyAdsActivity extends AppCompatActivity {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                hideKeyboard(EditMyAdsActivity.this);
+
                 month = month + 1;
                 String currentDate = year + "-" + month + "-" + day;
                 datePicker.setMinDate(System.currentTimeMillis() - 1000);

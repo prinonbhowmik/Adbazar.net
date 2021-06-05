@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.adbazarnet.Activity.EditMyAdsActivity;
 import com.adbazarnet.Activity.PostAdActivity;
 import com.adbazarnet.Api.ApiUtils;
 import com.adbazarnet.Models.SubCategoryModel;
@@ -22,12 +23,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PostAdSubCatAdapter extends RecyclerView.Adapter<PostAdSubCatAdapter.ViewHolder> {
+public class AdEditSubCatAdapter extends RecyclerView.Adapter<AdEditSubCatAdapter.ViewHolder> {
     private List<SubCategoryModel> list;
     private Context context;
-    private PostAdActivity activity;
+    private EditMyAdsActivity activity;
 
-    public PostAdSubCatAdapter(List<SubCategoryModel> list, Context context) {
+    public AdEditSubCatAdapter(List<SubCategoryModel> list, Context context) {
         this.list = list;
         this.context = context;
     }

@@ -248,8 +248,8 @@ public class PostAdCategoryAdapter extends RecyclerView.Adapter<PostAdCategoryAd
                         activity.mileageEt.setVisibility(View.GONE);
                         activity.txtL.setVisibility(View.GONE);
                         activity.landEt.setVisibility(View.GONE);
-                        activity.txtA.setVisibility(View.GONE);
-                        activity.addressEt.setVisibility(View.GONE);
+                        activity.txtA.setVisibility(View.VISIBLE);
+                        activity.addressEt.setVisibility(View.VISIBLE);
                         activity.txtS.setVisibility(View.GONE);
                         activity.serviceSpinner.setVisibility(View.GONE);
                         activity.txtF.setVisibility(View.GONE);

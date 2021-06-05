@@ -8,12 +8,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.adbazarnet.Activity.EditMyAdsActivity;
 import com.adbazarnet.Activity.PostAdActivity;
 import com.adbazarnet.Api.ApiUtils;
-import com.adbazarnet.Models.SubCategoryModel;
+import com.adbazarnet.Models.LocationsModel;
 import com.adbazarnet.Models.SubCategoryProductModel;
+import com.adbazarnet.Models.SubLocationsModel;
 import com.adbazarnet.R;
 
 import java.util.List;
@@ -22,13 +25,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PostAdSubCatAdapter extends RecyclerView.Adapter<PostAdSubCatAdapter.ViewHolder> {
-    private List<SubCategoryModel> list;
+public class AdEditSubLocAdapter extends RecyclerView.Adapter<AdEditSubLocAdapter.ViewHolder> {
+    private List<SubLocationsModel> location;
     private Context context;
-    private PostAdActivity activity;
+    private EditMyAdsActivity activity;
 
-    public PostAdSubCatAdapter(List<SubCategoryModel> list, Context context) {
-        this.list = list;
+    public AdEditSubLocAdapter(List<SubLocationsModel> location, Context context) {
+        this.location = location;
         this.context = context;
     }
 
@@ -41,24 +44,24 @@ public class PostAdSubCatAdapter extends RecyclerView.Adapter<PostAdSubCatAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        SubCategoryModel model = list.get(position);
-        holder.categoryName.setText(model.getName());
+        SubLocationsModel model = location.get(position);
+        holder.locationName.setText(model.getName());
         holder.ad_count.setText("("+model.getAd_count()+")");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<SubCategoryProductModel> call = ApiUtils.getUserService().getSubCategoriesProduct(50,0,model.getSlug());
+                Call<SubCategoryProductModel> call = ApiUtils.getUserService().getProductByLocation(50,0,model.getSlug());
                 call.enqueue(new Callback<SubCategoryProductModel>() {
                     @Override
                     public void onResponse(Call<SubCategoryProductModel> call, Response<SubCategoryProductModel> response) {
                         if (response.isSuccessful()){
-                            activity.categoryTv.setText(model.getName());
-                            activity.categoryId = model.getId();
-                            Log.d("checkData", String.valueOf(model.getId()));
+                            activity.locationTv.setText(model.getName());
+                            activity.locationId = model.getId();
                             activity.dialog.dismiss();
                         }
                     }
+
                     @Override
                     public void onFailure(Call<SubCategoryProductModel> call, Throwable t) {
                         Log.d("ErrorKi",t.getMessage());
@@ -71,14 +74,14 @@ public class PostAdSubCatAdapter extends RecyclerView.Adapter<PostAdSubCatAdapte
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return location.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView categoryName,ad_count;
+        private TextView locationName,ad_count;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            categoryName = itemView.findViewById(R.id.categoryName);
+            locationName = itemView.findViewById(R.id.categoryName);
             ad_count = itemView.findViewById(R.id.ad_count);
         }
     }

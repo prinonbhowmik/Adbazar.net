@@ -127,7 +127,7 @@
                             android:background="@color/theme">
 
                             <TextView
-                                android:id="@+id/categoryTv2"
+                                android:id="@+id/categoryTv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerHorizontal="true"
@@ -154,7 +154,7 @@
                             android:background="@color/theme">
 
                             <TextView
-                                android:id="@+id/locationTv2"
+                                android:id="@+id/locationTv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerHorizontal="true"
