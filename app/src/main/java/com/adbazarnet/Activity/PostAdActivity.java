@@ -19,6 +19,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -81,6 +82,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import okhttp3.MediaType;
@@ -122,7 +124,7 @@ public class PostAdActivity extends AppCompatActivity {
     private ChipNavigationBar chipNavigationBar;
     private int loggedIn, vacancy;
     private PostAdModel model;
-    public String postType;
+    public String postType,lang;
     private File file1, file2, file3, file4, file5;
     private static final int PERMISSION_REQUEST_CODE = 1;
     private static final int REQUEST_GALLERY = 200;
@@ -138,6 +140,8 @@ public class PostAdActivity extends AppCompatActivity {
         postType = i.getStringExtra("type");
 
         init();
+
+        getLocale();
 
         if (postType.equals("bid")) {
             txt3.setVisibility(View.GONE);
@@ -183,7 +187,7 @@ public class PostAdActivity extends AppCompatActivity {
                 categoriesRecycler.setLayoutManager(new LinearLayoutManager(PostAdActivity.this));
 
 
-                Call<List<CategoriesModel>> call = apiInterface.getProductsCategories();
+                Call<List<CategoriesModel>> call = apiInterface.getProductsCategories(lang);
                 call.enqueue(new Callback<List<CategoriesModel>>() {
                     @Override
                     public void onResponse(Call<List<CategoriesModel>> call, Response<List<CategoriesModel>> response) {
@@ -237,7 +241,7 @@ public class PostAdActivity extends AppCompatActivity {
 
                 allLocationTv.setVisibility(View.GONE);
 
-                Call<List<LocationsModel>> call = apiInterface.getAllLocations();
+                Call<List<LocationsModel>> call = apiInterface.getAllLocations(lang);
                 call.enqueue(new Callback<List<LocationsModel>>() {
                     @Override
                     public void onResponse(Call<List<LocationsModel>> call, Response<List<LocationsModel>> response) {
@@ -933,6 +937,18 @@ public class PostAdActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    private void getLocale() {
+
+        lang = sharedPreferences.getString("lang", "");
+
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration(getResources().getConfiguration());
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
 
     }
 

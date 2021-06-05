@@ -1,6 +1,7 @@
 package com.adbazarnet.Adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,7 @@ public class AdEditSubLocAdapter extends RecyclerView.Adapter<AdEditSubLocAdapte
     private List<SubLocationsModel> location;
     private Context context;
     private EditMyAdsActivity activity;
+    private SharedPreferences sharedPreferences;
 
     public AdEditSubLocAdapter(List<SubLocationsModel> location, Context context) {
         this.location = location;
@@ -47,11 +49,13 @@ public class AdEditSubLocAdapter extends RecyclerView.Adapter<AdEditSubLocAdapte
         SubLocationsModel model = location.get(position);
         holder.locationName.setText(model.getName());
         holder.ad_count.setText("("+model.getAd_count()+")");
+        sharedPreferences = context.getSharedPreferences("MyRef",Context.MODE_PRIVATE);
+        String lang = sharedPreferences.getString("lang","");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<SubCategoryProductModel> call = ApiUtils.getUserService().getProductByLocation(50,0,model.getSlug());
+                Call<SubCategoryProductModel> call = ApiUtils.getUserService().getProductByLocation(lang,50,0,model.getSlug());
                 call.enqueue(new Callback<SubCategoryProductModel>() {
                     @Override
                     public void onResponse(Call<SubCategoryProductModel> call, Response<SubCategoryProductModel> response) {

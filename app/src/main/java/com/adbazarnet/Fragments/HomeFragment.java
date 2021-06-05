@@ -3,6 +3,7 @@ package com.adbazarnet.Fragments;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
@@ -41,6 +42,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class HomeFragment extends Fragment implements SubCategoryProductsInterface {
     private ImageView navIcon;
     private DrawerLayout drawerLayout;
@@ -59,6 +62,8 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
     public static TextView adCountTv;
     public static Dialog dialog;
     private SubCatProductsAdapter subProductAdapter;
+    public static String lang;
+    private SharedPreferences sharedPreferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -152,17 +157,18 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
     }
 
     private void getLocale() {
-        // lang = sharedPreferences.getString("lang","");
-        Locale locale = new Locale("bn");
+        lang = sharedPreferences.getString("lang","");
+        Locale locale = new Locale(lang);
         Locale.setDefault(locale);
         Configuration configuration = new Configuration();
         configuration.locale = locale;
-        getActivity().getBaseContext().getResources().updateConfiguration(configuration, getActivity().getBaseContext().getResources().getDisplayMetrics());
+        getActivity().getBaseContext().getResources().updateConfiguration(configuration,
+                getActivity().getBaseContext().getResources().getDisplayMetrics());
 
     }
 
     private void getAllLocations(RecyclerView locationRecycler) {
-        Call<List<LocationsModel>> call = apiInterface.getAllLocations();
+        Call<List<LocationsModel>> call = apiInterface.getAllLocations(lang);
         call.enqueue(new Callback<List<LocationsModel>>() {
             @Override
             public void onResponse(Call<List<LocationsModel>> call, Response<List<LocationsModel>> response) {
@@ -182,7 +188,7 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
     }
 
     private void getCategoriesList(RecyclerView categoriesRecycler) {
-        Call<List<CategoriesModel>> call = apiInterface.getProductsCategories();
+        Call<List<CategoriesModel>> call = apiInterface.getProductsCategories(lang);
         call.enqueue(new Callback<List<CategoriesModel>>() {
             @Override
             public void onResponse(Call<List<CategoriesModel>> call, Response<List<CategoriesModel>> response) {
@@ -203,7 +209,7 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
     }
 
     private void getAllAds() {
-        Call<List<ProductModel>> call = apiInterface.getAllAds();
+        Call<List<ProductModel>> call = apiInterface.getAllAds(lang);
         call.enqueue(new Callback<List<ProductModel>>() {
             @Override
             public void onResponse(Call<List<ProductModel>> call, Response<List<ProductModel>> response) {
@@ -242,6 +248,7 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
         adsRecycler = view.findViewById(R.id.adsRecycler);
         adCountTv = view.findViewById(R.id.adCountTv);
         adsRecycler.setLayoutManager(new GridLayoutManager(getContext(),2));
+        sharedPreferences = getContext().getSharedPreferences("MyRef", MODE_PRIVATE);
 
     }
 

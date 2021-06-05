@@ -1,6 +1,7 @@
 package com.adbazarnet.Adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdapter.ViewHolder> {
     private List<SubCategoryModel> list;
     private Context context;
@@ -34,6 +37,7 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
     private List<ProductModel> adlist = new ArrayList<>();
     private SubCatProductsAdapter subProductAdapter;
     private SubCategoryClick click;
+    private SharedPreferences sharedPreferences;
 
     public SubCategoriesAdapter(List<SubCategoryModel> list, Context context) {
         this.list = list;
@@ -53,11 +57,12 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
         SubCategoryModel model = list.get(position);
         holder.categoryName.setText(model.getName());
         holder.ad_count.setText("("+model.getAd_count()+")");
+        String lang = fragment.lang;
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<SubCategoryProductModel> call = ApiUtils.getUserService().getSubCategoriesProduct(50,0,model.getSlug());
+                Call<SubCategoryProductModel> call = ApiUtils.getUserService().getSubCategoriesProduct(lang,50,0,model.getSlug());
                 call.enqueue(new Callback<SubCategoryProductModel>() {
                     @Override
                     public void onResponse(Call<SubCategoryProductModel> call, Response<SubCategoryProductModel> response) {

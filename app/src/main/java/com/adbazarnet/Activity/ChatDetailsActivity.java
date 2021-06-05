@@ -1,14 +1,21 @@
 package com.adbazarnet.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,26 +30,30 @@ import com.adbazarnet.Models.ChatChannelModel;
 import com.adbazarnet.Models.ChatModel2;
 import com.adbazarnet.Models.UserDetailsModel;
 import com.adbazarnet.R;
+import com.google.android.material.navigation.NavigationView;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ChatDetailsActivity extends AppCompatActivity {
+public class ChatDetailsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView chatRecycler;
     private EditText msgEt;
-    private ImageView msgBtn;
-    private int channelId,loggedIn;
+    private ImageView msgBtn, navIcon;
+    private int channelId, loggedIn;
     private ChatDetailsAdapter adapter;
     private SharedPreferences sharedPreferences;
-    private String token;
+    private String token, lang;
     private ChipNavigationBar chipNavigationBar;
     private Dialog dialog;
+    private NavigationView navigationView;
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,59 +62,60 @@ public class ChatDetailsActivity extends AppCompatActivity {
 
         init();
 
+        getLocale();
+
         Intent i = getIntent();
-        channelId = i.getIntExtra("channel",0);
+        channelId = i.getIntExtra("channel", 0);
 
-       getAllChat();
+        getAllChat();
 
-       msgBtn.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               String msg = msgEt.getText().toString();
-               if (msg.equals("")){
-                   msgEt.setError("Please enter text first");
-               }else{
-                   Call<ChatChannelModel> chatcall = ApiUtils.getUserService().sendMsg
-                           ("Token "+token,channelId,msg);
-                   chatcall.enqueue(new Callback<ChatChannelModel>() {
-                       @Override
-                       public void onResponse(Call<ChatChannelModel> call, Response<ChatChannelModel> response) {
-                           if (response.isSuccessful()){
-                               msgEt.setText("");
-                              getAllChat();
-                           }
-                       }
+        msgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String msg = msgEt.getText().toString();
+                if (msg.equals("")) {
+                    msgEt.setError("Please enter text first");
+                } else {
+                    Call<ChatChannelModel> chatcall = ApiUtils.getUserService().sendMsg
+                            ("Token " + token, channelId, msg);
+                    chatcall.enqueue(new Callback<ChatChannelModel>() {
+                        @Override
+                        public void onResponse(Call<ChatChannelModel> call, Response<ChatChannelModel> response) {
+                            if (response.isSuccessful()) {
+                                msgEt.setText("");
+                                getAllChat();
+                            }
+                        }
 
-                       @Override
-                       public void onFailure(Call<ChatChannelModel> call, Throwable t) {
+                        @Override
+                        public void onFailure(Call<ChatChannelModel> call, Throwable t) {
 
-                       }
-                   });
-               }
-           }
-       });
+                        }
+                    });
+                }
+            }
+        });
 
         chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int i) {
-                switch (i){
+                switch (i) {
 
                     case R.id.home:
-                        startActivity(new Intent(ChatDetailsActivity.this,MainActivity.class)
-                                .putExtra("fragment","home"));
+                        startActivity(new Intent(ChatDetailsActivity.this, MainActivity.class)
+                                .putExtra("fragment", "home"));
                         finish();
                         break;
                     case R.id.favourite:
-                        startActivity(new Intent(ChatDetailsActivity.this,MainActivity.class)
-                                .putExtra("fragment","favourite"));
+                        startActivity(new Intent(ChatDetailsActivity.this, MainActivity.class)
+                                .putExtra("fragment", "favourite"));
                         finish();
                         break;
                     case R.id.adPost:
-                        if (loggedIn==0){
+                        if (loggedIn == 0) {
                             startActivity(new Intent(ChatDetailsActivity.this, LoginActivity.class));
                             finish();
-                        }
-                        else {
+                        } else {
                             dialog = new Dialog(ChatDetailsActivity.this);
                             dialog.setContentView(R.layout.post_ad_popup);
                             ImageView closeIv = dialog.findViewById(R.id.closeIv);
@@ -121,7 +133,7 @@ public class ChatDetailsActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(ChatDetailsActivity.this,
-                                            PostAdActivity.class).putExtra("type","sell"));
+                                            PostAdActivity.class).putExtra("type", "sell"));
                                     finish();
                                     dialog.dismiss();
                                 }
@@ -130,7 +142,7 @@ public class ChatDetailsActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(ChatDetailsActivity.this,
-                                            PostAdActivity.class).putExtra("type","rent"));
+                                            PostAdActivity.class).putExtra("type", "rent"));
                                     finish();
                                     dialog.dismiss();
                                 }
@@ -139,7 +151,7 @@ public class ChatDetailsActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(ChatDetailsActivity.this,
-                                            PostAdActivity.class).putExtra("type","bid"));
+                                            PostAdActivity.class).putExtra("type", "bid"));
                                     finish();
                                     dialog.dismiss();
                                 }
@@ -148,7 +160,7 @@ public class ChatDetailsActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(ChatDetailsActivity.this,
-                                            PostAdActivity.class).putExtra("type","exchange"));
+                                            PostAdActivity.class).putExtra("type", "exchange"));
                                     finish();
                                     dialog.dismiss();
                                 }
@@ -172,19 +184,20 @@ public class ChatDetailsActivity extends AppCompatActivity {
                         }
                         break;
                     case R.id.chat:
-                        startActivity(new Intent(ChatDetailsActivity.this,MainActivity.class)
-                                .putExtra("fragment","chat"));
-                        finish();                        break;
+                        startActivity(new Intent(ChatDetailsActivity.this, MainActivity.class)
+                                .putExtra("fragment", "chat"));
+                        finish();
+                        break;
                     case R.id.account:
-                        if (loggedIn == 0 ){
-                            startActivity(new Intent(ChatDetailsActivity.this,LoginActivity.class));
+                        if (loggedIn == 0) {
+                            startActivity(new Intent(ChatDetailsActivity.this, LoginActivity.class));
                             finish();
                             break;
-                        }else{
+                        } else {
                             //pop-up will be shown
                             dialog = new Dialog(ChatDetailsActivity.this);
                             dialog.setContentView(R.layout.profile_option_xml);
-                            CardView close  = dialog.findViewById(R.id.closeTv);
+                            CardView close = dialog.findViewById(R.id.closeTv);
                             TextView dashboard = dialog.findViewById(R.id.dashboardTv);
                             TextView myAds = dialog.findViewById(R.id.myAdsTv);
                             TextView favouriteTv = dialog.findViewById(R.id.favouriteTv);
@@ -204,7 +217,7 @@ public class ChatDetailsActivity extends AppCompatActivity {
                             membership.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(ChatDetailsActivity.this,MembershipActivity.class));
+                                    startActivity(new Intent(ChatDetailsActivity.this, MembershipActivity.class));
                                     finish();
                                 }
                             });
@@ -212,7 +225,7 @@ public class ChatDetailsActivity extends AppCompatActivity {
                             myAds.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(ChatDetailsActivity.this,MyAdsActivity.class));
+                                    startActivity(new Intent(ChatDetailsActivity.this, MyAdsActivity.class));
                                 }
                             });
 
@@ -228,7 +241,7 @@ public class ChatDetailsActivity extends AppCompatActivity {
                             dashboard.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(ChatDetailsActivity.this,DashboardActivity.class));
+                                    startActivity(new Intent(ChatDetailsActivity.this, DashboardActivity.class));
                                     finish();
                                 }
                             });
@@ -236,7 +249,7 @@ public class ChatDetailsActivity extends AppCompatActivity {
                             profile.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(ChatDetailsActivity.this,ProfileActivity.class));
+                                    startActivity(new Intent(ChatDetailsActivity.this, ProfileActivity.class));
                                     finish();
                                 }
                             });
@@ -262,8 +275,8 @@ public class ChatDetailsActivity extends AppCompatActivity {
                                     editor.putInt("id", 0);
                                     editor.commit();
                                     finish();
-                                    startActivity(new Intent(ChatDetailsActivity.this,MainActivity.class)
-                                            .putExtra("fragment","home"));
+                                    startActivity(new Intent(ChatDetailsActivity.this, MainActivity.class)
+                                            .putExtra("fragment", "home"));
                                 }
                             });
 
@@ -279,14 +292,26 @@ public class ChatDetailsActivity extends AppCompatActivity {
 
     }
 
+    private void getLocale() {
+
+        lang = sharedPreferences.getString("lang", "");
+
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration(getResources().getConfiguration());
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+
+    }
+
     private void getAllChat() {
-        Call<List<ChatChannelModel>> call = ApiUtils.getUserService().getChatDetails("Token "+token,channelId);
+        Call<List<ChatChannelModel>> call = ApiUtils.getUserService().getChatDetails("Token " + token, channelId);
         call.enqueue(new Callback<List<ChatChannelModel>>() {
             @Override
             public void onResponse(Call<List<ChatChannelModel>> call, Response<List<ChatChannelModel>> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     List<ChatChannelModel> list = response.body();
-                    adapter = new ChatDetailsAdapter(list,ChatDetailsActivity.this);
+                    adapter = new ChatDetailsAdapter(list, ChatDetailsActivity.this);
                     chatRecycler.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                 }
@@ -305,14 +330,89 @@ public class ChatDetailsActivity extends AppCompatActivity {
         chatRecycler = findViewById(R.id.chatRecycler);
         chatRecycler.setLayoutManager(new LinearLayoutManager(ChatDetailsActivity.this));
         sharedPreferences = getSharedPreferences("MyRef", MODE_PRIVATE);
-        token = sharedPreferences.getString("token",null);
-        loggedIn = sharedPreferences.getInt("loggedIn",0);
+        token = sharedPreferences.getString("token", null);
+        loggedIn = sharedPreferences.getInt("loggedIn", 0);
         chipNavigationBar = findViewById(R.id.bottom_menu);
+        navIcon = findViewById(R.id.navIcon);
+        navigationView = findViewById(R.id.nav_view);
+        drawerLayout = findViewById(R.id.drawerLayout);
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().clear();
+        navigationView.inflateMenu(R.menu.home_navigation_drawer);
+        navigationView.getMenu().removeItem(R.id.login);
+
+        navIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(ChatDetailsActivity.this,MainActivity.class).putExtra("fragment","chat"));
+        startActivity(new Intent(ChatDetailsActivity.this, MainActivity.class).putExtra("fragment", "chat"));
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.login:
+                startActivity(new Intent(ChatDetailsActivity.this, LoginActivity.class));
+                break;
+            case R.id.home:
+                startActivity(new Intent(ChatDetailsActivity.this, MainActivity.class)
+                        .putExtra("fragment","home"));
+                drawerLayout.closeDrawers();
+                break;
+            case R.id.bids:
+                startActivity(new Intent(ChatDetailsActivity.this, MainActivity.class)
+                        .putExtra("fragment","home"));
+                drawerLayout.closeDrawers();
+                break;
+            case R.id.contact:
+
+                break;
+            case R.id.language:
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                alertDialog.setMessage("Change Language");
+
+                alertDialog.setPositiveButton("English", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Locale locale = new Locale("en");
+                        Locale.setDefault(locale);
+                        Configuration configuration = new Configuration();
+                        configuration.locale = locale;
+                        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+                        SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
+                        editor.putString("lang", "en");
+                        editor.apply();
+                        startActivity(getIntent());
+                    }
+                });
+                alertDialog.setNegativeButton("বাংলা", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Locale locale = new Locale("bn");
+                        Locale.setDefault(locale);
+                        Configuration configuration = new Configuration();
+                        configuration.locale = locale;
+                        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+                        SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
+                        editor.putString("lang", "bn");
+                        editor.apply();
+                        startActivity(getIntent());
+                    }
+                });
+                alertDialog.setCancelable(false);
+                alertDialog.show();
+                break;
+
+        }
+
+        return false;
     }
 }

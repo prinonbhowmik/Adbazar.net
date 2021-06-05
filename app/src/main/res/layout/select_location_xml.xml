@@ -54,7 +54,7 @@
                     android:fontFamily="@font/roboto"
                     android:padding="10dp"
                     android:textColor="#000"
-                    android:text=" Locations"
+                    android:text="@string/location"
                     android:textSize="20sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/locationHeader"
             android:drawableLeft="@drawable/location_theme_color"
-            android:text=" All Location"
+            android:text="@string/all_location"
             android:layout_centerVertical="true"
             android:padding="10dp"
             android:textSize="18sp"

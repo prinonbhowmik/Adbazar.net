@@ -1,6 +1,7 @@
 package com.adbazarnet.Adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,12 +26,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class SubLocationAdapter extends RecyclerView.Adapter<SubLocationAdapter.ViewHolder> {
     private List<SubLocationsModel> location;
     private Context context;
     private HomeFragment fragment;
     private List<ProductModel> adlist = new ArrayList<>();
     private SubCatProductsAdapter subProductAdapter;
+    private SharedPreferences sharedPreferences;
 
     public SubLocationAdapter(List<SubLocationsModel> location, Context context) {
         this.location = location;
@@ -49,10 +53,13 @@ public class SubLocationAdapter extends RecyclerView.Adapter<SubLocationAdapter.
         holder.locationName.setText(model.getName());
         holder.ad_count.setText("("+model.getAd_count()+")");
 
+        String lang = fragment.lang;
+
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<SubCategoryProductModel> call = ApiUtils.getUserService().getProductByLocation(50,0,model.getSlug());
+                Call<SubCategoryProductModel> call = ApiUtils.getUserService().getProductByLocation(lang, 50,0,model.getSlug());
                 call.enqueue(new Callback<SubCategoryProductModel>() {
                     @Override
                     public void onResponse(Call<SubCategoryProductModel> call, Response<SubCategoryProductModel> response) {

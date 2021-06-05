@@ -47,7 +47,7 @@ import retrofit2.http.Query;
 public interface ApiInterface {
 
     @GET("categories/")
-    Call<List<CategoriesModel>> getProductsCategories();
+    Call<List<CategoriesModel>> getProductsCategories(@Header("Accept-Language")String lang);
 
     @GET("categories/?limit=1&offset=0&ad_type=electronics&search=Mobiles")
     Call<CategorisQueryModel> getSubCategories(@Query("limit") int limit,
@@ -56,12 +56,14 @@ public interface ApiInterface {
                                                @Query("search") String search);
 
     @GET("posts/?limit=10&offset=-1&category__slug=mobile-phones")
-    Call<SubCategoryProductModel> getSubCategoriesProduct(@Query("limit") int limit,
+    Call<SubCategoryProductModel> getSubCategoriesProduct(@Header("Accept-Language")String lang,
+                                                          @Query("limit") int limit,
                                                           @Query("offset") int offset,
                                                           @Query("category__slug") String ad_type);
 
     @GET("posts/?limit=20&offset=0&location__slug=Bangshal")
-    Call<SubCategoryProductModel> getProductByLocation(@Query("limit") int limit,
+    Call<SubCategoryProductModel> getProductByLocation(@Header("Accept-Language")String lang,
+                                                       @Query("limit") int limit,
                                                        @Query("offset") int offset,
                                                        @Query("location__slug") String slug);
 
@@ -81,10 +83,10 @@ public interface ApiInterface {
     Call<UserDetailsModel> logoutUser();
 
     @GET("posts")
-    Call<List<ProductModel>> getAllAds();
+    Call<List<ProductModel>> getAllAds(@Header("Accept-Language")String lang);
 
     @GET("locations/")
-    Call<List<LocationsModel>> getAllLocations();
+    Call<List<LocationsModel>> getAllLocations(@Header("Accept-Language")String lang);
 
     @PATCH("account/auth/profile/")
     Call<User> updateProfile(@Header("Authorization") String token, @Body User user);
@@ -101,7 +103,7 @@ public interface ApiInterface {
     Call<UserDetailsModel> updatePassword(@Header("Authorization") String token, @Body UserDetailsModel user);
 
     @GET("posts/{id}/")
-    Call<AdDetails> getAdDetails(@Path("id") int id);
+    Call<AdDetails> getAdDetails(@Header("Accept-Language")String lang,@Path("id") int id);
 
     @GET("posts/{id}/bids")
     Call<List<BidModel>> getBids(@Path("id") int id);
@@ -121,7 +123,8 @@ public interface ApiInterface {
                                       @Field("ad") int adId);
 
     @GET("favourite-posts/")
-    Call<List<FavouriteAds>> getFavouriteAds(@Header("Authorization") String token);
+    Call<List<FavouriteAds>> getFavouriteAds(@Header("Authorization") String token,
+                                             @Header("Accept-Language")String lang);
 
     @GET("myposts/")
     Call<List<FavouriteAdDetails>> getMyAds(@Header("Authorization") String token);

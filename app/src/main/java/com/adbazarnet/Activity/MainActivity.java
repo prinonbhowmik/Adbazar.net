@@ -53,16 +53,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
-        editor.putString("lang", "en");
-        editor.apply();
+        sharedPreferences = getSharedPreferences("MyRef", MODE_PRIVATE);
+
         getLocale();
 
         init();
 
         Intent intent = getIntent();
         loadFragment = intent.getStringExtra("fragment");
-        sharedPreferences = getSharedPreferences("MyRef", MODE_PRIVATE);
+
         id = sharedPreferences.getInt("id", 0);
         loggedIn = sharedPreferences.getInt("loggedIn", 0);
         if (id != 0) {
@@ -302,8 +301,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             });
 
                             dialog.setCancelable(false);
-                            dialog.show();
-
+                            if (!isFinishing()) {
+                                dialog.show();
+                            }
                             break;
                         }
                 }
@@ -315,14 +315,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void getLocale() {
 
-        lang = sharedPreferences.getString("lang", "en");
+        lang = sharedPreferences.getString("lang", "");
 
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
         Configuration configuration = new Configuration(getResources().getConfiguration());
         configuration.locale = locale;
         getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
-
 
     }
 
@@ -374,6 +373,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
                         editor.putString("lang", "en");
                         editor.apply();
+                        startActivity(getIntent());
                     }
                 });
                 alertDialog.setNegativeButton("বাংলা", new DialogInterface.OnClickListener() {
@@ -387,6 +387,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
                         editor.putString("lang", "bn");
                         editor.apply();
+                        startActivity(getIntent());
                     }
                 });
                 alertDialog.setCancelable(false);

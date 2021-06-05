@@ -4,6 +4,7 @@
     <string name="sell_item"><u>Sell Item</u></string>
     <string name="buy_item"><u>Buy Item</u></string>
     <string name="all_ads">All Ads</string>
+    <string name="ads"> Ads</string>
     <string name="bids">Bids</string>
     <string name="bride_groom">Bride/Groom</string>
     <string name="log_in">Log In</string>
@@ -31,4 +32,8 @@
     <string name="membership">"  Membership"</string>
     <string name="profile">"  Profile"</string>
     <string name="logout">"  Logout"</string>
+    <string name="category">Category</string>
+    <string name="location">Location</string>
+    <string name="all_category">All Category</string>
+    <string name="all_location">All Location</string>
 </resources>

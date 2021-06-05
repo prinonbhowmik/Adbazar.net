@@ -42,7 +42,7 @@ public class FavouriteFragment extends Fragment {
     private RecyclerView favouriteRecycler;
     private List<FavouriteAds> adsList;
     private FavouriteAdsAdapter adapter;
-    private String token;
+    private String token,lang;
     private SharedPreferences sharedPreferences;
     private ImageView fav_navIcon;
     private DrawerLayout drawerLayout;
@@ -68,7 +68,7 @@ public class FavouriteFragment extends Fragment {
             getActivity().finish();
         }
         else{
-            Call<List<FavouriteAds>> call= ApiUtils.getUserService().getFavouriteAds("Token "+token);
+            Call<List<FavouriteAds>> call= ApiUtils.getUserService().getFavouriteAds("Token "+token,lang);
             call.enqueue(new Callback<List<FavouriteAds>>() {
                 @Override
                 public void onResponse(Call<List<FavouriteAds>> call, Response<List<FavouriteAds>> response) {
@@ -98,6 +98,7 @@ public class FavouriteFragment extends Fragment {
         adsList = new ArrayList<>();
         sharedPreferences = getContext().getSharedPreferences("MyRef", MODE_PRIVATE);
         token = sharedPreferences.getString("token",null);
+        lang = sharedPreferences.getString("lang",null);
 
     }
 

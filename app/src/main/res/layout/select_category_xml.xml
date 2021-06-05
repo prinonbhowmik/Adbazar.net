@@ -54,7 +54,7 @@
                     android:fontFamily="@font/roboto"
                     android:padding="10dp"
                     android:textColor="#000"
-                    android:text="Categories"
+                    android:text="@string/category"
                     android:textSize="20sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/categoryHeader"
             android:drawableLeft="@drawable/ic_dashboard_1_"
-            android:text=" All Category"
+            android:text="@string/all_category"
             android:layout_centerVertical="true"
             android:padding="10dp"
             android:textSize="18sp"

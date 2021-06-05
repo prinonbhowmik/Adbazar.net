@@ -14,7 +14,7 @@
     <string name="post">"পোস্ট "</string>
     <string name="chat">"চ্যাট "</string>
     <string name="account">"একাউন্ট "</string>
-    <string name="enter_keyword_here">আপনি যা অনুসন্ধান করছেন তা টাইপ করুন</string>
+    <string name="enter_keyword_here">অনুসন্ধান টাইপ করুন</string>
     <string name="let_s_post_an_ad_choose_any_option_below">আপনি যে সেবাটি নিতে চান সেটি নির্বাচন করুন</string>
     <string name="sell_an_item_or_service">কোনো কিছু বিক্রি করুন</string>
     <string name="rent_something">কোনো কিছু ভাড়া দিন</string>
@@ -30,4 +30,9 @@
     <string name="profile">"প্রোফাইল "</string>
     <string name="logout">"লগ আউট "</string>
     <string name="favourite2">"  ফেভারিট"</string>
+    <string name="category">"ক্যাটাগরি "</string>
+    <string name="location">"লোকেশন "</string>
+    <string name="ads">"বিজ্ঞাপন "</string>
+    <string name="all_category">"সকল ক্যাটাগরি "</string>
+    <string name="all_location">"সকল লোকেশন "</string>
 </resources>

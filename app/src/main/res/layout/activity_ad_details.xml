@@ -1,1053 +1,1079 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.AdDetailsActivity">
+    android:id="@+id/drawerLayout"
+    tools:context=".Activity.AdDetailsActivity"
+    tools:openDrawer="start">
 
-    <RelativeLayout
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/theme">
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/navIcon"
-            android:layout_width="25sp"
-            android:layout_height="25sp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:src="@drawable/ic_menu" />
+       <RelativeLayout
+           android:id="@+id/toolbar"
+           android:layout_width="match_parent"
+           android:layout_height="60dp"
+           android:background="@color/theme">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_toEndOf="@+id/navIcon"
-            android:layout_toRightOf="@+id/navIcon"
-            android:fontFamily="@font/comfortaa"
-            android:gravity="center_vertical"
-            android:text="AdBazar.net"
-            android:textColor="@color/white"
-            android:textSize="21sp" />
+           <ImageView
+               android:id="@+id/navIcon"
+               android:layout_width="25sp"
+               android:layout_height="25sp"
+               android:layout_centerVertical="true"
+               android:layout_marginStart="20dp"
+               android:layout_marginLeft="20dp"
+               android:src="@drawable/ic_menu" />
 
-        <ImageView
-            android:id="@+id/homeSearchIV"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/ic_home_search" />
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_centerVertical="true"
+               android:layout_marginStart="20dp"
+               android:layout_marginLeft="10dp"
+               android:layout_toEndOf="@+id/navIcon"
+               android:layout_toRightOf="@+id/navIcon"
+               android:fontFamily="@font/comfortaa"
+               android:gravity="center_vertical"
+               android:text="AdBazar.net"
+               android:textColor="@color/white"
+               android:textSize="21sp" />
 
-    </RelativeLayout>
+           <ImageView
+               android:id="@+id/homeSearchIV"
+               android:layout_width="15dp"
+               android:layout_height="15dp"
+               android:layout_alignParentEnd="true"
+               android:layout_alignParentRight="true"
+               android:layout_centerVertical="true"
+               android:layout_marginEnd="20dp"
+               android:layout_marginRight="20dp"
+               android:src="@drawable/ic_home_search" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar"
-        android:layout_above="@+id/bottom_menu"
-        android:background="#D8D7D7">
+       </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+       <ScrollView
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_below="@+id/toolbar"
+           android:layout_above="@+id/bottom_menu"
+           android:background="#D8D7D7">
 
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent">
 
-            <RelativeLayout
-                android:id="@+id/layout1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:background="@drawable/category_layout_design"
-                android:backgroundTint="#fff">
-
-                <TextView
-                    android:id="@+id/header"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/category_header_layout"
-                    android:fontFamily="@font/roboto"
-                    android:padding="10dp"
-                    android:text=" Ad Details"
-                    android:textColor="#000"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/sliderCardView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/header"
-                    app:cardCornerRadius="6dp">
-
-                    <com.smarteist.autoimageslider.SliderView
-                        android:id="@+id/imageSlider"
-                        android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        app:sliderAnimationDuration="2000"
-                        app:sliderAutoCycleDirection="back_and_forth"
-                        app:sliderAutoCycleEnabled="true"
-                        app:sliderIndicatorAnimationDuration="600"
-                        app:sliderIndicatorGravity="center_horizontal|bottom"
-                        app:sliderIndicatorMargin="15dp"
-                        app:sliderIndicatorOrientation="horizontal"
-                        app:sliderIndicatorPadding="3dp"
-                        app:sliderIndicatorRadius="2dp"
-                        app:sliderIndicatorSelectedColor="#5A5A5A"
-                        app:sliderIndicatorUnselectedColor="#FFF"
-                        app:sliderScrollTimeInSec="4"
-                        app:sliderStartAutoCycle="true" />
-
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:id="@+id/productName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/sliderCardView"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/roboto"
-                    android:textColor="#343a40"
-                    android:textFontWeight="700"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/productPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/productName"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/roboto"
-                    android:textColor="#ff4500"
-                    android:textFontWeight="700"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/uploadTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/productPrice"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/roboto"
-                    android:textColor="#646464"
-                    android:textFontWeight="700"
-                    android:textSize="16sp" />
-
-                <View
-                    android:id="@+id/view1"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@id/uploadTime"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="#e5e5e5" />
 
                <RelativeLayout
-                   android:id="@+id/categoryLayout"
-                   android:layout_below="@+id/view1"
+                   android:id="@+id/layout1"
                    android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
-                   <TextView
-                       android:id="@+id/txt1"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_margin="10dp"
-                       android:drawableLeft="@drawable/ic_next"
-                       android:fontFamily="@font/roboto"
-                       android:text="  Category :"
-                       android:textColor="#646464"
-                       android:textFontWeight="700"
-                       android:textSize="18sp" />
+                   android:layout_height="wrap_content"
+                   android:layout_margin="15dp"
+                   android:background="@drawable/category_layout_design"
+                   android:backgroundTint="#fff">
 
                    <TextView
-                       android:id="@+id/categoryTv"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_marginTop="10dp"
-                       android:layout_toEndOf="@+id/txt1"
-                       android:fontFamily="@font/roboto"
-                       android:textColor="#646464"
-                       android:textSize="18sp" />
-               </RelativeLayout>
-
-               <RelativeLayout
-                   android:id="@+id/conditionLayout"
-                   android:layout_below="@+id/categoryLayout"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
-                   <TextView
-                       android:id="@+id/txt2"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_margin="10dp"
-                       android:drawableLeft="@drawable/ic_next"
-                       android:fontFamily="@font/roboto"
-                       android:text="  Condition :"
-                       android:textColor="#646464"
-                       android:textFontWeight="700"
-                       android:textSize="18sp" />
-
-                   <TextView
-                       android:id="@+id/conditionTv"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_marginTop="10dp"
-                       android:layout_toEndOf="@+id/txt2"
-                       android:fontFamily="@font/roboto"
-                       android:textColor="#646464"
-                       android:textSize="18sp" />
-               </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/modelYearLayout"
-                    android:layout_below="@+id/conditionLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/txtMY"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:drawableLeft="@drawable/ic_next"
-                        android:fontFamily="@font/roboto"
-                        android:text="  Model and Year :"
-                        android:textColor="#646464"
-                        android:visibility="gone"
-                        android:textFontWeight="700"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/modelYearTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@+id/txtMY"
-                        android:fontFamily="@font/roboto"
-                        android:textColor="#646464"
-                        android:visibility="gone"
-                        android:textSize="18sp" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/mileageLayout"
-                    android:layout_below="@+id/modelYearLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/txtM"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:drawableLeft="@drawable/ic_next"
-                        android:fontFamily="@font/roboto"
-                        android:text="  Mileage :"
-                        android:textColor="#646464"
-                        android:visibility="gone"
-                        android:textFontWeight="700"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/mileageTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@+id/txtM"
-                        android:fontFamily="@font/roboto"
-                        android:textColor="#646464"
-                        android:visibility="gone"
-                        android:textSize="18sp" />
-
-                </RelativeLayout>
-
-
-                <RelativeLayout
-                   android:id="@+id/warrantyLayout"
-                   android:layout_below="@+id/mileageLayout"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
-                   <TextView
-                       android:id="@+id/txt3"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_margin="10dp"
-                       android:drawableLeft="@drawable/ic_next"
-                       android:fontFamily="@font/roboto"
-                       android:text="  Warranty :"
-                       android:textColor="#646464"
-                       android:visibility="gone"
-                       android:textFontWeight="700"
-                       android:textSize="18sp" />
-
-                   <TextView
-                       android:id="@+id/warrantyTv"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_marginTop="10dp"
-                       android:layout_toEndOf="@+id/txt3"
-                       android:fontFamily="@font/roboto"
-                       android:textColor="#646464"
-                       android:visibility="gone"
-                       android:textSize="18sp" />
-
-               </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/jobTypeLayout"
-                    android:layout_below="@+id/warrantyLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/jobTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:drawableLeft="@drawable/ic_next"
-                        android:fontFamily="@font/roboto"
-                        android:text="  Job Type :"
-                        android:textColor="#646464"
-                        android:textFontWeight="700"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/jobTypeTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@+id/jobTv"
-                        android:fontFamily="@font/roboto"
-                        android:textColor="#646464"
-                        android:textSize="18sp" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/vacancyLayout"
-                    android:layout_below="@+id/jobTypeLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/txtV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:drawableLeft="@drawable/ic_next"
-                        android:fontFamily="@font/roboto"
-                        android:text="  Total Vacancy :"
-                        android:textColor="#646464"
-                        android:textFontWeight="700"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/vacancyTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@+id/txtV"
-                        android:fontFamily="@font/roboto"
-                        android:textColor="#646464"
-                        android:textSize="18sp" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/deadlineLayout"
-                    android:layout_below="@+id/vacancyLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/txtD"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:drawableLeft="@drawable/ic_next"
-                        android:fontFamily="@font/roboto"
-                        android:text="  Application Deadline :"
-                        android:textColor="#646464"
-                        android:textFontWeight="700"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/deadlineTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@+id/txtD"
-                        android:fontFamily="@font/roboto"
-                        android:textColor="#646464"
-                        android:textSize="18sp" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/requirmentLayout"
-                    android:layout_below="@+id/deadlineLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/txtR"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:drawableLeft="@drawable/ic_next"
-                        android:fontFamily="@font/roboto"
-                        android:text="  Minimum Requirement :"
-                        android:textColor="#646464"
-                        android:textFontWeight="700"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/requirmentTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@+id/txtR"
-                        android:fontFamily="@font/roboto"
-                        android:textColor="#646464"
-                        android:textSize="18sp" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/addressLayout"
-                    android:layout_below="@+id/requirmentLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/txtA"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:drawableLeft="@drawable/ic_next"
-                        android:fontFamily="@font/roboto"
-                        android:text="  Address :"
-                        android:textColor="#646464"
-                        android:textFontWeight="700"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/addressTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@+id/txtA"
-                        android:fontFamily="@font/roboto"
-                        android:textColor="#646464"
-                        android:textSize="18sp" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/landLayout"
-                    android:layout_below="@+id/addressLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/txtL"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:drawableLeft="@drawable/ic_next"
-                        android:fontFamily="@font/roboto"
-                        android:text="  Address :"
-                        android:textColor="#646464"
-                        android:textFontWeight="700"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/landTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@+id/txtL"
-                        android:fontFamily="@font/roboto"
-                        android:textColor="#646464"
-                        android:textSize="18sp" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/otherLayout"
-                    android:layout_below="@+id/addressLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/txtO"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:drawableLeft="@drawable/ic_next"
-                        android:fontFamily="@font/roboto"
-                        android:text="  Other Information :"
-                        android:textColor="#646464"
-                        android:textFontWeight="700"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/otherTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@+id/txtO"
-                        android:fontFamily="@font/roboto"
-                        android:textColor="#646464"
-                        android:textSize="18sp" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/websiteLayout"
-                    android:layout_below="@+id/otherLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/txtW"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:drawableLeft="@drawable/ic_next"
-                        android:fontFamily="@font/roboto"
-                        android:text="  Company Website :"
-                        android:textColor="#646464"
-                        android:textFontWeight="700"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/websiteTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@+id/txtW"
-                        android:fontFamily="@font/roboto"
-                        android:textColor="#17a2b8"
-                        android:textSize="18sp" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/attchmentLayout"
-                    android:layout_below="@+id/websiteLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/txtAtt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:drawableLeft="@drawable/ic_next"
-                        android:fontFamily="@font/roboto"
-                        android:text="  Attachment :"
-                        android:textColor="#646464"
-                        android:textFontWeight="700"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/attachmentTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@+id/txtAtt"
-                        android:fontFamily="@font/roboto"
-                        android:text=" Download"
-                        android:textColor="#17a2b8"
-                        android:textSize="18sp" />
-
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/txt4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/attchmentLayout"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="@font/roboto"
-                    android:text=" Product Description:"
-                    android:textColor="#646464"
-                    android:textSize="18sp" />
-
-
-
-                <RelativeLayout
-                    android:id="@+id/descriptionLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt4"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/category_layout_design">
-
-                    <TextView
-                        android:id="@+id/descriptionTv"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:textColor="#000"
-                        android:textSize="20sp" />
-
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/favouriteTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/descriptionLayout"
-                    android:layout_margin="15dp"
-                    android:background="@drawable/textview_design"
-                    android:drawableLeft="@drawable/ic_favorite_heart_button"
-                    android:fontFamily="@font/roboto"
-                    android:padding="10dp"
-                    android:text="  Favourite"
-                    android:textColor="#646464"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/shareTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/descriptionLayout"
-                    android:layout_margin="15dp"
-                    android:layout_toEndOf="@+id/favouriteTv"
-                    android:background="@drawable/textview_design"
-                    android:drawableLeft="@drawable/ic_baseline_share_24"
-                    android:fontFamily="@font/roboto"
-                    android:padding="10dp"
-                    android:text="  Share"
-                    android:textColor="#646464"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/layout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/layout1"
-                android:layout_margin="15dp"
-                android:background="@drawable/category_layout_design">
-
-                <RelativeLayout
-                    android:id="@+id/relatedLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:background="@drawable/category_layout_design">
-
-                    <TextView
-                        android:id="@+id/header2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/category_header_layout"
-                        android:fontFamily="@font/roboto"
-                        android:padding="10dp"
-                        android:text=" Related Ads"
-                        android:textColor="#000"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/relatedProductRecycler"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/header2" />
-
-                    <TextView
-                        android:id="@+id/noDataTv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/header2"
-                        android:layout_margin="20dp"
-                        android:text="No Related ad found !"
-                        android:textColor="#222"
-                        android:textSize="20sp"
-                        android:visibility="gone" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/bidLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:visibility="gone"
-                    android:background="@drawable/category_layout_design">
-
-                    <TextView
-                        android:id="@+id/bidHeader"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/category_header_layout"
-                        android:fontFamily="@font/roboto"
-                        android:padding="10dp"
-                        android:text=" Place Bid"
-                        android:textColor="#000"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                   <RelativeLayout
-                       android:id="@+id/l2"
+                       android:id="@+id/header"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
-                       android:layout_below="@+id/bidHeader">
+                       android:background="@drawable/category_header_layout"
+                       android:fontFamily="@font/roboto"
+                       android:padding="10dp"
+                       android:text=" Ad Details"
+                       android:textColor="#000"
+                       android:textSize="20sp"
+                       android:textStyle="bold" />
 
-                       <androidx.recyclerview.widget.RecyclerView
-                           android:id="@+id/bidRecycler"
+                   <androidx.cardview.widget.CardView
+                       android:id="@+id/sliderCardView"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/header"
+                       app:cardCornerRadius="6dp">
+
+                       <com.smarteist.autoimageslider.SliderView
+                           android:id="@+id/imageSlider"
                            android:layout_width="match_parent"
-                           android:layout_height="400dp" />
+                           android:layout_height="250dp"
+                           app:sliderAnimationDuration="2000"
+                           app:sliderAutoCycleDirection="back_and_forth"
+                           app:sliderAutoCycleEnabled="true"
+                           app:sliderIndicatorAnimationDuration="600"
+                           app:sliderIndicatorGravity="center_horizontal|bottom"
+                           app:sliderIndicatorMargin="15dp"
+                           app:sliderIndicatorOrientation="horizontal"
+                           app:sliderIndicatorPadding="3dp"
+                           app:sliderIndicatorRadius="2dp"
+                           app:sliderIndicatorSelectedColor="#5A5A5A"
+                           app:sliderIndicatorUnselectedColor="#FFF"
+                           app:sliderScrollTimeInSec="4"
+                           app:sliderStartAutoCycle="true" />
+
+                   </androidx.cardview.widget.CardView>
+
+                   <TextView
+                       android:id="@+id/productName"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/sliderCardView"
+                       android:layout_marginLeft="10dp"
+                       android:layout_marginTop="10dp"
+                       android:fontFamily="@font/roboto"
+                       android:textColor="#343a40"
+                       android:textFontWeight="700"
+                       android:textSize="18sp" />
+
+                   <TextView
+                       android:id="@+id/productPrice"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/productName"
+                       android:layout_marginLeft="10dp"
+                       android:layout_marginTop="10dp"
+                       android:fontFamily="@font/roboto"
+                       android:textColor="#ff4500"
+                       android:textFontWeight="700"
+                       android:textSize="18sp" />
+
+                   <TextView
+                       android:id="@+id/uploadTime"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/productPrice"
+                       android:layout_marginLeft="10dp"
+                       android:layout_marginTop="10dp"
+                       android:fontFamily="@font/roboto"
+                       android:textColor="#646464"
+                       android:textFontWeight="700"
+                       android:textSize="16sp" />
+
+                   <View
+                       android:id="@+id/view1"
+                       android:layout_width="match_parent"
+                       android:layout_height="1dp"
+                       android:layout_below="@id/uploadTime"
+                       android:layout_marginLeft="10dp"
+                       android:layout_marginTop="20dp"
+                       android:layout_marginRight="10dp"
+                       android:layout_marginBottom="20dp"
+                       android:background="#e5e5e5" />
+
+                   <RelativeLayout
+                       android:id="@+id/categoryLayout"
+                       android:layout_below="@+id/view1"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+                       <TextView
+                           android:id="@+id/txt1"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_margin="10dp"
+                           android:drawableLeft="@drawable/ic_next"
+                           android:fontFamily="@font/roboto"
+                           android:text="  Category :"
+                           android:textColor="#646464"
+                           android:textFontWeight="700"
+                           android:textSize="18sp" />
 
                        <TextView
-                           android:id="@+id/noBidTv"
+                           android:id="@+id/categoryTv"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="10dp"
+                           android:layout_toEndOf="@+id/txt1"
+                           android:fontFamily="@font/roboto"
+                           android:textColor="#646464"
+                           android:textSize="18sp" />
+                   </RelativeLayout>
+
+                   <RelativeLayout
+                       android:id="@+id/conditionLayout"
+                       android:layout_below="@+id/categoryLayout"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+                       <TextView
+                           android:id="@+id/txt2"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_margin="10dp"
+                           android:drawableLeft="@drawable/ic_next"
+                           android:fontFamily="@font/roboto"
+                           android:text="  Condition :"
+                           android:textColor="#646464"
+                           android:textFontWeight="700"
+                           android:textSize="18sp" />
+
+                       <TextView
+                           android:id="@+id/conditionTv"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="10dp"
+                           android:layout_toEndOf="@+id/txt2"
+                           android:fontFamily="@font/roboto"
+                           android:textColor="#646464"
+                           android:textSize="18sp" />
+                   </RelativeLayout>
+
+                   <RelativeLayout
+                       android:id="@+id/modelYearLayout"
+                       android:layout_below="@+id/conditionLayout"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+                       <TextView
+                           android:id="@+id/txtMY"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_margin="10dp"
+                           android:drawableLeft="@drawable/ic_next"
+                           android:fontFamily="@font/roboto"
+                           android:text="  Model and Year :"
+                           android:textColor="#646464"
+                           android:visibility="gone"
+                           android:textFontWeight="700"
+                           android:textSize="18sp" />
+
+                       <TextView
+                           android:id="@+id/modelYearTv"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="10dp"
+                           android:layout_toEndOf="@+id/txtMY"
+                           android:fontFamily="@font/roboto"
+                           android:textColor="#646464"
+                           android:visibility="gone"
+                           android:textSize="18sp" />
+
+                   </RelativeLayout>
+
+                   <RelativeLayout
+                       android:id="@+id/mileageLayout"
+                       android:layout_below="@+id/modelYearLayout"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+                       <TextView
+                           android:id="@+id/txtM"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_margin="10dp"
+                           android:drawableLeft="@drawable/ic_next"
+                           android:fontFamily="@font/roboto"
+                           android:text="  Mileage :"
+                           android:textColor="#646464"
+                           android:visibility="gone"
+                           android:textFontWeight="700"
+                           android:textSize="18sp" />
+
+                       <TextView
+                           android:id="@+id/mileageTv"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="10dp"
+                           android:layout_toEndOf="@+id/txtM"
+                           android:fontFamily="@font/roboto"
+                           android:textColor="#646464"
+                           android:visibility="gone"
+                           android:textSize="18sp" />
+
+                   </RelativeLayout>
+
+
+                   <RelativeLayout
+                       android:id="@+id/warrantyLayout"
+                       android:layout_below="@+id/mileageLayout"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+                       <TextView
+                           android:id="@+id/txt3"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_margin="10dp"
+                           android:drawableLeft="@drawable/ic_next"
+                           android:fontFamily="@font/roboto"
+                           android:text="  Warranty :"
+                           android:textColor="#646464"
+                           android:visibility="gone"
+                           android:textFontWeight="700"
+                           android:textSize="18sp" />
+
+                       <TextView
+                           android:id="@+id/warrantyTv"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="10dp"
+                           android:layout_toEndOf="@+id/txt3"
+                           android:fontFamily="@font/roboto"
+                           android:textColor="#646464"
+                           android:visibility="gone"
+                           android:textSize="18sp" />
+
+                   </RelativeLayout>
+
+                   <RelativeLayout
+                       android:id="@+id/jobTypeLayout"
+                       android:layout_below="@+id/warrantyLayout"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+                       <TextView
+                           android:id="@+id/jobTv"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_margin="10dp"
+                           android:drawableLeft="@drawable/ic_next"
+                           android:fontFamily="@font/roboto"
+                           android:text="  Job Type :"
+                           android:textColor="#646464"
+                           android:textFontWeight="700"
+                           android:textSize="18sp" />
+
+                       <TextView
+                           android:id="@+id/jobTypeTv"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="10dp"
+                           android:layout_toEndOf="@+id/jobTv"
+                           android:fontFamily="@font/roboto"
+                           android:textColor="#646464"
+                           android:textSize="18sp" />
+
+                   </RelativeLayout>
+
+                   <RelativeLayout
+                       android:id="@+id/vacancyLayout"
+                       android:layout_below="@+id/jobTypeLayout"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+                       <TextView
+                           android:id="@+id/txtV"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_margin="10dp"
+                           android:drawableLeft="@drawable/ic_next"
+                           android:fontFamily="@font/roboto"
+                           android:text="  Total Vacancy :"
+                           android:textColor="#646464"
+                           android:textFontWeight="700"
+                           android:textSize="18sp" />
+
+                       <TextView
+                           android:id="@+id/vacancyTv"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="10dp"
+                           android:layout_toEndOf="@+id/txtV"
+                           android:fontFamily="@font/roboto"
+                           android:textColor="#646464"
+                           android:textSize="18sp" />
+
+                   </RelativeLayout>
+
+                   <RelativeLayout
+                       android:id="@+id/deadlineLayout"
+                       android:layout_below="@+id/vacancyLayout"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+                       <TextView
+                           android:id="@+id/txtD"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_margin="10dp"
+                           android:drawableLeft="@drawable/ic_next"
+                           android:fontFamily="@font/roboto"
+                           android:text="  Application Deadline :"
+                           android:textColor="#646464"
+                           android:textFontWeight="700"
+                           android:textSize="18sp" />
+
+                       <TextView
+                           android:id="@+id/deadlineTv"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="10dp"
+                           android:layout_toEndOf="@+id/txtD"
+                           android:fontFamily="@font/roboto"
+                           android:textColor="#646464"
+                           android:textSize="18sp" />
+
+                   </RelativeLayout>
+
+                   <RelativeLayout
+                       android:id="@+id/requirmentLayout"
+                       android:layout_below="@+id/deadlineLayout"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+                       <TextView
+                           android:id="@+id/txtR"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_margin="10dp"
+                           android:drawableLeft="@drawable/ic_next"
+                           android:fontFamily="@font/roboto"
+                           android:text="  Minimum Requirement :"
+                           android:textColor="#646464"
+                           android:textFontWeight="700"
+                           android:textSize="18sp" />
+
+                       <TextView
+                           android:id="@+id/requirmentTv"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="10dp"
+                           android:layout_toEndOf="@+id/txtR"
+                           android:fontFamily="@font/roboto"
+                           android:textColor="#646464"
+                           android:textSize="18sp" />
+
+                   </RelativeLayout>
+
+                   <RelativeLayout
+                       android:id="@+id/addressLayout"
+                       android:layout_below="@+id/requirmentLayout"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+                       <TextView
+                           android:id="@+id/txtA"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_margin="10dp"
+                           android:drawableLeft="@drawable/ic_next"
+                           android:fontFamily="@font/roboto"
+                           android:text="  Address :"
+                           android:textColor="#646464"
+                           android:textFontWeight="700"
+                           android:textSize="18sp" />
+
+                       <TextView
+                           android:id="@+id/addressTv"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="10dp"
+                           android:layout_toEndOf="@+id/txtA"
+                           android:fontFamily="@font/roboto"
+                           android:textColor="#646464"
+                           android:textSize="18sp" />
+
+                   </RelativeLayout>
+
+                   <RelativeLayout
+                       android:id="@+id/landLayout"
+                       android:layout_below="@+id/addressLayout"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+                       <TextView
+                           android:id="@+id/txtL"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_margin="10dp"
+                           android:drawableLeft="@drawable/ic_next"
+                           android:fontFamily="@font/roboto"
+                           android:text="  Address :"
+                           android:textColor="#646464"
+                           android:textFontWeight="700"
+                           android:textSize="18sp" />
+
+                       <TextView
+                           android:id="@+id/landTv"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="10dp"
+                           android:layout_toEndOf="@+id/txtL"
+                           android:fontFamily="@font/roboto"
+                           android:textColor="#646464"
+                           android:textSize="18sp" />
+
+                   </RelativeLayout>
+
+                   <RelativeLayout
+                       android:id="@+id/otherLayout"
+                       android:layout_below="@+id/addressLayout"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+                       <TextView
+                           android:id="@+id/txtO"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_margin="10dp"
+                           android:drawableLeft="@drawable/ic_next"
+                           android:fontFamily="@font/roboto"
+                           android:text="  Other Information :"
+                           android:textColor="#646464"
+                           android:textFontWeight="700"
+                           android:textSize="18sp" />
+
+                       <TextView
+                           android:id="@+id/otherTv"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="10dp"
+                           android:layout_toEndOf="@+id/txtO"
+                           android:fontFamily="@font/roboto"
+                           android:textColor="#646464"
+                           android:textSize="18sp" />
+
+                   </RelativeLayout>
+
+                   <RelativeLayout
+                       android:id="@+id/websiteLayout"
+                       android:layout_below="@+id/otherLayout"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+                       <TextView
+                           android:id="@+id/txtW"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_margin="10dp"
+                           android:drawableLeft="@drawable/ic_next"
+                           android:fontFamily="@font/roboto"
+                           android:text="  Company Website :"
+                           android:textColor="#646464"
+                           android:textFontWeight="700"
+                           android:textSize="18sp" />
+
+                       <TextView
+                           android:id="@+id/websiteTv"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="10dp"
+                           android:layout_toEndOf="@+id/txtW"
+                           android:fontFamily="@font/roboto"
+                           android:textColor="#17a2b8"
+                           android:textSize="18sp" />
+
+                   </RelativeLayout>
+
+                   <RelativeLayout
+                       android:id="@+id/attchmentLayout"
+                       android:layout_below="@+id/websiteLayout"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+                       <TextView
+                           android:id="@+id/txtAtt"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_margin="10dp"
+                           android:drawableLeft="@drawable/ic_next"
+                           android:fontFamily="@font/roboto"
+                           android:text="  Attachment :"
+                           android:textColor="#646464"
+                           android:textFontWeight="700"
+                           android:textSize="18sp" />
+
+                       <TextView
+                           android:id="@+id/attachmentTv"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="10dp"
+                           android:layout_toEndOf="@+id/txtAtt"
+                           android:fontFamily="@font/roboto"
+                           android:text=" Download"
+                           android:textColor="#17a2b8"
+                           android:textSize="18sp" />
+
+                   </RelativeLayout>
+
+                   <TextView
+                       android:id="@+id/txt4"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/attchmentLayout"
+                       android:layout_marginLeft="10dp"
+                       android:layout_marginTop="20dp"
+                       android:fontFamily="@font/roboto"
+                       android:text=" Product Description:"
+                       android:textColor="#646464"
+                       android:textSize="18sp" />
+
+
+
+                   <RelativeLayout
+                       android:id="@+id/descriptionLayout"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/txt4"
+                       android:layout_marginLeft="10dp"
+                       android:layout_marginRight="10dp"
+                       android:layout_marginBottom="10dp"
+                       android:background="@drawable/category_layout_design">
+
+                       <TextView
+                           android:id="@+id/descriptionTv"
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:layout_margin="5dp"
+                           android:textColor="#000"
+                           android:textSize="20sp" />
+
+                   </RelativeLayout>
+
+                   <TextView
+                       android:id="@+id/favouriteTv"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/descriptionLayout"
+                       android:layout_margin="15dp"
+                       android:background="@drawable/textview_design"
+                       android:drawableLeft="@drawable/ic_favorite_heart_button"
+                       android:fontFamily="@font/roboto"
+                       android:padding="10dp"
+                       android:text="  Favourite"
+                       android:textColor="#646464"
+                       android:textSize="18sp"
+                       android:textStyle="bold" />
+
+                   <TextView
+                       android:id="@+id/shareTv"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/descriptionLayout"
+                       android:layout_margin="15dp"
+                       android:layout_toEndOf="@+id/favouriteTv"
+                       android:background="@drawable/textview_design"
+                       android:drawableLeft="@drawable/ic_baseline_share_24"
+                       android:fontFamily="@font/roboto"
+                       android:padding="10dp"
+                       android:text="  Share"
+                       android:textColor="#646464"
+                       android:textSize="18sp"
+                       android:textStyle="bold" />
+
+               </RelativeLayout>
+
+               <RelativeLayout
+                   android:id="@+id/layout2"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_below="@+id/layout1"
+                   android:layout_margin="15dp"
+                   android:background="@drawable/category_layout_design">
+
+                   <RelativeLayout
+                       android:id="@+id/relatedLayout"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_margin="15dp"
+                       android:background="@drawable/category_layout_design">
+
+                       <TextView
+                           android:id="@+id/header2"
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
+                           android:background="@drawable/category_header_layout"
+                           android:fontFamily="@font/roboto"
+                           android:padding="10dp"
+                           android:text=" Related Ads"
+                           android:textColor="#000"
+                           android:textSize="20sp"
+                           android:textStyle="bold" />
+
+                       <androidx.recyclerview.widget.RecyclerView
+                           android:id="@+id/relatedProductRecycler"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_below="@+id/header2" />
+
+                       <TextView
+                           android:id="@+id/noDataTv"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_below="@id/header2"
                            android:layout_margin="20dp"
-                           android:text="No Bid found !"
+                           android:text="No Related ad found !"
                            android:textColor="#222"
                            android:textSize="20sp"
                            android:visibility="gone" />
+
                    </RelativeLayout>
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/l2"
-                        android:layout_marginTop="10dp"
-                        android:background="@color/theme">
+                   <RelativeLayout
+                       android:id="@+id/bidLayout"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_margin="15dp"
+                       android:visibility="gone"
+                       android:background="@drawable/category_layout_design">
 
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:background="#fff"
-                            app:cardCornerRadius="10dp"
-                            android:layout_margin="5dp">
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="#fff"
-                                android:weightSum="5">
-                                <EditText
-                                    android:id="@+id/bidEt"
-                                    android:layout_weight="3.5"
-                                    android:layout_width="0dp"
-                                    android:hint="Bid Here (max: 20)"
-                                    android:layout_height="match_parent"
-                                    android:background="@drawable/edittext_background"
-                                    android:textSize="18sp"
-                                    android:textColor="#000"
-                                    android:textColorHint="#AFABAB"
-                                    android:padding="10dp" />
-                                <TextView
-                                    android:id="@+id/bidBtn"
-                                    android:layout_weight="1.5"
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:text="Submit"
-                                    android:textAllCaps="false"
-                                    android:textSize="18sp"
-                                    android:background="#dc3545"
-                                    android:textColor="#fff"
-                                    android:padding="10dp" />
-                            </LinearLayout>
+                       <TextView
+                           android:id="@+id/bidHeader"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:background="@drawable/category_header_layout"
+                           android:fontFamily="@font/roboto"
+                           android:padding="10dp"
+                           android:text=" Place Bid"
+                           android:textColor="#000"
+                           android:textSize="20sp"
+                           android:textStyle="bold" />
 
-                        </androidx.cardview.widget.CardView>
+                       <RelativeLayout
+                           android:id="@+id/l2"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_below="@+id/bidHeader">
 
-                    </RelativeLayout>
+                           <androidx.recyclerview.widget.RecyclerView
+                               android:id="@+id/bidRecycler"
+                               android:layout_width="match_parent"
+                               android:layout_height="400dp" />
 
-                </RelativeLayout>
-            </RelativeLayout>
+                           <TextView
+                               android:id="@+id/noBidTv"
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               android:layout_margin="20dp"
+                               android:text="No Bid found !"
+                               android:textColor="#222"
+                               android:textSize="20sp"
+                               android:visibility="gone" />
+                       </RelativeLayout>
 
+                       <RelativeLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_below="@+id/l2"
+                           android:layout_marginTop="10dp"
+                           android:background="@color/theme">
 
+                           <androidx.cardview.widget.CardView
+                               android:layout_width="match_parent"
+                               android:layout_height="45dp"
+                               android:background="#fff"
+                               app:cardCornerRadius="10dp"
+                               android:layout_margin="5dp">
+                               <LinearLayout
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   android:background="#fff"
+                                   android:weightSum="5">
+                                   <EditText
+                                       android:id="@+id/bidEt"
+                                       android:layout_weight="3.5"
+                                       android:layout_width="0dp"
+                                       android:hint="Bid Here (max: 20)"
+                                       android:layout_height="match_parent"
+                                       android:background="@drawable/edittext_background"
+                                       android:textSize="18sp"
+                                       android:textColor="#000"
+                                       android:textColorHint="#AFABAB"
+                                       android:padding="10dp" />
+                                   <TextView
+                                       android:id="@+id/bidBtn"
+                                       android:layout_weight="1.5"
+                                       android:layout_width="0dp"
+                                       android:layout_height="match_parent"
+                                       android:text="Submit"
+                                       android:textAllCaps="false"
+                                       android:textSize="18sp"
+                                       android:background="#dc3545"
+                                       android:textColor="#fff"
+                                       android:padding="10dp" />
+                               </LinearLayout>
 
+                           </androidx.cardview.widget.CardView>
 
-            <RelativeLayout
-                android:id="@+id/sellerLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/layout2"
-                android:layout_margin="15dp"
-                android:background="@drawable/category_layout_design">
+                       </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/sellerHeader"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/category_header_layout"
-                    android:fontFamily="@font/roboto"
-                    android:padding="10dp"
-                    android:text=" Seller Information"
-                    android:textColor="#000"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/sellerProfileIv"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_below="@+id/sellerHeader"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="20dp" />
-
-                <TextView
-                    android:id="@+id/postedtxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/sellerHeader"
-                    android:layout_marginTop="20dp"
-                    android:layout_toEndOf="@+id/sellerProfileIv"
-                    android:fontFamily="@font/roboto"
-                    android:text="Posted By"
-                    android:textColor="#969696"
-                    android:textFontWeight="400"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/sellerNameTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/postedtxt"
-                    android:layout_marginBottom="25dp"
-                    android:layout_toEndOf="@+id/sellerProfileIv"
-                    android:fontFamily="@font/roboto"
-                    android:text=""
-                    android:textColor="#007bff"
-                    android:textFontWeight="400"
-                    android:textSize="16sp" />
-
-                <View
-                    android:id="@+id/view2"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/sellerNameTv"
-                    android:background="#e5e5e5" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/locationIv"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_below="@+id/view2"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="20dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_pin" />
-
-                <TextView
-                    android:id="@+id/locationtxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/view2"
-                    android:layout_marginTop="20dp"
-                    android:layout_toEndOf="@+id/locationIv"
-                    android:fontFamily="@font/roboto"
-                    android:text="Location"
-                    android:textColor="#969696"
-                    android:textFontWeight="400"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/LocationTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/locationtxt"
-                    android:layout_marginBottom="25dp"
-                    android:layout_toEndOf="@+id/locationIv"
-                    android:fontFamily="@font/roboto"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textFontWeight="400"
-                    android:textSize="16sp" />
-
-                <View
-                    android:id="@+id/view3"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/LocationTv"
-                    android:background="#e5e5e5" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/memberIv"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_below="@+id/view3"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="20dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_check_mark" />
-
-                <TextView
-                    android:id="@+id/membershiptxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/view3"
-                    android:layout_marginTop="20dp"
-                    android:layout_toEndOf="@+id/memberIv"
-                    android:fontFamily="@font/roboto"
-                    android:text="Membership"
-                    android:textColor="#969696"
-                    android:textFontWeight="400"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/membershipTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/membershiptxt"
-                    android:layout_marginBottom="25dp"
-                    android:layout_toEndOf="@+id/locationIv"
-                    android:fontFamily="@font/roboto"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textFontWeight="400"
-                    android:textSize="16sp" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/layout3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/sellerLayout"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="50dp"
-                android:background="@drawable/category_layout_design">
-
-                <TextView
-                    android:id="@+id/infoHeader"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/category_header_layout"
-                    android:fontFamily="@font/roboto"
-                    android:padding="10dp"
-                    android:text=" Safety Tips for Buyers"
-                    android:textColor="#000"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/help1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/infoHeader"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
-                    android:layout_marginTop="25dp"
-                    android:drawableLeft="@drawable/ic_baseline_arrow_forward_ios_24"
-                    android:fontFamily="@font/roboto"
-                    android:text="  Meet seller at a public place"
-                    android:textColor="#000"
-                    android:textFontWeight="400"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/help2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/help1"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
-                    android:layout_marginTop="25dp"
-                    android:drawableLeft="@drawable/ic_baseline_arrow_forward_ios_24"
-                    android:fontFamily="@font/roboto"
-                    android:text="  Check The item before you buy"
-                    android:textColor="#000"
-                    android:textFontWeight="400"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/help3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/help2"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginBottom="25dp"
-                    android:drawableLeft="@drawable/ic_baseline_arrow_forward_ios_24"
-                    android:fontFamily="@font/roboto"
-                    android:text="  Check The item before you buy"
-                    android:textColor="#000"
-                    android:textFontWeight="400"
-                    android:textSize="16sp" />
+                   </RelativeLayout>
+               </RelativeLayout>
 
 
 
-            </RelativeLayout>
 
-        </RelativeLayout>
-    </ScrollView>
+               <RelativeLayout
+                   android:id="@+id/sellerLayout"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_below="@+id/layout2"
+                   android:layout_margin="15dp"
+                   android:background="@drawable/category_layout_design">
 
-    <FrameLayout
-        android:id="@+id/contactLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bottom_menu"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp">
+                   <TextView
+                       android:id="@+id/sellerHeader"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:background="@drawable/category_header_layout"
+                       android:fontFamily="@font/roboto"
+                       android:padding="10dp"
+                       android:text=" Seller Information"
+                       android:textColor="#000"
+                       android:textSize="20sp"
+                       android:textStyle="bold" />
+
+                   <de.hdodenhof.circleimageview.CircleImageView
+                       android:id="@+id/sellerProfileIv"
+                       android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:layout_below="@+id/sellerHeader"
+                       android:layout_centerVertical="true"
+                       android:layout_margin="20dp" />
+
+                   <TextView
+                       android:id="@+id/postedtxt"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/sellerHeader"
+                       android:layout_marginTop="20dp"
+                       android:layout_toEndOf="@+id/sellerProfileIv"
+                       android:fontFamily="@font/roboto"
+                       android:text="Posted By"
+                       android:textColor="#969696"
+                       android:textFontWeight="400"
+                       android:textSize="16sp" />
+
+                   <TextView
+                       android:id="@+id/sellerNameTv"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/postedtxt"
+                       android:layout_marginBottom="25dp"
+                       android:layout_toEndOf="@+id/sellerProfileIv"
+                       android:fontFamily="@font/roboto"
+                       android:text=""
+                       android:textColor="#007bff"
+                       android:textFontWeight="400"
+                       android:textSize="16sp" />
+
+                   <View
+                       android:id="@+id/view2"
+                       android:layout_width="match_parent"
+                       android:layout_height="1dp"
+                       android:layout_below="@+id/sellerNameTv"
+                       android:background="#e5e5e5" />
+
+                   <de.hdodenhof.circleimageview.CircleImageView
+                       android:id="@+id/locationIv"
+                       android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:layout_below="@+id/view2"
+                       android:layout_centerVertical="true"
+                       android:layout_margin="20dp"
+                       android:scaleType="centerCrop"
+                       android:src="@drawable/ic_pin" />
+
+                   <TextView
+                       android:id="@+id/locationtxt"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/view2"
+                       android:layout_marginTop="20dp"
+                       android:layout_toEndOf="@+id/locationIv"
+                       android:fontFamily="@font/roboto"
+                       android:text="Location"
+                       android:textColor="#969696"
+                       android:textFontWeight="400"
+                       android:textSize="16sp" />
+
+                   <TextView
+                       android:id="@+id/LocationTv"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/locationtxt"
+                       android:layout_marginBottom="25dp"
+                       android:layout_toEndOf="@+id/locationIv"
+                       android:fontFamily="@font/roboto"
+                       android:text=""
+                       android:textColor="#000"
+                       android:textFontWeight="400"
+                       android:textSize="16sp" />
+
+                   <View
+                       android:id="@+id/view3"
+                       android:layout_width="match_parent"
+                       android:layout_height="1dp"
+                       android:layout_below="@+id/LocationTv"
+                       android:background="#e5e5e5" />
+
+                   <de.hdodenhof.circleimageview.CircleImageView
+                       android:id="@+id/memberIv"
+                       android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:layout_below="@+id/view3"
+                       android:layout_centerVertical="true"
+                       android:layout_margin="20dp"
+                       android:scaleType="centerCrop"
+                       android:src="@drawable/ic_check_mark" />
+
+                   <TextView
+                       android:id="@+id/membershiptxt"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/view3"
+                       android:layout_marginTop="20dp"
+                       android:layout_toEndOf="@+id/memberIv"
+                       android:fontFamily="@font/roboto"
+                       android:text="Membership"
+                       android:textColor="#969696"
+                       android:textFontWeight="400"
+                       android:textSize="16sp" />
+
+                   <TextView
+                       android:id="@+id/membershipTV"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/membershiptxt"
+                       android:layout_marginBottom="25dp"
+                       android:layout_toEndOf="@+id/locationIv"
+                       android:fontFamily="@font/roboto"
+                       android:text=""
+                       android:textColor="#000"
+                       android:textFontWeight="400"
+                       android:textSize="16sp" />
+
+               </RelativeLayout>
+
+               <RelativeLayout
+                   android:id="@+id/layout3"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_below="@+id/sellerLayout"
+                   android:layout_marginLeft="15dp"
+                   android:layout_marginTop="30dp"
+                   android:layout_marginRight="15dp"
+                   android:layout_marginBottom="50dp"
+                   android:background="@drawable/category_layout_design">
+
+                   <TextView
+                       android:id="@+id/infoHeader"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:background="@drawable/category_header_layout"
+                       android:fontFamily="@font/roboto"
+                       android:padding="10dp"
+                       android:text=" Safety Tips for Buyers"
+                       android:textColor="#000"
+                       android:textSize="20sp"
+                       android:textStyle="bold" />
+
+                   <TextView
+                       android:id="@+id/help1"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/infoHeader"
+                       android:layout_marginLeft="25dp"
+                       android:layout_marginRight="25dp"
+                       android:layout_marginTop="25dp"
+                       android:drawableLeft="@drawable/ic_baseline_arrow_forward_ios_24"
+                       android:fontFamily="@font/roboto"
+                       android:text="  Meet seller at a public place"
+                       android:textColor="#000"
+                       android:textFontWeight="400"
+                       android:textSize="16sp" />
+
+                   <TextView
+                       android:id="@+id/help2"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/help1"
+                       android:layout_marginLeft="25dp"
+                       android:layout_marginRight="25dp"
+                       android:layout_marginTop="25dp"
+                       android:drawableLeft="@drawable/ic_baseline_arrow_forward_ios_24"
+                       android:fontFamily="@font/roboto"
+                       android:text="  Check The item before you buy"
+                       android:textColor="#000"
+                       android:textFontWeight="400"
+                       android:textSize="16sp" />
+
+                   <TextView
+                       android:id="@+id/help3"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/help2"
+                       android:layout_marginLeft="25dp"
+                       android:layout_marginRight="25dp"
+                       android:layout_marginTop="25dp"
+                       android:layout_marginBottom="25dp"
+                       android:drawableLeft="@drawable/ic_baseline_arrow_forward_ios_24"
+                       android:fontFamily="@font/roboto"
+                       android:text="  Check The item before you buy"
+                       android:textColor="#000"
+                       android:textFontWeight="400"
+                       android:textSize="16sp" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:orientation="horizontal"
-            android:weightSum="1">
 
-            <TextView
-                android:id="@+id/callNowTV"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="5dp"
-                android:layout_weight=".5"
-                android:background="@drawable/btn_background"
-                android:fontFamily="@font/roboto"
-                android:gravity="center"
-                android:text=" Call Now"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
+               </RelativeLayout>
 
-            <TextView
-                android:id="@+id/chatTV"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
-                android:layout_weight=".5"
-                android:background="@drawable/btn_background"
-                android:fontFamily="@font/roboto"
-                android:gravity="center"
-                android:text=" Chat"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
-        </LinearLayout>
-    </FrameLayout>
+           </RelativeLayout>
+       </ScrollView>
 
-    <com.ismaeldivita.chipnavigation.ChipNavigationBar
-        android:id="@+id/bottom_menu"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#fff"
-        android:layout_alignParentBottom="true"
-        app:cnb_menuResource="@menu/bottom_drawer_menu"
-        app:cnb_orientationMode="horizontal"
-        app:cnb_addLeftInset="false"
-        app:cnb_addRightInset="false"
-        app:cnb_addTopInset="false"
-        app:cnb_radius="8dp"
-        app:cnb_iconSize="24dp"
-        android:theme="@style/Widget.BottomNavigationView"/>
+       <FrameLayout
+           android:id="@+id/contactLayout"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_above="@+id/bottom_menu"
+           android:layout_marginStart="10dp"
+           android:layout_marginEnd="10dp"
+           android:layout_marginBottom="10dp">
 
-</RelativeLayout>
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="45dp"
+               android:orientation="horizontal"
+               android:weightSum="1">
+
+               <TextView
+                   android:id="@+id/callNowTV"
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                   android:layout_marginEnd="5dp"
+                   android:layout_weight=".5"
+                   android:background="@drawable/btn_background"
+                   android:fontFamily="@font/roboto"
+                   android:gravity="center"
+                   android:text=" Call Now"
+                   android:textColor="@color/white"
+                   android:textSize="15sp" />
+
+               <TextView
+                   android:id="@+id/chatTV"
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                   android:layout_marginStart="5dp"
+                   android:layout_weight=".5"
+                   android:background="@drawable/btn_background"
+                   android:fontFamily="@font/roboto"
+                   android:gravity="center"
+                   android:text=" Chat"
+                   android:textColor="@color/white"
+                   android:textSize="15sp" />
+           </LinearLayout>
+       </FrameLayout>
+
+       <com.ismaeldivita.chipnavigation.ChipNavigationBar
+           android:id="@+id/bottom_menu"
+           android:layout_width="match_parent"
+           android:layout_height="60dp"
+           android:background="#fff"
+           android:layout_alignParentBottom="true"
+           app:cnb_menuResource="@menu/bottom_drawer_menu"
+           app:cnb_orientationMode="horizontal"
+           app:cnb_addLeftInset="false"
+           app:cnb_addRightInset="false"
+           app:cnb_addTopInset="false"
+           app:cnb_radius="8dp"
+           app:cnb_iconSize="24dp"
+           android:theme="@style/Widget.BottomNavigationView"/>
+   </RelativeLayout>
+
+
+
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        style="@style/NavigationView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        android:background="@color/gray"
+        app:itemIconTint="#424e4e"
+        app:itemTextColor="@color/white"
+        app:menu="@menu/home_navigation_drawer" />
+
+
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

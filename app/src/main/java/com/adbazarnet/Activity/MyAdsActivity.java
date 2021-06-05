@@ -1,14 +1,21 @@
 package com.adbazarnet.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,15 +27,17 @@ import com.adbazarnet.Fragments.FavouriteFragment;
 import com.adbazarnet.Models.FavouriteAdDetails;
 import com.adbazarnet.Models.UserDetailsModel;
 import com.adbazarnet.R;
+import com.google.android.material.navigation.NavigationView;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MyAdsActivity extends AppCompatActivity {
+public class MyAdsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private RecyclerView myAdsRecycler;
     private List<FavouriteAdDetails> list;
     private MyAdsAdapter adapter;
@@ -37,6 +46,9 @@ public class MyAdsActivity extends AppCompatActivity {
     private ChipNavigationBar chipNavigationBar;
     private Dialog dialog;
     private int loggedIn;
+    private ImageView navIcon;
+    private NavigationView navigationView;
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -266,11 +278,87 @@ public class MyAdsActivity extends AppCompatActivity {
         token = sharedPreferences.getString("token",null);
         loggedIn = sharedPreferences.getInt("loggedIn",0);
         chipNavigationBar = findViewById(R.id.bottom_menu);
+
+        navIcon = findViewById(R.id.navIcon);
+        navigationView = findViewById(R.id.nav_view);
+        drawerLayout = findViewById(R.id.drawerLayout);
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().clear();
+        navigationView.inflateMenu(R.menu.home_navigation_drawer);
+        navigationView.getMenu().removeItem(R.id.login);
+
+        navIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(MyAdsActivity.this,MainActivity.class).putExtra("fragment","home"));
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.login:
+                startActivity(new Intent(MyAdsActivity.this, LoginActivity.class));
+                break;
+            case R.id.home:
+                startActivity(new Intent(MyAdsActivity.this, MainActivity.class)
+                        .putExtra("fragment","home"));
+                drawerLayout.closeDrawers();
+                break;
+            case R.id.bids:
+                startActivity(new Intent(MyAdsActivity.this, MainActivity.class)
+                        .putExtra("fragment","home"));
+                drawerLayout.closeDrawers();
+                break;
+            case R.id.contact:
+
+                break;
+            case R.id.language:
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                alertDialog.setMessage("Change Language");
+
+                alertDialog.setPositiveButton("English", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Locale locale = new Locale("en");
+                        Locale.setDefault(locale);
+                        Configuration configuration = new Configuration();
+                        configuration.locale = locale;
+                        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+                        SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
+                        editor.putString("lang", "en");
+                        editor.apply();
+                        startActivity(getIntent());
+                    }
+                });
+                alertDialog.setNegativeButton("বাংলা", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Locale locale = new Locale("bn");
+                        Locale.setDefault(locale);
+                        Configuration configuration = new Configuration();
+                        configuration.locale = locale;
+                        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+                        SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
+                        editor.putString("lang", "bn");
+                        editor.apply();
+                        startActivity(getIntent());
+                    }
+                });
+                alertDialog.setCancelable(false);
+                alertDialog.show();
+                break;
+
+        }
+
+        return false;
     }
 }

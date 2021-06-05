@@ -1,24 +1,31 @@
 package com.adbazarnet.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -47,6 +54,7 @@ import com.adbazarnet.Models.PostAdModel;
 import com.adbazarnet.Models.PostImageModel;
 import com.adbazarnet.Models.UserDetailsModel;
 import com.adbazarnet.R;
+import com.google.android.material.navigation.NavigationView;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -62,6 +70,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,7 +78,7 @@ import retrofit2.Response;
 
 import static com.adbazarnet.Activity.PostAdActivity.hideKeyboard;
 
-public class EditMyAdsActivity extends AppCompatActivity {
+public class EditMyAdsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static TextView locationTv, categoryTv;
     public static String ad_Type = null;
     public static TextView txt3, txt4, txt5, txt6, txtC, txtW, txtMY, txtM, txtL, txtA, txtS, txtF, txtJT, txtVC, txtMR, txtD, txtCE, txtWeb, txtAtt, txt87;
@@ -104,10 +113,13 @@ public class EditMyAdsActivity extends AppCompatActivity {
     private File file1, file2, file3, file4, file5;
     private static final int PERMISSION_REQUEST_CODE = 1;
     private static final int REQUEST_GALLERY = 200;
-    private String file_path;
+    private String file_path,lang;
     private Bitmap bitmap1, bitmap2, bitmap3, bitmap4, bitmap5;
     private ProgressDialog progressDialog;
     private boolean is_sell =false,is_bid = false,is_job=false;
+    private ImageView navIcon;
+    private NavigationView navigationView;
+    private DrawerLayout drawerLayout;
 
 
     @Override
@@ -116,6 +128,8 @@ public class EditMyAdsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_my_ads);
 
         init();
+
+        getLocale();
 
         Intent i = getIntent();
         adId = i.getIntExtra("id", 0);
@@ -132,7 +146,7 @@ public class EditMyAdsActivity extends AppCompatActivity {
                 RecyclerView categoriesRecycler = dialog.findViewById(R.id.categoriesRecycler);
                 categoriesRecycler.setLayoutManager(new LinearLayoutManager(EditMyAdsActivity.this));
 
-                Call<List<CategoriesModel>> call = apiInterface.getProductsCategories();
+                Call<List<CategoriesModel>> call = apiInterface.getProductsCategories(lang);
                 call.enqueue(new Callback<List<CategoriesModel>>() {
                     @Override
                     public void onResponse(Call<List<CategoriesModel>> call, Response<List<CategoriesModel>> response) {
@@ -187,7 +201,7 @@ public class EditMyAdsActivity extends AppCompatActivity {
 
                 allLocationTv.setVisibility(View.GONE);
 
-                Call<List<LocationsModel>> call = apiInterface.getAllLocations();
+                Call<List<LocationsModel>> call = apiInterface.getAllLocations(lang);
                 call.enqueue(new Callback<List<LocationsModel>>() {
                     @Override
                     public void onResponse(Call<List<LocationsModel>> call, Response<List<LocationsModel>> response) {
@@ -673,8 +687,20 @@ public class EditMyAdsActivity extends AppCompatActivity {
 
     }
 
+    private void getLocale() {
+
+        lang = sharedPreferences.getString("lang", "");
+
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration(getResources().getConfiguration());
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+
+    }
+
     private void getData() {
-        Call<AdDetails> call = apiInterface.getAdDetails(adId);
+        Call<AdDetails> call = apiInterface.getAdDetails(lang,adId);
         call.enqueue(new Callback<AdDetails>() {
             @Override
             public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
@@ -1946,6 +1972,21 @@ public class EditMyAdsActivity extends AppCompatActivity {
         token = sharedPreferences.getString("token", null);
         Log.d("TAGc",token);
         loggedIn = sharedPreferences.getInt("loggedIn", 0);
+
+        navIcon = findViewById(R.id.navIcon);
+        navigationView = findViewById(R.id.nav_view);
+        drawerLayout = findViewById(R.id.drawerLayout);
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().clear();
+        navigationView.inflateMenu(R.menu.home_navigation_drawer);
+        navigationView.getMenu().removeItem(R.id.login);
+
+        navIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
     }
 
     public void setNegotiable(View view) {
@@ -2051,4 +2092,63 @@ public class EditMyAdsActivity extends AppCompatActivity {
         return getBitmap;
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.login:
+                startActivity(new Intent(EditMyAdsActivity.this, LoginActivity.class));
+                break;
+            case R.id.home:
+                startActivity(new Intent(EditMyAdsActivity.this, MainActivity.class)
+                        .putExtra("fragment","home"));
+                drawerLayout.closeDrawers();
+                break;
+            case R.id.bids:
+                startActivity(new Intent(EditMyAdsActivity.this, MainActivity.class)
+                        .putExtra("fragment","home"));
+                drawerLayout.closeDrawers();
+                break;
+            case R.id.contact:
+
+                break;
+            case R.id.language:
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                alertDialog.setMessage("Change Language");
+
+                alertDialog.setPositiveButton("English", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Locale locale = new Locale("en");
+                        Locale.setDefault(locale);
+                        Configuration configuration = new Configuration();
+                        configuration.locale = locale;
+                        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+                        SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
+                        editor.putString("lang", "en");
+                        editor.apply();
+                        startActivity(getIntent());
+                    }
+                });
+                alertDialog.setNegativeButton("বাংলা", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Locale locale = new Locale("bn");
+                        Locale.setDefault(locale);
+                        Configuration configuration = new Configuration();
+                        configuration.locale = locale;
+                        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+                        SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
+                        editor.putString("lang", "bn");
+                        editor.apply();
+                        startActivity(getIntent());
+                    }
+                });
+                alertDialog.setCancelable(false);
+                alertDialog.show();
+                break;
+
+        }
+
+        return false;
+    }
 }
