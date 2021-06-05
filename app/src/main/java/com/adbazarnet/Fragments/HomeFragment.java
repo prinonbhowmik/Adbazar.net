@@ -3,6 +3,7 @@ package com.adbazarnet.Fragments;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.core.view.GravityCompat;
@@ -34,6 +35,7 @@ import com.adbazarnet.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -64,6 +66,8 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_home, container, false);
         init(view);
+
+        getLocale();
 
         getAllAds();
 
@@ -145,6 +149,16 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
         });
 
         return view;
+    }
+
+    private void getLocale() {
+        // lang = sharedPreferences.getString("lang","");
+        Locale locale = new Locale("bn");
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.locale = locale;
+        getActivity().getBaseContext().getResources().updateConfiguration(configuration, getActivity().getBaseContext().getResources().getDisplayMetrics());
+
     }
 
     private void getAllLocations(RecyclerView locationRecycler) {

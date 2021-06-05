@@ -279,4 +279,10 @@ public class DashboardActivity extends AppCompatActivity {
         creditTv = findViewById(R.id.creditTv);
         remaingTv = findViewById(R.id.remaingTv);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(DashboardActivity.this,MainActivity.class).putExtra("fragment","home"));
+    }
 }

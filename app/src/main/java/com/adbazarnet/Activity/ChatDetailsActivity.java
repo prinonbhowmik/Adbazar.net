@@ -309,4 +309,10 @@ public class ChatDetailsActivity extends AppCompatActivity {
         loggedIn = sharedPreferences.getInt("loggedIn",0);
         chipNavigationBar = findViewById(R.id.bottom_menu);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(ChatDetailsActivity.this,MainActivity.class).putExtra("fragment","chat"));
+    }
 }

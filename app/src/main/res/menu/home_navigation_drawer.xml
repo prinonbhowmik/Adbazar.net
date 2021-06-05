@@ -5,21 +5,24 @@
 
         <item
             android:id="@+id/home"
-            android:title="All Ads" />
+            android:title="@string/all_ads" />
 
         <item
             android:id="@+id/bids"
-            android:title="Bids" />
+            android:title="@string/bids" />
         <item
             android:id="@+id/bride"
-            android:title="Bride/Groom" />
+            android:title="@string/bride_groom" />
         <item
             android:id="@+id/login"
-            android:title="Log In" />
+            android:title="@string/log_in" />
 
         <item
             android:id="@+id/contact"
-            android:title="Contact" />
+            android:title="@string/contact" />
+        <item
+            android:id="@+id/language"
+            android:title="@string/change_language" />
 
 
     </group>

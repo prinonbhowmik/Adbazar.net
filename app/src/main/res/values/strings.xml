@@ -1,7 +1,34 @@
 <resources>
     <string name="app_name">AdBazar.net</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sell_item"><u>Sell Item</u></string>
     <string name="buy_item"><u>Buy Item</u></string>
+    <string name="all_ads">All Ads</string>
+    <string name="bids">Bids</string>
+    <string name="bride_groom">Bride/Groom</string>
+    <string name="log_in">Log In</string>
+    <string name="contact">Contact</string>
+    <string name="change_language">Change Language</string>
+    <string name="home">Home</string>
+    <string name="favourite">Favourite</string>
+    <string name="favourite2">  Favourite</string>
+    <string name="post">Post</string>
+    <string name="chat">Chat</string>
+    <string name="account">Account</string>
+    <string name="enter_keyword_here">Enter Keyword Here</string>
+    <string name="let_s_post_an_ad_choose_any_option_below">Let\'s post an ad. Choose any option below</string>
+    <string name="sell_an_item_or_service">Sell an item or service</string>
+    <string name="rent_something">Rent Something</string>
+    <string name="auction_something">Auction Something</string>
+    <string name="exchange_something">Exchange Something</string>
+    <string name="post_a_job_circular">Post a job circular</string>
+    <string name="bride_groom_ad">Bride Groom Ad</string>
+    <string name="look_for_something_to_buy">Look for something to buy</string>
+    <string name="look_for_something_to_rent">Look for something to rent</string>
+    <string name="close" translatable="false">Close</string>
+    <string name="dashboard">"  Dashboard"</string>
+    <string name="my_ads">"  My Ads"</string>
+    <string name="membership">"  Membership"</string>
+    <string name="profile">"  Profile"</string>
+    <string name="logout">"  Logout"</string>
 </resources>

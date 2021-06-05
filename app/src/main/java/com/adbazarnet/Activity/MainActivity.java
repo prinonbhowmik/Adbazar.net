@@ -7,9 +7,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -30,6 +33,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,32 +44,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private SharedPreferences sharedPreferences;
     private ChipNavigationBar chipNavigationBar;
-    private int id,loggedIn;
+    private int id, loggedIn;
     private Dialog dialog;
-    private String loadFragment = null;
+    private String loadFragment = null, lang = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
+        editor.putString("lang", "en");
+        editor.apply();
+        getLocale();
+
         init();
+
         Intent intent = getIntent();
         loadFragment = intent.getStringExtra("fragment");
-        sharedPreferences = getSharedPreferences("MyRef",MODE_PRIVATE);
-        id = sharedPreferences.getInt("id",0);
-        loggedIn = sharedPreferences.getInt("loggedIn",0);
-        if(id!=0){
+        sharedPreferences = getSharedPreferences("MyRef", MODE_PRIVATE);
+        id = sharedPreferences.getInt("id", 0);
+        loggedIn = sharedPreferences.getInt("loggedIn", 0);
+        if (id != 0) {
             navigationView.getMenu().removeItem(R.id.login);
         }
 
         if (loadFragment.equals("home")) {
             chipNavigationBar.setItemSelected(R.id.home, true);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
-        }else if(loadFragment.equals("favourite")){
+        } else if (loadFragment.equals("favourite")) {
             chipNavigationBar.setItemSelected(R.id.favourite, true);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FavouriteFragment()).commit();
-        }else if(loadFragment.equals("chat")){
+        } else if (loadFragment.equals("chat")) {
             chipNavigationBar.setItemSelected(R.id.chat, true);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ChatFragment()).commit();
         }
@@ -73,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int i) {
-                switch (i){
+                switch (i) {
 
                     case R.id.home:
                         FragmentTransaction home = getSupportFragmentManager().beginTransaction();
@@ -81,21 +91,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         home.commit();
                         break;
                     case R.id.favourite:
-                        if (loggedIn==0){
+                        if (loggedIn == 0) {
                             startActivity(new Intent(MainActivity.this, LoginActivity.class));
                             finish();
-                        }else {
+                        } else {
                             FragmentTransaction favourite = getSupportFragmentManager().beginTransaction();
                             favourite.replace(R.id.fragment_container, new FavouriteFragment());
                             favourite.commit();
                         }
                         break;
                     case R.id.adPost:
-                        if (loggedIn==0){
+                        if (loggedIn == 0) {
                             startActivity(new Intent(MainActivity.this, LoginActivity.class));
                             finish();
-                        }
-                        else {
+                        } else {
                             dialog = new Dialog(MainActivity.this);
                             dialog.setContentView(R.layout.post_ad_popup);
                             ImageView closeIv = dialog.findViewById(R.id.closeIv);
@@ -113,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(MainActivity.this,
-                                            PostAdActivity.class).putExtra("type","sell"));
+                                            PostAdActivity.class).putExtra("type", "sell"));
                                     finish();
                                     dialog.dismiss();
                                 }
@@ -122,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(MainActivity.this,
-                                            PostAdActivity.class).putExtra("type","rent"));
+                                            PostAdActivity.class).putExtra("type", "rent"));
                                     finish();
                                     dialog.dismiss();
                                 }
@@ -131,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(MainActivity.this,
-                                            PostAdActivity.class).putExtra("type","bid"));
+                                            PostAdActivity.class).putExtra("type", "bid"));
                                     finish();
                                     dialog.dismiss();
                                 }
@@ -140,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(MainActivity.this,
-                                            PostAdActivity.class).putExtra("type","exchange"));
+                                            PostAdActivity.class).putExtra("type", "exchange"));
                                     finish();
                                     dialog.dismiss();
                                 }
@@ -149,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(MainActivity.this,
-                                            PostAdActivity.class).putExtra("type","job"));
+                                            PostAdActivity.class).putExtra("type", "job"));
                                     finish();
                                     dialog.dismiss();
                                 }
@@ -158,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(MainActivity.this,
-                                            PostAdActivity.class).putExtra("type","lookforbuy"));
+                                            PostAdActivity.class).putExtra("type", "lookforbuy"));
                                     finish();
                                     dialog.dismiss();
                                 }
@@ -167,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(MainActivity.this,
-                                            PostAdActivity.class).putExtra("type","lookforrent"));
+                                            PostAdActivity.class).putExtra("type", "lookforrent"));
                                     finish();
                                     dialog.dismiss();
                                 }
@@ -192,25 +201,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         }
                         break;
                     case R.id.chat:
-                        if (loggedIn==0){
+                        if (loggedIn == 0) {
                             startActivity(new Intent(MainActivity.this, LoginActivity.class));
                             finish();
-                        }else {
+                        } else {
                             FragmentTransaction chat = getSupportFragmentManager().beginTransaction();
                             chat.replace(R.id.fragment_container, new ChatFragment());
                             chat.commit();
                         }
                         break;
                     case R.id.account:
-                        if (loggedIn == 0 ){
-                            startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                        if (loggedIn == 0) {
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
                             finish();
                             break;
-                        }else{
+                        } else {
                             //pop-up will be shown
                             dialog = new Dialog(MainActivity.this);
                             dialog.setContentView(R.layout.profile_option_xml);
-                            CardView close  = dialog.findViewById(R.id.closeTv);
+                            CardView close = dialog.findViewById(R.id.closeTv);
                             TextView dashboard = dialog.findViewById(R.id.dashboardTv);
                             TextView myAds = dialog.findViewById(R.id.myAdsTv);
                             TextView favouriteTv = dialog.findViewById(R.id.favouriteTv);
@@ -230,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             membership.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(MainActivity.this,MembershipActivity.class));
+                                    startActivity(new Intent(MainActivity.this, MembershipActivity.class));
                                     finish();
                                 }
                             });
@@ -238,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             myAds.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(MainActivity.this,MyAdsActivity.class));
+                                    startActivity(new Intent(MainActivity.this, MyAdsActivity.class));
                                 }
                             });
 
@@ -254,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             dashboard.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(MainActivity.this,DashboardActivity.class));
+                                    startActivity(new Intent(MainActivity.this, DashboardActivity.class));
                                     finish();
                                 }
                             });
@@ -262,7 +271,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             profile.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(MainActivity.this,ProfileActivity.class));
+                                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                                     finish();
                                 }
                             });
@@ -304,12 +313,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    private void getLocale() {
+
+        lang = sharedPreferences.getString("lang", "en");
+
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration(getResources().getConfiguration());
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+
+
+    }
+
     private void init() {
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().clear();
+        navigationView.inflateMenu(R.menu.home_navigation_drawer);
         navigationView.getMenu().getItem(0).setChecked(true);
-        chipNavigationBar=findViewById(R.id.bottom_menu);
+        chipNavigationBar = findViewById(R.id.bottom_menu);
 
     }
 
@@ -317,12 +341,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.login:
-                startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 break;
             case R.id.home:
                 FragmentTransaction home = getSupportFragmentManager().beginTransaction();
                 home.replace(R.id.fragment_container, new HomeFragment());
                 home.commit();
+                chipNavigationBar.setItemSelected(R.id.home, true);
                 drawerLayout.closeDrawers();
                 break;
             case R.id.bids:
@@ -334,8 +359,66 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.contact:
                 Toast.makeText(this, "Contact", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.language:
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                alertDialog.setMessage("Change Language");
+
+                alertDialog.setPositiveButton("English", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Locale locale = new Locale("en");
+                        Locale.setDefault(locale);
+                        Configuration configuration = new Configuration();
+                        configuration.locale = locale;
+                        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+                        SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
+                        editor.putString("lang", "en");
+                        editor.apply();
+                    }
+                });
+                alertDialog.setNegativeButton("বাংলা", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Locale locale = new Locale("bn");
+                        Locale.setDefault(locale);
+                        Configuration configuration = new Configuration();
+                        configuration.locale = locale;
+                        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+                        SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
+                        editor.putString("lang", "bn");
+                        editor.apply();
+                    }
+                });
+                alertDialog.setCancelable(false);
+                alertDialog.show();
+                break;
 
         }
         return false;
     }
+
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed();
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("Are you really want to exit?");
+
+        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                System.exit(0);
+            }
+        });
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alertDialog.setCancelable(false);
+        alertDialog.show();
+
+    }
+
+
 }

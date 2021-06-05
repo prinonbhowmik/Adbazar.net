@@ -6,27 +6,27 @@
         <item
             android:id="@+id/home"
             android:icon="@drawable/ic_home"
-            android:title="Home"
+            android:title="@string/home"
             app:cnb_iconColor="@color/theme"/>
         <item
             android:id="@+id/favourite"
             android:icon="@drawable/ic_favourite_heart"
-            android:title="Favourite"
+            android:title="@string/favourite"
             app:cnb_iconColor="@color/theme"/>
         <item
             android:id="@+id/adPost"
             android:icon="@drawable/ic_add"
-            android:title="Post"
+            android:title="@string/post"
             app:cnb_iconColor="@color/theme"/>
         <item
             android:id="@+id/chat"
             android:icon="@drawable/ic_chat"
-            android:title="Chat"
+            android:title="@string/chat"
             app:cnb_iconColor="@color/theme"/>
         <item
             android:id="@+id/account"
             android:icon="@drawable/ic_account"
-            android:title="Account"
+            android:title="@string/account"
             app:cnb_iconColor="@color/theme"/>
 
 

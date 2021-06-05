@@ -267,4 +267,10 @@ public class MyAdsActivity extends AppCompatActivity {
         loggedIn = sharedPreferences.getInt("loggedIn",0);
         chipNavigationBar = findViewById(R.id.bottom_menu);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(MyAdsActivity.this,MainActivity.class).putExtra("fragment","home"));
+    }
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AdBazar.net</string>
+    <string name="sell_item">বিক্রি করুন</string>
+    <string name="buy_item">কিনুন</string>
+    <string name="all_ads">সমস্ত বিজ্ঞাপন</string>
+    <string name="bids">" নিলামসমূহ"</string>
+    <string name="contact">" একাউন্ট"</string>
+    <string name="bride_groom">কনে / বর</string>
+    <string name="log_in">"লগ ইন "</string>
+    <string name="change_language">ভাষা পরিবর্তন</string>
+    <string name="home">"হোম "</string>
+    <string name="favourite">ফেভারিট</string>
+    <string name="post">"পোস্ট "</string>
+    <string name="chat">"চ্যাট "</string>
+    <string name="account">"একাউন্ট "</string>
+    <string name="enter_keyword_here">আপনি যা অনুসন্ধান করছেন তা টাইপ করুন</string>
+    <string name="let_s_post_an_ad_choose_any_option_below">আপনি যে সেবাটি নিতে চান সেটি নির্বাচন করুন</string>
+    <string name="sell_an_item_or_service">কোনো কিছু বিক্রি করুন</string>
+    <string name="rent_something">কোনো কিছু ভাড়া দিন</string>
+    <string name="auction_something">কোনো কিছু নিলাম করুন</string>
+    <string name="exchange_something">"কোনো কিছু এক্সচেঞ্জ করুন "</string>
+    <string name="post_a_job_circular">"চাকুরীর বিজ্ঞাপন দিন "</string>
+    <string name="bride_groom_ad">পাত্র/পাত্রীর বিজ্ঞাপন দিন</string>
+    <string name="look_for_something_to_buy">কোন কিছু কিনতে চাই</string>
+    <string name="look_for_something_to_rent">কোন কিছু ভাড়া নিতে চাই</string>
+    <string name="dashboard">"ড্যাশবোর্ড "</string>
+    <string name="my_ads">আমার বিজ্ঞাপন</string>
+    <string name="membership">"মেম্বারশিপ "</string>
+    <string name="profile">"প্রোফাইল "</string>
+    <string name="logout">"লগ আউট "</string>
+    <string name="favourite2">"  ফেভারিট"</string>
+</resources>

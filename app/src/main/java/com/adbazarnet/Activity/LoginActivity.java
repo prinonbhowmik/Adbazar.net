@@ -120,4 +120,10 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(new Intent(LoginActivity.this,SignupActivity.class));
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(LoginActivity.this,MainActivity.class).putExtra("fragment","home"));
+    }
 }

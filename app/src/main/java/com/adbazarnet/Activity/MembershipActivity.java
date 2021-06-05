@@ -268,4 +268,10 @@ public class MembershipActivity extends AppCompatActivity {
         memberRecycler.setLayoutManager(new GridLayoutManager(MembershipActivity.this,2));
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(MembershipActivity.this,MainActivity.class).putExtra("fragment","home"));
+    }
 }

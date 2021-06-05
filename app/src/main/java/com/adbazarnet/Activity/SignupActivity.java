@@ -92,4 +92,10 @@ public class SignupActivity extends AppCompatActivity {
         passLT = findViewById(R.id.password_Lt);
         signupBtn = findViewById(R.id.sign_upBtn);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(SignupActivity.this,LoginActivity.class));
+    }
 }
