@@ -24,11 +24,11 @@
     <string name="bride_groom_ad">পাত্র/পাত্রীর বিজ্ঞাপন দিন</string>
     <string name="look_for_something_to_buy">কোন কিছু কিনতে চাই</string>
     <string name="look_for_something_to_rent">কোন কিছু ভাড়া নিতে চাই</string>
-    <string name="dashboard">"ড্যাশবোর্ড "</string>
-    <string name="my_ads">আমার বিজ্ঞাপন</string>
-    <string name="membership">"মেম্বারশিপ "</string>
-    <string name="profile">"প্রোফাইল "</string>
-    <string name="logout">"লগ আউট "</string>
+    <string name="dashboard">  ড্যাশবোর্ড </string>
+    <string name="my_ads">  আমার বিজ্ঞাপন</string>
+    <string name="membership">"  মেম্বারশিপ "</string>
+    <string name="profile">"  প্রোফাইল "</string>
+    <string name="logout">"  লগ আউট "</string>
     <string name="favourite2">"  ফেভারিট"</string>
     <string name="category">"ক্যাটাগরি "</string>
     <string name="location">"লোকেশন "</string>

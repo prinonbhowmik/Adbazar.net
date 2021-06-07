@@ -57,20 +57,22 @@
        <RelativeLayout
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:layout_margin="15dp"
-           android:backgroundTint="#fff"
-           android:layout_below="@+id/toolbar"
            android:layout_above="@+id/bottom_menu"
-           android:background="@drawable/category_layout_design">
+           android:layout_marginStart="15dp"
+           android:layout_marginEnd="15dp"
+           android:layout_marginBottom="15dp"
+           android:background="@drawable/category_layout_design"
+           android:backgroundTint="#fff">
+
            <TextView
                android:id="@+id/header"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
+               android:background="@drawable/category_header_layout"
                android:fontFamily="@font/roboto"
                android:padding="10dp"
-               android:background="@drawable/category_header_layout"
-               android:textColor="#000"
                android:text="My Ads"
+               android:textColor="#000"
                android:textSize="20sp" />
 
            <HorizontalScrollView
@@ -165,6 +167,7 @@
                            android:textColor="#000"
                            android:textSize="14sp"
                            android:textStyle="bold" />
+
                        <TextView
                            android:id="@+id/topAdtxt"
                            android:layout_width="80dp"
@@ -201,14 +204,14 @@
                    <RelativeLayout
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
-                       android:background="#fff"
-                       android:layout_below="@+id/headerLayot">
+                       android:layout_below="@+id/headerLayot"
+                       android:background="#fff">
 
                        <androidx.recyclerview.widget.RecyclerView
+                           android:id="@+id/myAdsRecycler"
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
-                           android:id="@+id/myAdsRecycler"
-                           android:nestedScrollingEnabled="false"/>
+                           android:nestedScrollingEnabled="false" />
 
                    </RelativeLayout>
 
