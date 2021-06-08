@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.adbazarnet.Models.RelatedAds;
@@ -25,15 +24,15 @@ public class RelatedProductAdapter extends RecyclerView.Adapter<RelatedProductAd
         this.context = context;
     }
 
-    @NonNull
+
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.related_product_recycler_xml, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder( ViewHolder holder, int position) {
         RelatedAds ads = list.get(position);
 
         holder.productName.setText(ads.getAd_title());
@@ -57,7 +56,7 @@ public class RelatedProductAdapter extends RecyclerView.Adapter<RelatedProductAd
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView productName,productPrice;
         private ImageView image;
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder( View itemView) {
             super(itemView);
             productName = itemView.findViewById(R.id.productName);
             productPrice = itemView.findViewById(R.id.productPrice);

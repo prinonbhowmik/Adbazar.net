@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,15 +30,14 @@ public class PostAdLocationAdapter extends RecyclerView.Adapter<PostAdLocationAd
         this.context = context;
     }
 
-    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.location_recycler, parent, false);
         return new ViewHolder(view);
 }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder( ViewHolder holder, int position) {
         LocationsModel list = locationsModels.get(position);
 
         holder.locationName.setText(list.getName());
@@ -83,7 +81,7 @@ public class PostAdLocationAdapter extends RecyclerView.Adapter<PostAdLocationAd
         private ImageView imageIV;
         private RelativeLayout subLocLayout, locationlayout1;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder( View itemView) {
             super(itemView);
 
             locationName = itemView.findViewById(R.id.locationName);

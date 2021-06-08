@@ -11,7 +11,6 @@ import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,15 +36,15 @@ public class SubCatProductsAdapter extends RecyclerView.Adapter<SubCatProductsAd
         this.context = context;
     }
 
-    @NonNull
+
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.products_recycler, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder( ViewHolder holder, int position) {
         ProductModel model = list.get(position);
         try {
             Picasso.get()
@@ -114,7 +113,7 @@ public class SubCatProductsAdapter extends RecyclerView.Adapter<SubCatProductsAd
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView productIv;
         private TextView productNameTv,productPrice,locationTv,bidTv;
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder( View itemView) {
             super(itemView);
             productIv = itemView.findViewById(R.id.productImage);
             productNameTv = itemView.findViewById(R.id.productName);

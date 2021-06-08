@@ -15,10 +15,15 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private int id, loggedIn;
     private Dialog dialog;
     private String loadFragment = null, lang = null;
+    private int count=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -333,12 +339,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.inflateMenu(R.menu.home_navigation_drawer);
         navigationView.getMenu().getItem(0).setChecked(true);
         chipNavigationBar = findViewById(R.id.bottom_menu);
-
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+
             case R.id.login:
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 break;
@@ -359,7 +365,59 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Contact", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.language:
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                String[] languageArray = {"English","বাংলা"};
+                Spinner spinner = (Spinner) navigationView.getMenu().findItem(R.id.language).getActionView();
+                spinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,languageArray));
+                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        Toast.makeText(MainActivity.this,languageArray[position],Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                    }
+                });
+
+
+                /*String[] languageArray = {"English","বাংলা"};
+                AutoCompleteTextView spinner = (AutoCompleteTextView) navigationView.getMenu().findItem(R.id.language).getActionView();
+                ArrayAdapter<String> product_color = new ArrayAdapter<String>(this, R.layout.spinner_item_design, R.id.simpleSpinner, languageArray);
+                product_color.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                spinner.setText(product_color.getItem(0), false);
+                spinner.setAdapter(product_color);
+                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                       *//* if (position==0){
+                            Locale locale = new Locale("en");
+                            Locale.setDefault(locale);
+                            Configuration configuration = new Configuration();
+                            configuration.locale = locale;
+                            getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+                            SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
+                            editor.putString("lang", "en");
+                            editor.apply();
+                            startActivity(getIntent());
+                        }else {
+                            Locale locale = new Locale("bn");
+                            Locale.setDefault(locale);
+                            Configuration configuration = new Configuration();
+                            configuration.locale = locale;
+                            getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+                            SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
+                            editor.putString("lang", "bn");
+                            editor.apply();
+                            startActivity(getIntent());
+                        }*//*
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });*/
+
+               /* AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
                 alertDialog.setMessage("Change Language");
 
                 alertDialog.setPositiveButton("English", new DialogInterface.OnClickListener() {
@@ -391,7 +449,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 });
                 alertDialog.setCancelable(false);
-                alertDialog.show();
+                alertDialog.show();*/
                 break;
 
         }
