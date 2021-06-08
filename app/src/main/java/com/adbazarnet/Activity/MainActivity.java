@@ -53,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Dialog dialog;
     private String loadFragment = null, lang = null;
     private int count=0;
+    private Spinner spinner;
+    String[] languageArray = {"English","বাংলা"};
+    private String language;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -317,6 +320,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+
     }
 
     private void getLocale() {
@@ -339,12 +343,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.inflateMenu(R.menu.home_navigation_drawer);
         navigationView.getMenu().getItem(0).setChecked(true);
         chipNavigationBar = findViewById(R.id.bottom_menu);
+        lang = sharedPreferences.getString("lang","en");
+
+        spinner = (Spinner) navigationView.getMenu().findItem(R.id.language).getActionView();
+        spinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.
+                simple_spinner_dropdown_item,languageArray));
+        spinner.setSelection(0);
+        if (lang.equals("en")){
+            spinner.setSelection(0);
+        }else{
+            spinner.setSelection(1);
+        }
+
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-
             case R.id.login:
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 break;
@@ -365,19 +380,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Contact", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.language:
-                String[] languageArray = {"English","বাংলা"};
-                Spinner spinner = (Spinner) navigationView.getMenu().findItem(R.id.language).getActionView();
-                spinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,languageArray));
-                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        Toast.makeText(MainActivity.this,languageArray[position],Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-                    }
-                });
 
+                language = spinner.getSelectedItem().toString();
+
+                if (language.equals("বাংলা")) {
+                    Locale locale2 = new Locale("bn");
+                    Locale.setDefault(locale2);
+                    Configuration configuration2 = new Configuration();
+                    configuration2.locale = locale2;
+                    getBaseContext().getResources().updateConfiguration(configuration2,
+                            getBaseContext().getResources().getDisplayMetrics());
+                    SharedPreferences.Editor editor2 = getSharedPreferences("MyRef",
+                            MODE_PRIVATE).edit();
+                    editor2.putString("lang", "bn");
+                    editor2.apply();
+                    startActivity(getIntent());
+                }else{
+                    Locale locale = new Locale("en");
+                    Locale.setDefault(locale);
+                    Configuration configuration = new Configuration();
+                    configuration.locale = locale;
+                    getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+                    SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
+                    editor.putString("lang", "en");
+                    editor.apply();
+                    startActivity(getIntent());
+                }
 
                 /*String[] languageArray = {"English","বাংলা"};
                 AutoCompleteTextView spinner = (AutoCompleteTextView) navigationView.getMenu().findItem(R.id.language).getActionView();

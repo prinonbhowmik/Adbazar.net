@@ -279,7 +279,6 @@
 
                    </RelativeLayout>
 
-
                    <RelativeLayout
                        android:id="@+id/warrantyLayout"
                        android:layout_below="@+id/mileageLayout"
@@ -487,7 +486,7 @@
 
                    <RelativeLayout
                        android:id="@+id/otherLayout"
-                       android:layout_below="@+id/addressLayout"
+                       android:layout_below="@+id/landLayout"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content">
                        <TextView
