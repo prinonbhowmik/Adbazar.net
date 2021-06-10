@@ -271,7 +271,7 @@
                 android:layout_below="@+id/view11"
                 android:layout_alignParentRight="true"
                 android:layout_margin="10dp"
-                android:backgroundTint="#6c757d"
+                android:backgroundTint="#7B7F82"
                 android:padding="15dp"/>
         </RelativeLayout>
     </ScrollView>

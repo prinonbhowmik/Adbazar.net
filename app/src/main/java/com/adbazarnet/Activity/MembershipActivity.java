@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,30 +18,34 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.adbazarnet.Adapter.MembershipPackageAdapter;
 import com.adbazarnet.Api.ApiUtils;
+import com.adbazarnet.Fragments.ChatFragment;
 import com.adbazarnet.Fragments.FavouriteFragment;
+import com.adbazarnet.Fragments.HomeFragment;
 import com.adbazarnet.Models.MembershipPackage;
 import com.adbazarnet.Models.UserDetailsModel;
 import com.adbazarnet.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 import java.util.List;
 import java.util.Locale;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MembershipActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    private ChipNavigationBar chipNavigationBar;
     private Dialog dialog;
     private SharedPreferences sharedPreferences;
     public static String token;
@@ -49,6 +54,13 @@ public class MembershipActivity extends AppCompatActivity implements NavigationV
     private ImageView navIcon;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
+    private BottomNavigationView chipNavigationBar;
+    private CircleImageView adPost;
+    private Spinner spinner;
+    String[] languageArray = {"English","বাংলা"};
+    private String language;
+    private String lang;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,108 +68,65 @@ public class MembershipActivity extends AppCompatActivity implements NavigationV
 
         init();
 
-        chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
+
+        Call<List<MembershipPackage>> call = ApiUtils.getUserService().getPackages("Token "+token);
+        call.enqueue(new Callback<List<MembershipPackage>>() {
             @Override
-            public void onItemSelected(int i) {
-                switch (i){
+            public void onResponse(Call<List<MembershipPackage>> call, Response<List<MembershipPackage>> response) {
+                if (response.isSuccessful()){
+                    List<MembershipPackage> list = response.body();
+                    MembershipPackageAdapter adapter = new MembershipPackageAdapter(list,MembershipActivity.this);
+                    memberRecycler.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<MembershipPackage>> call, Throwable t) {
+                Toast.makeText(MembershipActivity.this, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        chipNavigationBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
 
                     case R.id.home:
-                        startActivity(new Intent(MembershipActivity.this,MainActivity.class)
-                                .putExtra("fragment","home"));
-                        finish();
+                        FragmentTransaction home = getSupportFragmentManager().beginTransaction();
+                        home.replace(R.id.fragment_container, new HomeFragment());
+                        home.commit();
                         break;
                     case R.id.favourite:
-                        startActivity(new Intent(MembershipActivity.this,MainActivity.class)
-                                .putExtra("fragment","favourite"));
-                        finish();
-                        break;
-                    case R.id.adPost:
-                        if (loggedIn==0){
+                        if (loggedIn == 0) {
                             startActivity(new Intent(MembershipActivity.this, LoginActivity.class));
                             finish();
-                        }
-                        else {
-                            dialog = new Dialog(MembershipActivity.this);
-                            dialog.setContentView(R.layout.post_ad_popup);
-                            ImageView closeIv = dialog.findViewById(R.id.closeIv);
-                            TextView sellItemTv = dialog.findViewById(R.id.sellItemTv);
-                            TextView rentTv = dialog.findViewById(R.id.rentTv);
-                            TextView auctionTv = dialog.findViewById(R.id.auctionTv);
-                            TextView exchangeTv = dialog.findViewById(R.id.exchangeTv);
-                            TextView jobTv = dialog.findViewById(R.id.jobTv);
-                            TextView brideTv = dialog.findViewById(R.id.brideTv);
-                            TextView lookforbuyTv = dialog.findViewById(R.id.lookforbuyTv);
-                            TextView lookforRentTv = dialog.findViewById(R.id.lookforRentTv);
-                            Button closeBtn = dialog.findViewById(R.id.closeBtn);
-
-                            sellItemTv.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivity(new Intent(MembershipActivity.this,
-                                            PostAdActivity.class).putExtra("type","sell"));
-                                    finish();
-                                    dialog.dismiss();
-                                }
-                            });
-                            rentTv.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivity(new Intent(MembershipActivity.this,
-                                            PostAdActivity.class).putExtra("type","rent"));
-                                    finish();
-                                    dialog.dismiss();
-                                }
-                            });
-                            auctionTv.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivity(new Intent(MembershipActivity.this,
-                                            PostAdActivity.class).putExtra("type","bid"));
-                                    finish();
-                                    dialog.dismiss();
-                                }
-                            });
-                            exchangeTv.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivity(new Intent(MembershipActivity.this,
-                                            PostAdActivity.class).putExtra("type","exchange"));
-                                    finish();
-                                    dialog.dismiss();
-                                }
-                            });
-
-                            closeIv.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dialog.dismiss();
-
-                                }
-                            });
-
-                            closeBtn.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dialog.dismiss();
-                                }
-                            });
-                            dialog.show();
+                        } else {
+                            FragmentTransaction favourite = getSupportFragmentManager().beginTransaction();
+                            favourite.replace(R.id.fragment_container, new FavouriteFragment());
+                            favourite.commit();
                         }
                         break;
                     case R.id.chat:
-                        startActivity(new Intent(MembershipActivity.this,MainActivity.class)
-                                .putExtra("fragment","chat"));
-                        finish();                        break;
+                        if (loggedIn == 0) {
+                            startActivity(new Intent(MembershipActivity.this, LoginActivity.class));
+                            finish();
+                        } else {
+                            FragmentTransaction chat = getSupportFragmentManager().beginTransaction();
+                            chat.replace(R.id.fragment_container, new ChatFragment());
+                            chat.commit();
+                        }
+                        break;
                     case R.id.account:
-                        if (loggedIn == 0 ){
-                            startActivity(new Intent(MembershipActivity.this,LoginActivity.class));
+                        if (loggedIn == 0) {
+                            startActivity(new Intent(MembershipActivity.this, LoginActivity.class));
                             finish();
                             break;
-                        }else{
+                        } else {
                             //pop-up will be shown
                             dialog = new Dialog(MembershipActivity.this);
                             dialog.setContentView(R.layout.profile_option_xml);
-                            CardView close  = dialog.findViewById(R.id.closeTv);
+                            Button close = dialog.findViewById(R.id.closeTv);
                             TextView dashboard = dialog.findViewById(R.id.dashboardTv);
                             TextView myAds = dialog.findViewById(R.id.myAdsTv);
                             TextView favouriteTv = dialog.findViewById(R.id.favouriteTv);
@@ -177,21 +146,22 @@ public class MembershipActivity extends AppCompatActivity implements NavigationV
                             membership.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                   dialog.dismiss();
+                                    startActivity(new Intent(MembershipActivity.this, MembershipActivity.class));
+                                    finish();
                                 }
                             });
 
                             myAds.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(MembershipActivity.this,MyAdsActivity.class));
+                                    startActivity(new Intent(MembershipActivity.this, MyAdsActivity.class));
                                 }
                             });
 
                             favouriteTv.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    chipNavigationBar.setItemSelected(R.id.favourite, true);
+                                    /*chipNavigationBar.setSelectedItemId(R.id.favourite, true);*/
                                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FavouriteFragment()).commit();
                                     dialog.dismiss();
                                 }
@@ -200,7 +170,7 @@ public class MembershipActivity extends AppCompatActivity implements NavigationV
                             dashboard.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(MembershipActivity.this,DashboardActivity.class));
+                                    startActivity(new Intent(MembershipActivity.this, DashboardActivity.class));
                                     finish();
                                 }
                             });
@@ -208,7 +178,7 @@ public class MembershipActivity extends AppCompatActivity implements NavigationV
                             profile.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(MembershipActivity.this,ProfileActivity.class));
+                                    startActivity(new Intent(MembershipActivity.this, ProfileActivity.class));
                                     finish();
                                 }
                             });
@@ -234,37 +204,123 @@ public class MembershipActivity extends AppCompatActivity implements NavigationV
                                     editor.putInt("id", 0);
                                     editor.commit();
                                     finish();
-                                    startActivity(new Intent(MembershipActivity.this,MainActivity.class)
-                                            .putExtra("fragment","home"));
-                                    dialog.dismiss();
+                                    startActivity(getIntent());
                                 }
                             });
 
                             dialog.setCancelable(false);
-                            dialog.show();
-
+                            if (!isFinishing()) {
+                                dialog.show();
+                            }
                             break;
                         }
                 }
-
+                return false;
             }
         });
 
-        Call<List<MembershipPackage>> call = ApiUtils.getUserService().getPackages("Token "+token);
-        call.enqueue(new Callback<List<MembershipPackage>>() {
+        adPost.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<List<MembershipPackage>> call, Response<List<MembershipPackage>> response) {
-                if (response.isSuccessful()){
-                    List<MembershipPackage> list = response.body();
-                    MembershipPackageAdapter adapter = new MembershipPackageAdapter(list,MembershipActivity.this);
-                    memberRecycler.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
+            public void onClick(View v) {
+                if (loggedIn == 0) {
+                    startActivity(new Intent(MembershipActivity.this, LoginActivity.class));
+                    finish();
                 }
-            }
+                else {
+                    dialog = new Dialog(MembershipActivity.this);
+                    dialog.setContentView(R.layout.post_ad_popup);
+                    ImageView closeIv = dialog.findViewById(R.id.closeIv);
+                    TextView sellItemTv = dialog.findViewById(R.id.sellItemTv);
+                    TextView rentTv = dialog.findViewById(R.id.rentTv);
+                    TextView auctionTv = dialog.findViewById(R.id.auctionTv);
+                    TextView exchangeTv = dialog.findViewById(R.id.exchangeTv);
+                    TextView jobTv = dialog.findViewById(R.id.jobTv);
+                    TextView brideTv = dialog.findViewById(R.id.brideTv);
+                    TextView lookforbuyTv = dialog.findViewById(R.id.lookforbuyTv);
+                    TextView lookforRentTv = dialog.findViewById(R.id.lookforRentTv);
+                    Button closeBtn = dialog.findViewById(R.id.closeBtn);
 
-            @Override
-            public void onFailure(Call<List<MembershipPackage>> call, Throwable t) {
-                Toast.makeText(MembershipActivity.this, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
+                    sellItemTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(MembershipActivity.this,
+                                    PostAdActivity.class).putExtra("type", "sell"));
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+                    rentTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(MembershipActivity.this,
+                                    PostAdActivity.class).putExtra("type", "rent"));
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+                    auctionTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(MembershipActivity.this,
+                                    PostAdActivity.class).putExtra("type", "bid"));
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+                    exchangeTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(MembershipActivity.this,
+                                    PostAdActivity.class).putExtra("type", "exchange"));
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+                    jobTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(MembershipActivity.this,
+                                    PostAdActivity.class).putExtra("type", "job"));
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+                    lookforbuyTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(MembershipActivity.this,
+                                    PostAdActivity.class).putExtra("type", "lookforbuy"));
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+                    lookforRentTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(MembershipActivity.this,
+                                    PostAdActivity.class).putExtra("type", "lookforrent"));
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+
+                    closeIv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                            chipNavigationBar.setSelectedItemId(R.id.home);
+                        }
+                    });
+
+                    closeBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                            chipNavigationBar.setSelectedItemId(R.id.home);
+                        }
+                    });
+                    dialog.show();
+                }
             }
         });
 
@@ -293,7 +349,18 @@ public class MembershipActivity extends AppCompatActivity implements NavigationV
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
-
+        chipNavigationBar = findViewById(R.id.bottom_menu);
+        lang = sharedPreferences.getString("lang","en");
+        adPost = findViewById(R.id.adPost);
+        spinner = (Spinner) navigationView.getMenu().findItem(R.id.language).getActionView();
+        spinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.
+                simple_spinner_dropdown_item,languageArray));
+        spinner.setSelection(0);
+        if (lang.equals("en")){
+            spinner.setSelection(0);
+        }else{
+            spinner.setSelection(1);
+        }
 
     }
 
@@ -301,6 +368,7 @@ public class MembershipActivity extends AppCompatActivity implements NavigationV
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(MembershipActivity.this,MainActivity.class).putExtra("fragment","home"));
+        finish();
     }
 
 
@@ -324,39 +392,31 @@ public class MembershipActivity extends AppCompatActivity implements NavigationV
 
                 break;
             case R.id.language:
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-                alertDialog.setMessage("Change Language");
+                language = spinner.getSelectedItem().toString();
 
-                alertDialog.setPositiveButton("English", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Locale locale = new Locale("en");
-                        Locale.setDefault(locale);
-                        Configuration configuration = new Configuration();
-                        configuration.locale = locale;
-                        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
-                        SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
-                        editor.putString("lang", "en");
-                        editor.apply();
-                        startActivity(getIntent());
-                    }
-                });
-                alertDialog.setNegativeButton("বাংলা", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Locale locale = new Locale("bn");
-                        Locale.setDefault(locale);
-                        Configuration configuration = new Configuration();
-                        configuration.locale = locale;
-                        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
-                        SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
-                        editor.putString("lang", "bn");
-                        editor.apply();
-                        startActivity(getIntent());
-                    }
-                });
-                alertDialog.setCancelable(false);
-                alertDialog.show();
+                if (language.equals("বাংলা")) {
+                    Locale locale2 = new Locale("bn");
+                    Locale.setDefault(locale2);
+                    Configuration configuration2 = new Configuration();
+                    configuration2.locale = locale2;
+                    getBaseContext().getResources().updateConfiguration(configuration2,
+                            getBaseContext().getResources().getDisplayMetrics());
+                    SharedPreferences.Editor editor2 = getSharedPreferences("MyRef",
+                            MODE_PRIVATE).edit();
+                    editor2.putString("lang", "bn");
+                    editor2.apply();
+                    startActivity(getIntent());
+                }else{
+                    Locale locale = new Locale("en");
+                    Locale.setDefault(locale);
+                    Configuration configuration = new Configuration();
+                    configuration.locale = locale;
+                    getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+                    SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
+                    editor.putString("lang", "en");
+                    editor.apply();
+                    startActivity(getIntent());
+                }
                 break;
 
         }

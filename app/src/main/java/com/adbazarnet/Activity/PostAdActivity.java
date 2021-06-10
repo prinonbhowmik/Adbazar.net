@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,6 +34,7 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -51,7 +55,9 @@ import com.adbazarnet.Adapter.PostAdCategoryAdapter;
 import com.adbazarnet.Adapter.PostAdLocationAdapter;
 import com.adbazarnet.Api.ApiInterface;
 import com.adbazarnet.Api.ApiUtils;
+import com.adbazarnet.Fragments.ChatFragment;
 import com.adbazarnet.Fragments.FavouriteFragment;
+import com.adbazarnet.Fragments.HomeFragment;
 import com.adbazarnet.Models.AdDetails;
 import com.adbazarnet.Models.AdImages;
 import com.adbazarnet.Models.AdPhoneNumbers;
@@ -62,6 +68,8 @@ import com.adbazarnet.Models.PostAdModel;
 import com.adbazarnet.Models.PostImageModel;
 import com.adbazarnet.Models.UserDetailsModel;
 import com.adbazarnet.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -85,6 +93,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -92,7 +101,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PostAdActivity extends AppCompatActivity {
+public class PostAdActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public static TextView locationTv, categoryTv;
     public static String ad_Type = null;
@@ -121,7 +130,13 @@ public class PostAdActivity extends AppCompatActivity {
     private List<PostImageModel> imgArray = new ArrayList<>();
     private boolean negotiable = false, hidePhone = false, is_sell;
     private SharedPreferences sharedPreferences;
-    private ChipNavigationBar chipNavigationBar;
+    private BottomNavigationView chipNavigationBar;
+    private CircleImageView adPost;
+    private Spinner spinner;
+    String[] languageArray = {"English","বাংলা"};
+    private String language;
+    private NavigationView navigationView;
+    private DrawerLayout drawerLayout;
     private int loggedIn, vacancy;
     private PostAdModel model;
     public String postType,lang;
@@ -130,6 +145,7 @@ public class PostAdActivity extends AppCompatActivity {
     private static final int REQUEST_GALLERY = 200;
     private String file_path;
     private Bitmap bitmap1, bitmap2, bitmap3, bitmap4, bitmap5;
+    private ImageView navIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -746,95 +762,35 @@ public class PostAdActivity extends AppCompatActivity {
             }
         });
 
-        chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
+        chipNavigationBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onItemSelected(int i) {
-                switch (i) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
 
                     case R.id.home:
-                        startActivity(new Intent(PostAdActivity.this, MainActivity.class)
-                                .putExtra("fragment", "home"));
-                        finish();
+                        FragmentTransaction home = getSupportFragmentManager().beginTransaction();
+                        home.replace(R.id.fragment_container, new HomeFragment());
+                        home.commit();
                         break;
                     case R.id.favourite:
-                        startActivity(new Intent(PostAdActivity.this, MainActivity.class)
-                                .putExtra("fragment", "favourite"));
-                        finish();
-                        break;
-                    case R.id.adPost:
                         if (loggedIn == 0) {
                             startActivity(new Intent(PostAdActivity.this, LoginActivity.class));
                             finish();
                         } else {
-                            dialog = new Dialog(PostAdActivity.this);
-                            dialog.setContentView(R.layout.post_ad_popup);
-                            ImageView closeIv = dialog.findViewById(R.id.closeIv);
-                            TextView sellItemTv = dialog.findViewById(R.id.sellItemTv);
-                            TextView rentTv = dialog.findViewById(R.id.rentTv);
-                            TextView auctionTv = dialog.findViewById(R.id.auctionTv);
-                            TextView exchangeTv = dialog.findViewById(R.id.exchangeTv);
-                            TextView jobTv = dialog.findViewById(R.id.jobTv);
-                            TextView brideTv = dialog.findViewById(R.id.brideTv);
-                            TextView lookforbuyTv = dialog.findViewById(R.id.lookforbuyTv);
-                            TextView lookforRentTv = dialog.findViewById(R.id.lookforRentTv);
-                            Button closeBtn = dialog.findViewById(R.id.closeBtn);
-
-                            sellItemTv.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivity(new Intent(PostAdActivity.this,
-                                            PostAdActivity.class).putExtra("type", "sell"));
-                                    finish();
-                                    dialog.dismiss();
-                                }
-                            });
-                            rentTv.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivity(new Intent(PostAdActivity.this,
-                                            PostAdActivity.class).putExtra("type", "rent"));
-                                    finish();
-                                    dialog.dismiss();
-                                }
-                            });
-                            auctionTv.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivity(new Intent(PostAdActivity.this,
-                                            PostAdActivity.class).putExtra("type", "bid"));
-                                    finish();
-                                    dialog.dismiss();
-                                }
-                            });
-                            exchangeTv.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivity(new Intent(PostAdActivity.this,
-                                            PostAdActivity.class).putExtra("type", "exchange"));
-                                    finish();
-                                    dialog.dismiss();
-                                }
-                            });
-                            closeIv.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dialog.dismiss();
-                                }
-                            });
-
-                            closeBtn.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dialog.dismiss();
-                                }
-                            });
-                            dialog.show();
+                            FragmentTransaction favourite = getSupportFragmentManager().beginTransaction();
+                            favourite.replace(R.id.fragment_container, new FavouriteFragment());
+                            favourite.commit();
                         }
                         break;
                     case R.id.chat:
-                        startActivity(new Intent(PostAdActivity.this, MainActivity.class)
-                                .putExtra("fragment", "chat"));
-                        finish();
+                        if (loggedIn == 0) {
+                            startActivity(new Intent(PostAdActivity.this, LoginActivity.class));
+                            finish();
+                        } else {
+                            FragmentTransaction chat = getSupportFragmentManager().beginTransaction();
+                            chat.replace(R.id.fragment_container, new ChatFragment());
+                            chat.commit();
+                        }
                         break;
                     case R.id.account:
                         if (loggedIn == 0) {
@@ -845,7 +801,7 @@ public class PostAdActivity extends AppCompatActivity {
                             //pop-up will be shown
                             dialog = new Dialog(PostAdActivity.this);
                             dialog.setContentView(R.layout.profile_option_xml);
-                            CardView close = dialog.findViewById(R.id.closeTv);
+                            Button close = dialog.findViewById(R.id.closeTv);
                             TextView dashboard = dialog.findViewById(R.id.dashboardTv);
                             TextView myAds = dialog.findViewById(R.id.myAdsTv);
                             TextView favouriteTv = dialog.findViewById(R.id.favouriteTv);
@@ -880,7 +836,7 @@ public class PostAdActivity extends AppCompatActivity {
                             favouriteTv.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    chipNavigationBar.setItemSelected(R.id.favourite, true);
+                                    /*chipNavigationBar.setSelectedItemId(R.id.favourite, true);*/
                                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FavouriteFragment()).commit();
                                     dialog.dismiss();
                                 }
@@ -923,21 +879,125 @@ public class PostAdActivity extends AppCompatActivity {
                                     editor.putInt("id", 0);
                                     editor.commit();
                                     finish();
-                                    startActivity(new Intent(PostAdActivity.this, MainActivity.class)
-                                            .putExtra("fragment", "home"));
+                                    startActivity(getIntent());
                                 }
                             });
 
                             dialog.setCancelable(false);
-                            dialog.show();
-
+                            if (!isFinishing()) {
+                                dialog.show();
+                            }
                             break;
                         }
                 }
-
+                return false;
             }
         });
 
+        adPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (loggedIn == 0) {
+                    startActivity(new Intent(PostAdActivity.this, LoginActivity.class));
+                    finish();
+                }
+                else {
+                    dialog = new Dialog(PostAdActivity.this);
+                    dialog.setContentView(R.layout.post_ad_popup);
+                    ImageView closeIv = dialog.findViewById(R.id.closeIv);
+                    TextView sellItemTv = dialog.findViewById(R.id.sellItemTv);
+                    TextView rentTv = dialog.findViewById(R.id.rentTv);
+                    TextView auctionTv = dialog.findViewById(R.id.auctionTv);
+                    TextView exchangeTv = dialog.findViewById(R.id.exchangeTv);
+                    TextView jobTv = dialog.findViewById(R.id.jobTv);
+                    TextView brideTv = dialog.findViewById(R.id.brideTv);
+                    TextView lookforbuyTv = dialog.findViewById(R.id.lookforbuyTv);
+                    TextView lookforRentTv = dialog.findViewById(R.id.lookforRentTv);
+                    Button closeBtn = dialog.findViewById(R.id.closeBtn);
+
+                    sellItemTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(PostAdActivity.this,
+                                    PostAdActivity.class).putExtra("type", "sell"));
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+                    rentTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(PostAdActivity.this,
+                                    PostAdActivity.class).putExtra("type", "rent"));
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+                    auctionTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(PostAdActivity.this,
+                                    PostAdActivity.class).putExtra("type", "bid"));
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+                    exchangeTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(PostAdActivity.this,
+                                    PostAdActivity.class).putExtra("type", "exchange"));
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+                    jobTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(PostAdActivity.this,
+                                    PostAdActivity.class).putExtra("type", "job"));
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+                    lookforbuyTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(PostAdActivity.this,
+                                    PostAdActivity.class).putExtra("type", "lookforbuy"));
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+                    lookforRentTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(PostAdActivity.this,
+                                    PostAdActivity.class).putExtra("type", "lookforrent"));
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+
+                    closeIv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                            chipNavigationBar.setSelectedItemId(R.id.home);
+                        }
+                    });
+
+                    closeBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                            chipNavigationBar.setSelectedItemId(R.id.home);
+                        }
+                    });
+                    dialog.show();
+                }
+            }
+        });
     }
 
     private void getLocale() {
@@ -1061,6 +1121,31 @@ public class PostAdActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("MyRef", MODE_PRIVATE);
         token = sharedPreferences.getString("token", null);
         loggedIn = sharedPreferences.getInt("loggedIn", 0);
+        navIcon = findViewById(R.id.navIcon);
+        navigationView = findViewById(R.id.nav_view);
+        drawerLayout = findViewById(R.id.drawerLayout);
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().clear();
+        navigationView.inflateMenu(R.menu.home_navigation_drawer);
+        navigationView.getMenu().removeItem(R.id.login);
+
+        navIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+        lang = sharedPreferences.getString("lang","en");
+        adPost = findViewById(R.id.adPost);
+        spinner = (Spinner) navigationView.getMenu().findItem(R.id.language).getActionView();
+        spinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.
+                simple_spinner_dropdown_item,languageArray));
+        spinner.setSelection(0);
+        if (lang.equals("en")){
+            spinner.setSelection(0);
+        }else{
+            spinner.setSelection(1);
+        }
     }
 
     public void setNegotiable(View view) {
@@ -1214,5 +1299,63 @@ public class PostAdActivity extends AppCompatActivity {
             view = new View(activity);
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.login:
+                startActivity(new Intent(PostAdActivity.this, LoginActivity.class));
+                break;
+            case R.id.home:
+                startActivity(new Intent(PostAdActivity.this, MainActivity.class)
+                        .putExtra("fragment","home"));
+                drawerLayout.closeDrawers();
+                break;
+            case R.id.bids:
+                startActivity(new Intent(PostAdActivity.this, MainActivity.class)
+                        .putExtra("fragment","home"));
+                drawerLayout.closeDrawers();
+                break;
+            case R.id.contact:
+
+                break;
+            case R.id.language:
+                language = spinner.getSelectedItem().toString();
+
+                if (language.equals("বাংলা")) {
+                    Locale locale2 = new Locale("bn");
+                    Locale.setDefault(locale2);
+                    Configuration configuration2 = new Configuration();
+                    configuration2.locale = locale2;
+                    getBaseContext().getResources().updateConfiguration(configuration2,
+                            getBaseContext().getResources().getDisplayMetrics());
+                    SharedPreferences.Editor editor2 = getSharedPreferences("MyRef",
+                            MODE_PRIVATE).edit();
+                    editor2.putString("lang", "bn");
+                    editor2.apply();
+                    startActivity(getIntent());
+                }else{
+                    Locale locale = new Locale("en");
+                    Locale.setDefault(locale);
+                    Configuration configuration = new Configuration();
+                    configuration.locale = locale;
+                    getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+                    SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
+                    editor.putString("lang", "en");
+                    editor.apply();
+                    startActivity(getIntent());
+                }
+                break;
+
+        }
+        return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(PostAdActivity.this,MainActivity.class).putExtra("fragment","home"));
+        finish();
     }
 }

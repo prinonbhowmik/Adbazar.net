@@ -23,11 +23,13 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +39,7 @@ import com.adbazarnet.Adapter.ImageSliderAdapter;
 import com.adbazarnet.Adapter.RelatedProductAdapter;
 import com.adbazarnet.Api.ApiUtils;
 import com.adbazarnet.Fragments.BidsFragment;
+import com.adbazarnet.Fragments.ChatFragment;
 import com.adbazarnet.Fragments.FavouriteFragment;
 import com.adbazarnet.Fragments.HomeFragment;
 import com.adbazarnet.Interface.GetBiderIdInterface;
@@ -50,6 +53,7 @@ import com.adbazarnet.Models.FavouriteAds;
 import com.adbazarnet.Models.RelatedAds;
 import com.adbazarnet.Models.UserDetailsModel;
 import com.adbazarnet.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
@@ -71,7 +75,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
     private int id, userId, sellerId;
     private SliderView imageSlider;
     private ImageSliderAdapter sliderAdapter;
-    private CircleImageView sellerProfileIv;
+    private CircleImageView sellerProfileIv,adPost;
     private TextView productName, productPrice, uploadTime, categoryTv, conditionTv,
             warrantyTv, descriptionTv, sellerNameTv, locationTv, noDataTv, membershipTV,
             favouriteTv, callNowTV, noBidTv, bidBtn, chatTV;
@@ -83,7 +87,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
     private SharedPreferences sharedPreferences;
     private String token, userPhone, location, prductimg, category;
     private Dialog dialog;
-    private ChipNavigationBar chipNavigationBar;
+    private BottomNavigationView chipNavigationBar;
     private int loggedIn, receiver;
     private RelativeLayout relatedLayout, bidLayout;
     private boolean is_bid;
@@ -93,7 +97,9 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
     private ImageView navIcon;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
-
+    private Spinner spinner;
+    String[] languageArray = {"English","বাংলা"};
+    private String language;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -440,97 +446,35 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
             }
         });
 
-        chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
+        chipNavigationBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onItemSelected(int i) {
-                switch (i) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
 
                     case R.id.home:
-                        startActivity(new Intent(AdDetailsActivity.this, MainActivity.class)
-                                .putExtra("fragment", "home"));
-                        finish();
+                        FragmentTransaction home = getSupportFragmentManager().beginTransaction();
+                        home.replace(R.id.fragment_container, new HomeFragment());
+                        home.commit();
                         break;
                     case R.id.favourite:
-                        startActivity(new Intent(AdDetailsActivity.this, MainActivity.class)
-                                .putExtra("fragment", "favourite"));
-                        finish();
-                        break;
-                    case R.id.adPost:
                         if (loggedIn == 0) {
                             startActivity(new Intent(AdDetailsActivity.this, LoginActivity.class));
                             finish();
                         } else {
-                            dialog = new Dialog(AdDetailsActivity.this);
-                            dialog.setContentView(R.layout.post_ad_popup);
-                            ImageView closeIv = dialog.findViewById(R.id.closeIv);
-                            TextView sellItemTv = dialog.findViewById(R.id.sellItemTv);
-                            TextView rentTv = dialog.findViewById(R.id.rentTv);
-                            TextView auctionTv = dialog.findViewById(R.id.auctionTv);
-                            TextView exchangeTv = dialog.findViewById(R.id.exchangeTv);
-                            TextView jobTv = dialog.findViewById(R.id.jobTv);
-                            TextView brideTv = dialog.findViewById(R.id.brideTv);
-                            TextView lookforbuyTv = dialog.findViewById(R.id.lookforbuyTv);
-                            TextView lookforRentTv = dialog.findViewById(R.id.lookforRentTv);
-                            Button closeBtn = dialog.findViewById(R.id.closeBtn);
-
-                            sellItemTv.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivity(new Intent(AdDetailsActivity.this,
-                                            PostAdActivity.class).putExtra("type", "sell"));
-                                    finish();
-                                    dialog.dismiss();
-                                }
-                            });
-                            rentTv.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivity(new Intent(AdDetailsActivity.this,
-                                            PostAdActivity.class).putExtra("type", "rent"));
-                                    finish();
-                                    dialog.dismiss();
-                                }
-                            });
-                            auctionTv.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivity(new Intent(AdDetailsActivity.this,
-                                            PostAdActivity.class).putExtra("type", "bid"));
-                                    finish();
-                                    dialog.dismiss();
-                                }
-                            });
-                            exchangeTv.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivity(new Intent(AdDetailsActivity.this,
-                                            PostAdActivity.class).putExtra("type", "exchange"));
-                                    finish();
-                                    dialog.dismiss();
-                                }
-                            });
-
-                            closeIv.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dialog.dismiss();
-
-                                }
-                            });
-
-                            closeBtn.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dialog.dismiss();
-                                }
-                            });
-                            dialog.show();
+                            FragmentTransaction favourite = getSupportFragmentManager().beginTransaction();
+                            favourite.replace(R.id.fragment_container, new FavouriteFragment());
+                            favourite.commit();
                         }
                         break;
                     case R.id.chat:
-                        startActivity(new Intent(AdDetailsActivity.this, MainActivity.class)
-                                .putExtra("fragment", "chat"));
-                        finish();
+                        if (loggedIn == 0) {
+                            startActivity(new Intent(AdDetailsActivity.this, LoginActivity.class));
+                            finish();
+                        } else {
+                            FragmentTransaction chat = getSupportFragmentManager().beginTransaction();
+                            chat.replace(R.id.fragment_container, new ChatFragment());
+                            chat.commit();
+                        }
                         break;
                     case R.id.account:
                         if (loggedIn == 0) {
@@ -541,7 +485,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                             //pop-up will be shown
                             dialog = new Dialog(AdDetailsActivity.this);
                             dialog.setContentView(R.layout.profile_option_xml);
-                            CardView close = dialog.findViewById(R.id.closeTv);
+                            Button close = dialog.findViewById(R.id.closeTv);
                             TextView dashboard = dialog.findViewById(R.id.dashboardTv);
                             TextView myAds = dialog.findViewById(R.id.myAdsTv);
                             TextView favouriteTv = dialog.findViewById(R.id.favouriteTv);
@@ -576,7 +520,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                             favouriteTv.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    chipNavigationBar.setItemSelected(R.id.favourite, true);
+                                    /*chipNavigationBar.setSelectedItemId(R.id.favourite, true);*/
                                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FavouriteFragment()).commit();
                                     dialog.dismiss();
                                 }
@@ -619,19 +563,123 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                                     editor.putInt("id", 0);
                                     editor.commit();
                                     finish();
-                                    startActivity(new Intent(AdDetailsActivity.this, MainActivity.class)
-                                            .putExtra("fragment", "home"));
-                                    dialog.dismiss();
+                                    startActivity(getIntent());
                                 }
                             });
 
                             dialog.setCancelable(false);
-                            dialog.show();
-
+                            if (!isFinishing()) {
+                                dialog.show();
+                            }
                             break;
                         }
                 }
+                return false;
+            }
+        });
 
+        adPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (loggedIn == 0) {
+                    startActivity(new Intent(AdDetailsActivity.this, LoginActivity.class));
+                    finish();
+                }
+                else {
+                    dialog = new Dialog(AdDetailsActivity.this);
+                    dialog.setContentView(R.layout.post_ad_popup);
+                    ImageView closeIv = dialog.findViewById(R.id.closeIv);
+                    TextView sellItemTv = dialog.findViewById(R.id.sellItemTv);
+                    TextView rentTv = dialog.findViewById(R.id.rentTv);
+                    TextView auctionTv = dialog.findViewById(R.id.auctionTv);
+                    TextView exchangeTv = dialog.findViewById(R.id.exchangeTv);
+                    TextView jobTv = dialog.findViewById(R.id.jobTv);
+                    TextView brideTv = dialog.findViewById(R.id.brideTv);
+                    TextView lookforbuyTv = dialog.findViewById(R.id.lookforbuyTv);
+                    TextView lookforRentTv = dialog.findViewById(R.id.lookforRentTv);
+                    Button closeBtn = dialog.findViewById(R.id.closeBtn);
+
+                    sellItemTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(AdDetailsActivity.this,
+                                    PostAdActivity.class).putExtra("type", "sell"));
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+                    rentTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(AdDetailsActivity.this,
+                                    PostAdActivity.class).putExtra("type", "rent"));
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+                    auctionTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(AdDetailsActivity.this,
+                                    PostAdActivity.class).putExtra("type", "bid"));
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+                    exchangeTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(AdDetailsActivity.this,
+                                    PostAdActivity.class).putExtra("type", "exchange"));
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+                    jobTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(AdDetailsActivity.this,
+                                    PostAdActivity.class).putExtra("type", "job"));
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+                    lookforbuyTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(AdDetailsActivity.this,
+                                    PostAdActivity.class).putExtra("type", "lookforbuy"));
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+                    lookforRentTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(AdDetailsActivity.this,
+                                    PostAdActivity.class).putExtra("type", "lookforrent"));
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+
+                    closeIv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                            chipNavigationBar.setSelectedItemId(R.id.home);
+                        }
+                    });
+
+                    closeBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                            chipNavigationBar.setSelectedItemId(R.id.home);
+                        }
+                    });
+                    dialog.show();
+                }
             }
         });
 
@@ -717,6 +765,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
         sellerNameTv = findViewById(R.id.sellerNameTv);
         contactLayout = findViewById(R.id.contactLayout);
         chatTV = findViewById(R.id.chatTV);
+        adPost = findViewById(R.id.adPost);
         txt2 = findViewById(R.id.txt2);
         txt3 = findViewById(R.id.txt3);
         txtV = findViewById(R.id.txtV);
@@ -747,6 +796,21 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().clear();
         navigationView.inflateMenu(R.menu.home_navigation_drawer);
+        sharedPreferences = getSharedPreferences("MyRef", MODE_PRIVATE);
+        token = sharedPreferences.getString("token", null);
+
+        userId = sharedPreferences.getInt("id", 0);
+        loggedIn = sharedPreferences.getInt("loggedIn", 0);
+        lang = sharedPreferences.getString("lang","en");
+        spinner = (Spinner) navigationView.getMenu().findItem(R.id.language).getActionView();
+        spinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.
+                simple_spinner_dropdown_item,languageArray));
+        spinner.setSelection(0);
+        if (lang.equals("en")){
+            spinner.setSelection(0);
+        }else{
+            spinner.setSelection(1);
+        }
 
         navIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -764,11 +828,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
         bidRecycler.setLayoutManager(layoutManager1);
 
         sliderAdapter = new ImageSliderAdapter(this);
-        sharedPreferences = getSharedPreferences("MyRef", MODE_PRIVATE);
-        token = sharedPreferences.getString("token", null);
 
-        userId = sharedPreferences.getInt("id", 0);
-        loggedIn = sharedPreferences.getInt("loggedIn", 0);
         chipNavigationBar = findViewById(R.id.bottom_menu);
         relatedLayout = findViewById(R.id.relatedLayout);
         bidLayout = findViewById(R.id.bidLayout);
@@ -784,52 +844,49 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                 startActivity(new Intent(AdDetailsActivity.this, LoginActivity.class));
                 break;
             case R.id.home:
-                startActivity(new Intent(AdDetailsActivity.this, MainActivity.class)
-                        .putExtra("fragment","home"));
+                FragmentTransaction home = getSupportFragmentManager().beginTransaction();
+                home.replace(R.id.fragment_container, new HomeFragment());
+                home.commit();
+                chipNavigationBar.setSelectedItemId(R.id.home);
                 drawerLayout.closeDrawers();
                 break;
             case R.id.bids:
-                startActivity(new Intent(AdDetailsActivity.this, MainActivity.class)
-                        .putExtra("fragment","home"));
+                FragmentTransaction bids = getSupportFragmentManager().beginTransaction();
+                bids.replace(R.id.fragment_container, new BidsFragment());
+                bids.commit();
                 drawerLayout.closeDrawers();
                 break;
             case R.id.contact:
-
+                Toast.makeText(this, "Contact", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.language:
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-                alertDialog.setMessage("Change Language");
 
-                alertDialog.setPositiveButton("English", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Locale locale = new Locale("en");
-                        Locale.setDefault(locale);
-                        Configuration configuration = new Configuration();
-                        configuration.locale = locale;
-                        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
-                        SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
-                        editor.putString("lang", "en");
-                        editor.apply();
-                        startActivity(getIntent());
-                    }
-                });
-                alertDialog.setNegativeButton("বাংলা", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Locale locale = new Locale("bn");
-                        Locale.setDefault(locale);
-                        Configuration configuration = new Configuration();
-                        configuration.locale = locale;
-                        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
-                        SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
-                        editor.putString("lang", "bn");
-                        editor.apply();
-                        startActivity(getIntent());
-                    }
-                });
-                alertDialog.setCancelable(false);
-                alertDialog.show();
+                language = spinner.getSelectedItem().toString();
+
+                if (language.equals("বাংলা")) {
+                    Locale locale2 = new Locale("bn");
+                    Locale.setDefault(locale2);
+                    Configuration configuration2 = new Configuration();
+                    configuration2.locale = locale2;
+                    getBaseContext().getResources().updateConfiguration(configuration2,
+                            getBaseContext().getResources().getDisplayMetrics());
+                    SharedPreferences.Editor editor2 = getSharedPreferences("MyRef",
+                            MODE_PRIVATE).edit();
+                    editor2.putString("lang", "bn");
+                    editor2.apply();
+                    startActivity(getIntent());
+                }else{
+                    Locale locale = new Locale("en");
+                    Locale.setDefault(locale);
+                    Configuration configuration = new Configuration();
+                    configuration.locale = locale;
+                    getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+                    SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
+                    editor.putString("lang", "en");
+                    editor.apply();
+                    startActivity(getIntent());
+                }
+
                 break;
 
         }
@@ -883,5 +940,12 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
         } else {
             Toast.makeText(this, "Not Granted", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(AdDetailsActivity.this,MainActivity.class).putExtra("fragment","home"));
+        finish();
     }
 }

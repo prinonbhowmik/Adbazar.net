@@ -14,10 +14,8 @@
             android:title="@string/favourite"
             app:cnb_iconColor="@color/theme"/>
         <item
-            android:id="@+id/adPost"
-            android:icon="@drawable/ic_add"
-            android:title="@string/post"
-            app:cnb_iconColor="@color/theme"/>
+            app:cnb_iconColor="@color/theme"
+            android:title="" />
         <item
             android:id="@+id/chat"
             android:icon="@drawable/ic_chat"
