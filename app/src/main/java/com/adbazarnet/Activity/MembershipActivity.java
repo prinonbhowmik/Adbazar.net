@@ -389,7 +389,6 @@ public class MembershipActivity extends AppCompatActivity implements NavigationV
                 drawerLayout.closeDrawers();
                 break;
             case R.id.contact:
-
                 break;
             case R.id.language:
                 language = spinner.getSelectedItem().toString();

@@ -58,9 +58,11 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_above="@+id/bottom_menu"
+           android:layout_below="@+id/toolbar"
            android:layout_marginStart="15dp"
+           android:layout_marginTop="15dp"
            android:layout_marginEnd="15dp"
-           android:layout_marginBottom="15dp"
+           android:layout_marginBottom="70dp"
            android:background="@drawable/category_layout_design"
            android:backgroundTint="#fff">
 
@@ -222,7 +224,6 @@
        </RelativeLayout>
 
        <include
-           android:id="@+id/layout111"
            layout="@layout/bottomnav"/>
 
    </RelativeLayout>

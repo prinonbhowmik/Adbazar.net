@@ -31,14 +31,13 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/adPost"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:padding="5dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:src="@drawable/ic_add"
         app:layout_constraintStart_toStartOf="parent"
         android:contentDescription="@string/bottom_sheet_behavior"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

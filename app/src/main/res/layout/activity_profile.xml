@@ -66,6 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:background="@drawable/category_layout_design"
+                android:layout_marginBottom="70dp"
                 android:backgroundTint="#fff">
 
                 <TextView
@@ -246,7 +247,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="25dp"
+                    android:layout_marginBottom="75dp"
                     android:background="@drawable/btn_background"
                     android:text="Change Password"
                     android:textAllCaps="false"
@@ -256,6 +257,9 @@
             </RelativeLayout>
 
         </ScrollView>
+
+        <include
+            layout="@layout/bottomnav"/>
 
     </RelativeLayout>
 

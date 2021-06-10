@@ -77,6 +77,7 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                     list = response.body();
                     adapter = new MyAdsAdapter(list,MyAdsActivity.this);
                     myAdsRecycler.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
                 }
             }
 

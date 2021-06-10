@@ -12,6 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <RelativeLayout
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -56,25 +57,14 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@+id/toolbar"
-            android:layout_above="@+id/bottom_menu"
+            android:layout_marginBottom="70dp"
             android:id="@+id/packageRecycler"/>
 
-        <com.ismaeldivita.chipnavigation.ChipNavigationBar
-            android:id="@+id/bottom_menu"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="#fff"
-            android:layout_alignParentBottom="true"
-            app:cnb_menuResource="@menu/bottom_drawer_menu"
-            app:cnb_orientationMode="horizontal"
-            app:cnb_addLeftInset="false"
-            app:cnb_addRightInset="false"
-            app:cnb_addTopInset="false"
-            app:cnb_radius="8dp"
-            app:cnb_iconSize="24dp"
-            android:theme="@style/Widget.BottomNavigationView"/>
+        <include
+            layout="@layout/bottomnav"/>
+
     </RelativeLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
