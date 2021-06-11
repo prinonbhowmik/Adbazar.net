@@ -70,9 +70,9 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_home, container, false);
-        init(view);
-
         getLocale();
+
+        init(view);
 
         getAllAds();
 
@@ -157,6 +157,7 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
     }
 
     private void getLocale() {
+        sharedPreferences = getContext().getSharedPreferences("MyRef", MODE_PRIVATE);
         lang = sharedPreferences.getString("lang","");
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
@@ -248,7 +249,6 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
         adsRecycler = view.findViewById(R.id.adsRecycler);
         adCountTv = view.findViewById(R.id.adCountTv);
         adsRecycler.setLayoutManager(new GridLayoutManager(getContext(),2));
-        sharedPreferences = getContext().getSharedPreferences("MyRef", MODE_PRIVATE);
 
     }
 

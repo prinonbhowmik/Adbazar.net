@@ -69,6 +69,8 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
 
         init();
 
+        getLocale();
+
         Call<List<FavouriteAdDetails>> call = ApiUtils.getUserService().getMyAds("Token "+token);
         call.enqueue(new Callback<List<FavouriteAdDetails>>() {
             @Override
@@ -93,18 +95,18 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                 switch (item.getItemId()) {
 
                     case R.id.home:
-                        FragmentTransaction home = getSupportFragmentManager().beginTransaction();
-                        home.replace(R.id.fragment_container, new HomeFragment());
-                        home.commit();
+                        startActivity(new Intent(MyAdsActivity.this,MainActivity.class).
+                                putExtra("fragment","home"));
+                        finish();
                         break;
                     case R.id.favourite:
                         if (loggedIn == 0) {
                             startActivity(new Intent(MyAdsActivity.this, LoginActivity.class));
                             finish();
                         } else {
-                            FragmentTransaction favourite = getSupportFragmentManager().beginTransaction();
-                            favourite.replace(R.id.fragment_container, new FavouriteFragment());
-                            favourite.commit();
+                            startActivity(new Intent(MyAdsActivity.this,MainActivity.class).
+                                    putExtra("fragment","favourite"));
+                            finish();
                         }
                         break;
                     case R.id.chat:
@@ -112,9 +114,9 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                             startActivity(new Intent(MyAdsActivity.this, LoginActivity.class));
                             finish();
                         } else {
-                            FragmentTransaction chat = getSupportFragmentManager().beginTransaction();
-                            chat.replace(R.id.fragment_container, new ChatFragment());
-                            chat.commit();
+                            startActivity(new Intent(MyAdsActivity.this,MainActivity.class).
+                                    putExtra("fragment","chat"));
+                            finish();
                         }
                         break;
                     case R.id.account:
@@ -155,6 +157,7 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(MyAdsActivity.this, MyAdsActivity.class));
+                                    finish();
                                 }
                             });
 
@@ -162,8 +165,9 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                                 @Override
                                 public void onClick(View v) {
                                     /*chipNavigationBar.setSelectedItemId(R.id.favourite, true);*/
-                                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FavouriteFragment()).commit();
-                                    dialog.dismiss();
+                                    startActivity(new Intent(MyAdsActivity.this,MainActivity.class).
+                                            putExtra("fragment","favourite"));
+                                    finish();
                                 }
                             });
 
@@ -326,6 +330,17 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
 
     }
 
+    private void getLocale() {
+
+        lang = sharedPreferences.getString("lang", "");
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration(getResources().getConfiguration());
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+
+    }
+
     private void init() {
         myAdsRecycler= findViewById(R.id.myAdsRecycler);
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -351,6 +366,8 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
             }
         });
         chipNavigationBar = findViewById(R.id.bottom_menu);
+        chipNavigationBar.getMenu().clear();
+        chipNavigationBar.inflateMenu(R.menu.bottom_drawer_menu);
         lang = sharedPreferences.getString("lang","en");
         adPost = findViewById(R.id.adPost);
         spinner = (Spinner) navigationView.getMenu().findItem(R.id.language).getActionView();
@@ -378,15 +395,18 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
         switch (item.getItemId()) {
             case R.id.login:
                 startActivity(new Intent(MyAdsActivity.this, LoginActivity.class));
+                finish();
                 break;
             case R.id.home:
                 startActivity(new Intent(MyAdsActivity.this, MainActivity.class)
                         .putExtra("fragment","home"));
+                finish();
                 drawerLayout.closeDrawers();
                 break;
             case R.id.bids:
                 startActivity(new Intent(MyAdsActivity.this, MainActivity.class)
                         .putExtra("fragment","home"));
+                finish();
                 drawerLayout.closeDrawers();
                 break;
             case R.id.contact:
@@ -407,6 +427,7 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                     editor2.putString("lang", "bn");
                     editor2.apply();
                     startActivity(getIntent());
+                    finish();
                 }else{
                     Locale locale = new Locale("en");
                     Locale.setDefault(locale);
@@ -417,6 +438,7 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                     editor.putString("lang", "en");
                     editor.apply();
                     startActivity(getIntent());
+                    finish();
                 }
                 break;
 

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.adbazarnet.Api.ApiUtils;
@@ -22,8 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SignupActivity extends AppCompatActivity {
-    private TextInputEditText nameEt,phoneEt,emailEt,passEt;
-    private TextInputLayout nameLT,phoneLT,emailLT,passLT;
+    private EditText nameEt,phoneEt,emailEt,passEt;
     private Button signupBtn;
     private String  name, phone,  pass, email;
 
@@ -41,16 +41,16 @@ public class SignupActivity extends AppCompatActivity {
                 pass = passEt.getText().toString();
                 email = emailEt.getText().toString();
                 if (TextUtils.isEmpty(name)) {
-                    nameLT.setError("Please enter full name!");
+                    nameEt.setError("Please enter full name!");
                     nameEt.requestFocus();
                 } else if (TextUtils.isEmpty(phone)){
-                    phoneLT.setError("Date of Birth!");
+                    phoneEt.setError("Date of Birth!");
                     phoneEt.requestFocus();
                 }else if(TextUtils.isEmpty(pass)){
-                    passLT.setError("Please enter password!");
+                    passEt.setError("Please enter password!");
                     passEt.requestFocus();
                 }else if(TextUtils.isEmpty(email)){
-                    emailLT.setError("please enter your address");
+                    emailEt.setError("please enter your address");
                     emailEt.requestFocus();
                 }else{
                     userRegister(name,phone,email,pass);
@@ -85,11 +85,7 @@ public class SignupActivity extends AppCompatActivity {
         nameEt = findViewById(R.id.name_Et);
         phoneEt = findViewById(R.id.phone_Et);
         emailEt = findViewById(R.id.email_Et);
-        passEt = findViewById(R.id.password_Et);
-        nameLT = findViewById(R.id.name_LT);
-        phoneLT = findViewById(R.id.phone_LT);
-        emailLT = findViewById(R.id.email_LT);
-        passLT = findViewById(R.id.password_Lt);
+        passEt = findViewById(R.id.pass_Et);
         signupBtn = findViewById(R.id.sign_upBtn);
     }
 
@@ -97,5 +93,6 @@ public class SignupActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(SignupActivity.this,LoginActivity.class));
+        finish();
     }
 }

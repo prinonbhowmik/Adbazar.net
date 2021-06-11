@@ -5,12 +5,12 @@
 
         <item
             android:id="@+id/home"
-            android:icon="@drawable/ic_home"
+            android:icon="@drawable/home_filled"
             android:title="@string/home"
             app:cnb_iconColor="@color/theme"/>
         <item
             android:id="@+id/favourite"
-            android:icon="@drawable/ic_favourite_heart"
+            android:icon="@drawable/ic_like"
             android:title="@string/favourite"
             app:cnb_iconColor="@color/theme"/>
         <item
@@ -23,7 +23,7 @@
             app:cnb_iconColor="@color/theme"/>
         <item
             android:id="@+id/account"
-            android:icon="@drawable/ic_account"
+            android:icon="@drawable/ic_user_1_"
             android:title="@string/account"
             app:cnb_iconColor="@color/theme"/>
 

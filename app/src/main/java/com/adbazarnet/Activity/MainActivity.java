@@ -12,7 +12,9 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -159,6 +161,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(MainActivity.this, MyAdsActivity.class));
+                                    finish();
                                 }
                             });
 
@@ -312,7 +315,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         @Override
                         public void onClick(View v) {
                             dialog.dismiss();
-                            chipNavigationBar.setSelectedItemId(R.id.home);
+
                         }
                     });
 
@@ -320,7 +323,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         @Override
                         public void onClick(View v) {
                             dialog.dismiss();
-                            chipNavigationBar.setSelectedItemId(R.id.home);
+
                         }
                     });
                     dialog.show();
@@ -333,7 +336,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void getLocale() {
 
         lang = sharedPreferences.getString("lang", "");
-
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
         Configuration configuration = new Configuration(getResources().getConfiguration());
@@ -349,9 +351,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.getMenu().clear();
         navigationView.inflateMenu(R.menu.home_navigation_drawer);
         navigationView.getMenu().getItem(0).setChecked(true);
-        chipNavigationBar = findViewById(R.id.bottom_menu);
-        lang = sharedPreferences.getString("lang","en");
-        adPost = findViewById(R.id.adPost);
         spinner = (Spinner) navigationView.getMenu().findItem(R.id.language).getActionView();
         spinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.
                 simple_spinner_dropdown_item,languageArray));
@@ -361,6 +360,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }else{
             spinner.setSelection(1);
         }
+        adPost = findViewById(R.id.adPost);
+        chipNavigationBar = findViewById(R.id.bottom_menu);
+        chipNavigationBar.getMenu().clear();
+        chipNavigationBar.inflateMenu(R.menu.bottom_drawer_menu);
 
     }
 
@@ -369,6 +372,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
             case R.id.login:
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                finish();
                 break;
             case R.id.home:
                 FragmentTransaction home = getSupportFragmentManager().beginTransaction();
@@ -384,7 +388,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drawerLayout.closeDrawers();
                 break;
             case R.id.contact:
-                Toast.makeText(this, "Contact", Toast.LENGTH_SHORT).show();
+
                 break;
             case R.id.language:
 
@@ -402,6 +406,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     editor2.putString("lang", "bn");
                     editor2.apply();
                     startActivity(getIntent());
+                    finish();
                 }else{
                     Locale locale = new Locale("en");
                     Locale.setDefault(locale);
@@ -412,79 +417,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     editor.putString("lang", "en");
                     editor.apply();
                     startActivity(getIntent());
+                    finish();
                 }
 
-                /*String[] languageArray = {"English","বাংলা"};
-                AutoCompleteTextView spinner = (AutoCompleteTextView) navigationView.getMenu().findItem(R.id.language).getActionView();
-                ArrayAdapter<String> product_color = new ArrayAdapter<String>(this, R.layout.spinner_item_design, R.id.simpleSpinner, languageArray);
-                product_color.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                spinner.setText(product_color.getItem(0), false);
-                spinner.setAdapter(product_color);
-                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                       *//* if (position==0){
-                            Locale locale = new Locale("en");
-                            Locale.setDefault(locale);
-                            Configuration configuration = new Configuration();
-                            configuration.locale = locale;
-                            getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
-                            SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
-                            editor.putString("lang", "en");
-                            editor.apply();
-                            startActivity(getIntent());
-                        }else {
-                            Locale locale = new Locale("bn");
-                            Locale.setDefault(locale);
-                            Configuration configuration = new Configuration();
-                            configuration.locale = locale;
-                            getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
-                            SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
-                            editor.putString("lang", "bn");
-                            editor.apply();
-                            startActivity(getIntent());
-                        }*//*
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });*/
-
-               /* AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-                alertDialog.setMessage("Change Language");
-
-                alertDialog.setPositiveButton("English", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Locale locale = new Locale("en");
-                        Locale.setDefault(locale);
-                        Configuration configuration = new Configuration();
-                        configuration.locale = locale;
-                        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
-                        SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
-                        editor.putString("lang", "en");
-                        editor.apply();
-                        startActivity(getIntent());
-                    }
-                });
-                alertDialog.setNegativeButton("বাংলা", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Locale locale = new Locale("bn");
-                        Locale.setDefault(locale);
-                        Configuration configuration = new Configuration();
-                        configuration.locale = locale;
-                        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
-                        SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
-                        editor.putString("lang", "bn");
-                        editor.apply();
-                        startActivity(getIntent());
-                    }
-                });
-                alertDialog.setCancelable(false);
-                alertDialog.show();*/
                 break;
 
         }

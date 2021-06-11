@@ -334,18 +334,18 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
                 switch (item.getItemId()) {
 
                     case R.id.home:
-                        FragmentTransaction home = getSupportFragmentManager().beginTransaction();
-                        home.replace(R.id.fragment_container, new HomeFragment());
-                        home.commit();
+                        startActivity(new Intent(EditMyAdsActivity.this,MainActivity.class).
+                                putExtra("fragment","home"));
+                        finish();
                         break;
                     case R.id.favourite:
                         if (loggedIn == 0) {
                             startActivity(new Intent(EditMyAdsActivity.this, LoginActivity.class));
                             finish();
                         } else {
-                            FragmentTransaction favourite = getSupportFragmentManager().beginTransaction();
-                            favourite.replace(R.id.fragment_container, new FavouriteFragment());
-                            favourite.commit();
+                            startActivity(new Intent(EditMyAdsActivity.this,MainActivity.class).
+                                    putExtra("fragment","favourite"));
+                            finish();
                         }
                         break;
                     case R.id.chat:
@@ -353,9 +353,9 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
                             startActivity(new Intent(EditMyAdsActivity.this, LoginActivity.class));
                             finish();
                         } else {
-                            FragmentTransaction chat = getSupportFragmentManager().beginTransaction();
-                            chat.replace(R.id.fragment_container, new ChatFragment());
-                            chat.commit();
+                            startActivity(new Intent(EditMyAdsActivity.this,MainActivity.class).
+                                    putExtra("fragment","chat"));
+                            finish();
                         }
                         break;
                     case R.id.account:
@@ -396,15 +396,16 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(EditMyAdsActivity.this, MyAdsActivity.class));
+                                    finish();
                                 }
                             });
 
                             favouriteTv.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    /*chipNavigationBar.setSelectedItemId(R.id.favourite, true);*/
-                                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FavouriteFragment()).commit();
-                                    dialog.dismiss();
+                                    startActivity(new Intent(EditMyAdsActivity.this,MainActivity.class).
+                                            putExtra("fragment","favourite"));
+                                    finish();
                                 }
                             });
 
@@ -445,7 +446,9 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
                                     editor.putInt("id", 0);
                                     editor.commit();
                                     finish();
-                                    startActivity(getIntent());
+                                    startActivity(new Intent(EditMyAdsActivity.this, MainActivity.class)
+                                            .putExtra("fragment","home"));
+                                    finish();
                                 }
                             });
 
@@ -2043,6 +2046,8 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
             }
         });
         chipNavigationBar = findViewById(R.id.bottom_menu);
+        chipNavigationBar.getMenu().clear();
+        chipNavigationBar.inflateMenu(R.menu.bottom_drawer_menu);
         lang = sharedPreferences.getString("lang","en");
         adPost = findViewById(R.id.adPost);
         spinner = (Spinner) navigationView.getMenu().findItem(R.id.language).getActionView();
@@ -2164,15 +2169,18 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
         switch (item.getItemId()) {
             case R.id.login:
                 startActivity(new Intent(EditMyAdsActivity.this, LoginActivity.class));
+                finish();
                 break;
             case R.id.home:
                 startActivity(new Intent(EditMyAdsActivity.this, MainActivity.class)
                         .putExtra("fragment","home"));
+                finish();
                 drawerLayout.closeDrawers();
                 break;
             case R.id.bids:
                 startActivity(new Intent(EditMyAdsActivity.this, MainActivity.class)
                         .putExtra("fragment","home"));
+                finish();
                 drawerLayout.closeDrawers();
                 break;
             case R.id.contact:
@@ -2205,6 +2213,7 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
                     startActivity(getIntent());
                 }
                 break;
+
 
         }
 

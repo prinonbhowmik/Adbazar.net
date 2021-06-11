@@ -68,6 +68,7 @@ public class MembershipActivity extends AppCompatActivity implements NavigationV
 
         init();
 
+        getLocale();
 
         Call<List<MembershipPackage>> call = ApiUtils.getUserService().getPackages("Token "+token);
         call.enqueue(new Callback<List<MembershipPackage>>() {
@@ -93,18 +94,18 @@ public class MembershipActivity extends AppCompatActivity implements NavigationV
                 switch (item.getItemId()) {
 
                     case R.id.home:
-                        FragmentTransaction home = getSupportFragmentManager().beginTransaction();
-                        home.replace(R.id.fragment_container, new HomeFragment());
-                        home.commit();
+                        startActivity(new Intent(MembershipActivity.this,MainActivity.class).
+                                putExtra("fragment","home"));
+                        finish();
                         break;
                     case R.id.favourite:
                         if (loggedIn == 0) {
                             startActivity(new Intent(MembershipActivity.this, LoginActivity.class));
                             finish();
                         } else {
-                            FragmentTransaction favourite = getSupportFragmentManager().beginTransaction();
-                            favourite.replace(R.id.fragment_container, new FavouriteFragment());
-                            favourite.commit();
+                            startActivity(new Intent(MembershipActivity.this,MainActivity.class).
+                                    putExtra("fragment","favourite"));
+                            finish();
                         }
                         break;
                     case R.id.chat:
@@ -112,9 +113,9 @@ public class MembershipActivity extends AppCompatActivity implements NavigationV
                             startActivity(new Intent(MembershipActivity.this, LoginActivity.class));
                             finish();
                         } else {
-                            FragmentTransaction chat = getSupportFragmentManager().beginTransaction();
-                            chat.replace(R.id.fragment_container, new ChatFragment());
-                            chat.commit();
+                            startActivity(new Intent(MembershipActivity.this,MainActivity.class).
+                                    putExtra("fragment","chat"));
+                            finish();
                         }
                         break;
                     case R.id.account:
@@ -155,6 +156,7 @@ public class MembershipActivity extends AppCompatActivity implements NavigationV
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(MembershipActivity.this, MyAdsActivity.class));
+                                    finish();
                                 }
                             });
 
@@ -162,8 +164,9 @@ public class MembershipActivity extends AppCompatActivity implements NavigationV
                                 @Override
                                 public void onClick(View v) {
                                     /*chipNavigationBar.setSelectedItemId(R.id.favourite, true);*/
-                                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FavouriteFragment()).commit();
-                                    dialog.dismiss();
+                                    startActivity(new Intent(MembershipActivity.this,MainActivity.class).
+                                            putExtra("fragment","favourite"));
+                                    finish();
                                 }
                             });
 
@@ -326,8 +329,18 @@ public class MembershipActivity extends AppCompatActivity implements NavigationV
 
     }
 
+    private void getLocale() {
+
+        lang = sharedPreferences.getString("lang", "");
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration(getResources().getConfiguration());
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+
+    }
+
     private void init() {
-        chipNavigationBar = findViewById(R.id.bottom_menu);
         sharedPreferences = getSharedPreferences("MyRef", MODE_PRIVATE);
         token = sharedPreferences.getString("token",null);
         userId = sharedPreferences.getInt("id",0);
@@ -350,6 +363,8 @@ public class MembershipActivity extends AppCompatActivity implements NavigationV
             }
         });
         chipNavigationBar = findViewById(R.id.bottom_menu);
+        chipNavigationBar.getMenu().clear();
+        chipNavigationBar.inflateMenu(R.menu.bottom_drawer_menu);
         lang = sharedPreferences.getString("lang","en");
         adPost = findViewById(R.id.adPost);
         spinner = (Spinner) navigationView.getMenu().findItem(R.id.language).getActionView();
@@ -377,15 +392,18 @@ public class MembershipActivity extends AppCompatActivity implements NavigationV
         switch (item.getItemId()) {
             case R.id.login:
                 startActivity(new Intent(MembershipActivity.this, LoginActivity.class));
+                finish();
                 break;
             case R.id.home:
                 startActivity(new Intent(MembershipActivity.this, MainActivity.class)
                         .putExtra("fragment","home"));
+                finish();
                 drawerLayout.closeDrawers();
                 break;
             case R.id.bids:
                 startActivity(new Intent(MembershipActivity.this, MainActivity.class)
                         .putExtra("fragment","home"));
+                finish();
                 drawerLayout.closeDrawers();
                 break;
             case R.id.contact:

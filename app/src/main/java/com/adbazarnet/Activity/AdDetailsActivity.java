@@ -107,10 +107,11 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
 
         Intent intent = getIntent();
         id = intent.getIntExtra("id", 0);
-
+        sharedPreferences = getSharedPreferences("MyRef", MODE_PRIVATE);
+        getLocale();
         init();
 
-        getLocale();
+
 
         Call<AdDetails> call = ApiUtils.getUserService().getAdDetails(lang, id);
         call.enqueue(new Callback<AdDetails>() {
@@ -279,6 +280,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
 
             }
         });
+
         websiteTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -297,7 +299,6 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                 startActivity(i);
             }
         });
-
 
         favouriteTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -452,18 +453,18 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                 switch (item.getItemId()) {
 
                     case R.id.home:
-                        FragmentTransaction home = getSupportFragmentManager().beginTransaction();
-                        home.replace(R.id.fragment_container, new HomeFragment());
-                        home.commit();
+                        startActivity(new Intent(AdDetailsActivity.this, MainActivity.class)
+                                .putExtra("fragment","home"));
+                        finish();
                         break;
                     case R.id.favourite:
                         if (loggedIn == 0) {
                             startActivity(new Intent(AdDetailsActivity.this, LoginActivity.class));
                             finish();
                         } else {
-                            FragmentTransaction favourite = getSupportFragmentManager().beginTransaction();
-                            favourite.replace(R.id.fragment_container, new FavouriteFragment());
-                            favourite.commit();
+                            startActivity(new Intent(AdDetailsActivity.this, MainActivity.class)
+                                    .putExtra("fragment","favourite"));
+                            finish();
                         }
                         break;
                     case R.id.chat:
@@ -471,9 +472,9 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                             startActivity(new Intent(AdDetailsActivity.this, LoginActivity.class));
                             finish();
                         } else {
-                            FragmentTransaction chat = getSupportFragmentManager().beginTransaction();
-                            chat.replace(R.id.fragment_container, new ChatFragment());
-                            chat.commit();
+                            startActivity(new Intent(AdDetailsActivity.this, MainActivity.class)
+                                    .putExtra("fragment","chat"));
+                            finish();
                         }
                         break;
                     case R.id.account:
@@ -514,6 +515,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(AdDetailsActivity.this, MyAdsActivity.class));
+                                    finish();
                                 }
                             });
 
@@ -521,7 +523,9 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                                 @Override
                                 public void onClick(View v) {
                                     /*chipNavigationBar.setSelectedItemId(R.id.favourite, true);*/
-                                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FavouriteFragment()).commit();
+                                    startActivity(new Intent(AdDetailsActivity.this, MainActivity.class)
+                                            .putExtra("fragment","favourite"));
+                                    finish();
                                     dialog.dismiss();
                                 }
                             });
@@ -562,8 +566,9 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                                     editor.putInt("loggedIn", 0);
                                     editor.putInt("id", 0);
                                     editor.commit();
+                                    startActivity(new Intent(AdDetailsActivity.this, MainActivity.class)
+                                            .putExtra("fragment","home"));
                                     finish();
-                                    startActivity(getIntent());
                                 }
                             });
 
@@ -667,7 +672,6 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         @Override
                         public void onClick(View v) {
                             dialog.dismiss();
-                            chipNavigationBar.setSelectedItemId(R.id.home);
                         }
                     });
 
@@ -675,7 +679,6 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         @Override
                         public void onClick(View v) {
                             dialog.dismiss();
-                            chipNavigationBar.setSelectedItemId(R.id.home);
                         }
                     });
                     dialog.show();
@@ -796,7 +799,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().clear();
         navigationView.inflateMenu(R.menu.home_navigation_drawer);
-        sharedPreferences = getSharedPreferences("MyRef", MODE_PRIVATE);
+
         token = sharedPreferences.getString("token", null);
 
         userId = sharedPreferences.getInt("id", 0);
@@ -830,6 +833,8 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
         sliderAdapter = new ImageSliderAdapter(this);
 
         chipNavigationBar = findViewById(R.id.bottom_menu);
+        chipNavigationBar.getMenu().clear();
+        chipNavigationBar.inflateMenu(R.menu.bottom_drawer_menu);
         relatedLayout = findViewById(R.id.relatedLayout);
         bidLayout = findViewById(R.id.bidLayout);
         noBidTv = findViewById(R.id.noBidTv);
@@ -842,22 +847,23 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
         switch (item.getItemId()) {
             case R.id.login:
                 startActivity(new Intent(AdDetailsActivity.this, LoginActivity.class));
+                finish();
                 break;
             case R.id.home:
-                FragmentTransaction home = getSupportFragmentManager().beginTransaction();
-                home.replace(R.id.fragment_container, new HomeFragment());
-                home.commit();
+                startActivity(new Intent(AdDetailsActivity.this,MainActivity.class).
+                        putExtra("fragment","home"));
+                finish();
                 chipNavigationBar.setSelectedItemId(R.id.home);
                 drawerLayout.closeDrawers();
                 break;
             case R.id.bids:
-                FragmentTransaction bids = getSupportFragmentManager().beginTransaction();
-                bids.replace(R.id.fragment_container, new BidsFragment());
-                bids.commit();
+                startActivity(new Intent(AdDetailsActivity.this,MainActivity.class).
+                        putExtra("fragment","home"));
+                finish();
                 drawerLayout.closeDrawers();
                 break;
             case R.id.contact:
-                Toast.makeText(this, "Contact", Toast.LENGTH_SHORT).show();
+
                 break;
             case R.id.language:
 
@@ -875,6 +881,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                     editor2.putString("lang", "bn");
                     editor2.apply();
                     startActivity(getIntent());
+                    finish();
                 }else{
                     Locale locale = new Locale("en");
                     Locale.setDefault(locale);
@@ -885,6 +892,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                     editor.putString("lang", "en");
                     editor.apply();
                     startActivity(getIntent());
+                    finish();
                 }
 
                 break;

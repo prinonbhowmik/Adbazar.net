@@ -12,7 +12,7 @@
     <string name="change_language">Change Language</string>
     <string name="home">Home</string>
     <string name="favourite">  Favourite</string>
-    <string name="favourite2">  Favourite</string>
+    <string name="favourite2">   Favourite</string>
     <string name="post">Post</string>
     <string name="chat">Chat</string>
     <string name="account">Account</string>
@@ -36,4 +36,11 @@
     <string name="location">Location</string>
     <string name="all_category">All Category</string>
     <string name="all_location">All Location</string>
+    <string name="login_to_your_account">Login To Your Account</string>
+    <string name="phone_or_email">Phone or Email :</string>
+    <string name="password">Password :</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="register_here">  Register here</string>
+    <string name="forget_password">Forget Password ?</string>
+    <string name="reset_here">  Reset Here</string>
 </resources>

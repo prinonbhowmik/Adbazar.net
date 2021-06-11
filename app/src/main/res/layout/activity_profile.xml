@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#646464"
     tools:context=".Activity.ProfileActivity"
-    tools:openDrawer="start">
+    tools:openDrawer="end">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -247,7 +247,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="75dp"
+                    android:layout_marginBottom="80dp"
                     android:background="@drawable/btn_background"
                     android:text="Change Password"
                     android:textAllCaps="false"

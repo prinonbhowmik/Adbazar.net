@@ -21,10 +21,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         android:background="@android:color/white"
-        app:itemIconTint="@color/theme"
-        app:itemTextColor="@color/theme"
+        app:itemIconTint="#555"
+        app:itemTextColor="#555"
         app:layout_constraintEnd_toEndOf="parent"
         app:elevation="0dp"
+        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_drawer_menu" />

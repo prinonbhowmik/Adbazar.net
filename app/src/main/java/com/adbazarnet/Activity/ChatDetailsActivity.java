@@ -114,18 +114,18 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                 switch (item.getItemId()) {
 
                     case R.id.home:
-                        FragmentTransaction home = getSupportFragmentManager().beginTransaction();
-                        home.replace(R.id.fragment_container, new HomeFragment());
-                        home.commit();
+                        startActivity(new Intent(ChatDetailsActivity.this, MainActivity.class)
+                                .putExtra("fragment","home"));
+                        finish();
                         break;
                     case R.id.favourite:
                         if (loggedIn == 0) {
                             startActivity(new Intent(ChatDetailsActivity.this, LoginActivity.class));
                             finish();
                         } else {
-                            FragmentTransaction favourite = getSupportFragmentManager().beginTransaction();
-                            favourite.replace(R.id.fragment_container, new FavouriteFragment());
-                            favourite.commit();
+                            startActivity(new Intent(ChatDetailsActivity.this, MainActivity.class)
+                                    .putExtra("fragment","favourite"));
+                            finish();
                         }
                         break;
                     case R.id.chat:
@@ -133,9 +133,9 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                             startActivity(new Intent(ChatDetailsActivity.this, LoginActivity.class));
                             finish();
                         } else {
-                            FragmentTransaction chat = getSupportFragmentManager().beginTransaction();
-                            chat.replace(R.id.fragment_container, new ChatFragment());
-                            chat.commit();
+                            startActivity(new Intent(ChatDetailsActivity.this, MainActivity.class)
+                                    .putExtra("fragment","chat"));
+                            finish();
                         }
                         break;
                     case R.id.account:
@@ -143,7 +143,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                             startActivity(new Intent(ChatDetailsActivity.this, LoginActivity.class));
                             finish();
                             break;
-                        } else {
+                        }else {
                             //pop-up will be shown
                             dialog = new Dialog(ChatDetailsActivity.this);
                             dialog.setContentView(R.layout.profile_option_xml);
@@ -176,6 +176,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(ChatDetailsActivity.this, MyAdsActivity.class));
+                                    finish();
                                 }
                             });
 
@@ -183,8 +184,9 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                                 @Override
                                 public void onClick(View v) {
                                     /*chipNavigationBar.setSelectedItemId(R.id.favourite, true);*/
-                                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FavouriteFragment()).commit();
-                                    dialog.dismiss();
+                                    startActivity(new Intent(ChatDetailsActivity.this, MyAdsActivity.class)
+                                            .putExtra("fragment","favourite"));
+                                    finish();
                                 }
                             });
 
@@ -224,8 +226,9 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                                     editor.putInt("loggedIn", 0);
                                     editor.putInt("id", 0);
                                     editor.commit();
+                                    startActivity(new Intent(ChatDetailsActivity.this, MainActivity.class)
+                                            .putExtra("fragment","home"));
                                     finish();
-                                    startActivity(getIntent());
                                 }
                             });
 
@@ -329,7 +332,6 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                         @Override
                         public void onClick(View v) {
                             dialog.dismiss();
-                            chipNavigationBar.setSelectedItemId(R.id.home);
                         }
                     });
 
@@ -337,7 +339,6 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                         @Override
                         public void onClick(View v) {
                             dialog.dismiss();
-                            chipNavigationBar.setSelectedItemId(R.id.home);
                         }
                     });
                     dialog.show();
@@ -403,6 +404,8 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
         });
 
         chipNavigationBar = findViewById(R.id.bottom_menu);
+        chipNavigationBar.getMenu().clear();
+        chipNavigationBar.inflateMenu(R.menu.bottom_drawer_menu);
         lang = sharedPreferences.getString("lang","en");
         adPost = findViewById(R.id.adPost);
         spinner = (Spinner) navigationView.getMenu().findItem(R.id.language).getActionView();
@@ -429,15 +432,18 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
         switch (item.getItemId()) {
             case R.id.login:
                 startActivity(new Intent(ChatDetailsActivity.this, LoginActivity.class));
+                finish();
                 break;
             case R.id.home:
                 startActivity(new Intent(ChatDetailsActivity.this, MainActivity.class)
                         .putExtra("fragment","home"));
+                finish();
                 drawerLayout.closeDrawers();
                 break;
             case R.id.bids:
                 startActivity(new Intent(ChatDetailsActivity.this, MainActivity.class)
                         .putExtra("fragment","home"));
+                finish();
                 drawerLayout.closeDrawers();
                 break;
             case R.id.contact:
@@ -458,6 +464,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                     editor2.putString("lang", "bn");
                     editor2.apply();
                     startActivity(getIntent());
+                    finish();
                 }else{
                     Locale locale = new Locale("en");
                     Locale.setDefault(locale);
@@ -468,6 +475,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                     editor.putString("lang", "en");
                     editor.apply();
                     startActivity(getIntent());
+                    finish();
                 }
                 break;
 

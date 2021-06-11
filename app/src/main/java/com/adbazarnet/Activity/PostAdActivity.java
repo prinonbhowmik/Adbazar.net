@@ -154,10 +154,9 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
 
         Intent i = getIntent();
         postType = i.getStringExtra("type");
-
-        init();
-
+        sharedPreferences = getSharedPreferences("MyRef", MODE_PRIVATE);
         getLocale();
+        init();
 
         if (postType.equals("bid")) {
             txt3.setVisibility(View.GONE);
@@ -167,7 +166,8 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
             hidePhnBtn.setVisibility(View.GONE);
             txtF.setVisibility(View.VISIBLE);
             featureEt.setVisibility(View.VISIBLE);
-        } else if (postType.equals("job")) {
+        }
+        else if (postType.equals("job")) {
             txt3.setVisibility(View.GONE);
             priceEt.setVisibility(View.GONE);
             negotiableBtn.setVisibility(View.GONE);
@@ -768,18 +768,18 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                 switch (item.getItemId()) {
 
                     case R.id.home:
-                        FragmentTransaction home = getSupportFragmentManager().beginTransaction();
-                        home.replace(R.id.fragment_container, new HomeFragment());
-                        home.commit();
+                        startActivity(new Intent(PostAdActivity.this,MainActivity.class).
+                                putExtra("fragment","home"));
+                        finish();
                         break;
                     case R.id.favourite:
                         if (loggedIn == 0) {
                             startActivity(new Intent(PostAdActivity.this, LoginActivity.class));
                             finish();
                         } else {
-                            FragmentTransaction favourite = getSupportFragmentManager().beginTransaction();
-                            favourite.replace(R.id.fragment_container, new FavouriteFragment());
-                            favourite.commit();
+                            startActivity(new Intent(PostAdActivity.this,MainActivity.class).
+                                    putExtra("fragment","favourite"));
+                            finish();
                         }
                         break;
                     case R.id.chat:
@@ -787,9 +787,9 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                             startActivity(new Intent(PostAdActivity.this, LoginActivity.class));
                             finish();
                         } else {
-                            FragmentTransaction chat = getSupportFragmentManager().beginTransaction();
-                            chat.replace(R.id.fragment_container, new ChatFragment());
-                            chat.commit();
+                            startActivity(new Intent(PostAdActivity.this,MainActivity.class).
+                                    putExtra("fragment","chat"));
+                            finish();
                         }
                         break;
                     case R.id.account:
@@ -830,15 +830,16 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(PostAdActivity.this, MyAdsActivity.class));
+                                    finish();
                                 }
                             });
 
                             favouriteTv.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    /*chipNavigationBar.setSelectedItemId(R.id.favourite, true);*/
-                                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FavouriteFragment()).commit();
-                                    dialog.dismiss();
+                                    startActivity(new Intent(PostAdActivity.this,MainActivity.class).
+                                            putExtra("fragment","favourite"));
+                                    finish();
                                 }
                             });
 
@@ -983,7 +984,6 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                         @Override
                         public void onClick(View v) {
                             dialog.dismiss();
-                            chipNavigationBar.setSelectedItemId(R.id.home);
                         }
                     });
 
@@ -991,7 +991,6 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                         @Override
                         public void onClick(View v) {
                             dialog.dismiss();
-                            chipNavigationBar.setSelectedItemId(R.id.home);
                         }
                     });
                     dialog.show();
@@ -1118,7 +1117,8 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
         img5 = findViewById(R.id.img5);
         apiInterface = ApiUtils.getUserService();
         chipNavigationBar = findViewById(R.id.bottom_menu);
-        sharedPreferences = getSharedPreferences("MyRef", MODE_PRIVATE);
+        chipNavigationBar.getMenu().clear();
+        chipNavigationBar.inflateMenu(R.menu.bottom_drawer_menu);
         token = sharedPreferences.getString("token", null);
         loggedIn = sharedPreferences.getInt("loggedIn", 0);
         navIcon = findViewById(R.id.navIcon);
@@ -1306,15 +1306,18 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
         switch (item.getItemId()) {
             case R.id.login:
                 startActivity(new Intent(PostAdActivity.this, LoginActivity.class));
+                finish();
                 break;
             case R.id.home:
                 startActivity(new Intent(PostAdActivity.this, MainActivity.class)
                         .putExtra("fragment","home"));
+                finish();
                 drawerLayout.closeDrawers();
                 break;
             case R.id.bids:
                 startActivity(new Intent(PostAdActivity.this, MainActivity.class)
                         .putExtra("fragment","home"));
+                finish();
                 drawerLayout.closeDrawers();
                 break;
             case R.id.contact:
@@ -1335,6 +1338,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                     editor2.putString("lang", "bn");
                     editor2.apply();
                     startActivity(getIntent());
+                    finish();
                 }else{
                     Locale locale = new Locale("en");
                     Locale.setDefault(locale);
@@ -1345,6 +1349,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                     editor.putString("lang", "en");
                     editor.apply();
                     startActivity(getIntent());
+                    finish();
                 }
                 break;
 

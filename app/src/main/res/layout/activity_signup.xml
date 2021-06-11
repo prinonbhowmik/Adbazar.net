@@ -7,159 +7,176 @@
     android:background="#fff"
     tools:context=".Activity.SignupActivity">
 
-    <ImageView
-        android:id="@+id/logo"
+    <RelativeLayout
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:src="@drawable/logo"
-        android:layout_marginTop="20dp"/>
+        android:layout_height="60dp"
+        android:background="@color/theme">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/navIcon"
+            android:layout_toRightOf="@+id/navIcon"
+            android:fontFamily="@font/comfortaa"
+            android:gravity="center_vertical"
+            android:text="AdBazar.net"
+            android:textColor="@color/white"
+            android:textSize="21sp" />
+
+
+    </RelativeLayout>
 
     <ScrollView
+        android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/logo"
-        >
+        android:background="#D8D7D7">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rl1">
+            android:background="#D8D7D7">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/name_LT"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            <RelativeLayout
+                android:id="@+id/ll1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                app:boxCornerRadiusBottomStart="10dp"
-                app:boxCornerRadiusTopEnd="10dp"
-                android:hint="Full Name"
-                app:hintTextColor="@color/black"
-                android:textColorHint="#000"
-                app:boxBackgroundMode="outline">
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/category_layout_design"
+                android:backgroundTint="#fff">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/name_Et"
+                <TextView
+                    android:id="@+id/header"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:fontFamily="@font/comfortaa"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/category_header_layout"
+                    android:fontFamily="@font/roboto"
+                    android:padding="10dp"
+                    android:text="Create A New Account"
                     android:textColor="#000"
-                    android:textSize="18sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:textSize="20sp" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/phone_LT"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="20dp"
-                android:layout_below="@+id/name_LT"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                app:boxCornerRadiusBottomStart="10dp"
-                app:boxCornerRadiusTopEnd="10dp"
-                android:hint="Phone"
-                app:hintTextColor="@color/black"
-                android:textColorHint="#000"
-                app:boxBackgroundMode="outline">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/phone_Et"
+                <RelativeLayout
+                    android:layout_below="@+id/header"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="phone"
-                    android:maxLines="1"
-                    android:fontFamily="@font/comfortaa"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
-                    android:textColor="#000"
-                    android:textSize="18sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:background="#fff">
+                    <TextView
+                        android:id="@+id/nameTag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Name :"
+                        android:textColor="#6C6767"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/email_LT"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_below="@+id/phone_LT"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                app:boxCornerRadiusBottomStart="10dp"
-                app:boxCornerRadiusTopEnd="10dp"
-                android:hint="Email "
-                app:hintTextColor="@color/black"
-                android:textColorHint="#000"
-                app:boxBackgroundMode="outline">
+                    <EditText
+                        android:id="@+id/name_Et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/nameTag"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:padding="10dp"
+                        android:textColor="#000" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/email_Et"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:fontFamily="@font/comfortaa"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
-                    android:textColor="#000"
-                    android:textSize="18sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    <TextView
+                        android:id="@+id/phoneTag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/name_Et"
+                        android:layout_margin="10dp"
+                        android:text="Phone Number :"
+                        android:textColor="#6C6767"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/password_Lt"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_below="@+id/email_LT"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                app:boxCornerRadiusBottomStart="10dp"
-                app:boxCornerRadiusTopEnd="10dp"
-                android:hint="Password"
-                app:hintTextColor="@color/black"
-                android:textColorHint="#000"
-                app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/themDark"
-                app:boxBackgroundMode="outline">
+                    <EditText
+                        android:id="@+id/phone_Et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/phoneTag"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:inputType="phone"
+                        android:padding="10dp"
+                        android:textColor="#000" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/password_Et"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:fontFamily="@font/comfortaa"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
-                    android:textColor="#000"
-                    android:textSize="18sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    <TextView
+                        android:id="@+id/emailTag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/phone_Et"
+                        android:layout_margin="10dp"
+                        android:text="Email :"
+                        android:textColor="#6C6767"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/sign_upBtn"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/password_Lt"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="50dp"
-                android:fontFamily="@font/comfortaa"
-                android:background="@drawable/btn_background"
-                android:text="Sign Up"
-                android:textSize="18sp"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"/>
+                    <EditText
+                        android:id="@+id/email_Et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/emailTag"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:inputType="textEmailAddress"
+                        android:padding="10dp"
+                        android:textColor="#000" />
+
+                    <TextView
+                        android:id="@+id/passTag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/email_Et"
+                        android:layout_margin="10dp"
+                        android:text="Password :"
+                        android:textColor="#6C6767"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/pass_Et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/passTag"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/edittex_design"
+                        android:inputType="textPassword"
+                        android:padding="10dp"
+                        android:textColor="#000" />
+
+
+                    <Button
+                        android:id="@+id/sign_upBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/pass_Et"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="50dp"
+                        android:padding="10dp"
+                        android:backgroundTint="@color/theme"
+                        android:text="Sign Up"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+
         </RelativeLayout>
     </ScrollView>
 
