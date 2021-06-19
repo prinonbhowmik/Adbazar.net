@@ -98,7 +98,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#fff"
-                                    android:textSize="40sp"
+                                    android:textSize="35sp"
                                     android:layout_marginTop="10dp"
                                     android:layout_marginRight="15dp"
                                     android:layout_alignParentRight="true"/>
@@ -108,7 +108,7 @@
                                     android:layout_below="@+id/totalAdsTv"
                                     android:textColor="#fff"
                                     android:hint="Total Ads"
-                                    android:textSize="20sp"
+                                    android:textSize="18sp"
                                     android:textFontWeight="-60"
                                     android:layout_marginBottom="20dp"
                                     android:layout_marginRight="10dp"
@@ -134,7 +134,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#fff"
-                                    android:textSize="40sp"
+                                    android:textSize="35sp"
                                     android:layout_marginTop="10dp"
                                     android:layout_marginRight="15dp"
                                     android:layout_alignParentRight="true"/>
@@ -143,7 +143,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_below="@+id/pendingAdsTv"
                                     android:hint="Pending Ads"
-                                    android:textSize="20sp"
+                                    android:textSize="18sp"
                                     android:textFontWeight="-60"
                                     android:layout_marginBottom="20dp"
                                     android:layout_marginRight="10dp"
@@ -177,7 +177,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#fff"
-                                    android:textSize="40sp"
+                                    android:textSize="35sp"
                                     android:layout_marginTop="10dp"
                                     android:layout_marginRight="15dp"
                                     android:layout_alignParentRight="true"/>
@@ -187,12 +187,11 @@
                                     android:layout_below="@+id/liveAdsTv"
                                     android:textColor="#fff"
                                     android:hint="Live Ads"
-                                    android:textSize="20sp"
+                                    android:textSize="18sp"
                                     android:textFontWeight="-60"
                                     android:layout_marginBottom="20dp"
                                     android:layout_marginRight="10dp"
                                     android:layout_alignParentRight="true"/>
-
 
                             </RelativeLayout>
                         </androidx.cardview.widget.CardView>
@@ -213,7 +212,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#fff"
-                                    android:textSize="40sp"
+                                    android:textSize="35sp"
                                     android:layout_marginTop="10dp"
                                     android:layout_marginRight="15dp"
                                     android:layout_alignParentRight="true"/>
@@ -222,7 +221,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_below="@+id/expiredAdsTv"
                                     android:hint="Expired Ads"
-                                    android:textSize="20sp"
+                                    android:textSize="18sp"
                                     android:textFontWeight="-60"
                                     android:layout_marginBottom="20dp"
                                     android:layout_marginRight="10dp"

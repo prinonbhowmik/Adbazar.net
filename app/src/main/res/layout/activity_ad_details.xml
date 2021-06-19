@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:id="@+id/drawerLayout"
     tools:context=".Activity.AdDetailsActivity"
-    tools:openDrawer="start">
+    tools:openDrawer="end">
 
    <RelativeLayout
        android:layout_width="match_parent"
@@ -84,7 +84,7 @@
                        android:padding="10dp"
                        android:text=" Ad Details"
                        android:textColor="#000"
-                       android:textSize="20sp"
+                       android:textSize="18sp"
                        android:textStyle="bold" />
 
                    <androidx.cardview.widget.CardView
@@ -124,7 +124,7 @@
                        android:fontFamily="@font/roboto"
                        android:textColor="#343a40"
                        android:textFontWeight="700"
-                       android:textSize="18sp" />
+                       android:textSize="15sp" />
 
                    <TextView
                        android:id="@+id/productPrice"
@@ -136,7 +136,7 @@
                        android:fontFamily="@font/roboto"
                        android:textColor="#ff4500"
                        android:textFontWeight="700"
-                       android:textSize="18sp" />
+                       android:textSize="15sp" />
 
                    <TextView
                        android:id="@+id/uploadTime"
@@ -148,7 +148,7 @@
                        android:fontFamily="@font/roboto"
                        android:textColor="#646464"
                        android:textFontWeight="700"
-                       android:textSize="16sp" />
+                       android:textSize="13sp" />
 
                    <View
                        android:id="@+id/view1"
@@ -176,7 +176,7 @@
                            android:text="  Category :"
                            android:textColor="#646464"
                            android:textFontWeight="700"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                        <TextView
                            android:id="@+id/categoryTv"
@@ -186,7 +186,7 @@
                            android:layout_toEndOf="@+id/txt1"
                            android:fontFamily="@font/roboto"
                            android:textColor="#646464"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
                    </RelativeLayout>
 
                    <RelativeLayout
@@ -204,7 +204,7 @@
                            android:text="  Condition :"
                            android:textColor="#646464"
                            android:textFontWeight="700"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                        <TextView
                            android:id="@+id/conditionTv"
@@ -214,7 +214,7 @@
                            android:layout_toEndOf="@+id/txt2"
                            android:fontFamily="@font/roboto"
                            android:textColor="#646464"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
                    </RelativeLayout>
 
                    <RelativeLayout
@@ -233,7 +233,7 @@
                            android:textColor="#646464"
                            android:visibility="gone"
                            android:textFontWeight="700"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                        <TextView
                            android:id="@+id/modelYearTv"
@@ -244,7 +244,7 @@
                            android:fontFamily="@font/roboto"
                            android:textColor="#646464"
                            android:visibility="gone"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                    </RelativeLayout>
 
@@ -264,7 +264,7 @@
                            android:textColor="#646464"
                            android:visibility="gone"
                            android:textFontWeight="700"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                        <TextView
                            android:id="@+id/mileageTv"
@@ -275,7 +275,7 @@
                            android:fontFamily="@font/roboto"
                            android:textColor="#646464"
                            android:visibility="gone"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                    </RelativeLayout>
 
@@ -295,7 +295,7 @@
                            android:textColor="#646464"
                            android:visibility="gone"
                            android:textFontWeight="700"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                        <TextView
                            android:id="@+id/warrantyTv"
@@ -306,7 +306,7 @@
                            android:fontFamily="@font/roboto"
                            android:textColor="#646464"
                            android:visibility="gone"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                    </RelativeLayout>
 
@@ -325,7 +325,7 @@
                            android:text="  Job Type :"
                            android:textColor="#646464"
                            android:textFontWeight="700"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                        <TextView
                            android:id="@+id/jobTypeTv"
@@ -335,7 +335,7 @@
                            android:layout_toEndOf="@+id/jobTv"
                            android:fontFamily="@font/roboto"
                            android:textColor="#646464"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                    </RelativeLayout>
 
@@ -354,7 +354,7 @@
                            android:text="  Total Vacancy :"
                            android:textColor="#646464"
                            android:textFontWeight="700"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                        <TextView
                            android:id="@+id/vacancyTv"
@@ -364,7 +364,7 @@
                            android:layout_toEndOf="@+id/txtV"
                            android:fontFamily="@font/roboto"
                            android:textColor="#646464"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                    </RelativeLayout>
 
@@ -383,7 +383,7 @@
                            android:text="  Application Deadline :"
                            android:textColor="#646464"
                            android:textFontWeight="700"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                        <TextView
                            android:id="@+id/deadlineTv"
@@ -393,7 +393,7 @@
                            android:layout_toEndOf="@+id/txtD"
                            android:fontFamily="@font/roboto"
                            android:textColor="#646464"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                    </RelativeLayout>
 
@@ -412,7 +412,7 @@
                            android:text="  Minimum Requirement :"
                            android:textColor="#646464"
                            android:textFontWeight="700"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                        <TextView
                            android:id="@+id/requirmentTv"
@@ -422,7 +422,7 @@
                            android:layout_toEndOf="@+id/txtR"
                            android:fontFamily="@font/roboto"
                            android:textColor="#646464"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                    </RelativeLayout>
 
@@ -441,7 +441,7 @@
                            android:text="  Address :"
                            android:textColor="#646464"
                            android:textFontWeight="700"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                        <TextView
                            android:id="@+id/addressTv"
@@ -451,7 +451,7 @@
                            android:layout_toEndOf="@+id/txtA"
                            android:fontFamily="@font/roboto"
                            android:textColor="#646464"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                    </RelativeLayout>
 
@@ -470,7 +470,7 @@
                            android:text="  Address :"
                            android:textColor="#646464"
                            android:textFontWeight="700"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                        <TextView
                            android:id="@+id/landTv"
@@ -480,7 +480,7 @@
                            android:layout_toEndOf="@+id/txtL"
                            android:fontFamily="@font/roboto"
                            android:textColor="#646464"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                    </RelativeLayout>
 
@@ -499,7 +499,7 @@
                            android:text="  Other Information :"
                            android:textColor="#646464"
                            android:textFontWeight="700"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                        <TextView
                            android:id="@+id/otherTv"
@@ -509,7 +509,7 @@
                            android:layout_toEndOf="@+id/txtO"
                            android:fontFamily="@font/roboto"
                            android:textColor="#646464"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                    </RelativeLayout>
 
@@ -528,7 +528,7 @@
                            android:text="  Company Website :"
                            android:textColor="#646464"
                            android:textFontWeight="700"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                        <TextView
                            android:id="@+id/websiteTv"
@@ -538,7 +538,7 @@
                            android:layout_toEndOf="@+id/txtW"
                            android:fontFamily="@font/roboto"
                            android:textColor="#17a2b8"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                    </RelativeLayout>
 
@@ -557,7 +557,7 @@
                            android:text="  Attachment :"
                            android:textColor="#646464"
                            android:textFontWeight="700"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                        <TextView
                            android:id="@+id/attachmentTv"
@@ -568,7 +568,7 @@
                            android:fontFamily="@font/roboto"
                            android:text=" Download"
                            android:textColor="#17a2b8"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                    </RelativeLayout>
 
@@ -582,7 +582,7 @@
                        android:fontFamily="@font/roboto"
                        android:text=" Product Description:"
                        android:textColor="#646464"
-                       android:textSize="18sp" />
+                       android:textSize="15sp" />
 
 
 
@@ -602,7 +602,7 @@
                            android:layout_height="match_parent"
                            android:layout_margin="5dp"
                            android:textColor="#000"
-                           android:textSize="20sp" />
+                           android:textSize="15sp" />
 
                    </RelativeLayout>
 
@@ -618,7 +618,7 @@
                        android:padding="10dp"
                        android:text="  Favourite"
                        android:textColor="#646464"
-                       android:textSize="18sp"
+                       android:textSize="15sp"
                        android:textStyle="bold" />
 
                    <TextView
@@ -634,7 +634,7 @@
                        android:padding="10dp"
                        android:text="  Share"
                        android:textColor="#646464"
-                       android:textSize="18sp"
+                       android:textSize="15sp"
                        android:textStyle="bold" />
 
                </RelativeLayout>
@@ -663,7 +663,7 @@
                            android:padding="10dp"
                            android:text=" Related Ads"
                            android:textColor="#000"
-                           android:textSize="20sp"
+                           android:textSize="16sp"
                            android:textStyle="bold" />
 
                        <androidx.recyclerview.widget.RecyclerView
@@ -680,7 +680,7 @@
                            android:layout_margin="20dp"
                            android:text="No Related ad found !"
                            android:textColor="#222"
-                           android:textSize="20sp"
+                           android:textSize="18sp"
                            android:visibility="gone" />
 
                    </RelativeLayout>
@@ -702,7 +702,7 @@
                            android:padding="10dp"
                            android:text=" Place Bid"
                            android:textColor="#000"
-                           android:textSize="20sp"
+                           android:textSize="18sp"
                            android:textStyle="bold" />
 
                        <RelativeLayout
@@ -723,7 +723,7 @@
                                android:layout_margin="20dp"
                                android:text="No Bid found !"
                                android:textColor="#222"
-                               android:textSize="20sp"
+                               android:textSize="18sp"
                                android:visibility="gone" />
                        </RelativeLayout>
 
@@ -752,7 +752,7 @@
                                        android:hint="Bid Here (max: 20)"
                                        android:layout_height="match_parent"
                                        android:background="@drawable/edittext_background"
-                                       android:textSize="18sp"
+                                       android:textSize="15sp"
                                        android:textColor="#000"
                                        android:textColorHint="#AFABAB"
                                        android:padding="10dp" />
@@ -763,7 +763,7 @@
                                        android:layout_height="match_parent"
                                        android:text="Submit"
                                        android:textAllCaps="false"
-                                       android:textSize="18sp"
+                                       android:textSize="15sp"
                                        android:background="#dc3545"
                                        android:textColor="#fff"
                                        android:padding="10dp" />
@@ -796,7 +796,7 @@
                        android:padding="10dp"
                        android:text=" Seller Information"
                        android:textColor="#000"
-                       android:textSize="20sp"
+                       android:textSize="18sp"
                        android:textStyle="bold" />
 
                    <de.hdodenhof.circleimageview.CircleImageView
@@ -818,7 +818,7 @@
                        android:text="Posted By"
                        android:textColor="#969696"
                        android:textFontWeight="400"
-                       android:textSize="16sp" />
+                       android:textSize="15sp" />
 
                    <TextView
                        android:id="@+id/sellerNameTv"
@@ -831,7 +831,7 @@
                        android:text=""
                        android:textColor="#007bff"
                        android:textFontWeight="400"
-                       android:textSize="16sp" />
+                       android:textSize="15sp" />
 
                    <View
                        android:id="@+id/view2"
@@ -861,7 +861,7 @@
                        android:text="Location"
                        android:textColor="#969696"
                        android:textFontWeight="400"
-                       android:textSize="16sp" />
+                       android:textSize="15sp" />
 
                    <TextView
                        android:id="@+id/LocationTv"
@@ -874,7 +874,7 @@
                        android:text=""
                        android:textColor="#000"
                        android:textFontWeight="400"
-                       android:textSize="16sp" />
+                       android:textSize="15sp" />
 
                    <View
                        android:id="@+id/view3"
@@ -904,7 +904,7 @@
                        android:text="Membership"
                        android:textColor="#969696"
                        android:textFontWeight="400"
-                       android:textSize="16sp" />
+                       android:textSize="15sp" />
 
                    <TextView
                        android:id="@+id/membershipTV"
@@ -917,7 +917,7 @@
                        android:text=""
                        android:textColor="#000"
                        android:textFontWeight="400"
-                       android:textSize="16sp" />
+                       android:textSize="15sp" />
 
                </RelativeLayout>
 
@@ -941,7 +941,7 @@
                        android:padding="10dp"
                        android:text=" Safety Tips for Buyers"
                        android:textColor="#000"
-                       android:textSize="20sp"
+                       android:textSize="18sp"
                        android:textStyle="bold" />
 
                    <TextView
@@ -957,7 +957,7 @@
                        android:text="  Meet seller at a public place"
                        android:textColor="#000"
                        android:textFontWeight="400"
-                       android:textSize="16sp" />
+                       android:textSize="15sp" />
 
                    <TextView
                        android:id="@+id/help2"
@@ -972,7 +972,7 @@
                        android:text="  Check The item before you buy"
                        android:textColor="#000"
                        android:textFontWeight="400"
-                       android:textSize="16sp" />
+                       android:textSize="15sp" />
 
                    <TextView
                        android:id="@+id/help3"
@@ -988,7 +988,7 @@
                        android:text="  Check The item before you buy"
                        android:textColor="#000"
                        android:textFontWeight="400"
-                       android:textSize="16sp" />
+                       android:textSize="15sp" />
 
 
 

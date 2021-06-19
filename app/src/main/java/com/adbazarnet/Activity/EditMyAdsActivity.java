@@ -1198,7 +1198,7 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
                         locationTv.setText(response.body().getLocation().getName());
                         titleEt.setText(response.body().getAd_title());
                         otherInfoEt.setText(response.body().getOther_information());
-                        priceEt.setText(response.body().getPrice());
+                        priceEt.setText(""+response.body().getPrice());
                         addressEt.setText(response.body().getAddress());
                         landEt.setText(response.body().getPlot_size());
                         negotiableBtn.setChecked(response.body().isNegotiable());

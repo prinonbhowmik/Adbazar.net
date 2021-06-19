@@ -73,7 +73,7 @@
                 android:padding="10dp"
                 android:text=" Chat"
                 android:textColor="#000"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -104,7 +104,7 @@
                 android:hint="Enter Keyword Here"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext_background"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:textColor="#000"
                 android:textColorHint="#AFABAB"
                 android:padding="10dp"

@@ -17,9 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.adbazarnet.Adapter.CategoryNamesAdapter;
@@ -64,6 +67,8 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
     private SubCatProductsAdapter subProductAdapter;
     public static String lang;
     private SharedPreferences sharedPreferences;
+    private ScrollView scrollView;
+    private RelativeLayout layout1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -153,6 +158,18 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
             }
         });
 
+        scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                float y = 0;
+                if (scrollView.getScrollY() < y) {
+                    layout1.setGravity(View.GONE);
+                } else {
+                    layout1.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         return view;
     }
 
@@ -236,6 +253,7 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
         searchBtn = view.findViewById(R.id.searchBtn);
         categoryTv = view.findViewById(R.id.categoryTv);
         locationTv = view.findViewById(R.id.locationTv);
+        layout1 = view.findViewById(R.id.layout1);
         drawerLayout=getActivity().findViewById(R.id.drawerLayout);
         navIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -248,6 +266,7 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
         adlist = new ArrayList<>();
         adsRecycler = view.findViewById(R.id.adsRecycler);
         adCountTv = view.findViewById(R.id.adCountTv);
+        scrollView = view.findViewById(R.id.scrollView);
         adsRecycler.setLayoutManager(new GridLayoutManager(getContext(),2));
 
     }
