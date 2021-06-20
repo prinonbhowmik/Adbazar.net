@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ebebeb"
-    tools:openDrawer="start"
+    tools:openDrawer="end"
     android:id="@+id/drawerLayout"
     tools:context=".Activity.DashboardActivity">
 
@@ -134,7 +134,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#fff"
-                                    android:textSize="35sp"
+                                    android:textSize="21sp"
                                     android:layout_marginTop="10dp"
                                     android:layout_marginRight="15dp"
                                     android:layout_alignParentRight="true"/>
@@ -143,7 +143,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_below="@+id/pendingAdsTv"
                                     android:hint="Pending Ads"
-                                    android:textSize="18sp"
+                                    android:textSize="15sp"
                                     android:textFontWeight="-60"
                                     android:layout_marginBottom="20dp"
                                     android:layout_marginRight="10dp"
@@ -212,7 +212,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#fff"
-                                    android:textSize="35sp"
+                                    android:textSize="21sp"
                                     android:layout_marginTop="10dp"
                                     android:layout_marginRight="15dp"
                                     android:layout_alignParentRight="true"/>
@@ -221,7 +221,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_below="@+id/expiredAdsTv"
                                     android:hint="Expired Ads"
-                                    android:textSize="18sp"
+                                    android:textSize="15sp"
                                     android:textFontWeight="-60"
                                     android:layout_marginBottom="20dp"
                                     android:layout_marginRight="10dp"

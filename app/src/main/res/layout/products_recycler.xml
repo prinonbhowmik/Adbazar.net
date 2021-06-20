@@ -3,12 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="160dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
     android:background="#fff"
-    android:layout_marginLeft="10dp">
+    app:cardElevation="0dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,7 +20,7 @@
             android:id="@+id/productImage"
             android:layout_width="match_parent"
             android:layout_height="140dp"
-            android:padding="5dp"
+            android:scaleType="fitXY"
             android:layout_centerHorizontal="true" />
         <TextView
             android:id="@+id/productName"
@@ -28,8 +29,6 @@
             android:layout_below="@+id/productImage"
             android:textAlignment="viewStart"
             android:text="abcs"
-            android:fontFamily="@font/comfortaa"
-            android:textStyle="bold"
             android:layout_marginStart="5dp"
             android:layout_marginTop="3dp"
             android:layout_marginEnd="5dp"
@@ -40,18 +39,41 @@
             android:gravity="center_horizontal"
             tools:ignore="RtlCompat" />
         <RelativeLayout
+            android:id="@+id/locationLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/productName">
+
+            <TextView
+                android:id="@+id/locationTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="5dp"
+                android:textColor="#4F555A"
+                android:layout_alignParentLeft="true"
+                android:textSize="12sp"
+                android:layout_marginStart="5dp"
+                android:textAlignment="center"
+                android:maxLines="1"
+                android:gravity="center_horizontal" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
             android:id="@+id/priceLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/productName">
+            android:layout_below="@+id/locationLayout">
             <TextView
                 android:id="@+id/productUnitPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/comfortaa"
                 android:textStyle="bold"
+                android:layout_alignParentLeft="true"
+                android:layout_marginStart="5dp"
                 android:textColor="@color/themRed"
                 android:textSize="13sp"
                 android:layout_marginBottom="5dp"/>
@@ -59,7 +81,6 @@
                 android:id="@+id/bidTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/comfortaa"
                 android:textStyle="bold"
                 android:text="Place Bid"
                 android:textColor="@color/theme"
@@ -68,24 +89,6 @@
                 android:layout_marginBottom="5dp" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/priceLayout">
-
-            <TextView
-                android:id="@+id/locationTv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="5dp"
-                android:textColor="#4F555A"
-                android:fontFamily="@font/comfortaa"
-                android:textSize="12sp"
-                android:textAlignment="center"
-                android:maxLines="1"
-                android:gravity="center_horizontal" />
-        </RelativeLayout>
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

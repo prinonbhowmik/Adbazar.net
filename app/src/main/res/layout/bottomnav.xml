@@ -15,17 +15,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#AEABAB"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_menu"
+        tools:ignore="MissingConstraints" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@android:color/white"
+        android:background="#fff"
         app:itemIconTint="#555"
         app:itemTextColor="#555"
         app:layout_constraintEnd_toEndOf="parent"
         app:elevation="0dp"
-        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_drawer_menu" />
