@@ -78,7 +78,7 @@
                     android:padding="10dp"
                     android:text="Your profile information"
                     android:textColor="#000"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profileIv"
@@ -96,7 +96,7 @@
                     android:layout_margin="10dp"
                     android:text="Name :"
                     android:textColor="#6C6767"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <EditText
@@ -107,6 +107,7 @@
                     android:layout_margin="10dp"
                     android:background="@drawable/edittex_design"
                     android:padding="10dp"
+                    android:textSize="15sp"
                     android:textColor="#000" />
 
                 <TextView
@@ -117,7 +118,7 @@
                     android:layout_margin="10dp"
                     android:text="Phone Number :"
                     android:textColor="#6C6767"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <EditText
@@ -129,6 +130,7 @@
                     android:background="@drawable/edittex_design"
                     android:inputType="phone"
                     android:padding="10dp"
+                    android:textSize="15sp"
                     android:textColor="#000" />
 
                 <TextView
@@ -139,7 +141,7 @@
                     android:layout_margin="10dp"
                     android:text="Email :"
                     android:textColor="#6C6767"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <EditText
@@ -151,6 +153,7 @@
                     android:background="@drawable/edittex_design"
                     android:inputType="textEmailAddress"
                     android:padding="10dp"
+                    android:textSize="15sp"
                     android:textColor="#000" />
 
                 <Button
@@ -162,7 +165,7 @@
                     android:background="@drawable/btn_background"
                     android:text="Update Profile"
                     android:textAllCaps="false"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
                 <View
                     android:id="@+id/v1"
@@ -180,7 +183,7 @@
                     android:layout_margin="10dp"
                     android:text="Old Password :"
                     android:textColor="#6C6767"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <EditText
@@ -192,6 +195,7 @@
                     android:background="@drawable/edittex_design"
                     android:inputType="textPassword"
                     android:padding="10dp"
+                    android:textSize="15sp"
                     android:textColor="#000" />
 
                 <TextView
@@ -202,7 +206,7 @@
                     android:layout_margin="10dp"
                     android:text="New Password :"
                     android:textColor="#6C6767"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <EditText
@@ -214,6 +218,7 @@
                     android:background="@drawable/edittex_design"
                     android:hint="New Password"
                     android:padding="10dp"
+                    android:textSize="15sp"
                     android:textColor="#000" />
 
                 <TextView
@@ -224,7 +229,7 @@
                     android:layout_margin="10dp"
                     android:text="Confirm Password :"
                     android:textColor="#6C6767"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <EditText
@@ -237,6 +242,7 @@
                     android:hint="Confirm new password"
                     android:inputType="textPassword"
                     android:padding="10dp"
+                    android:textSize="15sp"
                     android:textColor="#000" />
 
                 <Button
@@ -251,7 +257,7 @@
                     android:background="@drawable/btn_background"
                     android:text="Change Password"
                     android:textAllCaps="false"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
 
             </RelativeLayout>

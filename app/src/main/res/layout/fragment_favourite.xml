@@ -69,7 +69,7 @@
             android:padding="10dp"
             android:text="Favourite Ads"
             android:textColor="#000"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <HorizontalScrollView

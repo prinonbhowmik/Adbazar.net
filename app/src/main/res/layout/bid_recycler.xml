@@ -23,7 +23,7 @@
         android:text="Prinon bhowmik"
         android:textColor="#646464"
         android:textFontWeight="400"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/bidTimeTv"
@@ -35,7 +35,7 @@
         android:text="a month ago"
         android:textColor="#646464"
         android:textFontWeight="400"
-        android:textSize="16sp" />
+        android:textSize="13sp" />
     <TextView
         android:id="@+id/bidMsgTv"
         android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
         android:textStyle="bold"
         android:textColor="#ff7f50"
         android:textFontWeight="400"
-        android:textSize="16sp" />
+        android:textSize="12sp" />
 
 
 </RelativeLayout>

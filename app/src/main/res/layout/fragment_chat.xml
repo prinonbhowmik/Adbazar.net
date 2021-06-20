@@ -74,7 +74,7 @@
                 android:padding="10dp"
                 android:text=" Chat"
                 android:textColor="#000"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -87,7 +87,7 @@
                 android:padding="10dp"
                 android:text=" Recent"
                 android:textColor="#139e89"
-                android:textSize="25sp"
+                android:textSize="21sp"
                 android:textStyle="bold" />
 
             <View

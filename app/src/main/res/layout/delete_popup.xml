@@ -13,7 +13,7 @@
         android:textColor="#646464"
         android:textAlignment="center"
         android:layout_margin="15dp"
-        android:textSize="31sp"/>
+        android:textSize="21sp"/>
 
     <View
         android:id="@+id/view1"
@@ -33,7 +33,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
-        android:textSize="18sp"/>
+        android:textSize="15sp"/>
 
     <View
         android:id="@+id/view2"
@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:layout_margin="10dp"
         android:backgroundTint="#dc3545"
         android:layout_below="@id/view2"
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:text="Cancel"
         android:layout_toStartOf="@+id/deleteAd"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:layout_margin="10dp"
         android:backgroundTint="#6c757d"
         android:layout_below="@id/view2"

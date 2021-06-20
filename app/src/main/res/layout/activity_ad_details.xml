@@ -467,7 +467,7 @@
                            android:layout_margin="10dp"
                            android:drawableLeft="@drawable/ic_next"
                            android:fontFamily="@font/roboto"
-                           android:text="  Address :"
+                           android:text="  Plot :"
                            android:textColor="#646464"
                            android:textFontWeight="700"
                            android:textSize="15sp" />

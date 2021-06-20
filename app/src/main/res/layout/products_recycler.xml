@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="160dp"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
@@ -25,7 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/productImage"
-            android:textAlignment="center"
+            android:textAlignment="viewStart"
+            android:text="abcs"
             android:fontFamily="@font/comfortaa"
             android:textStyle="bold"
             android:layout_marginStart="5dp"
@@ -33,9 +35,10 @@
             android:layout_marginEnd="5dp"
             android:maxLines="1"
             android:lineSpacingExtra="3dp"
-            android:textSize="15sp"
+            android:textSize="13sp"
             android:textColor="@color/black"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal"
+            tools:ignore="RtlCompat" />
         <RelativeLayout
             android:id="@+id/priceLayout"
             android:layout_width="wrap_content"
@@ -50,7 +53,7 @@
                 android:fontFamily="@font/comfortaa"
                 android:textStyle="bold"
                 android:textColor="@color/themRed"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:layout_marginBottom="5dp"/>
             <TextView
                 android:id="@+id/bidTv"
@@ -60,7 +63,7 @@
                 android:textStyle="bold"
                 android:text="Place Bid"
                 android:textColor="@color/theme"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:visibility="gone"
                 android:layout_marginBottom="5dp" />
         </RelativeLayout>

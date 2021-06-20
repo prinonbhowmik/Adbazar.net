@@ -25,7 +25,7 @@
                 android:text="Free"
                 android:textAlignment="center"
                 android:textColor="#923eba"
-                android:textSize="25sp" />
+                android:textSize="21sp" />
 
             <TextView
                 android:id="@+id/txt2"
@@ -37,7 +37,7 @@
                 android:text="Ad Limit 30"
                 android:textAlignment="center"
                 android:textColor="#000"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/txt3"
@@ -49,7 +49,7 @@
                 android:text="Ad duration 90 days"
                 android:textAlignment="center"
                 android:textColor="#000"
-                android:textSize="15sp" />
+                android:textSize="13sp" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -83,7 +83,7 @@
                         android:text="৳ 0"
                         android:textAlignment="center"
                         android:textColor="#6f42c1"
-                        android:textSize="18sp" />
+                        android:textSize="15sp"/>
 
                     <TextView
                         android:id="@+id/txt5"
@@ -96,7 +96,7 @@
                         android:layout_centerHorizontal="true"
                         android:textAlignment="center"
                         android:textColor="#6f42c1"
-                        android:textSize="15sp" />
+                        android:textSize="13sp" />
 
                     <Button
                         android:id="@+id/btn"

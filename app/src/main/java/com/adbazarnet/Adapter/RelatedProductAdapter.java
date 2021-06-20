@@ -1,6 +1,8 @@
 package com.adbazarnet.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.adbazarnet.Activity.AdDetailsActivity;
 import com.adbazarnet.Models.RelatedAds;
 import com.adbazarnet.R;
 import com.squareup.picasso.Picasso;
@@ -45,6 +48,10 @@ public class RelatedProductAdapter extends RecyclerView.Adapter<RelatedProductAd
         } catch (Exception e) {
             e.printStackTrace();
         }
+        holder.itemView.setOnClickListener(v -> {
+            context.startActivity(new Intent(context, AdDetailsActivity.class).putExtra("id",ads.getId()));
+            ((Activity)context).finish();
+        });
 
     }
 

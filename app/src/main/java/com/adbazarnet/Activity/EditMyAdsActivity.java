@@ -276,6 +276,7 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
                 CropImage.activity()
                         .setFixAspectRatio(false)
                         .setGuidelines(CropImageView.Guidelines.OFF)
+                        .setShowCropOverlay(false)
                         .start(EditMyAdsActivity.this);
                 imgSelect = 1;
             }
@@ -286,6 +287,7 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
                 CropImage.activity()
                         .setFixAspectRatio(false)
                         .setGuidelines(CropImageView.Guidelines.OFF)
+                        .setShowCropOverlay(false)
                         .start(EditMyAdsActivity.this);
                 imgSelect = 2;
             }
@@ -296,6 +298,7 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
                 CropImage.activity()
                         .setFixAspectRatio(false)
                         .setGuidelines(CropImageView.Guidelines.OFF)
+                        .setShowCropOverlay(false)
                         .start(EditMyAdsActivity.this);
                 imgSelect = 3;
             }
@@ -306,6 +309,7 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
                 CropImage.activity()
                         .setFixAspectRatio(false)
                         .setGuidelines(CropImageView.Guidelines.OFF)
+                        .setShowCropOverlay(false)
                         .start(EditMyAdsActivity.this);
                 imgSelect = 4;
             }
@@ -316,6 +320,7 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
                 CropImage.activity()
                         .setFixAspectRatio(false)
                         .setGuidelines(CropImageView.Guidelines.OFF)
+                        .setShowCropOverlay(false)
                         .start(EditMyAdsActivity.this);
                 imgSelect = 5;
             }

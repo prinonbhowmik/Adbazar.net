@@ -73,7 +73,7 @@
                        android:padding="10dp"
                        android:text="@string/login_to_your_account"
                        android:textColor="#000"
-                       android:textSize="20sp" />
+                       android:textSize="18sp" />
 
                    <RelativeLayout
                        android:id="@+id/l1"
@@ -89,7 +89,7 @@
                            android:layout_margin="10dp"
                            android:text="@string/phone_or_email"
                            android:textColor="#6C6767"
-                           android:textSize="20sp"
+                           android:textSize="15sp"
                            android:textStyle="bold" />
 
                        <EditText
@@ -100,6 +100,7 @@
                            android:layout_margin="10dp"
                            android:background="@drawable/edittex_design"
                            android:padding="10dp"
+                           android:textSize="15sp"
                            android:textColor="#000" />
 
                        <TextView
@@ -110,7 +111,7 @@
                            android:layout_margin="10dp"
                            android:text="@string/password"
                            android:textColor="#6C6767"
-                           android:textSize="20sp"
+                           android:textSize="15sp"
                            android:textStyle="bold" />
 
                        <EditText
@@ -122,6 +123,7 @@
                            android:background="@drawable/edittex_design"
                            android:inputType="textPassword"
                            android:padding="10dp"
+                           android:textSize="15sp"
                            android:textColor="#000" />
 
 
@@ -135,7 +137,7 @@
                            android:text=" Login"
                            android:textAllCaps="false"
                            android:textColor="#fff"
-                           android:textSize="18sp" />
+                           android:textSize="15sp" />
 
                        <RelativeLayout
                            android:id="@+id/registerLayout"
@@ -149,6 +151,7 @@
                                android:layout_width="wrap_content"
                                android:layout_height="match_parent"
                                android:text="@string/don_t_have_an_account"
+                               android:textSize="15sp"
                                android:textColor="#7A7777" />
 
                            <TextView
@@ -157,6 +160,7 @@
                                android:layout_height="match_parent"
                                android:layout_toEndOf="@+id/txt1"
                                android:onClick="goToSignUp"
+                               android:textSize="15sp"
                                android:text="@string/register_here"
                                android:textColor="#007bff" />
 
@@ -175,6 +179,7 @@
                                android:layout_width="wrap_content"
                                android:layout_height="match_parent"
                                android:text="@string/forget_password"
+                               android:textSize="15sp"
                                android:textColor="#7A7777" />
 
                            <TextView
@@ -183,6 +188,7 @@
                                android:layout_height="match_parent"
                                android:layout_toEndOf="@+id/txt2"
                                android:onClick="resetPass"
+                               android:textSize="15sp"
                                android:text="@string/reset_here"
                                android:textColor="#007bff" />
 

@@ -26,7 +26,7 @@
                 android:textColor="#000"
                 android:layout_marginLeft="10dp"
                 android:padding="10dp"
-                android:textSize="21sp"
+                android:textSize="15sp"
                 android:text="hi"/>
         </RelativeLayout>
 
@@ -37,7 +37,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/msgCard"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:text="12-00 pm,12-12-2020"
         android:layout_marginLeft="10dp"
         android:textColor="#969696"

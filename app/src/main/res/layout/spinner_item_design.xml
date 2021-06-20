@@ -10,6 +10,6 @@
     android:paddingStart="15dp"
     android:textAppearance="?attr/textAppearanceSubtitle1"
     android:textColor="@color/black"
-    android:textSize="18sp"
+    android:textSize="15sp"
     tools:ignore="RtlSymmetry" />
 

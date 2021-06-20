@@ -321,6 +321,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                 CropImage.activity()
                         .setFixAspectRatio(false)
                         .setGuidelines(CropImageView.Guidelines.OFF)
+                        .setShowCropOverlay(false)
                         .start(PostAdActivity.this);
                 imgSelect = 1;
             }
@@ -331,6 +332,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                 CropImage.activity()
                         .setFixAspectRatio(false)
                         .setGuidelines(CropImageView.Guidelines.OFF)
+                        .setShowCropOverlay(false)
                         .start(PostAdActivity.this);
                 imgSelect = 2;
             }
@@ -341,6 +343,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                 CropImage.activity()
                         .setFixAspectRatio(false)
                         .setGuidelines(CropImageView.Guidelines.OFF)
+                        .setShowCropOverlay(false)
                         .start(PostAdActivity.this);
                 imgSelect = 3;
             }
@@ -351,6 +354,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                 CropImage.activity()
                         .setFixAspectRatio(false)
                         .setGuidelines(CropImageView.Guidelines.OFF)
+                        .setShowCropOverlay(false)
                         .start(PostAdActivity.this);
                 imgSelect = 4;
             }
@@ -361,6 +365,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                 CropImage.activity()
                         .setFixAspectRatio(false)
                         .setGuidelines(CropImageView.Guidelines.OFF)
+                        .setShowCropOverlay(false)
                         .start(PostAdActivity.this);
                 imgSelect = 5;
             }

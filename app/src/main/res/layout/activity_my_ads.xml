@@ -75,7 +75,7 @@
                android:padding="10dp"
                android:text="My Ads"
                android:textColor="#000"
-               android:textSize="20sp" />
+               android:textSize="18sp" />
 
            <HorizontalScrollView
                android:layout_width="match_parent"

@@ -53,6 +53,7 @@ import com.adbazarnet.Models.FavouriteAds;
 import com.adbazarnet.Models.RelatedAds;
 import com.adbazarnet.Models.UserDetailsModel;
 import com.adbazarnet.R;
+import com.facebook.share.model.ShareLinkContent;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
@@ -70,6 +71,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.facebook.share.model.ShareLinkContent.*;
+
 public class AdDetailsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GetBiderIdInterface {
 
     private int id, userId, sellerId;
@@ -80,7 +83,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
             warrantyTv, descriptionTv, sellerNameTv, locationTv, noDataTv, membershipTV,
             favouriteTv, callNowTV, noBidTv, bidBtn, chatTV;
     private TextView txt3, txt2, vacancyTv, txtV, txtD, deadlineTv, txtR, requirmentTv, txtA, addressTv, txtO, otherTv, txtW, websiteTv, txtAtt, attchmetnTv, jobTv, jobTypeTv, txtMY, modelYearTv,
-            txtM, mileageTv, txtL, landEt;
+            txtM, mileageTv, txtL, landEt,shareTv;
     private RecyclerView relatedProductRecycler, bidRecycler;
     private RelatedProductAdapter relatedProductAdapter;
     private BidsShowAdapter bidAdapter;
@@ -686,6 +689,18 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
             }
         });
 
+        shareTv.setOnClickListener(v -> {
+           /* ShareLinkContent content = new ShareLinkContent.Builder()
+                    .setContentUrl(Uri.parse("https://adbazar.net/listing/ad-details?adId="+id))
+                    .build();*/
+            String message = "https://adbazar.net/listing/ad-details?adId="+id;
+            Intent share = new Intent(Intent.ACTION_SEND);
+            share.setType("text/plain");
+            share.putExtra(Intent.EXTRA_TEXT, message);
+
+            startActivity(Intent.createChooser(share, "www.facebook.com"));
+        });
+
     }
 
     private void getLocale() {
@@ -779,6 +794,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
         requirmentTv = findViewById(R.id.requirmentTv);
         txtA = findViewById(R.id.txtA);
         addressTv = findViewById(R.id.addressTv);
+        shareTv = findViewById(R.id.shareTv);
         txtO = findViewById(R.id.txtO);
         otherTv = findViewById(R.id.otherTv);
         txtW = findViewById(R.id.txtW);

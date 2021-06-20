@@ -7,6 +7,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -367,6 +368,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -392,9 +394,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.language:
 
-                language = spinner.getSelectedItem().toString();
-
-                if (language.equals("বাংলা")) {
+              /*  if (language.equals("বাংলা")) {
                     Locale locale2 = new Locale("bn");
                     Locale.setDefault(locale2);
                     Configuration configuration2 = new Configuration();
@@ -418,7 +418,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     editor.apply();
                     startActivity(getIntent());
                     finish();
-                }
+                }*/
 
                 break;
 

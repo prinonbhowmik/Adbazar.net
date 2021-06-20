@@ -14,7 +14,7 @@
         android:fontFamily="@font/roboto"
         android:text="User Details"
         android:textColor="#646464"
-        android:textSize="23sp" />
+        android:textSize="16sp" />
 
     <View
         android:id="@+id/view1"
@@ -34,7 +34,7 @@
         android:fontFamily="@font/roboto_bold"
         android:textColor="#646464"
         android:text="Name :"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:textStyle="bold" />
 
     <TextView
@@ -48,7 +48,7 @@
         android:layout_marginTop="25dp"
         android:layout_marginBottom="15dp"
         android:fontFamily="@font/roboto"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
 
     <View
         android:id="@+id/view2"
@@ -70,7 +70,7 @@
         android:fontFamily="@font/roboto_bold"
         android:textColor="#646464"
         android:text="Email :"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:textStyle="bold" />
 
     <TextView
@@ -84,7 +84,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
         android:fontFamily="@font/roboto"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
 
     <View
         android:id="@+id/view3"
@@ -106,7 +106,7 @@
         android:fontFamily="@font/roboto_bold"
         android:textColor="#646464"
         android:text="Phone Number :"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:textStyle="bold" />
 
     <TextView
@@ -143,7 +143,7 @@
         android:fontFamily="@font/roboto_bold"
         android:text="Call"
         android:textAllCaps="false"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:textStyle="bold" />
     <Button
         android:id="@+id/smsBtn"
@@ -157,7 +157,7 @@
         android:layout_marginBottom="15dp"
         android:fontFamily="@font/roboto"
         android:text="SMS"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
 
     <View
         android:id="@+id/view5"
@@ -181,6 +181,6 @@
         android:padding="10dp"
         android:text="Close"
         android:textAllCaps="false"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
 
 </RelativeLayout>

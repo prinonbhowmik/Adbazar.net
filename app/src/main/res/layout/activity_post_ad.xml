@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawerLayout"
-    tools:openDrawer="start"
+    tools:openDrawer="end"
     tools:context=".Activity.PostAdActivity">
 
     <RelativeLayout
@@ -83,7 +83,7 @@
                         android:padding="10dp"
                         android:text="Post An Ad"
                         android:textColor="#000"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/header2"
@@ -95,7 +95,7 @@
                         android:layout_marginBottom="20dp"
                         android:text=" Ad Information"
                         android:textColor="#000"
-                        android:textSize="21sp"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <View
@@ -141,7 +141,7 @@
                                     android:text=" Select Category"
                                     android:textAlignment="center"
                                     android:textColor="#fff"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
                             </RelativeLayout>
 
                         </androidx.cardview.widget.CardView>
@@ -168,7 +168,7 @@
                                     android:text=" Select Location"
                                     android:textAlignment="center"
                                     android:textColor="#fff"
-                                    android:textSize="18sp" />
+                                    android:textSize="15sp" />
                             </RelativeLayout>
                         </androidx.cardview.widget.CardView>
 
@@ -184,7 +184,7 @@
                         android:layout_marginBottom="10dp"
                         android:text=" Ad Title*:"
                         android:textColor="#646464"
-                        android:textSize="21sp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -198,6 +198,7 @@
                         android:background="@drawable/edittex_design"
                         android:hint=" Enter Ad Title"
                         android:padding="10dp"
+                        android:textSize="15sp"
                         android:textColor="#000"
                         android:textColorHint="#E6E4E4" />
 
@@ -216,7 +217,7 @@
                             android:text=" Condition:"
                             android:visibility="gone"
                             android:textColor="#646464"
-                            android:textSize="21sp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <AutoCompleteTextView
@@ -250,7 +251,7 @@
                             android:text=" Job Type:"
                             android:visibility="gone"
                             android:textColor="#646464"
-                            android:textSize="21sp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <AutoCompleteTextView
@@ -284,7 +285,7 @@
                             android:text=" Total Vacancies:"
                             android:visibility="gone"
                             android:textColor="#646464"
-                            android:textSize="21sp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <EditText
@@ -299,6 +300,7 @@
                             android:visibility="gone"
                             android:inputType="number"
                             android:padding="10dp"
+                            android:textSize="15sp"
                             android:textColor="#000"
                             android:textColorHint="#BAB6B6" />
                     </RelativeLayout>
@@ -318,7 +320,7 @@
                             android:text=" Minimum Requirement:"
                             android:visibility="gone"
                             android:textColor="#646464"
-                            android:textSize="21sp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <AutoCompleteTextView
@@ -331,6 +333,7 @@
                             android:layout_marginBottom="10dp"
                             android:textColor="#000"
                             android:padding="10dp"
+                            android:textSize="15sp"
                             android:inputType="none"
                             android:visibility="gone"
                             android:theme="@style/spinnerTheme"
@@ -354,7 +357,7 @@
                             android:text=" Feature:"
                             android:visibility="gone"
                             android:textColor="#646464"
-                            android:textSize="21sp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <EditText
@@ -367,6 +370,7 @@
                             android:layout_marginBottom="10dp"
                             android:background="@drawable/edittex_design"
                             android:hint=" Features"
+                            android:textSize="15sp"
                             android:visibility="gone"
                             android:padding="10dp"
                             android:textColor="#000"
@@ -388,7 +392,7 @@
                             android:text=" Application Deadline :"
                             android:visibility="gone"
                             android:textColor="#646464"
-                            android:textSize="21sp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <EditText
@@ -404,6 +408,7 @@
                             android:hint=" Deadline"
                             android:visibility="gone"
                             android:padding="10dp"
+                            android:textSize="15sp"
                             android:textColor="#000"
                             android:textColorHint="#BAB6B6" />
                     </RelativeLayout>
@@ -423,7 +428,7 @@
                             android:text=" About Company / Employer:"
                             android:visibility="gone"
                             android:textColor="#646464"
-                            android:textSize="21sp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <EditText
@@ -439,6 +444,7 @@
                             android:hint=" About Company/Employeer"
                             android:visibility="gone"
                             android:padding="10dp"
+                            android:textSize="15sp"
                             android:textColor="#000"
                             android:textColorHint="#BAB6B6" />
                     </RelativeLayout>
@@ -454,7 +460,7 @@
                         android:layout_marginBottom="10dp"
                         android:text=" Other Information:"
                         android:textColor="#646464"
-                        android:textSize="21sp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -468,6 +474,7 @@
                         android:background="@drawable/edittex_design"
                         android:hint=" Other Information"
                         android:padding="10dp"
+                        android:textSize="15sp"
                         android:textColor="#000"
                         android:textColorHint="#BAB6B6" />
 
@@ -487,7 +494,7 @@
                             android:layout_marginBottom="10dp"
                             android:text=" Price*:"
                             android:textColor="#646464"
-                            android:textSize="21sp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <EditText
@@ -502,6 +509,7 @@
                             android:hint=" Enter Price"
                             android:inputType="number"
                             android:padding="10dp"
+                            android:textSize="15sp"
                             android:textColor="#000"
                             android:textColorHint="#BAB6B6" />
                     </RelativeLayout>
@@ -522,7 +530,7 @@
                             android:text=" Address:"
                             android:visibility="gone"
                             android:textColor="#646464"
-                            android:textSize="21sp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <EditText
@@ -536,6 +544,7 @@
                             android:background="@drawable/edittex_design"
                             android:hint=" Enter Address"
                             android:visibility="gone"
+                            android:textSize="15sp"
                             android:padding="10dp"
                             android:textColor="#000"
                             android:textColorHint="#BAB6B6" />
@@ -557,7 +566,7 @@
                             android:text=" Land/Plot Size:"
                             android:textColor="#646464"
                             android:visibility="gone"
-                            android:textSize="21sp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <EditText
@@ -572,6 +581,7 @@
                             android:hint=" Enter land/plot no"
                             android:visibility="gone"
                             android:padding="10dp"
+                            android:textSize="15sp"
                             android:textColor="#000"
                             android:textColorHint="#BAB6B6" />
                     </RelativeLayout>
@@ -592,7 +602,7 @@
                             android:text=" Company Website (If Any):"
                             android:textColor="#646464"
                             android:visibility="gone"
-                            android:textSize="21sp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <EditText
@@ -607,6 +617,7 @@
                             android:hint=" Company website(If have)"
                             android:visibility="gone"
                             android:padding="10dp"
+                            android:textSize="15sp"
                             android:textColor="#000"
                             android:textColorHint="#BAB6B6" />
                     </RelativeLayout>
@@ -626,7 +637,7 @@
                             android:text=" Service Type:"
                             android:visibility="gone"
                             android:textColor="#646464"
-                            android:textSize="21sp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <AutoCompleteTextView
@@ -640,6 +651,7 @@
                             android:textColor="#000"
                             android:padding="10dp"
                             android:inputType="none"
+                            android:textSize="15sp"
                             android:visibility="gone"
                             android:theme="@style/spinnerTheme"
                             android:background="@drawable/edittex_design" />
@@ -660,8 +672,9 @@
                             android:onClick="setNegotiable"
                             android:text=" Negotiable"
                             android:textColor="#646464"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            tools:ignore="UseSwitchCompatOrMaterialXml" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -679,7 +692,7 @@
                             android:text=" Warranty:"
                             android:visibility="gone"
                             android:textColor="#646464"
-                            android:textSize="21sp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <EditText
@@ -690,6 +703,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
                             android:layout_marginBottom="10dp"
+                            android:textSize="15sp"
                             android:background="@drawable/edittex_design"
                             android:hint=" Warranty information"
                             android:inputType="text"
@@ -714,7 +728,7 @@
                             android:text=" Model and Year:"
                             android:visibility="gone"
                             android:textColor="#646464"
-                            android:textSize="21sp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <EditText
@@ -731,6 +745,7 @@
                             android:inputType="phone"
                             android:textColor="#000"
                             android:textColorHint="#BAB6B6"
+                            android:textSize="15sp"
                             android:visibility="gone" />
 
                         <TextView
@@ -744,7 +759,7 @@
                             android:text=" Mileage:"
                             android:visibility="gone"
                             android:textColor="#646464"
-                            android:textSize="21sp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <EditText
@@ -759,6 +774,7 @@
                             android:hint=" Total Kilometer(Skip if not applicable) "
                             android:padding="10dp"
                             android:inputType="phone"
+                            android:textSize="15sp"
                             android:textColor="#000"
                             android:textColorHint="#BAB6B6"
                             android:visibility="gone" />
@@ -781,7 +797,7 @@
                             android:layout_marginBottom="10dp"
                             android:text=" Phone Number 1:"
                             android:textColor="#646464"
-                            android:textSize="21sp"
+                            android:textSize="15sp"
                             android:textStyle="bold"
                             android:visibility="gone" />
 
@@ -796,6 +812,7 @@
                             android:hint=" Enter Phone Number "
                             android:padding="10dp"
                             android:inputType="phone"
+                            android:textSize="15sp"
                             android:textColor="#000"
                             android:textColorHint="#BAB6B6"
                             android:visibility="gone" />
@@ -809,7 +826,7 @@
                             android:layout_marginBottom="10dp"
                             android:text=" Phone Number 2:"
                             android:textColor="#646464"
-                            android:textSize="21sp"
+                            android:textSize="15sp"
                             android:textStyle="bold"
                             android:visibility="gone" />
 
@@ -823,6 +840,7 @@
                             android:background="@drawable/edittex_design"
                             android:hint=" Enter Phone Number"
                             android:padding="10dp"
+                            android:textSize="15sp"
                             android:textColor="#000"
                             android:inputType="phone"
                             android:textColorHint="#BAB6B6"
@@ -837,7 +855,7 @@
                             android:layout_marginBottom="10dp"
                             android:text=" Phone Number 3:"
                             android:textColor="#646464"
-                            android:textSize="21sp"
+                            android:textSize="15sp"
                             android:textStyle="bold"
                             android:visibility="gone" />
 
@@ -852,6 +870,7 @@
                             android:hint=" Enter Phone Number"
                             android:padding="10dp"
                             android:inputType="phone"
+                            android:textSize="15sp"
                             android:textColor="#000"
                             android:textColorHint="#BAB6B6"
                             android:visibility="gone" />
@@ -875,7 +894,7 @@
                             android:text="Add Phone"
                             android:textAllCaps="false"
                             android:textColor="#fff"
-                            android:textSize="18sp" />
+                            android:textSize="15sp" />
                         <Switch
                             android:id="@+id/hidePhnBtn"
                             android:layout_width="wrap_content"
@@ -886,8 +905,9 @@
                             android:layoutDirection="rtl"
                             android:text=" Hide Phone"
                             android:textColor="#646464"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            tools:ignore="UseSwitchCompatOrMaterialXml" />
                     </RelativeLayout>
 
                     <TextView
@@ -900,7 +920,7 @@
                         android:layout_marginBottom="10dp"
                         android:text=" Description*:"
                         android:textColor="#646464"
-                        android:textSize="21sp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -914,6 +934,7 @@
                         android:background="@drawable/edittex_design"
                         android:hint=" Enter Description"
                         android:padding="10dp"
+                        android:textSize="15sp"
                         android:textColor="#000"
                         android:textColorHint="#BAB6B6" />
 
@@ -932,7 +953,7 @@
                             android:text=" Attachment:"
                             android:textColor="#646464"
                             android:visibility="gone"
-                            android:textSize="21sp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                         <Button
                             android:id="@+id/browseBtn"
@@ -943,6 +964,7 @@
                             android:textAllCaps="false"
                             android:textColor="#000"
                             android:visibility="gone"
+                            android:textSize="15sp"
                             android:layout_marginLeft="10dp"
                             android:backgroundTint="#D1CFC9"/>
                         <TextView
@@ -958,7 +980,7 @@
                             android:visibility="gone"
                             android:layout_centerVertical="true"
                             android:textColor="#BAB6B6"
-                            android:textSize="18sp"
+                            android:textSize="15sp"
                             />
 
                     </RelativeLayout>
@@ -974,7 +996,7 @@
                         android:layout_marginBottom="10dp"
                         android:text=" Add Images (Max: 5):"
                         android:textColor="#646464"
-                        android:textSize="21sp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <Button
@@ -989,7 +1011,7 @@
                         android:text="Click here to Select Image"
                         android:textAllCaps="false"
                         android:textColor="#000"
-                        android:textSize="18sp" />
+                        android:textSize="15sp" />
 
                     <LinearLayout
                         android:id="@+id/imgLayout"
@@ -1061,7 +1083,7 @@
                                 android:text=" Submit"
                                 android:textAllCaps="false"
                                 android:textColor="#fff"
-                                android:textSize="21sp" />
+                                android:textSize="15sp" />
                         </RelativeLayout>
 
                     </androidx.cardview.widget.CardView>
@@ -1089,7 +1111,7 @@
                         android:padding="10dp"
                         android:text="How To Sell Quickly?"
                         android:textColor="#000"
-                        android:textSize="20sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/help1"
@@ -1104,7 +1126,7 @@
                         android:text="  Use a brief title and description of the item."
                         android:textColor="#000"
                         android:textFontWeight="400"
-                        android:textSize="16sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/help2"
@@ -1119,7 +1141,7 @@
                         android:text="  Make sure you post in the correct category"
                         android:textColor="#000"
                         android:textFontWeight="400"
-                        android:textSize="16sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/help3"
@@ -1135,7 +1157,7 @@
                         android:text="  Add nice photos to your ad"
                         android:textColor="#000"
                         android:textFontWeight="400"
-                        android:textSize="16sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/help4"
@@ -1151,7 +1173,7 @@
                         android:text="  Put a reasonable price"
                         android:textColor="#000"
                         android:textFontWeight="400"
-                        android:textSize="16sp" />
+                        android:textSize="15sp" />
                     <TextView
                         android:id="@+id/help5"
                         android:layout_width="wrap_content"
@@ -1166,7 +1188,7 @@
                         android:text="  Check the item before publish"
                         android:textColor="#000"
                         android:textFontWeight="400"
-                        android:textSize="16sp" />
+                        android:textSize="15sp" />
 
                 </RelativeLayout>
 

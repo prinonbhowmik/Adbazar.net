@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -158,17 +159,7 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
             }
         });
 
-        scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-            @Override
-            public void onScrollChanged() {
-                float y = 0;
-                if (scrollView.getScrollY() < y) {
-                    layout1.setGravity(View.GONE);
-                } else {
-                    layout1.setVisibility(View.VISIBLE);
-                }
-            }
-        });
+
 
         return view;
     }
