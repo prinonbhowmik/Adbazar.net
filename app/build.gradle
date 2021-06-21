@@ -69,4 +69,7 @@ dependencies {
     //image crop api
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
 
+    //sweet-alert-dialog
+    implementation 'com.github.zhoujunwen:sweetalert:1.5.4'
+
 }

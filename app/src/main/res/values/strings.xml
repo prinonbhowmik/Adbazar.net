@@ -11,7 +11,7 @@
     <string name="contact">Contact</string>
     <string name="change_language">Change Language</string>
     <string name="home">Home</string>
-    <string name="favourite">  Favourite</string>
+    <string name="favourite">  "  Favourite"</string>
     <string name="post">Post</string>
     <string name="chat">Chat</string>
     <string name="account">Account</string>
@@ -42,4 +42,5 @@
     <string name="register_here">  Register here</string>
     <string name="forget_password">Forget Password ?</string>
     <string name="reset_here">  Reset Here</string>
+    <string name="langugae_question">Change language</string>
 </resources>

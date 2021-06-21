@@ -7,8 +7,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -381,15 +383,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().clear();
         navigationView.inflateMenu(R.menu.home_navigation_drawer);
-        spinner = (Spinner) navigationView.getMenu().findItem(R.id.language).getActionView();
-        spinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.
-                simple_spinner_dropdown_item,languageArray));
-        spinner.setSelection(0);
-        if (lang.equals("en")){
-            spinner.setSelection(0);
-        }else{
-            spinner.setSelection(1);
-        }
+
         adPost = findViewById(R.id.adPost);
         chipNavigationBar = findViewById(R.id.bottom_menu);
         chipNavigationBar.getMenu().clear();
@@ -417,6 +411,66 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.login:
+                startActivity(new Intent(LoginActivity.this, LoginActivity.class));
+                finish();
+                break;
+            case R.id.home:
+                startActivity(new Intent(LoginActivity.this, MainActivity.class)
+                        .putExtra("fragment","home"));
+                finish();
+                drawerLayout.closeDrawers();
+                break;
+            case R.id.bids:
+                startActivity(new Intent(LoginActivity.this, MainActivity.class)
+                        .putExtra("fragment","home"));
+                finish();
+                drawerLayout.closeDrawers();
+                break;
+            case R.id.contact:
+
+                break;
+            case R.id.language:
+                AlertDialog alertDialog = new AlertDialog.Builder(this)
+                        .setMessage(R.string.langugae_question)
+                        .setPositiveButton("English", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Locale locale = new Locale("en");
+                                Locale.setDefault(locale);
+                                Configuration configuration = new Configuration();
+                                configuration.locale = locale;
+                                getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+                                SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
+                                editor.putString("lang", "en");
+                                editor.apply();
+                                startActivity(getIntent());
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("বাংলা", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Locale locale2 = new Locale("bn");
+                                Locale.setDefault(locale2);
+                                Configuration configuration2 = new Configuration();
+                                configuration2.locale = locale2;
+                                getBaseContext().getResources().updateConfiguration(configuration2,
+                                        getBaseContext().getResources().getDisplayMetrics());
+                                SharedPreferences.Editor editor2 = getSharedPreferences("MyRef",
+                                        MODE_PRIVATE).edit();
+                                editor2.putString("lang", "bn");
+                                editor2.apply();
+                                startActivity(getIntent());
+                                finish();
+                            }
+                        })
+                        .show();
+                break;
+
+
+        }
         return false;
     }
 }

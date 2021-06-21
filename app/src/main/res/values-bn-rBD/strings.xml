@@ -10,7 +10,7 @@
     <string name="log_in">"লগ ইন "</string>
     <string name="change_language">ভাষা পরিবর্তন</string>
     <string name="home">"হোম "</string>
-    <string name="favourite">ফেভারিট</string>
+    <string name="favourite">"  ফেভারিট"</string>
     <string name="post">"পোস্ট "</string>
     <string name="chat">"চ্যাট "</string>
     <string name="account">"একাউন্ট "</string>
@@ -24,8 +24,8 @@
     <string name="bride_groom_ad">পাত্র/পাত্রীর বিজ্ঞাপন দিন</string>
     <string name="look_for_something_to_buy">কোন কিছু কিনতে চাই</string>
     <string name="look_for_something_to_rent">কোন কিছু ভাড়া নিতে চাই</string>
-    <string name="dashboard">  ড্যাশবোর্ড </string>
-    <string name="my_ads">  আমার বিজ্ঞাপন</string>
+    <string name="dashboard">  "  ড্যাশবোর্ড" </string>
+    <string name="my_ads">  "  আমার বিজ্ঞাপন"</string>
     <string name="membership">"  মেম্বারশিপ "</string>
     <string name="profile">"  প্রোফাইল "</string>
     <string name="logout">"  লগ আউট "</string>
@@ -35,4 +35,12 @@
     <string name="ads">"বিজ্ঞাপন "</string>
     <string name="all_category">"সকল ক্যাটাগরি "</string>
     <string name="all_location">"সকল লোকেশন "</string>
+    <string name="login_to_your_account">আপনার অ্যাকাউন্টে লগ ইন করুন</string>
+    <string name="password">পাসওয়ার্ড:</string>
+    <string name="phone_or_email">" ফোন অথবা ইমেইল :"</string>
+    <string name="don_t_have_an_account">কোন অ্যাকাউন্ট নেই?</string>
+    <string name="register_here">এখানে নিবন্ধন করুন</string>
+    <string name="forget_password">পাসওয়ার্ড ভুলে গেছেন ?</string>
+    <string name="reset_here">এখানে পুনরায় সেট করুন</string>
+    <string name="langugae_question">ভাষা পরিবর্তন করুন</string>
 </resources>

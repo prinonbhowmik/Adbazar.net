@@ -152,12 +152,13 @@
                 android:text="@string/close"
                 android:textAllCaps="false"
                 android:textColor="#fff"
-                android:textSize="18sp"
+                android:textSize="15sp"
+                android:fontFamily="@font/roboto"
                 android:layout_below="@+id/view6"
                 android:layout_alignParentRight="true"
                 android:layout_margin="10dp"
                 android:backgroundTint="#7B7F82"
-                android:padding="10dp"/>
+               />
         </RelativeLayout>
 
     </ScrollView>

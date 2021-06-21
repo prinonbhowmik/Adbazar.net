@@ -159,6 +159,25 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
             }
         });
 
+        scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollY > oldScrollY) {
+                    layout1.setVisibility(View.GONE);
+                }
+
+                // the delay of the extension of the FAB is set for 12 items
+                if (scrollY < oldScrollY ) {
+                    layout1.setVisibility(View.VISIBLE);
+                }
+
+                // if the nestedScrollView is at the first item of the list then the
+                // extended floating action should be in extended state
+                if (scrollY == 0) {
+                    layout1.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
 
         return view;

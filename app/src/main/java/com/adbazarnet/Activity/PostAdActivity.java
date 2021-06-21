@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -132,9 +133,6 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
     private SharedPreferences sharedPreferences;
     private BottomNavigationView chipNavigationBar;
     private CircleImageView adPost;
-    private Spinner spinner;
-    String[] languageArray = {"English","বাংলা"};
-    private String language;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private int loggedIn, vacancy;
@@ -1142,15 +1140,6 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
         });
         lang = sharedPreferences.getString("lang","en");
         adPost = findViewById(R.id.adPost);
-        spinner = (Spinner) navigationView.getMenu().findItem(R.id.language).getActionView();
-        spinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.
-                simple_spinner_dropdown_item,languageArray));
-        spinner.setSelection(0);
-        if (lang.equals("en")){
-            spinner.setSelection(0);
-        }else{
-            spinner.setSelection(1);
-        }
     }
 
     public void setNegotiable(View view) {
@@ -1329,33 +1318,41 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
 
                 break;
             case R.id.language:
-                language = spinner.getSelectedItem().toString();
-
-                if (language.equals("বাংলা")) {
-                    Locale locale2 = new Locale("bn");
-                    Locale.setDefault(locale2);
-                    Configuration configuration2 = new Configuration();
-                    configuration2.locale = locale2;
-                    getBaseContext().getResources().updateConfiguration(configuration2,
-                            getBaseContext().getResources().getDisplayMetrics());
-                    SharedPreferences.Editor editor2 = getSharedPreferences("MyRef",
-                            MODE_PRIVATE).edit();
-                    editor2.putString("lang", "bn");
-                    editor2.apply();
-                    startActivity(getIntent());
-                    finish();
-                }else{
-                    Locale locale = new Locale("en");
-                    Locale.setDefault(locale);
-                    Configuration configuration = new Configuration();
-                    configuration.locale = locale;
-                    getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
-                    SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
-                    editor.putString("lang", "en");
-                    editor.apply();
-                    startActivity(getIntent());
-                    finish();
-                }
+                AlertDialog alertDialog = new AlertDialog.Builder(this)
+                        .setMessage(R.string.langugae_question)
+                        .setPositiveButton("English", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Locale locale = new Locale("en");
+                                Locale.setDefault(locale);
+                                Configuration configuration = new Configuration();
+                                configuration.locale = locale;
+                                getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+                                SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
+                                editor.putString("lang", "en");
+                                editor.apply();
+                                startActivity(getIntent());
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("বাংলা", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Locale locale2 = new Locale("bn");
+                                Locale.setDefault(locale2);
+                                Configuration configuration2 = new Configuration();
+                                configuration2.locale = locale2;
+                                getBaseContext().getResources().updateConfiguration(configuration2,
+                                        getBaseContext().getResources().getDisplayMetrics());
+                                SharedPreferences.Editor editor2 = getSharedPreferences("MyRef",
+                                        MODE_PRIVATE).edit();
+                                editor2.putString("lang", "bn");
+                                editor2.apply();
+                                startActivity(getIntent());
+                                finish();
+                            }
+                        })
+                        .show();
                 break;
 
         }

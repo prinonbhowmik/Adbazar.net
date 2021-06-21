@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,10 +18,14 @@ import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -59,8 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Dialog dialog;
     private String loadFragment = null, lang = null;
     private int count=0;
-    private Spinner spinner;
-    String[] languageArray = {"English","বাংলা"};
+
     private String language;
 
     @Override
@@ -352,15 +356,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.getMenu().clear();
         navigationView.inflateMenu(R.menu.home_navigation_drawer);
         navigationView.getMenu().getItem(0).setChecked(true);
-        spinner = (Spinner) navigationView.getMenu().findItem(R.id.language).getActionView();
-        spinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.
-                simple_spinner_dropdown_item,languageArray));
-        spinner.setSelection(0);
-        if (lang.equals("en")){
-            spinner.setSelection(0);
-        }else{
-            spinner.setSelection(1);
-        }
         adPost = findViewById(R.id.adPost);
         chipNavigationBar = findViewById(R.id.bottom_menu);
         chipNavigationBar.getMenu().clear();
@@ -393,6 +388,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 break;
             case R.id.language:
+
+                AlertDialog alertDialog = new AlertDialog.Builder(this)
+                        .setMessage(R.string.langugae_question)
+                        .setPositiveButton("English", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Locale locale = new Locale("en");
+                                Locale.setDefault(locale);
+                                Configuration configuration = new Configuration();
+                                configuration.locale = locale;
+                                getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+                                SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
+                                editor.putString("lang", "en");
+                                editor.apply();
+                                startActivity(getIntent());
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("বাংলা", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Locale locale2 = new Locale("bn");
+                                Locale.setDefault(locale2);
+                                Configuration configuration2 = new Configuration();
+                                configuration2.locale = locale2;
+                                getBaseContext().getResources().updateConfiguration(configuration2,
+                                        getBaseContext().getResources().getDisplayMetrics());
+                                SharedPreferences.Editor editor2 = getSharedPreferences("MyRef",
+                                        MODE_PRIVATE).edit();
+                                editor2.putString("lang", "bn");
+                                editor2.apply();
+                                startActivity(getIntent());
+                                finish();
+                            }
+                        })
+                        .show();
 
               /*  if (language.equals("বাংলা")) {
                     Locale locale2 = new Locale("bn");

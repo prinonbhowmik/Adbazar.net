@@ -175,7 +175,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                     } else {
                         sellerProfileIv.setImageResource(R.drawable.ic_user);
                     }
-                    if (response.body().getWarranty() == null) {
+                    if (response.body().getWarranty() == null || response.body().getWarranty().equals("")) {
                         warrantyTv.setVisibility(View.GONE);
                         txt3.setVisibility(View.GONE);
                     } else {
@@ -191,7 +191,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         vacancyTv.setVisibility(View.VISIBLE);
                         txtV.setVisibility(View.VISIBLE);
                     }
-                    if (response.body().getApplication_deadline() == null) {
+                    if (response.body().getApplication_deadline() == null || response.body().getApplication_deadline().equals("")) {
                         txtD.setVisibility(View.GONE);
                         deadlineTv.setVisibility(View.GONE);
                     } else {
@@ -199,7 +199,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         txtD.setVisibility(View.VISIBLE);
                         deadlineTv.setVisibility(View.VISIBLE);
                     }
-                    if (response.body().getMinimum_requirement() == null) {
+                    if (response.body().getMinimum_requirement() == null || response.body().getMinimum_requirement().equals("")) {
                         txtR.setVisibility(View.GONE);
                         requirmentTv.setVisibility(View.GONE);
                     } else {
@@ -207,7 +207,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         txtR.setVisibility(View.VISIBLE);
                         requirmentTv.setVisibility(View.VISIBLE);
                     }
-                    if (response.body().getPlot_size() == null) {
+                    if (response.body().getPlot_size() == null || response.body().getPlot_size().equals("")) {
                         txtL.setVisibility(View.GONE);
                         landEt.setVisibility(View.GONE);
                     } else {
@@ -215,7 +215,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         txtL.setVisibility(View.VISIBLE);
                         landEt.setVisibility(View.VISIBLE);
                     }
-                    if (response.body().getAddress() == null) {
+                    if (response.body().getAddress() == null || response.body().getAddress().equals("")) {
                         txtA.setVisibility(View.GONE);
                         addressTv.setVisibility(View.GONE);
                     } else {
@@ -223,7 +223,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         txtA.setVisibility(View.VISIBLE);
                         addressTv.setVisibility(View.VISIBLE);
                     }
-                    if (response.body().getOther_information() == null) {
+                    if (response.body().getOther_information() == null || response.body().getOther_information().equals("")) {
                         txtO.setVisibility(View.GONE);
                         otherTv.setVisibility(View.GONE);
                     } else {
@@ -231,7 +231,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         txtO.setVisibility(View.VISIBLE);
                         otherTv.setVisibility(View.VISIBLE);
                     }
-                    if (response.body().getCompany_website() == null) {
+                    if (response.body().getCompany_website() == null || response.body().getCompany_website().equals("")) {
                         txtW.setVisibility(View.GONE);
                         websiteTv.setVisibility(View.GONE);
                     } else {
@@ -239,7 +239,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         txtW.setVisibility(View.VISIBLE);
                         websiteTv.setVisibility(View.VISIBLE);
                     }
-                    if (response.body().getAttached_file() == null) {
+                    if (response.body().getAttached_file() == null || response.body().getAttached_file().equals("")) {
                         txtAtt.setVisibility(View.GONE);
                         attchmetnTv.setVisibility(View.GONE);
                     } else {
@@ -247,7 +247,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         attchmetnTv.setVisibility(View.VISIBLE);
                         downloadLink = response.body().getAttached_file();
                     }
-                    if (response.body().getJob_type() == null) {
+                    if (response.body().getJob_type() == null || response.body().getJob_type().equals("")) {
                         jobTv.setVisibility(View.GONE);
                         jobTypeTv.setVisibility(View.GONE);
                     } else {
@@ -255,7 +255,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         jobTypeTv.setVisibility(View.VISIBLE);
                         jobTypeTv.setText(response.body().getJob_type());
                     }
-                    if (response.body().getModel_and_year() == null) {
+                    if (response.body().getModel_and_year() == null || response.body().getModel_and_year().equals("")) {
                         txtMY.setVisibility(View.GONE);
                         modelYearTv.setVisibility(View.GONE);
                     } else {
@@ -263,7 +263,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         txtMY.setVisibility(View.VISIBLE);
                         modelYearTv.setText(response.body().getModel_and_year());
                     }
-                    if (response.body().getMileage() == null) {
+                    if (response.body().getMileage() == null || response.body().getMileage().equals("")) {
                         txtM.setVisibility(View.GONE);
                         mileageTv.setVisibility(View.GONE);
                     } else {
@@ -690,9 +690,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
         });
 
         shareTv.setOnClickListener(v -> {
-           /* ShareLinkContent content = new ShareLinkContent.Builder()
-                    .setContentUrl(Uri.parse("https://adbazar.net/listing/ad-details?adId="+id))
-                    .build();*/
+
             String message = "https://adbazar.net/listing/ad-details?adId="+id;
             Intent share = new Intent(Intent.ACTION_SEND);
             share.setType("text/plain");
@@ -821,15 +819,6 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
         userId = sharedPreferences.getInt("id", 0);
         loggedIn = sharedPreferences.getInt("loggedIn", 0);
         lang = sharedPreferences.getString("lang","en");
-        spinner = (Spinner) navigationView.getMenu().findItem(R.id.language).getActionView();
-        spinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.
-                simple_spinner_dropdown_item,languageArray));
-        spinner.setSelection(0);
-        if (lang.equals("en")){
-            spinner.setSelection(0);
-        }else{
-            spinner.setSelection(1);
-        }
 
         navIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -883,33 +872,41 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                 break;
             case R.id.language:
 
-                language = spinner.getSelectedItem().toString();
-
-                if (language.equals("বাংলা")) {
-                    Locale locale2 = new Locale("bn");
-                    Locale.setDefault(locale2);
-                    Configuration configuration2 = new Configuration();
-                    configuration2.locale = locale2;
-                    getBaseContext().getResources().updateConfiguration(configuration2,
-                            getBaseContext().getResources().getDisplayMetrics());
-                    SharedPreferences.Editor editor2 = getSharedPreferences("MyRef",
-                            MODE_PRIVATE).edit();
-                    editor2.putString("lang", "bn");
-                    editor2.apply();
-                    startActivity(getIntent());
-                    finish();
-                }else{
-                    Locale locale = new Locale("en");
-                    Locale.setDefault(locale);
-                    Configuration configuration = new Configuration();
-                    configuration.locale = locale;
-                    getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
-                    SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
-                    editor.putString("lang", "en");
-                    editor.apply();
-                    startActivity(getIntent());
-                    finish();
-                }
+                AlertDialog alertDialog = new AlertDialog.Builder(this)
+                        .setMessage(R.string.langugae_question)
+                        .setPositiveButton("English", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Locale locale = new Locale("en");
+                                Locale.setDefault(locale);
+                                Configuration configuration = new Configuration();
+                                configuration.locale = locale;
+                                getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+                                SharedPreferences.Editor editor = getSharedPreferences("MyRef", MODE_PRIVATE).edit();
+                                editor.putString("lang", "en");
+                                editor.apply();
+                                startActivity(getIntent());
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("বাংলা", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Locale locale2 = new Locale("bn");
+                                Locale.setDefault(locale2);
+                                Configuration configuration2 = new Configuration();
+                                configuration2.locale = locale2;
+                                getBaseContext().getResources().updateConfiguration(configuration2,
+                                        getBaseContext().getResources().getDisplayMetrics());
+                                SharedPreferences.Editor editor2 = getSharedPreferences("MyRef",
+                                        MODE_PRIVATE).edit();
+                                editor2.putString("lang", "bn");
+                                editor2.apply();
+                                startActivity(getIntent());
+                                finish();
+                            }
+                        })
+                        .show();
 
                 break;
 

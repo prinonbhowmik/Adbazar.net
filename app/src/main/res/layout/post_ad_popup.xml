@@ -272,7 +272,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_margin="10dp"
                 android:backgroundTint="#7B7F82"
-                android:padding="15dp"/>
+                android:padding="5dp"/>
         </RelativeLayout>
     </ScrollView>
 
