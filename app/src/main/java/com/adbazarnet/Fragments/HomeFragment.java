@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -166,13 +167,10 @@ public class HomeFragment extends Fragment implements SubCategoryProductsInterfa
                     layout1.setVisibility(View.GONE);
                 }
 
-                // the delay of the extension of the FAB is set for 12 items
                 if (scrollY < oldScrollY ) {
                     layout1.setVisibility(View.VISIBLE);
                 }
 
-                // if the nestedScrollView is at the first item of the list then the
-                // extended floating action should be in extended state
                 if (scrollY == 0) {
                     layout1.setVisibility(View.VISIBLE);
                 }
