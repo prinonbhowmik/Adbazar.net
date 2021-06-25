@@ -71,6 +71,7 @@ import com.adbazarnet.Models.UserDetailsModel;
 import com.adbazarnet.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -427,17 +428,24 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                 phn1 = phnnoEt1.getText().toString();
                 phn2 = phnnoEt2.getText().toString();
                 phn3 = phnnoEt3.getText().toString();
-                PhoneNoModel phn = new PhoneNoModel(phn1);
-                PhoneNoModel phnn = new PhoneNoModel(phn2);
-                PhoneNoModel phnnn = new PhoneNoModel(phn3);
+
+                Log.d("checlPhn",phn1+","+phn2+","+phn3);
+
                 List<PhoneNoModel> phoneNumbers = new ArrayList<>();
-                if (phn1 != null) {
+                if (!TextUtils.isEmpty(phn1)) {
+                    PhoneNoModel phn = new PhoneNoModel(phn1);
                     phoneNumbers.add(phn);
-                } else if (phn2 != null) {
+                }
+                if (!TextUtils.isEmpty(phn2)) {
+                    PhoneNoModel phnn = new PhoneNoModel(phn2);
                     phoneNumbers.add(phnn);
-                } else if (phn3 != null) {
+                }
+                if (!TextUtils.isEmpty(phn3)) {
+                    PhoneNoModel phnnn = new PhoneNoModel(phn3);
                     phoneNumbers.add(phnnn);
                 }
+
+                Log.d("phncjhk",new Gson().toJson(phoneNumbers));
 
                 if (uri1 != null) {
                     bitmap1 = decodeUriToBitmap(PostAdActivity.this, uri1);
@@ -494,7 +502,6 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                     PostImageModel imageModel5 = new PostImageModel(encoded);
                     imgArray.add(imageModel5);
                 }
-
 
                 String mileage = mileageEt.getText().toString();
                 String modelYear = modelYearEt.getText().toString();
@@ -598,6 +605,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                         }
                     }
                 }
+
                 else if (postType.equals("rent") || postType.equals("lookforbuy")
                         || postType.equals("lookforrent")) {
                     if (ad_Type.equals("electronics")) {
@@ -700,6 +708,9 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
 
                     }
                 }
+
+                String checkData = new Gson().toJson(model);
+                Log.d("whatif",new Gson().toJson(imgArray));
 
                 Call<AdDetails> call = ApiUtils.getUserService().postsellAd("Token " + token, model);
                 call.enqueue(new Callback<AdDetails>() {

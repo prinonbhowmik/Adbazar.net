@@ -24,6 +24,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
@@ -60,6 +61,7 @@ import com.adbazarnet.Models.UserDetailsModel;
 import com.adbazarnet.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -328,7 +330,8 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
             }
         });
 
-        chipNavigationBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        chipNavigationBar.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
@@ -571,12 +574,7 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*progressDialog = new ProgressDialog(EditMyAdsActivity.this);
-                progressDialog.setTitle("Uploading");
-                progressDialog.setMessage("Loading...");
-                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                progressDialog.setCancelable(false);
-                progressDialog.show();*/
+
                 String adTitle = titleEt.getText().toString();
                 if (conditionSpinner.getVisibility() == View.VISIBLE) {
                     condition = conditionSpinner.getText().toString();
@@ -608,15 +606,18 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
                 phn1 = phnnoEt1.getText().toString();
                 phn2 = phnnoEt2.getText().toString();
                 phn3 = phnnoEt3.getText().toString();
-                PhoneNoModel phn = new PhoneNoModel(phn1);
-                PhoneNoModel phnn = new PhoneNoModel(phn2);
-                PhoneNoModel phnnn = new PhoneNoModel(phn3);
+
                 List<PhoneNoModel> phoneNumbers = new ArrayList<>();
-                if (phn1 != null) {
+                if (!TextUtils.isEmpty(phn1)) {
+                    PhoneNoModel phn = new PhoneNoModel(phn1);
                     phoneNumbers.add(phn);
-                } else if (phn2 != null) {
+                }
+                if (!TextUtils.isEmpty(phn2)) {
+                    PhoneNoModel phnn = new PhoneNoModel(phn2);
                     phoneNumbers.add(phnn);
-                } else if (phn3 != null) {
+                }
+                if (!TextUtils.isEmpty(phn3)) {
+                    PhoneNoModel phnnn = new PhoneNoModel(phn3);
                     phoneNumbers.add(phnnn);
                 }
 
@@ -686,35 +687,40 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
                 String employeer = employeerEt.getText().toString();
                 String website = websiteEt.getText().toString();
 
-                Log.d("checkPhnNoArray", String.valueOf(phoneNumbers));
+                Log.d("whatif",new Gson().toJson(imgArray));
 
                 if (ad_Type.equals("electronics")) {
                     model = new EditAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers, description,
                             locationId, categoryId, imgArray, negotiable, ad_Type, hidePhone);
-                } else if (ad_Type.equals("vehicle")) {
+                }
+                else if (ad_Type.equals("vehicle")) {
                     model = new EditAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers, description,
                             locationId, modelYear, mileage, categoryId, imgArray, negotiable, ad_Type, hidePhone);
-                } else if (ad_Type.equals("property")) {
+                }
+                else if (ad_Type.equals("property")) {
                     model = new EditAdModel(adTitle, price, otherInfo, phoneNumbers, description,
                             locationId,address,land, categoryId, imgArray, negotiable, ad_Type, hidePhone);
-                } else if (ad_Type.equals("general")) {
+                }
+                else if (ad_Type.equals("general")) {
                     model = new EditAdModel(adTitle, price, otherInfo, phoneNumbers, description,
                             locationId, categoryId, imgArray, negotiable,hidePhone, ad_Type);
-                } else if (ad_Type.equals("service")) {
+                }
+                else if (ad_Type.equals("service")) {
                     model = new EditAdModel( adTitle,hidePhone ,price,  otherInfo,  phoneNumbers,
                             description, locationId, address, service, categoryId,
                             imgArray, negotiable, ad_Type);
-                }else  if (ad_Type.equals("job")){
+                }
+                else  if (ad_Type.equals("job")){
                     model = new EditAdModel(adTitle,jobType,vacancy,requirment,deadline,employeer,website
                             ,otherInfo,description,locationId,address,categoryId,imgArray,ad_Type);
                 }
+
                 Call<AdDetails> call = ApiUtils.getUserService().editMyAds("Token " + token, adId ,model);
                 call.enqueue(new Callback<AdDetails>() {
                     @Override
                     public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
+                        Log.d("whatifs",new Gson().toJson(response.body()));
                         if (response.isSuccessful()){
-                            //progressDialog.dismiss();
-
                             Dialog dialog2 = new Dialog(EditMyAdsActivity.this);
                             dialog2.setContentView(R.layout.success_popup);
                             dialog2.setCancelable(false);
@@ -738,7 +744,7 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
 
                     @Override
                     public void onFailure(Call<AdDetails> call, Throwable t) {
-
+                        Log.d("kiproblem",t.getMessage());
                     }
                 });
             }
@@ -840,6 +846,7 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
                         descriptionEt.setText(response.body().getDescription());
                         if (response.body().getAd_images().size() == 1) {
                             img1.setVisibility(View.VISIBLE);
+                            uri1 = Uri.parse(response.body().getAd_images().get(0).getImage());
                             try {
                                 Picasso.get()
                                         .load(response.body().getAd_images().get(0).getImage())
@@ -2116,7 +2123,6 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
                 if (imgSelect == 1) {
                     uri1 = resultUri;
                     img1.setImageURI(uri1);
-
                 } else if (imgSelect == 2) {
                     uri2 = resultUri;
                     img2.setImageURI(uri2);
