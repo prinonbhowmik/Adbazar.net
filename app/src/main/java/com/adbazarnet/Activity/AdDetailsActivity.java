@@ -34,6 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.adbazarnet.Adapter.BidsShowAdapter;
+import com.adbazarnet.Adapter.CallListAdapter;
 import com.adbazarnet.Adapter.ChatMsgAdapter;
 import com.adbazarnet.Adapter.ImageSliderAdapter;
 import com.adbazarnet.Adapter.RelatedProductAdapter;
@@ -45,6 +46,7 @@ import com.adbazarnet.Fragments.HomeFragment;
 import com.adbazarnet.Interface.GetBiderIdInterface;
 import com.adbazarnet.Models.AdDetails;
 import com.adbazarnet.Models.AdImages;
+import com.adbazarnet.Models.AdPhoneNumbers;
 import com.adbazarnet.Models.BidModel;
 import com.adbazarnet.Models.ChatChannelModel;
 import com.adbazarnet.Models.ChatModel;
@@ -53,7 +55,6 @@ import com.adbazarnet.Models.FavouriteAds;
 import com.adbazarnet.Models.RelatedAds;
 import com.adbazarnet.Models.UserDetailsModel;
 import com.adbazarnet.R;
-import com.facebook.share.model.ShareLinkContent;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
@@ -70,8 +71,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.facebook.share.model.ShareLinkContent.*;
 
 public class AdDetailsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GetBiderIdInterface {
 
@@ -96,13 +95,14 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
     private boolean is_bid;
     private EditText bidEt;
     private FrameLayout contactLayout;
-    private String downloadLink, lang;
+    private String downloadLink, lang,userName;
     private ImageView navIcon;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private Spinner spinner;
     String[] languageArray = {"English","বাংলা"};
     private String language;
+    private List<AdPhoneNumbers> numberslist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,8 +114,6 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
         getLocale();
         init();
 
-
-
         Call<AdDetails> call = ApiUtils.getUserService().getAdDetails(lang, id);
         call.enqueue(new Callback<AdDetails>() {
             @Override
@@ -123,6 +121,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                 if (response.isSuccessful()) {
                     List<AdImages> images = response.body().getAd_images();
                     List<RelatedAds> relatedAds = response.body().getRelated_ads();
+                    numberslist = response.body().getAd_phone_numbers();
                     productName.setText(response.body().getAd_title());
                     productPrice.setText("৳ " + response.body().getPrice());
                     String date = String.valueOf(response.body().getCreated());
@@ -144,6 +143,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         txt2.setVisibility(View.VISIBLE);
                     }
                     descriptionTv.setText(response.body().getDescription());
+                    userName = response.body().getUser().getName();
                     sellerNameTv.setText(response.body().getUser().getName());
                     locationTv.setText(response.body().getLocation().getName() + ", " +
                             response.body().getLocation().getLocation_name());
@@ -339,9 +339,18 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
         callNowTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent callIntent = new Intent(Intent.ACTION_DIAL);
-                callIntent.setData(Uri.parse("tel:" + userPhone));
-                startActivity(callIntent);
+                dialog = new Dialog(AdDetailsActivity.this);
+                dialog.setContentView(R.layout.call_list_dialog);
+                TextView header = dialog.findViewById(R.id.header);
+                Button closeBtn = dialog.findViewById(R.id.closeBtn);
+                RecyclerView callRecycler = dialog.findViewById(R.id.callRecycler);
+                callRecycler.setLayoutManager(new LinearLayoutManager(AdDetailsActivity.this));
+
+                header.setText("Contact "+userName);
+                closeBtn.setOnClickListener(v1 -> { dialog.dismiss(); });
+                callRecycler.setAdapter(new CallListAdapter(numberslist,AdDetailsActivity.this));
+
+                dialog.show();
             }
         });
 
@@ -845,6 +854,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
         noBidTv = findViewById(R.id.noBidTv);
         bidBtn = findViewById(R.id.bidBtn);
         bidEt = findViewById(R.id.bidEt);
+        numberslist = new ArrayList<>();
     }
 
     @Override

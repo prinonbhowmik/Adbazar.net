@@ -31,7 +31,6 @@ public class EditAdModel {
     private boolean is_sell;
     private boolean is_job;
 
-
     //electronics
     public EditAdModel(String ad_title, String condition, String price, String warranty,
                        String other_information, List<PhoneNoModel> ad_phone_numbers, String description,
