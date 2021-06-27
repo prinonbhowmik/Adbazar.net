@@ -759,7 +759,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                                         Intent intent = new Intent(PostAdActivity.this, MainActivity.class);
                                         intent.putExtra("fragment", "home");
                                         startActivity(intent);
-                                        finish();
+
                                     }
                                 });
                             }
@@ -789,32 +789,32 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                     case R.id.home:
                         startActivity(new Intent(PostAdActivity.this,MainActivity.class).
                                 putExtra("fragment","home"));
-                        finish();
+
                         break;
                     case R.id.favourite:
                         if (loggedIn == 0) {
                             startActivity(new Intent(PostAdActivity.this, LoginActivity.class));
-                            finish();
+
                         } else {
                             startActivity(new Intent(PostAdActivity.this,MainActivity.class).
                                     putExtra("fragment","favourite"));
-                            finish();
+
                         }
                         break;
                     case R.id.chat:
                         if (loggedIn == 0) {
                             startActivity(new Intent(PostAdActivity.this, LoginActivity.class));
-                            finish();
+
                         } else {
                             startActivity(new Intent(PostAdActivity.this,MainActivity.class).
                                     putExtra("fragment","chat"));
-                            finish();
+
                         }
                         break;
                     case R.id.account:
                         if (loggedIn == 0) {
                             startActivity(new Intent(PostAdActivity.this, LoginActivity.class));
-                            finish();
+
                             break;
                         } else {
                             //pop-up will be shown
@@ -832,7 +832,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                                 @Override
                                 public void onClick(View v) {
                                     dialog.dismiss();
-                                    finish();
+
                                     startActivity(getIntent());
                                 }
                             });
@@ -841,7 +841,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(PostAdActivity.this, MembershipActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -849,7 +849,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(PostAdActivity.this, MyAdsActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -858,7 +858,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                                 public void onClick(View v) {
                                     startActivity(new Intent(PostAdActivity.this,MainActivity.class).
                                             putExtra("fragment","favourite"));
-                                    finish();
+
                                 }
                             });
 
@@ -866,7 +866,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(PostAdActivity.this, DashboardActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -874,7 +874,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(PostAdActivity.this, ProfileActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -898,7 +898,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                                     editor.putInt("loggedIn", 0);
                                     editor.putInt("id", 0);
                                     editor.commit();
-                                    finish();
+
                                     startActivity(getIntent());
                                 }
                             });
@@ -919,7 +919,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
             public void onClick(View v) {
                 if (loggedIn == 0) {
                     startActivity(new Intent(PostAdActivity.this, LoginActivity.class));
-                    finish();
+
                 }
                 else {
                     dialog = new Dialog(PostAdActivity.this);
@@ -940,7 +940,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                         public void onClick(View v) {
                             startActivity(new Intent(PostAdActivity.this,
                                     PostAdActivity.class).putExtra("type", "sell"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -949,7 +949,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                         public void onClick(View v) {
                             startActivity(new Intent(PostAdActivity.this,
                                     PostAdActivity.class).putExtra("type", "rent"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -958,7 +958,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                         public void onClick(View v) {
                             startActivity(new Intent(PostAdActivity.this,
                                     PostAdActivity.class).putExtra("type", "bid"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -967,7 +967,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                         public void onClick(View v) {
                             startActivity(new Intent(PostAdActivity.this,
                                     PostAdActivity.class).putExtra("type", "exchange"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -976,7 +976,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                         public void onClick(View v) {
                             startActivity(new Intent(PostAdActivity.this,
                                     PostAdActivity.class).putExtra("type", "job"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -985,7 +985,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                         public void onClick(View v) {
                             startActivity(new Intent(PostAdActivity.this,
                                     PostAdActivity.class).putExtra("type", "lookforbuy"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -994,7 +994,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                         public void onClick(View v) {
                             startActivity(new Intent(PostAdActivity.this,
                                     PostAdActivity.class).putExtra("type", "lookforrent"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -1316,18 +1316,18 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
         switch (item.getItemId()) {
             case R.id.login:
                 startActivity(new Intent(PostAdActivity.this, LoginActivity.class));
-                finish();
+
                 break;
             case R.id.home:
                 startActivity(new Intent(PostAdActivity.this, MainActivity.class)
                         .putExtra("fragment","home"));
-                finish();
+
                 drawerLayout.closeDrawers();
                 break;
             case R.id.bids:
                 startActivity(new Intent(PostAdActivity.this, MainActivity.class)
                         .putExtra("fragment","home"));
-                finish();
+
                 drawerLayout.closeDrawers();
                 break;
             case R.id.contact:
@@ -1348,7 +1348,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                                 editor.putString("lang", "en");
                                 editor.apply();
                                 startActivity(getIntent());
-                                finish();
+
                             }
                         })
                         .setNegativeButton("বাংলা", new DialogInterface.OnClickListener() {
@@ -1365,7 +1365,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                                 editor2.putString("lang", "bn");
                                 editor2.apply();
                                 startActivity(getIntent());
-                                finish();
+
                             }
                         })
                         .show();
@@ -1378,7 +1378,6 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(PostAdActivity.this,MainActivity.class).putExtra("fragment","home"));
         finish();
     }
 }

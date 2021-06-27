@@ -105,12 +105,12 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                     case R.id.home:
                         startActivity(new Intent(LoginActivity.this,MainActivity.class).
                                 putExtra("fragment","home"));
-                        finish();
+
                         break;
                     case R.id.favourite:
                         if (loggedIn == 0) {
                             startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-                            finish();
+
                         } else {
                             FragmentTransaction favourite = getSupportFragmentManager().beginTransaction();
                             favourite.replace(R.id.fragment_container, new FavouriteFragment());
@@ -119,7 +119,8 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                         break;
                     case R.id.chat:
                             startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-                            finish();
+
+
 
                         break;
                     case R.id.account:
@@ -140,7 +141,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                                 @Override
                                 public void onClick(View v) {
                                     dialog.dismiss();
-                                    finish();
+
                                     startActivity(getIntent());
                                 }
                             });
@@ -149,7 +150,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -157,7 +158,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -166,7 +167,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                                 public void onClick(View v) {
                                     /*chipNavigationBar.setSelectedItemId(R.id.favourite, true);*/
                                     startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -174,7 +175,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -182,7 +183,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -206,7 +207,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                                     editor.putInt("loggedIn", 0);
                                     editor.putInt("id", 0);
                                     editor.commit();
-                                    finish();
+
                                     startActivity(getIntent());
                                 }
                             });
@@ -243,7 +244,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                         @Override
                         public void onClick(View v) {
                             startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -251,7 +252,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                         @Override
                         public void onClick(View v) {
                             startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -259,7 +260,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                         @Override
                         public void onClick(View v) {
                             startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -267,7 +268,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                         @Override
                         public void onClick(View v) {
                             startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -275,7 +276,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                         @Override
                         public void onClick(View v) {
                             startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -283,7 +284,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                         @Override
                         public void onClick(View v) {
                             startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -291,7 +292,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                         @Override
                         public void onClick(View v) {
                             startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -352,7 +353,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                         Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(LoginActivity.this,MainActivity.class).
                                 putExtra("fragment","home"));
-                        finish();
+
                     }
                 }else if(response.code()==400 || response.code()==404){
                     Toast.makeText(LoginActivity.this, "Login Failed!", Toast.LENGTH_SHORT).show();
@@ -403,7 +404,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(LoginActivity.this,MainActivity.class).putExtra("fragment","home"));
+        finish();
     }
 
     public void resetPass(View view) {
@@ -414,18 +415,18 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
         switch (item.getItemId()) {
             case R.id.login:
                 startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-                finish();
+
                 break;
             case R.id.home:
                 startActivity(new Intent(LoginActivity.this, MainActivity.class)
                         .putExtra("fragment","home"));
-                finish();
+
                 drawerLayout.closeDrawers();
                 break;
             case R.id.bids:
                 startActivity(new Intent(LoginActivity.this, MainActivity.class)
                         .putExtra("fragment","home"));
-                finish();
+
                 drawerLayout.closeDrawers();
                 break;
             case R.id.contact:
@@ -446,7 +447,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                                 editor.putString("lang", "en");
                                 editor.apply();
                                 startActivity(getIntent());
-                                finish();
+
                             }
                         })
                         .setNegativeButton("বাংলা", new DialogInterface.OnClickListener() {
@@ -463,7 +464,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                                 editor2.putString("lang", "bn");
                                 editor2.apply();
                                 startActivity(getIntent());
-                                finish();
+
                             }
                         })
                         .show();

@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     case R.id.favourite:
                         if (loggedIn == 0) {
                             startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                            finish();
+
                         } else {
                             FragmentTransaction favourite = getSupportFragmentManager().beginTransaction();
                             favourite.replace(R.id.fragment_container, new FavouriteFragment());
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     case R.id.chat:
                         if (loggedIn == 0) {
                             startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                            finish();
+
                         } else {
                             FragmentTransaction chat = getSupportFragmentManager().beginTransaction();
                             chat.replace(R.id.fragment_container, new ChatFragment());
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     case R.id.account:
                         if (loggedIn == 0) {
                             startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                            finish();
+
                             break;
                         } else {
                             //pop-up will be shown
@@ -149,8 +149,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 @Override
                                 public void onClick(View v) {
                                     dialog.dismiss();
-                                    finish();
-                                    startActivity(getIntent());
                                 }
                             });
 
@@ -158,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(MainActivity.this, MembershipActivity.class));
-                                    finish();
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -166,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(MainActivity.this, MyAdsActivity.class));
-                                    finish();
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -183,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(MainActivity.this, DashboardActivity.class));
-                                    finish();
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -191,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(MainActivity.this, ProfileActivity.class));
-                                    finish();
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -215,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     editor.putInt("loggedIn", 0);
                                     editor.putInt("id", 0);
                                     editor.commit();
-                                    finish();
+
                                     startActivity(getIntent());
                                 }
                             });
@@ -236,7 +234,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
                 if (loggedIn == 0) {
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                    finish();
+
                 }
                 else {
                     dialog = new Dialog(MainActivity.this);
@@ -257,7 +255,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         public void onClick(View v) {
                             startActivity(new Intent(MainActivity.this,
                                     PostAdActivity.class).putExtra("type", "sell"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -266,7 +264,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         public void onClick(View v) {
                             startActivity(new Intent(MainActivity.this,
                                     PostAdActivity.class).putExtra("type", "rent"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -275,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         public void onClick(View v) {
                             startActivity(new Intent(MainActivity.this,
                                     PostAdActivity.class).putExtra("type", "bid"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -284,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         public void onClick(View v) {
                             startActivity(new Intent(MainActivity.this,
                                     PostAdActivity.class).putExtra("type", "exchange"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -293,7 +291,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         public void onClick(View v) {
                             startActivity(new Intent(MainActivity.this,
                                     PostAdActivity.class).putExtra("type", "job"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -302,7 +300,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         public void onClick(View v) {
                             startActivity(new Intent(MainActivity.this,
                                     PostAdActivity.class).putExtra("type", "lookforbuy"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -311,7 +309,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         public void onClick(View v) {
                             startActivity(new Intent(MainActivity.this,
                                     PostAdActivity.class).putExtra("type", "lookforrent"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -369,7 +367,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
             case R.id.login:
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                finish();
+
                 break;
             case R.id.home:
                 FragmentTransaction home = getSupportFragmentManager().beginTransaction();
@@ -403,7 +401,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 editor.putString("lang", "en");
                                 editor.apply();
                                 startActivity(getIntent());
-                                finish();
+
                             }
                         })
                         .setNegativeButton("বাংলা", new DialogInterface.OnClickListener() {
@@ -420,7 +418,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 editor2.putString("lang", "bn");
                                 editor2.apply();
                                 startActivity(getIntent());
-                                finish();
+
                             }
                         })
                         .show();
@@ -437,7 +435,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     editor2.putString("lang", "bn");
                     editor2.apply();
                     startActivity(getIntent());
-                    finish();
+
                 }else{
                     Locale locale = new Locale("en");
                     Locale.setDefault(locale);
@@ -448,7 +446,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     editor.putString("lang", "en");
                     editor.apply();
                     startActivity(getIntent());
-                    finish();
+
                 }*/
 
                 break;
@@ -466,6 +464,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent();
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
                 System.exit(0);
             }
         });

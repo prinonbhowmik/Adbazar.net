@@ -192,7 +192,6 @@ public class MembershipPackageAdapter extends RecyclerView.Adapter<MembershipPac
                                      if (response.isSuccessful()){
                                          Toast.makeText(context, "Request complete please wait for admin approval", Toast.LENGTH_LONG).show();
                                          context.startActivity(new Intent(context, MainActivity.class).putExtra("fragment","home"));
-                                         ((Activity)context).finish();
                                      }
                                  }
 

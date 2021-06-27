@@ -68,7 +68,6 @@ public class SubCatProductsAdapter extends RecyclerView.Adapter<SubCatProductsAd
             public void onClick(View v) {
                 Log.d("GetID", String.valueOf(model.getId()));
                 context.startActivity(new Intent(context, AdDetailsActivity.class).putExtra("id",model.getId()));
-                ((Activity)context).finish();
             }
         });
 

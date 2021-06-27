@@ -72,7 +72,6 @@ public class CHatListAdapter extends RecyclerView.Adapter<CHatListAdapter.ViewHo
                 i.putExtra("channel",list.getId());
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 context.startActivity(i);
-                ((Activity)context).finish();
             }
         });
 

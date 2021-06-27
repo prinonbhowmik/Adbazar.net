@@ -77,12 +77,12 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
     private int id, userId, sellerId;
     private SliderView imageSlider;
     private ImageSliderAdapter sliderAdapter;
-    private CircleImageView sellerProfileIv,adPost;
+    private CircleImageView sellerProfileIv, adPost;
     private TextView productName, productPrice, uploadTime, categoryTv, conditionTv,
             warrantyTv, descriptionTv, sellerNameTv, locationTv, noDataTv, membershipTV,
             favouriteTv, callNowTV, noBidTv, bidBtn, chatTV;
     private TextView txt3, txt2, vacancyTv, txtV, txtD, deadlineTv, txtR, requirmentTv, txtA, addressTv, txtO, otherTv, txtW, websiteTv, txtAtt, attchmetnTv, jobTv, jobTypeTv, txtMY, modelYearTv,
-            txtM, mileageTv, txtL, landEt,shareTv;
+            txtM, mileageTv, txtL, landEt, shareTv;
     private RecyclerView relatedProductRecycler, bidRecycler;
     private RelatedProductAdapter relatedProductAdapter;
     private BidsShowAdapter bidAdapter;
@@ -95,14 +95,15 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
     private boolean is_bid;
     private EditText bidEt;
     private FrameLayout contactLayout;
-    private String downloadLink, lang,userName;
+    private String downloadLink, lang, userName;
     private ImageView navIcon;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private Spinner spinner;
-    String[] languageArray = {"English","বাংলা"};
+    String[] languageArray = {"English", "বাংলা"};
     private String language;
     private List<AdPhoneNumbers> numberslist;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -346,9 +347,11 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                 RecyclerView callRecycler = dialog.findViewById(R.id.callRecycler);
                 callRecycler.setLayoutManager(new LinearLayoutManager(AdDetailsActivity.this));
 
-                header.setText("Contact "+userName);
-                closeBtn.setOnClickListener(v1 -> { dialog.dismiss(); });
-                callRecycler.setAdapter(new CallListAdapter(numberslist,AdDetailsActivity.this));
+                header.setText("Contact " + userName);
+                closeBtn.setOnClickListener(v1 -> {
+                    dialog.dismiss();
+                });
+                callRecycler.setAdapter(new CallListAdapter(numberslist, AdDetailsActivity.this));
 
                 dialog.show();
             }
@@ -438,7 +441,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                 } else {
                     if (loggedIn == 0) {
                         startActivity(new Intent(AdDetailsActivity.this, LoginActivity.class));
-                        finish();
+
                     } else {
                         Call<BidModel> modelCall = ApiUtils.getUserService().postBids("Token " + token, id, bidMsg, id);
                         modelCall.enqueue(new Callback<BidModel>() {
@@ -466,7 +469,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
 
                     case R.id.home:
                         startActivity(new Intent(AdDetailsActivity.this, MainActivity.class)
-                                .putExtra("fragment","home"));
+                                .putExtra("fragment", "home"));
                         finish();
                         break;
                     case R.id.favourite:
@@ -475,8 +478,9 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                             finish();
                         } else {
                             startActivity(new Intent(AdDetailsActivity.this, MainActivity.class)
-                                    .putExtra("fragment","favourite"));
+                                    .putExtra("fragment", "favourite"));
                             finish();
+
                         }
                         break;
                     case R.id.chat:
@@ -485,14 +489,14 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                             finish();
                         } else {
                             startActivity(new Intent(AdDetailsActivity.this, MainActivity.class)
-                                    .putExtra("fragment","chat"));
+                                    .putExtra("fragment", "chat"));
                             finish();
                         }
                         break;
                     case R.id.account:
                         if (loggedIn == 0) {
                             startActivity(new Intent(AdDetailsActivity.this, LoginActivity.class));
-                            finish();
+finish();
                             break;
                         } else {
                             //pop-up will be shown
@@ -510,16 +514,14 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                                 @Override
                                 public void onClick(View v) {
                                     dialog.dismiss();
-                                    finish();
-                                    startActivity(getIntent());
                                 }
                             });
 
                             membership.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
+                                    dialog.dismiss();
                                     startActivity(new Intent(AdDetailsActivity.this, MembershipActivity.class));
-                                    finish();
                                 }
                             });
 
@@ -527,7 +529,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(AdDetailsActivity.this, MyAdsActivity.class));
-                                    finish();
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -536,8 +538,8 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                                 public void onClick(View v) {
                                     /*chipNavigationBar.setSelectedItemId(R.id.favourite, true);*/
                                     startActivity(new Intent(AdDetailsActivity.this, MainActivity.class)
-                                            .putExtra("fragment","favourite"));
-                                    finish();
+                                            .putExtra("fragment", "favourite"));
+
                                     dialog.dismiss();
                                 }
                             });
@@ -546,7 +548,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(AdDetailsActivity.this, DashboardActivity.class));
-                                    finish();
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -554,7 +556,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(AdDetailsActivity.this, ProfileActivity.class));
-                                    finish();
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -579,8 +581,8 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                                     editor.putInt("id", 0);
                                     editor.commit();
                                     startActivity(new Intent(AdDetailsActivity.this, MainActivity.class)
-                                            .putExtra("fragment","home"));
-                                    finish();
+                                            .putExtra("fragment", "home"));
+
                                 }
                             });
 
@@ -600,9 +602,8 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
             public void onClick(View v) {
                 if (loggedIn == 0) {
                     startActivity(new Intent(AdDetailsActivity.this, LoginActivity.class));
-                    finish();
-                }
-                else {
+
+                } else {
                     dialog = new Dialog(AdDetailsActivity.this);
                     dialog.setContentView(R.layout.post_ad_popup);
                     ImageView closeIv = dialog.findViewById(R.id.closeIv);
@@ -621,7 +622,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         public void onClick(View v) {
                             startActivity(new Intent(AdDetailsActivity.this,
                                     PostAdActivity.class).putExtra("type", "sell"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -630,7 +631,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         public void onClick(View v) {
                             startActivity(new Intent(AdDetailsActivity.this,
                                     PostAdActivity.class).putExtra("type", "rent"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -639,7 +640,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         public void onClick(View v) {
                             startActivity(new Intent(AdDetailsActivity.this,
                                     PostAdActivity.class).putExtra("type", "bid"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -648,7 +649,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         public void onClick(View v) {
                             startActivity(new Intent(AdDetailsActivity.this,
                                     PostAdActivity.class).putExtra("type", "exchange"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -657,7 +658,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         public void onClick(View v) {
                             startActivity(new Intent(AdDetailsActivity.this,
                                     PostAdActivity.class).putExtra("type", "job"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -666,7 +667,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         public void onClick(View v) {
                             startActivity(new Intent(AdDetailsActivity.this,
                                     PostAdActivity.class).putExtra("type", "lookforbuy"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -675,7 +676,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         public void onClick(View v) {
                             startActivity(new Intent(AdDetailsActivity.this,
                                     PostAdActivity.class).putExtra("type", "lookforrent"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -700,7 +701,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
 
         shareTv.setOnClickListener(v -> {
 
-            String message = "https://adbazar.net/listing/ad-details?adId="+id;
+            String message = "https://adbazar.net/listing/ad-details?adId=" + id;
             Intent share = new Intent(Intent.ACTION_SEND);
             share.setType("text/plain");
             share.putExtra(Intent.EXTRA_TEXT, message);
@@ -827,7 +828,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
 
         userId = sharedPreferences.getInt("id", 0);
         loggedIn = sharedPreferences.getInt("loggedIn", 0);
-        lang = sharedPreferences.getString("lang","en");
+        lang = sharedPreferences.getString("lang", "en");
 
         navIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -862,19 +863,19 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
         switch (item.getItemId()) {
             case R.id.login:
                 startActivity(new Intent(AdDetailsActivity.this, LoginActivity.class));
-                finish();
+
                 break;
             case R.id.home:
-                startActivity(new Intent(AdDetailsActivity.this,MainActivity.class).
-                        putExtra("fragment","home"));
-                finish();
+                startActivity(new Intent(AdDetailsActivity.this, MainActivity.class).
+                        putExtra("fragment", "home"));
+
                 chipNavigationBar.setSelectedItemId(R.id.home);
                 drawerLayout.closeDrawers();
                 break;
             case R.id.bids:
-                startActivity(new Intent(AdDetailsActivity.this,MainActivity.class).
-                        putExtra("fragment","home"));
-                finish();
+                startActivity(new Intent(AdDetailsActivity.this, MainActivity.class).
+                        putExtra("fragment", "home"));
+
                 drawerLayout.closeDrawers();
                 break;
             case R.id.contact:
@@ -896,7 +897,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                                 editor.putString("lang", "en");
                                 editor.apply();
                                 startActivity(getIntent());
-                                finish();
+
                             }
                         })
                         .setNegativeButton("বাংলা", new DialogInterface.OnClickListener() {
@@ -913,7 +914,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                                 editor2.putString("lang", "bn");
                                 editor2.apply();
                                 startActivity(getIntent());
-                                finish();
+
                             }
                         })
                         .show();
@@ -976,7 +977,6 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(AdDetailsActivity.this,MainActivity.class).putExtra("fragment","home"));
         finish();
     }
 }

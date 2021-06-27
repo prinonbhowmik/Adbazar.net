@@ -96,32 +96,32 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                     case R.id.home:
                         startActivity(new Intent(DashboardActivity.this,MainActivity.class).
                                 putExtra("fragment","home"));
-                        finish();
+
                         break;
                     case R.id.favourite:
                         if (loggedIn == 0) {
                             startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
-                            finish();
+
                         } else {
                             startActivity(new Intent(DashboardActivity.this,MainActivity.class).
                                     putExtra("fragment","favourite"));
-                            finish();
+
                         }
                         break;
                     case R.id.chat:
                         if (loggedIn == 0) {
                             startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
-                            finish();
+
                         } else {
                             startActivity(new Intent(DashboardActivity.this,MainActivity.class).
                                     putExtra("fragment","chat"));
-                            finish();
+
                         }
                         break;
                     case R.id.account:
                         if (loggedIn == 0) {
                             startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
-                            finish();
+
                             break;
                         } else {
                             //pop-up will be shown
@@ -139,7 +139,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                                 @Override
                                 public void onClick(View v) {
                                     dialog.dismiss();
-                                    finish();
+
                                     startActivity(getIntent());
                                 }
                             });
@@ -148,7 +148,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(DashboardActivity.this, MembershipActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -156,7 +156,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(DashboardActivity.this, MyAdsActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -166,7 +166,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                                     /*chipNavigationBar.setSelectedItemId(R.id.favourite, true);*/
                                     startActivity(new Intent(DashboardActivity.this,MainActivity.class).
                                             putExtra("fragment","favourite"));
-                                    finish();
+
                                 }
                             });
 
@@ -174,7 +174,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(DashboardActivity.this, DashboardActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -182,7 +182,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(DashboardActivity.this, ProfileActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -206,10 +206,10 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                                     editor.putInt("loggedIn", 0);
                                     editor.putInt("id", 0);
                                     editor.commit();
-                                    finish();
+
                                     startActivity(new Intent(DashboardActivity.this,MainActivity.class)
                                             .putExtra("fragment","home"));
-                                    finish();
+
                                 }
                             });
 
@@ -229,7 +229,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             public void onClick(View v) {
                 if (loggedIn == 0) {
                     startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
-                    finish();
+
                 }
                 else {
                     dialog = new Dialog(DashboardActivity.this);
@@ -250,7 +250,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                         public void onClick(View v) {
                             startActivity(new Intent(DashboardActivity.this,
                                     PostAdActivity.class).putExtra("type", "sell"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -259,7 +259,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                         public void onClick(View v) {
                             startActivity(new Intent(DashboardActivity.this,
                                     PostAdActivity.class).putExtra("type", "rent"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -268,7 +268,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                         public void onClick(View v) {
                             startActivity(new Intent(DashboardActivity.this,
                                     PostAdActivity.class).putExtra("type", "bid"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -277,7 +277,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                         public void onClick(View v) {
                             startActivity(new Intent(DashboardActivity.this,
                                     PostAdActivity.class).putExtra("type", "exchange"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -286,7 +286,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                         public void onClick(View v) {
                             startActivity(new Intent(DashboardActivity.this,
                                     PostAdActivity.class).putExtra("type", "job"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -295,7 +295,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                         public void onClick(View v) {
                             startActivity(new Intent(DashboardActivity.this,
                                     PostAdActivity.class).putExtra("type", "lookforbuy"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -304,7 +304,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                         public void onClick(View v) {
                             startActivity(new Intent(DashboardActivity.this,
                                     PostAdActivity.class).putExtra("type", "lookforrent"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -370,7 +370,6 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(DashboardActivity.this,MainActivity.class).putExtra("fragment","home"));
         finish();
     }
 
@@ -379,18 +378,18 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         switch (item.getItemId()) {
             case R.id.login:
                 startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
-                finish();
+
                 break;
             case R.id.home:
                 startActivity(new Intent(DashboardActivity.this, MainActivity.class)
                         .putExtra("fragment","home"));
-                finish();
+
                 drawerLayout.closeDrawers();
                 break;
             case R.id.bids:
                 startActivity(new Intent(DashboardActivity.this, MainActivity.class)
                         .putExtra("fragment","home"));
-                finish();
+
                 drawerLayout.closeDrawers();
                 break;
             case R.id.contact:
@@ -411,7 +410,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                                 editor.putString("lang", "en");
                                 editor.apply();
                                 startActivity(getIntent());
-                                finish();
+
                             }
                         })
                         .setNegativeButton("বাংলা", new DialogInterface.OnClickListener() {
@@ -428,7 +427,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                                 editor2.putString("lang", "bn");
                                 editor2.apply();
                                 startActivity(getIntent());
-                                finish();
+
                             }
                         })
                         .show();

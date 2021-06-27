@@ -94,32 +94,32 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                     case R.id.home:
                         startActivity(new Intent(MyAdsActivity.this,MainActivity.class).
                                 putExtra("fragment","home"));
-                        finish();
+
                         break;
                     case R.id.favourite:
                         if (loggedIn == 0) {
                             startActivity(new Intent(MyAdsActivity.this, LoginActivity.class));
-                            finish();
+
                         } else {
                             startActivity(new Intent(MyAdsActivity.this,MainActivity.class).
                                     putExtra("fragment","favourite"));
-                            finish();
+
                         }
                         break;
                     case R.id.chat:
                         if (loggedIn == 0) {
                             startActivity(new Intent(MyAdsActivity.this, LoginActivity.class));
-                            finish();
+
                         } else {
                             startActivity(new Intent(MyAdsActivity.this,MainActivity.class).
                                     putExtra("fragment","chat"));
-                            finish();
+
                         }
                         break;
                     case R.id.account:
                         if (loggedIn == 0) {
                             startActivity(new Intent(MyAdsActivity.this, LoginActivity.class));
-                            finish();
+
                             break;
                         } else {
                             //pop-up will be shown
@@ -137,7 +137,7 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                                 @Override
                                 public void onClick(View v) {
                                     dialog.dismiss();
-                                    finish();
+
                                     startActivity(getIntent());
                                 }
                             });
@@ -146,7 +146,7 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(MyAdsActivity.this, MembershipActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -154,7 +154,7 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(MyAdsActivity.this, MyAdsActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -164,7 +164,7 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                                     /*chipNavigationBar.setSelectedItemId(R.id.favourite, true);*/
                                     startActivity(new Intent(MyAdsActivity.this,MainActivity.class).
                                             putExtra("fragment","favourite"));
-                                    finish();
+
                                 }
                             });
 
@@ -172,7 +172,7 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(MyAdsActivity.this, DashboardActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -180,7 +180,7 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(MyAdsActivity.this, ProfileActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -204,7 +204,7 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                                     editor.putInt("loggedIn", 0);
                                     editor.putInt("id", 0);
                                     editor.commit();
-                                    finish();
+
                                     startActivity(getIntent());
                                 }
                             });
@@ -225,7 +225,7 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
             public void onClick(View v) {
                 if (loggedIn == 0) {
                     startActivity(new Intent(MyAdsActivity.this, LoginActivity.class));
-                    finish();
+
                 }
                 else {
                     dialog = new Dialog(MyAdsActivity.this);
@@ -246,7 +246,7 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                         public void onClick(View v) {
                             startActivity(new Intent(MyAdsActivity.this,
                                     PostAdActivity.class).putExtra("type", "sell"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -255,7 +255,7 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                         public void onClick(View v) {
                             startActivity(new Intent(MyAdsActivity.this,
                                     PostAdActivity.class).putExtra("type", "rent"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -264,7 +264,7 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                         public void onClick(View v) {
                             startActivity(new Intent(MyAdsActivity.this,
                                     PostAdActivity.class).putExtra("type", "bid"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -273,7 +273,7 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                         public void onClick(View v) {
                             startActivity(new Intent(MyAdsActivity.this,
                                     PostAdActivity.class).putExtra("type", "exchange"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -282,7 +282,7 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                         public void onClick(View v) {
                             startActivity(new Intent(MyAdsActivity.this,
                                     PostAdActivity.class).putExtra("type", "job"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -291,7 +291,7 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                         public void onClick(View v) {
                             startActivity(new Intent(MyAdsActivity.this,
                                     PostAdActivity.class).putExtra("type", "lookforbuy"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -300,7 +300,7 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                         public void onClick(View v) {
                             startActivity(new Intent(MyAdsActivity.this,
                                     PostAdActivity.class).putExtra("type", "lookforrent"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -373,7 +373,6 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(MyAdsActivity.this,MainActivity.class).putExtra("fragment","home"));
         finish();
     }
 
@@ -382,18 +381,18 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
         switch (item.getItemId()) {
             case R.id.login:
                 startActivity(new Intent(MyAdsActivity.this, LoginActivity.class));
-                finish();
+
                 break;
             case R.id.home:
                 startActivity(new Intent(MyAdsActivity.this, MainActivity.class)
                         .putExtra("fragment","home"));
-                finish();
+
                 drawerLayout.closeDrawers();
                 break;
             case R.id.bids:
                 startActivity(new Intent(MyAdsActivity.this, MainActivity.class)
                         .putExtra("fragment","home"));
-                finish();
+
                 drawerLayout.closeDrawers();
                 break;
             case R.id.contact:
@@ -414,7 +413,7 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                                 editor.putString("lang", "en");
                                 editor.apply();
                                 startActivity(getIntent());
-                                finish();
+
                             }
                         })
                         .setNegativeButton("বাংলা", new DialogInterface.OnClickListener() {
@@ -431,7 +430,7 @@ public class MyAdsActivity extends AppCompatActivity implements NavigationView.O
                                 editor2.putString("lang", "bn");
                                 editor2.apply();
                                 startActivity(getIntent());
-                                finish();
+
                             }
                         })
                         .show();

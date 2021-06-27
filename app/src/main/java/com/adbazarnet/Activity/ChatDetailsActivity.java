@@ -114,32 +114,31 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                     case R.id.home:
                         startActivity(new Intent(ChatDetailsActivity.this, MainActivity.class)
                                 .putExtra("fragment","home"));
-                        finish();
                         break;
                     case R.id.favourite:
                         if (loggedIn == 0) {
                             startActivity(new Intent(ChatDetailsActivity.this, LoginActivity.class));
-                            finish();
+
                         } else {
                             startActivity(new Intent(ChatDetailsActivity.this, MainActivity.class)
                                     .putExtra("fragment","favourite"));
-                            finish();
+
                         }
                         break;
                     case R.id.chat:
                         if (loggedIn == 0) {
                             startActivity(new Intent(ChatDetailsActivity.this, LoginActivity.class));
-                            finish();
+
                         } else {
                             startActivity(new Intent(ChatDetailsActivity.this, MainActivity.class)
                                     .putExtra("fragment","chat"));
-                            finish();
+
                         }
                         break;
                     case R.id.account:
                         if (loggedIn == 0) {
                             startActivity(new Intent(ChatDetailsActivity.this, LoginActivity.class));
-                            finish();
+
                             break;
                         }else {
                             //pop-up will be shown
@@ -157,7 +156,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                                 @Override
                                 public void onClick(View v) {
                                     dialog.dismiss();
-                                    finish();
+
                                     startActivity(getIntent());
                                 }
                             });
@@ -166,7 +165,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(ChatDetailsActivity.this, MembershipActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -174,7 +173,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(ChatDetailsActivity.this, MyAdsActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -184,7 +183,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                                     /*chipNavigationBar.setSelectedItemId(R.id.favourite, true);*/
                                     startActivity(new Intent(ChatDetailsActivity.this, MyAdsActivity.class)
                                             .putExtra("fragment","favourite"));
-                                    finish();
+
                                 }
                             });
 
@@ -192,7 +191,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(ChatDetailsActivity.this, DashboardActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -200,7 +199,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(ChatDetailsActivity.this, ProfileActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -226,7 +225,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                                     editor.commit();
                                     startActivity(new Intent(ChatDetailsActivity.this, MainActivity.class)
                                             .putExtra("fragment","home"));
-                                    finish();
+
                                 }
                             });
 
@@ -246,7 +245,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
             public void onClick(View v) {
                 if (loggedIn == 0) {
                     startActivity(new Intent(ChatDetailsActivity.this, LoginActivity.class));
-                    finish();
+
                 }
                 else {
                     dialog = new Dialog(ChatDetailsActivity.this);
@@ -267,7 +266,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                         public void onClick(View v) {
                             startActivity(new Intent(ChatDetailsActivity.this,
                                     PostAdActivity.class).putExtra("type", "sell"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -276,7 +275,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                         public void onClick(View v) {
                             startActivity(new Intent(ChatDetailsActivity.this,
                                     PostAdActivity.class).putExtra("type", "rent"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -285,7 +284,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                         public void onClick(View v) {
                             startActivity(new Intent(ChatDetailsActivity.this,
                                     PostAdActivity.class).putExtra("type", "bid"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -294,7 +293,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                         public void onClick(View v) {
                             startActivity(new Intent(ChatDetailsActivity.this,
                                     PostAdActivity.class).putExtra("type", "exchange"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -303,7 +302,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                         public void onClick(View v) {
                             startActivity(new Intent(ChatDetailsActivity.this,
                                     PostAdActivity.class).putExtra("type", "job"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -312,7 +311,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                         public void onClick(View v) {
                             startActivity(new Intent(ChatDetailsActivity.this,
                                     PostAdActivity.class).putExtra("type", "lookforbuy"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -321,7 +320,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                         public void onClick(View v) {
                             startActivity(new Intent(ChatDetailsActivity.this,
                                     PostAdActivity.class).putExtra("type", "lookforrent"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -412,7 +411,6 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(ChatDetailsActivity.this, MainActivity.class).putExtra("fragment", "chat"));
         finish();
     }
 
@@ -421,18 +419,18 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
         switch (item.getItemId()) {
             case R.id.login:
                 startActivity(new Intent(ChatDetailsActivity.this, LoginActivity.class));
-                finish();
+
                 break;
             case R.id.home:
                 startActivity(new Intent(ChatDetailsActivity.this, MainActivity.class)
                         .putExtra("fragment","home"));
-                finish();
+
                 drawerLayout.closeDrawers();
                 break;
             case R.id.bids:
                 startActivity(new Intent(ChatDetailsActivity.this, MainActivity.class)
                         .putExtra("fragment","home"));
-                finish();
+
                 drawerLayout.closeDrawers();
                 break;
             case R.id.contact:
@@ -453,7 +451,6 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                                 editor.putString("lang", "en");
                                 editor.apply();
                                 startActivity(getIntent());
-                                finish();
                             }
                         })
                         .setNegativeButton("বাংলা", new DialogInterface.OnClickListener() {
@@ -470,7 +467,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                                 editor2.putString("lang", "bn");
                                 editor2.apply();
                                 startActivity(getIntent());
-                                finish();
+
                             }
                         })
                         .show();

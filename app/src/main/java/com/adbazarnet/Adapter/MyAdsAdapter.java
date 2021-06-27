@@ -78,7 +78,6 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 context.startActivity(new Intent(context, AdDetailsActivity.class).putExtra("id",ads.getId()));
-                ((Activity)context).finish();
             }
         });
 
@@ -87,7 +86,6 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.ViewHolder> 
             public void onClick(View v) {
                 context.startActivity(new Intent(context, EditMyAdsActivity.class).putExtra("id",ads.getId()));
                 Log.d("CheckData", String.valueOf(ads.getId()));
-                ((Activity)context).finish();
             }
         });
 

@@ -50,7 +50,6 @@ public class RelatedProductAdapter extends RecyclerView.Adapter<RelatedProductAd
         }
         holder.itemView.setOnClickListener(v -> {
             context.startActivity(new Intent(context, AdDetailsActivity.class).putExtra("id",ads.getId()));
-            ((Activity)context).finish();
         });
 
     }

@@ -103,7 +103,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                                 editor.putString("phone_number", phnEt.getText().toString());
                                 editor.commit();
                                 startActivity(getIntent());
-                                finish();
+
                             }
                         }
 
@@ -136,7 +136,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                             if (response.code() == 200) {
                                 Toast.makeText(ProfileActivity.this, "Password Updated", Toast.LENGTH_SHORT).show();
                                 startActivity(getIntent());
-                                finish();
+
                             } else if (response.code() == 400) {
                                 Toast.makeText(ProfileActivity.this, "Password Update Failed", Toast.LENGTH_SHORT).show();
                             }
@@ -170,32 +170,32 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                     case R.id.home:
                         startActivity(new Intent(ProfileActivity.this, MainActivity.class).
                                 putExtra("fragment", "home"));
-                        finish();
+
                         break;
                     case R.id.favourite:
                         if (loggedIn == 0) {
                             startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
-                            finish();
+
                         } else {
                             startActivity(new Intent(ProfileActivity.this, MainActivity.class).
                                     putExtra("fragment", "favourite"));
-                            finish();
+
                         }
                         break;
                     case R.id.chat:
                         if (loggedIn == 0) {
                             startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
-                            finish();
+
                         } else {
                             startActivity(new Intent(ProfileActivity.this, MainActivity.class).
                                     putExtra("fragment", "chat"));
-                            finish();
+
                         }
                         break;
                     case R.id.account:
                         if (loggedIn == 0) {
                             startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
-                            finish();
+
                             break;
                         } else {
                             //pop-up will be shown
@@ -213,7 +213,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                                 @Override
                                 public void onClick(View v) {
                                     dialog.dismiss();
-                                    finish();
+
                                     startActivity(getIntent());
                                 }
                             });
@@ -222,7 +222,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(ProfileActivity.this, MembershipActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -230,7 +230,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(ProfileActivity.this, MyAdsActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -239,7 +239,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                                 public void onClick(View v) {
                                     startActivity(new Intent(ProfileActivity.this, MainActivity.class).
                                             putExtra("fragment", "favourite"));
-                                    finish();
+
                                 }
                             });
 
@@ -247,7 +247,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(ProfileActivity.this, DashboardActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -255,7 +255,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(ProfileActivity.this, ProfileActivity.class));
-                                    finish();
+
                                 }
                             });
 
@@ -279,7 +279,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                                     editor.putInt("loggedIn", 0);
                                     editor.putInt("id", 0);
                                     editor.commit();
-                                    finish();
+
                                     startActivity(getIntent());
                                 }
                             });
@@ -300,7 +300,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
             public void onClick(View v) {
                 if (loggedIn == 0) {
                     startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
-                    finish();
+
                 } else {
                     dialog = new Dialog(ProfileActivity.this);
                     dialog.setContentView(R.layout.post_ad_popup);
@@ -320,7 +320,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                         public void onClick(View v) {
                             startActivity(new Intent(ProfileActivity.this,
                                     PostAdActivity.class).putExtra("type", "sell"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -329,7 +329,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                         public void onClick(View v) {
                             startActivity(new Intent(ProfileActivity.this,
                                     PostAdActivity.class).putExtra("type", "rent"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -338,7 +338,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                         public void onClick(View v) {
                             startActivity(new Intent(ProfileActivity.this,
                                     PostAdActivity.class).putExtra("type", "bid"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -347,7 +347,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                         public void onClick(View v) {
                             startActivity(new Intent(ProfileActivity.this,
                                     PostAdActivity.class).putExtra("type", "exchange"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -356,7 +356,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                         public void onClick(View v) {
                             startActivity(new Intent(ProfileActivity.this,
                                     PostAdActivity.class).putExtra("type", "job"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -365,7 +365,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                         public void onClick(View v) {
                             startActivity(new Intent(ProfileActivity.this,
                                     PostAdActivity.class).putExtra("type", "lookforbuy"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -374,7 +374,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                         public void onClick(View v) {
                             startActivity(new Intent(ProfileActivity.this,
                                     PostAdActivity.class).putExtra("type", "lookforrent"));
-                            finish();
+
                             dialog.dismiss();
                         }
                     });
@@ -513,7 +513,6 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(ProfileActivity.this, MainActivity.class).putExtra("fragment", "home"));
         finish();
     }
 
@@ -522,18 +521,18 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         switch (item.getItemId()) {
             case R.id.login:
                 startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
-                finish();
+
                 break;
             case R.id.home:
                 startActivity(new Intent(ProfileActivity.this, MainActivity.class)
                         .putExtra("fragment", "home"));
-                finish();
+
                 drawerLayout.closeDrawers();
                 break;
             case R.id.bids:
                 startActivity(new Intent(ProfileActivity.this, MainActivity.class)
                         .putExtra("fragment", "home"));
-                finish();
+
                 drawerLayout.closeDrawers();
                 break;
             case R.id.contact:
@@ -554,7 +553,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                                 editor.putString("lang", "en");
                                 editor.apply();
                                 startActivity(getIntent());
-                                finish();
+
                             }
                         })
                         .setNegativeButton("বাংলা", new DialogInterface.OnClickListener() {
@@ -571,7 +570,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                                 editor2.putString("lang", "bn");
                                 editor2.apply();
                                 startActivity(getIntent());
-                                finish();
+
                             }
                         })
                         .show();
