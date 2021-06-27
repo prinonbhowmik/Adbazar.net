@@ -582,6 +582,7 @@ finish();
                                     editor.commit();
                                     startActivity(new Intent(AdDetailsActivity.this, MainActivity.class)
                                             .putExtra("fragment", "home"));
+                                    finish();
 
                                 }
                             });

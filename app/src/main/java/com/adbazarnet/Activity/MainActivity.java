@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private int id, loggedIn;
     private Dialog dialog;
     private String loadFragment = null, lang = null;
-    private int count=0;
+    private int count=0,status;
 
     private String language;
 
@@ -464,9 +464,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent();
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                finishAffinity();
                 System.exit(0);
             }
         });
