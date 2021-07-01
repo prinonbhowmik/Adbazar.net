@@ -126,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             FragmentTransaction chat = getSupportFragmentManager().beginTransaction();
                             chat.replace(R.id.fragment_container, new ChatFragment());
                             chat.commit();
+
                         }
                         break;
                     case R.id.account:
