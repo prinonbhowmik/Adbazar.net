@@ -222,7 +222,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(ProfileActivity.this, MembershipActivity.class));
-
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -230,7 +230,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(ProfileActivity.this, MyAdsActivity.class));
-
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -239,7 +239,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                                 public void onClick(View v) {
                                     startActivity(new Intent(ProfileActivity.this, MainActivity.class).
                                             putExtra("fragment", "favourite"));
-
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -247,7 +247,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(ProfileActivity.this, DashboardActivity.class));
-
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -255,7 +255,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(ProfileActivity.this, ProfileActivity.class));
-
+                                    dialog.dismiss();
                                 }
                             });
 

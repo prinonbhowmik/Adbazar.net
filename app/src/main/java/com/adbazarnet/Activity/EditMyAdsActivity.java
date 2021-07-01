@@ -391,7 +391,7 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(EditMyAdsActivity.this, MembershipActivity.class));
-
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -399,7 +399,7 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(EditMyAdsActivity.this, MyAdsActivity.class));
-
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -408,7 +408,7 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
                                 public void onClick(View v) {
                                     startActivity(new Intent(EditMyAdsActivity.this,MainActivity.class).
                                             putExtra("fragment","favourite"));
-
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -416,7 +416,7 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(EditMyAdsActivity.this, DashboardActivity.class));
-
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -424,7 +424,7 @@ public class EditMyAdsActivity extends AppCompatActivity implements NavigationVi
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(EditMyAdsActivity.this, ProfileActivity.class));
-
+                                    dialog.dismiss();
                                 }
                             });
 

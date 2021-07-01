@@ -47,9 +47,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private EditText phoneEt,passEt;
+    private EditText phoneEt, passEt;
     private Button loginBtn;
-    private String phone,password;
+    private String phone, password;
     private BottomNavigationView chipNavigationBar;
     private CircleImageView adPost;
     private int id, loggedIn;
@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private Spinner spinner;
-    String[] languageArray = {"English","বাংলা"};
+    String[] languageArray = {"English", "বাংলা"};
     private String language;
     private ImageView navIcon;
     private Dialog dialog;
@@ -103,8 +103,8 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                 switch (item.getItemId()) {
 
                     case R.id.home:
-                        startActivity(new Intent(LoginActivity.this,MainActivity.class).
-                                putExtra("fragment","home"));
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class).
+                                putExtra("fragment", "home"));
 
                         break;
                     case R.id.favourite:
@@ -118,106 +118,105 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                         }
                         break;
                     case R.id.chat:
-                            startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-
+                        startActivity(new Intent(LoginActivity.this, LoginActivity.class));
 
 
                         break;
                     case R.id.account:
 
-                            //pop-up will be shown
-                            dialog = new Dialog(LoginActivity.this);
-                            dialog.setContentView(R.layout.profile_option_xml);
-                            Button close = dialog.findViewById(R.id.closeTv);
-                            TextView dashboard = dialog.findViewById(R.id.dashboardTv);
-                            TextView myAds = dialog.findViewById(R.id.myAdsTv);
-                            TextView favouriteTv = dialog.findViewById(R.id.favouriteTv);
-                            TextView membership = dialog.findViewById(R.id.membershipTv);
-                            TextView profile = dialog.findViewById(R.id.profileTv);
-                            TextView logout = dialog.findViewById(R.id.logoutTv);
-                            logout.setVisibility(View.GONE);
+                        //pop-up will be shown
+                        dialog = new Dialog(LoginActivity.this);
+                        dialog.setContentView(R.layout.profile_option_xml);
+                        Button close = dialog.findViewById(R.id.closeTv);
+                        TextView dashboard = dialog.findViewById(R.id.dashboardTv);
+                        TextView myAds = dialog.findViewById(R.id.myAdsTv);
+                        TextView favouriteTv = dialog.findViewById(R.id.favouriteTv);
+                        TextView membership = dialog.findViewById(R.id.membershipTv);
+                        TextView profile = dialog.findViewById(R.id.profileTv);
+                        TextView logout = dialog.findViewById(R.id.logoutTv);
+                        logout.setVisibility(View.GONE);
 
-                            close.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dialog.dismiss();
+                        close.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
 
-                                    startActivity(getIntent());
-                                }
-                            });
-
-                            membership.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-
-                                }
-                            });
-
-                            myAds.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-
-                                }
-                            });
-
-                            favouriteTv.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    /*chipNavigationBar.setSelectedItemId(R.id.favourite, true);*/
-                                    startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-
-                                }
-                            });
-
-                            dashboard.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-
-                                }
-                            });
-
-                            profile.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-
-                                }
-                            });
-
-                            logout.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Call<UserDetailsModel> call = ApiUtils.getUserService().logoutUser();
-                                    call.enqueue(new Callback<UserDetailsModel>() {
-                                        @Override
-                                        public void onResponse(Call<UserDetailsModel> call, Response<UserDetailsModel> response) {
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<UserDetailsModel> call, Throwable t) {
-
-                                        }
-                                    });
-                                    SharedPreferences sharedPreferences = getSharedPreferences("MyRef", MODE_PRIVATE);
-                                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    editor.putString("token", "");
-                                    editor.putInt("loggedIn", 0);
-                                    editor.putInt("id", 0);
-                                    editor.commit();
-
-                                    startActivity(getIntent());
-                                }
-                            });
-
-                            dialog.setCancelable(false);
-                            if (!isFinishing()) {
-                                dialog.show();
+                                startActivity(getIntent());
                             }
-                            break;
+                        });
+
+                        membership.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startActivity(new Intent(LoginActivity.this, LoginActivity.class));
+                                dialog.dismiss();
+                            }
+                        });
+
+                        myAds.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startActivity(new Intent(LoginActivity.this, LoginActivity.class));
+                                dialog.dismiss();
+                            }
+                        });
+
+                        favouriteTv.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                /*chipNavigationBar.setSelectedItemId(R.id.favourite, true);*/
+                                startActivity(new Intent(LoginActivity.this, LoginActivity.class));
+                                dialog.dismiss();
+                            }
+                        });
+
+                        dashboard.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startActivity(new Intent(LoginActivity.this, LoginActivity.class));
+                                dialog.dismiss();
+                            }
+                        });
+
+                        profile.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startActivity(new Intent(LoginActivity.this, LoginActivity.class));
+                                dialog.dismiss();
+                            }
+                        });
+
+                        logout.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Call<UserDetailsModel> call = ApiUtils.getUserService().logoutUser();
+                                call.enqueue(new Callback<UserDetailsModel>() {
+                                    @Override
+                                    public void onResponse(Call<UserDetailsModel> call, Response<UserDetailsModel> response) {
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<UserDetailsModel> call, Throwable t) {
+
+                                    }
+                                });
+                                SharedPreferences sharedPreferences = getSharedPreferences("MyRef", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("token", "");
+                                editor.putInt("loggedIn", 0);
+                                editor.putInt("id", 0);
+                                editor.commit();
+
+                                startActivity(getIntent());
+                            }
+                        });
+
+                        dialog.setCancelable(false);
+                        if (!isFinishing()) {
+                            dialog.show();
                         }
+                        break;
+                }
 
                 return false;
             }
@@ -227,93 +226,93 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
             @Override
             public void onClick(View v) {
 
-                    dialog = new Dialog(LoginActivity.this);
-                    dialog.setContentView(R.layout.post_ad_popup);
-                    ImageView closeIv = dialog.findViewById(R.id.closeIv);
-                    TextView sellItemTv = dialog.findViewById(R.id.sellItemTv);
-                    TextView rentTv = dialog.findViewById(R.id.rentTv);
-                    TextView auctionTv = dialog.findViewById(R.id.auctionTv);
-                    TextView exchangeTv = dialog.findViewById(R.id.exchangeTv);
-                    TextView jobTv = dialog.findViewById(R.id.jobTv);
-                    TextView brideTv = dialog.findViewById(R.id.brideTv);
-                    TextView lookforbuyTv = dialog.findViewById(R.id.lookforbuyTv);
-                    TextView lookforRentTv = dialog.findViewById(R.id.lookforRentTv);
-                    Button closeBtn = dialog.findViewById(R.id.closeBtn);
+                dialog = new Dialog(LoginActivity.this);
+                dialog.setContentView(R.layout.post_ad_popup);
+                ImageView closeIv = dialog.findViewById(R.id.closeIv);
+                TextView sellItemTv = dialog.findViewById(R.id.sellItemTv);
+                TextView rentTv = dialog.findViewById(R.id.rentTv);
+                TextView auctionTv = dialog.findViewById(R.id.auctionTv);
+                TextView exchangeTv = dialog.findViewById(R.id.exchangeTv);
+                TextView jobTv = dialog.findViewById(R.id.jobTv);
+                TextView brideTv = dialog.findViewById(R.id.brideTv);
+                TextView lookforbuyTv = dialog.findViewById(R.id.lookforbuyTv);
+                TextView lookforRentTv = dialog.findViewById(R.id.lookforRentTv);
+                Button closeBtn = dialog.findViewById(R.id.closeBtn);
 
-                    sellItemTv.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startActivity(new Intent(LoginActivity.this, LoginActivity.class));
+                sellItemTv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(LoginActivity.this, LoginActivity.class));
 
-                            dialog.dismiss();
-                        }
-                    });
-                    rentTv.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startActivity(new Intent(LoginActivity.this, LoginActivity.class));
+                        dialog.dismiss();
+                    }
+                });
+                rentTv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(LoginActivity.this, LoginActivity.class));
 
-                            dialog.dismiss();
-                        }
-                    });
-                    auctionTv.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startActivity(new Intent(LoginActivity.this, LoginActivity.class));
+                        dialog.dismiss();
+                    }
+                });
+                auctionTv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(LoginActivity.this, LoginActivity.class));
 
-                            dialog.dismiss();
-                        }
-                    });
-                    exchangeTv.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startActivity(new Intent(LoginActivity.this, LoginActivity.class));
+                        dialog.dismiss();
+                    }
+                });
+                exchangeTv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(LoginActivity.this, LoginActivity.class));
 
-                            dialog.dismiss();
-                        }
-                    });
-                    jobTv.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startActivity(new Intent(LoginActivity.this, LoginActivity.class));
+                        dialog.dismiss();
+                    }
+                });
+                jobTv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(LoginActivity.this, LoginActivity.class));
 
-                            dialog.dismiss();
-                        }
-                    });
-                    lookforbuyTv.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startActivity(new Intent(LoginActivity.this, LoginActivity.class));
+                        dialog.dismiss();
+                    }
+                });
+                lookforbuyTv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(LoginActivity.this, LoginActivity.class));
 
-                            dialog.dismiss();
-                        }
-                    });
-                    lookforRentTv.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startActivity(new Intent(LoginActivity.this, LoginActivity.class));
+                        dialog.dismiss();
+                    }
+                });
+                lookforRentTv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(LoginActivity.this, LoginActivity.class));
 
-                            dialog.dismiss();
-                        }
-                    });
+                        dialog.dismiss();
+                    }
+                });
 
-                    closeIv.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
+                closeIv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
 
-                        }
-                    });
+                    }
+                });
 
-                    closeBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
+                closeBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
 
-                        }
-                    });
-                    dialog.show();
-                }
+                    }
+                });
+                dialog.show();
+            }
 
         });
 
@@ -331,13 +330,13 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
     }
 
     private void userLogin(String phone, String password) {
-        Call<UserDetailsModel> call = ApiUtils.getUserService().userLogin(phone,password);
+        Call<UserDetailsModel> call = ApiUtils.getUserService().userLogin(phone, password);
         call.enqueue(new Callback<UserDetailsModel>() {
             @Override
             public void onResponse(Call<UserDetailsModel> call, Response<UserDetailsModel> response) {
-                if (response.code()==200){
+                if (response.code() == 200) {
                     String token = response.body().getToken();
-                    if (token!=null){
+                    if (token != null) {
                         int id = response.body().getUser().getId();
                         SharedPreferences sharedPreferences = getSharedPreferences("MyRef", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -349,13 +348,13 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                         editor.putString("email", response.body().getUser().getEmail());
                         editor.putString("phone_number", response.body().getUser().getPhone_number());
                         editor.commit();
-                        Log.d("ShowToken",token+","+id);
+                        Log.d("ShowToken", token + "," + id);
                         Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this,MainActivity.class).
-                                putExtra("fragment","home"));
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class).
+                                putExtra("fragment", "home"));
 
                     }
-                }else if(response.code()==400 || response.code()==404){
+                } else if (response.code() == 400 || response.code() == 404) {
                     Toast.makeText(LoginActivity.this, "Login Failed!", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -397,7 +396,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
     }
 
     public void goToSignUp(View view) {
-        startActivity(new Intent(LoginActivity.this,SignupActivity.class));
+        startActivity(new Intent(LoginActivity.this, SignupActivity.class));
 
     }
 
@@ -415,17 +414,17 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
         switch (item.getItemId()) {
             case R.id.login:
                 startActivity(new Intent(LoginActivity.this, LoginActivity.class));
-
+                drawerLayout.closeDrawers();
                 break;
             case R.id.home:
                 startActivity(new Intent(LoginActivity.this, MainActivity.class)
-                        .putExtra("fragment","home"));
+                        .putExtra("fragment", "home"));
 
                 drawerLayout.closeDrawers();
                 break;
             case R.id.bids:
                 startActivity(new Intent(LoginActivity.this, MainActivity.class)
-                        .putExtra("fragment","home"));
+                        .putExtra("fragment", "home"));
 
                 drawerLayout.closeDrawers();
                 break;

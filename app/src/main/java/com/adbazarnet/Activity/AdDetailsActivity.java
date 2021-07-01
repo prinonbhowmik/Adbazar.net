@@ -470,7 +470,7 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                     case R.id.home:
                         startActivity(new Intent(AdDetailsActivity.this, MainActivity.class)
                                 .putExtra("fragment", "home"));
-                        finish();
+
                         break;
                     case R.id.favourite:
                         if (loggedIn == 0) {
@@ -479,24 +479,21 @@ public class AdDetailsActivity extends AppCompatActivity implements NavigationVi
                         } else {
                             startActivity(new Intent(AdDetailsActivity.this, MainActivity.class)
                                     .putExtra("fragment", "favourite"));
-                            finish();
+
 
                         }
                         break;
                     case R.id.chat:
                         if (loggedIn == 0) {
                             startActivity(new Intent(AdDetailsActivity.this, LoginActivity.class));
-                            finish();
                         } else {
                             startActivity(new Intent(AdDetailsActivity.this, MainActivity.class)
                                     .putExtra("fragment", "chat"));
-                            finish();
                         }
                         break;
                     case R.id.account:
                         if (loggedIn == 0) {
                             startActivity(new Intent(AdDetailsActivity.this, LoginActivity.class));
-finish();
                             break;
                         } else {
                             //pop-up will be shown

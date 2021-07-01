@@ -148,7 +148,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(DashboardActivity.this, MembershipActivity.class));
-
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -156,7 +156,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(DashboardActivity.this, MyAdsActivity.class));
-
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -166,7 +166,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                                     /*chipNavigationBar.setSelectedItemId(R.id.favourite, true);*/
                                     startActivity(new Intent(DashboardActivity.this,MainActivity.class).
                                             putExtra("fragment","favourite"));
-
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -174,7 +174,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(DashboardActivity.this, DashboardActivity.class));
-
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -182,7 +182,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(DashboardActivity.this, ProfileActivity.class));
-
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -378,7 +378,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         switch (item.getItemId()) {
             case R.id.login:
                 startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
-
+                drawerLayout.closeDrawers();
                 break;
             case R.id.home:
                 startActivity(new Intent(DashboardActivity.this, MainActivity.class)

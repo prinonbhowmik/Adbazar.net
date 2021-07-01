@@ -156,7 +156,6 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                                 @Override
                                 public void onClick(View v) {
                                     dialog.dismiss();
-
                                     startActivity(getIntent());
                                 }
                             });
@@ -165,7 +164,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(ChatDetailsActivity.this, MembershipActivity.class));
-
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -173,7 +172,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(ChatDetailsActivity.this, MyAdsActivity.class));
-
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -183,7 +182,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                                     /*chipNavigationBar.setSelectedItemId(R.id.favourite, true);*/
                                     startActivity(new Intent(ChatDetailsActivity.this, MyAdsActivity.class)
                                             .putExtra("fragment","favourite"));
-
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -191,7 +190,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(ChatDetailsActivity.this, DashboardActivity.class));
-
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -199,7 +198,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(ChatDetailsActivity.this, ProfileActivity.class));
-
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -225,7 +224,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
                                     editor.commit();
                                     startActivity(new Intent(ChatDetailsActivity.this, MainActivity.class)
                                             .putExtra("fragment","home"));
-
+                                    dialog.dismiss();
                                 }
                             });
 
@@ -346,7 +345,6 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
     }
 
     private void getLocale() {
-
         lang = sharedPreferences.getString("lang", "");
 
         Locale locale = new Locale(lang);
@@ -419,7 +417,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements Navigation
         switch (item.getItemId()) {
             case R.id.login:
                 startActivity(new Intent(ChatDetailsActivity.this, LoginActivity.class));
-
+                drawerLayout.closeDrawers();
                 break;
             case R.id.home:
                 startActivity(new Intent(ChatDetailsActivity.this, MainActivity.class)
