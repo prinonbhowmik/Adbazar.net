@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D8D7D7"
+    tools:context=".Fragments.ContactFragment">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/theme">
+
+        <ImageView
+            android:id="@+id/fav_navIcon"
+            android:layout_width="25sp"
+            android:layout_height="25sp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_menu" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/fav_navIcon"
+            android:layout_toRightOf="@+id/fav_navIcon"
+            android:fontFamily="@font/comfortaa"
+            android:gravity="center_vertical"
+            android:text="AdBazar.net"
+            android:textColor="@color/white"
+            android:textSize="21sp" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/layout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/category_layout_design"
+                android:backgroundTint="#fff">
+
+                <TextView
+                    android:id="@+id/header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/category_header_layout"
+                    android:fontFamily="@font/roboto"
+                    android:padding="10dp"
+                    android:text="Contact Us"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/text1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/header"
+                    android:layout_margin="5dp"
+                    android:lineSpacingExtra="5dp"
+                    android:padding="5dp"
+                    android:text="If you did not find the answer to your question or problem, please get in touch with us using the form below and we will respond to your message as soon as possible."
+                    android:textColor="#6E6A6A"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/text2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text1"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:drawableLeft="@drawable/ic_baseline_email_24"
+                    android:text="myopenbd@gmail.com"
+                    android:textColor="#5F5F5F"
+                    android:textSize="16sp" />
+
+                <View
+                    android:id="@+id/v1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/text2"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#8E8383" />
+
+                <TextView
+                    android:id="@+id/text3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/v1"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:drawableLeft="@drawable/ic_baseline_call_24"
+                    android:text="+88017xxxxxxxx"
+                    android:textColor="#5F5F5F"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/header2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text3"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/category_header_layout"
+                    android:fontFamily="@font/roboto"
+                    android:padding="10dp"
+                    android:text="Drop us a message"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/nameEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/header2"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/edittex_design"
+                    android:hint=" Enter Your Name"
+                    android:textColorHint="#989393"
+                    android:padding="10dp"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/emailEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/nameEt"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/edittex_design"
+                    android:hint=" Enter Your email"
+                    android:textColorHint="#989393"
+                    android:padding="10dp"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/msgEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/emailEt"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/edittex_design"
+                    android:hint=" Write your message"
+                    android:textColorHint="#989393"
+                    android:padding="10dp"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/submitBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/msgEt"
+                    android:layout_margin="10dp"
+                    android:backgroundTint="#7B7F82"
+                    android:textColorHint="#989393"
+                    android:padding="5dp"
+                    android:text="Submit"
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout1"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="100dp"
+                android:background="@drawable/category_layout_design">
+
+                <TextView
+                    android:id="@+id/infoHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/category_header_layout"
+                    android:fontFamily="@font/roboto"
+                    android:padding="10dp"
+                    android:text=" How To Sell Quickly?"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/help1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/infoHeader"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="25dp"
+                    android:drawableLeft="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:fontFamily="@font/roboto"
+                    android:text="  Use a brief title and description of the item."
+                    android:textColor="#000"
+                    android:textFontWeight="400"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/help2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/help1"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="25dp"
+                    android:drawableLeft="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:fontFamily="@font/roboto"
+                    android:text="  Make sure you post in the correct category"
+                    android:textColor="#000"
+                    android:textFontWeight="400"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/help3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/help2"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="25dp"
+                    android:drawableLeft="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:fontFamily="@font/roboto"
+                    android:text="  Add nice photos to your ad"
+                    android:textColor="#000"
+                    android:textFontWeight="400"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/help4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/help3"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="25dp"
+                    android:drawableLeft="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:fontFamily="@font/roboto"
+                    android:text="  Put a reasonable price"
+                    android:textColor="#000"
+                    android:textFontWeight="400"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/help5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/help4"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="25dp"
+                    android:drawableLeft="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:fontFamily="@font/roboto"
+                    android:text="  Check the item before publish"
+                    android:textColor="#000"
+                    android:textFontWeight="400"
+                    android:textSize="15sp" />
+
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

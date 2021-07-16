@@ -43,4 +43,6 @@
     <string name="forget_password">Forget Password ?</string>
     <string name="reset_here">  Reset Here</string>
     <string name="langugae_question">Change language</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

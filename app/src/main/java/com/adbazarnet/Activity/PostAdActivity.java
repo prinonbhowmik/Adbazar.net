@@ -398,6 +398,7 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
             @Override
             public void onClick(View v) {
                 String adTitle = titleEt.getText().toString();
+                String location = locationTv.getText().toString();
 
                 if (conditionSpinner.getVisibility() == View.VISIBLE) {
                     condition = conditionSpinner.getText().toString();
@@ -521,259 +522,1164 @@ public class PostAdActivity extends AppCompatActivity implements NavigationView.
                         if (ad_Type.equals("electronics")) {
                             if (TextUtils.isEmpty(adTitle)) {
                                 titleEt.setError("Ad title");
+                                Toast.makeText(PostAdActivity.this, "Need Ad title", Toast.LENGTH_LONG).show();
+                            }
+                            else if(location.equals(" Select Location")){
+                                Toast.makeText(PostAdActivity.this, "Select Location", Toast.LENGTH_LONG).show();
+                            }else if(img1.getDrawable().getConstantState()==getResources().
+                                    getDrawable(R.drawable.ic_baseline_image_24).getConstantState()){
+                                Toast.makeText(PostAdActivity.this, "Upload Image ", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(price)) {
                                 priceEt.setError("Enter price");
+                                Toast.makeText(PostAdActivity.this, "Provide Price", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(description)) {
                                 descriptionEt.setError("Enter description");
+                                Toast.makeText(PostAdActivity.this, "Provide description", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(phn1)) {
                                 Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
                             } else {
                                 model = new PostAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers, description,
                                         locationId, categoryId, imgArray, negotiable, ad_Type, hidePhone, true);
                                 Log.d("CheckCall", "Yes");
+                                Call<AdDetails> call = ApiUtils.getUserService().postsellAd("Token " + token, model);
+                                call.enqueue(new Callback<AdDetails>() {
+                                    @Override
+                                    public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
+                                        if (response.code() == 201) {
+
+                                        }
+                                        else {
+                                            Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<AdDetails> call, Throwable t) {
+
+                                    }
+                                });
+
+                                ProgressDialog progressDialog = new ProgressDialog(PostAdActivity.this);
+                                progressDialog.setTitle("Uploading");
+                                progressDialog.setMessage("Loading...");
+                                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                progressDialog.setCancelable(false);
+                                progressDialog.show();
+                                final Handler handler = new Handler();
+                                final Runnable runnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (progressDialog.isShowing()) {
+                                            progressDialog.dismiss();
+                                            Dialog dialog2 = new Dialog(PostAdActivity.this);
+                                            dialog2.setContentView(R.layout.success_popup);
+                                            dialog2.setCancelable(false);
+                                            dialog2.show();
+                                            TextView textView = dialog2.findViewById(R.id.textview);
+                                            Button okBtn = dialog2.findViewById(R.id.okBtn);
+                                            textView.setText("Ad created Successfully");
+
+                                            okBtn.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    dialog2.dismiss();
+                                                    Intent intent = new Intent(PostAdActivity.this, MainActivity.class);
+                                                    intent.putExtra("fragment", "home");
+                                                    startActivity(intent);
+
+                                                }
+                                            });
+                                        }
+                                    }
+                                };
+
+                                progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialog) {
+                                        handler.removeCallbacks(runnable);
+                                    }
+                                });
+
+                                handler.postDelayed(runnable, 10000);
                             }
                         }
                         else if (ad_Type.equals("vehicle")) {
                             if (TextUtils.isEmpty(adTitle)) {
                                 titleEt.setError("Ad title");
+                                Toast.makeText(PostAdActivity.this, "Provide Ad title", Toast.LENGTH_LONG).show();
+                            }else if(location.equals(" Select Location")){
+                                Toast.makeText(PostAdActivity.this, "Select Location", Toast.LENGTH_LONG).show();
+                            }else if(img1.getDrawable().getConstantState()==getResources().
+                                    getDrawable(R.drawable.ic_baseline_image_24).getConstantState()){
+                                Toast.makeText(PostAdActivity.this, "Upload Image ", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(price)) {
                                 priceEt.setError("Enter price");
+                                Toast.makeText(PostAdActivity.this, "Provide price", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(description)) {
                                 descriptionEt.setError("Enter description");
+                                Toast.makeText(PostAdActivity.this, "Provide description", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(phn1)) {
                                 Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
                             }
                             model = new PostAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers,
                                     description, locationId, modelYear, mileage, categoryId, imgArray,
                                     negotiable, ad_Type, hidePhone, true);
+                            Call<AdDetails> call = ApiUtils.getUserService().postsellAd("Token " + token, model);
+                            call.enqueue(new Callback<AdDetails>() {
+                                @Override
+                                public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
+                                    if (response.code() == 201) {
+
+                                    }
+                                    else {
+                                        Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<AdDetails> call, Throwable t) {
+
+                                }
+                            });
+
+                            ProgressDialog progressDialog = new ProgressDialog(PostAdActivity.this);
+                            progressDialog.setTitle("Uploading");
+                            progressDialog.setMessage("Loading...");
+                            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                            progressDialog.setCancelable(false);
+                            progressDialog.show();
+                            final Handler handler = new Handler();
+                            final Runnable runnable = new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (progressDialog.isShowing()) {
+                                        progressDialog.dismiss();
+                                        Dialog dialog2 = new Dialog(PostAdActivity.this);
+                                        dialog2.setContentView(R.layout.success_popup);
+                                        dialog2.setCancelable(false);
+                                        dialog2.show();
+                                        TextView textView = dialog2.findViewById(R.id.textview);
+                                        Button okBtn = dialog2.findViewById(R.id.okBtn);
+                                        textView.setText("Ad created Successfully");
+
+                                        okBtn.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                dialog2.dismiss();
+                                                Intent intent = new Intent(PostAdActivity.this, MainActivity.class);
+                                                intent.putExtra("fragment", "home");
+                                                startActivity(intent);
+
+                                            }
+                                        });
+                                    }
+                                }
+                            };
+
+                            progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                @Override
+                                public void onDismiss(DialogInterface dialog) {
+                                    handler.removeCallbacks(runnable);
+                                }
+                            });
+
+                            handler.postDelayed(runnable, 10000);
                         }
                         else if (ad_Type.equals("property")) {
                             if (TextUtils.isEmpty(adTitle)) {
                                 titleEt.setError("Ad title");
+                                Toast.makeText(PostAdActivity.this, "Provide Ad title", Toast.LENGTH_LONG).show();
+                            }else if(location.equals(" Select Location")){
+                                Toast.makeText(PostAdActivity.this, "Select Location", Toast.LENGTH_LONG).show();
+                            }else if(img1.getDrawable().getConstantState()==getResources().
+                                    getDrawable(R.drawable.ic_baseline_image_24).getConstantState()){
+                                Toast.makeText(PostAdActivity.this, "Upload Image ", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(price)) {
                                 priceEt.setError("Enter price");
+                                Toast.makeText(PostAdActivity.this, "Provide price", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(description)) {
                                 descriptionEt.setError("Enter description");
+                                Toast.makeText(PostAdActivity.this, "Provide description", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(phn1)) {
                                 Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
                             } else {
                                 model = new PostAdModel(adTitle, price, otherInfo, phoneNumbers, description,
                                         locationId, address, land, categoryId, imgArray, negotiable,
                                         true, ad_Type, hidePhone);
+                                Call<AdDetails> call = ApiUtils.getUserService().postsellAd("Token " + token, model);
+                                call.enqueue(new Callback<AdDetails>() {
+                                    @Override
+                                    public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
+                                        if (response.code() == 201) {
+
+                                        }
+                                        else {
+                                            Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<AdDetails> call, Throwable t) {
+
+                                    }
+                                });
+
+                                ProgressDialog progressDialog = new ProgressDialog(PostAdActivity.this);
+                                progressDialog.setTitle("Uploading");
+                                progressDialog.setMessage("Loading...");
+                                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                progressDialog.setCancelable(false);
+                                progressDialog.show();
+                                final Handler handler = new Handler();
+                                final Runnable runnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (progressDialog.isShowing()) {
+                                            progressDialog.dismiss();
+                                            Dialog dialog2 = new Dialog(PostAdActivity.this);
+                                            dialog2.setContentView(R.layout.success_popup);
+                                            dialog2.setCancelable(false);
+                                            dialog2.show();
+                                            TextView textView = dialog2.findViewById(R.id.textview);
+                                            Button okBtn = dialog2.findViewById(R.id.okBtn);
+                                            textView.setText("Ad created Successfully");
+
+                                            okBtn.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    dialog2.dismiss();
+                                                    Intent intent = new Intent(PostAdActivity.this, MainActivity.class);
+                                                    intent.putExtra("fragment", "home");
+                                                    startActivity(intent);
+
+                                                }
+                                            });
+                                        }
+                                    }
+                                };
+
+                                progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialog) {
+                                        handler.removeCallbacks(runnable);
+                                    }
+                                });
+
+                                handler.postDelayed(runnable, 10000);
                             }
                         }
                         else if (ad_Type.equals("general")) {
                             if (TextUtils.isEmpty(adTitle)) {
                                 titleEt.setError("Ad title");
+                                Toast.makeText(PostAdActivity.this, "Provide Ad title", Toast.LENGTH_LONG).show();
+                            }else if(location.equals(" Select Location")){
+                                Toast.makeText(PostAdActivity.this, "Select Location", Toast.LENGTH_LONG).show();
+                            }else if(img1.getDrawable().getConstantState()==getResources().
+                                    getDrawable(R.drawable.ic_baseline_image_24).getConstantState()){
+                                Toast.makeText(PostAdActivity.this, "Upload Image ", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(price)) {
                                 priceEt.setError("Enter price");
+                                Toast.makeText(PostAdActivity.this, "Provide price", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(description)) {
                                 descriptionEt.setError("Enter description");
+                                Toast.makeText(PostAdActivity.this, "Provide description", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(phn1)) {
                                 Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
                             } else {
                                 model = new PostAdModel(adTitle, price, otherInfo, phoneNumbers, description,
                                         locationId, categoryId, imgArray, negotiable, ad_Type, hidePhone,
                                         true);
+                                Call<AdDetails> call = ApiUtils.getUserService().postsellAd("Token " + token, model);
+                                call.enqueue(new Callback<AdDetails>() {
+                                    @Override
+                                    public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
+                                        if (response.code() == 201) {
+
+                                        }
+                                        else {
+                                            Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<AdDetails> call, Throwable t) {
+
+                                    }
+                                });
+
+                                ProgressDialog progressDialog = new ProgressDialog(PostAdActivity.this);
+                                progressDialog.setTitle("Uploading");
+                                progressDialog.setMessage("Loading...");
+                                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                progressDialog.setCancelable(false);
+                                progressDialog.show();
+                                final Handler handler = new Handler();
+                                final Runnable runnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (progressDialog.isShowing()) {
+                                            progressDialog.dismiss();
+                                            Dialog dialog2 = new Dialog(PostAdActivity.this);
+                                            dialog2.setContentView(R.layout.success_popup);
+                                            dialog2.setCancelable(false);
+                                            dialog2.show();
+                                            TextView textView = dialog2.findViewById(R.id.textview);
+                                            Button okBtn = dialog2.findViewById(R.id.okBtn);
+                                            textView.setText("Ad created Successfully");
+
+                                            okBtn.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    dialog2.dismiss();
+                                                    Intent intent = new Intent(PostAdActivity.this, MainActivity.class);
+                                                    intent.putExtra("fragment", "home");
+                                                    startActivity(intent);
+
+                                                }
+                                            });
+                                        }
+                                    }
+                                };
+
+                                progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialog) {
+                                        handler.removeCallbacks(runnable);
+                                    }
+                                });
+
+                                handler.postDelayed(runnable, 10000);
                             }
                         }
                         else if (ad_Type.equals("service")) {
                             if (TextUtils.isEmpty(adTitle)) {
                                 titleEt.setError("Ad title");
+                                Toast.makeText(PostAdActivity.this, "Provide Ad title", Toast.LENGTH_LONG).show();
+                            }else if(location.equals(" Select Location")){
+                                Toast.makeText(PostAdActivity.this, "Select Location", Toast.LENGTH_LONG).show();
+                            }else if(img1.getDrawable().getConstantState()==getResources().
+                                    getDrawable(R.drawable.ic_baseline_image_24).getConstantState()){
+                                Toast.makeText(PostAdActivity.this, "Upload Image ", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(price)) {
                                 priceEt.setError("Enter price");
+                                Toast.makeText(PostAdActivity.this, "Provide price", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(description)) {
                                 descriptionEt.setError("Enter description");
+                                Toast.makeText(PostAdActivity.this, "Provide description", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(phn1)) {
                                 Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
                             } else {
                                 model = new PostAdModel(adTitle, price, otherInfo, phoneNumbers, description, locationId,
                                         address, service, categoryId, imgArray, negotiable, ad_Type, hidePhone, true);
+                                Call<AdDetails> call = ApiUtils.getUserService().postsellAd("Token " + token, model);
+                                call.enqueue(new Callback<AdDetails>() {
+                                    @Override
+                                    public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
+                                        if (response.code() == 201) {
+
+                                        }
+                                        else {
+                                            Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<AdDetails> call, Throwable t) {
+
+                                    }
+                                });
+
+                                ProgressDialog progressDialog = new ProgressDialog(PostAdActivity.this);
+                                progressDialog.setTitle("Uploading");
+                                progressDialog.setMessage("Loading...");
+                                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                progressDialog.setCancelable(false);
+                                progressDialog.show();
+                                final Handler handler = new Handler();
+                                final Runnable runnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (progressDialog.isShowing()) {
+                                            progressDialog.dismiss();
+                                            Dialog dialog2 = new Dialog(PostAdActivity.this);
+                                            dialog2.setContentView(R.layout.success_popup);
+                                            dialog2.setCancelable(false);
+                                            dialog2.show();
+                                            TextView textView = dialog2.findViewById(R.id.textview);
+                                            Button okBtn = dialog2.findViewById(R.id.okBtn);
+                                            textView.setText("Ad created Successfully");
+
+                                            okBtn.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    dialog2.dismiss();
+                                                    Intent intent = new Intent(PostAdActivity.this, MainActivity.class);
+                                                    intent.putExtra("fragment", "home");
+                                                    startActivity(intent);
+
+                                                }
+                                            });
+                                        }
+                                    }
+                                };
+
+                                progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialog) {
+                                        handler.removeCallbacks(runnable);
+                                    }
+                                });
+
+                                handler.postDelayed(runnable, 10000);
                             }
                         }
                         else if (ad_Type.equals("job")) {
                             if (TextUtils.isEmpty(adTitle)) {
                                 titleEt.setError("Ad title");
+                                Toast.makeText(PostAdActivity.this, "Provide Ad Title", Toast.LENGTH_SHORT).show();
+                            }else if(location.equals(" Select Location")){
+                                Toast.makeText(PostAdActivity.this, "Select Location", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(deadline)) {
                                 deadlineEt.setError("Enter deadline");
+                                Toast.makeText(PostAdActivity.this, "Provide deadline", Toast.LENGTH_SHORT).show();
                             } else if (TextUtils.isEmpty(description)) {
                                 descriptionEt.setError("Enter description");
+                                Toast.makeText(PostAdActivity.this, "Provide Description", Toast.LENGTH_SHORT).show();
                             } else {
                                 vacancy = Integer.parseInt(vacancyEt.getText().toString());
                                 model = new PostAdModel(adTitle, true, jobType, vacancy, requirment, deadline, employeer, website
                                         , otherInfo, description, locationId, address, categoryId, imgArray, ad_Type);
                                 Log.d("jobData", adTitle + "," + jobType + "," + vacancy + "," + requirment + "," + deadline + "," + employeer + "," + website
                                         + " ," + otherInfo + "," + description + "," + locationId + "," + address + "," + categoryId + "," + imgArray + "," + ad_Type);
+                                Call<AdDetails> call = ApiUtils.getUserService().postsellAd("Token " + token, model);
+                                call.enqueue(new Callback<AdDetails>() {
+                                    @Override
+                                    public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
+                                        if (response.code() == 201) {
+
+                                        }
+                                        else {
+                                            Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<AdDetails> call, Throwable t) {
+
+                                    }
+                                });
+
+                                ProgressDialog progressDialog = new ProgressDialog(PostAdActivity.this);
+                                progressDialog.setTitle("Uploading");
+                                progressDialog.setMessage("Loading...");
+                                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                progressDialog.setCancelable(false);
+                                progressDialog.show();
+                                final Handler handler = new Handler();
+                                final Runnable runnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (progressDialog.isShowing()) {
+                                            progressDialog.dismiss();
+                                            Dialog dialog2 = new Dialog(PostAdActivity.this);
+                                            dialog2.setContentView(R.layout.success_popup);
+                                            dialog2.setCancelable(false);
+                                            dialog2.show();
+                                            TextView textView = dialog2.findViewById(R.id.textview);
+                                            Button okBtn = dialog2.findViewById(R.id.okBtn);
+                                            textView.setText("Ad created Successfully");
+
+                                            okBtn.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    dialog2.dismiss();
+                                                    Intent intent = new Intent(PostAdActivity.this, MainActivity.class);
+                                                    intent.putExtra("fragment", "home");
+                                                    startActivity(intent);
+
+                                                }
+                                            });
+                                        }
+                                    }
+                                };
+
+                                progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialog) {
+                                        handler.removeCallbacks(runnable);
+                                    }
+                                });
+
+                                handler.postDelayed(runnable, 10000);
                             }
                         }
                     }
-
-                    else if (postType.equals("rent") || postType.equals("lookforbuy")
-                            || postType.equals("lookforrent")) {
+                    else if (postType.equals("rent") || postType.equals("lookforbuy") || postType.equals("lookforrent")) {
                         if (ad_Type.equals("electronics")) {
                             if (TextUtils.isEmpty(adTitle)) {
                                 titleEt.setError("Ad title");
+                                Toast.makeText(PostAdActivity.this, "Provide Ad title", Toast.LENGTH_LONG).show();
+                            }else if(location.equals(" Select Location")){
+                                Toast.makeText(PostAdActivity.this, "Select Location", Toast.LENGTH_LONG).show();
+                            }else if(img1.getDrawable().getConstantState()==getResources().
+                                    getDrawable(R.drawable.ic_baseline_image_24).getConstantState()){
+                                Toast.makeText(PostAdActivity.this, "Upload Image ", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(price)) {
                                 priceEt.setError("Enter price");
+                                Toast.makeText(PostAdActivity.this, "Provide price", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(description)) {
                                 descriptionEt.setError("Enter description");
+                                Toast.makeText(PostAdActivity.this, "Provide description", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(phn1)) {
                                 Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
                             } else {
                                 model = new PostAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers, description,
                                         locationId, categoryId, imgArray, negotiable, ad_Type, hidePhone, false);
+                                Call<AdDetails> call = ApiUtils.getUserService().postsellAd("Token " + token, model);
+                                call.enqueue(new Callback<AdDetails>() {
+                                    @Override
+                                    public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
+                                        if (response.code() == 201) {
+
+                                        }
+                                        else {
+                                            Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<AdDetails> call, Throwable t) {
+
+                                    }
+                                });
+
+                                ProgressDialog progressDialog = new ProgressDialog(PostAdActivity.this);
+                                progressDialog.setTitle("Uploading");
+                                progressDialog.setMessage("Loading...");
+                                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                progressDialog.setCancelable(false);
+                                progressDialog.show();
+                                final Handler handler = new Handler();
+                                final Runnable runnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (progressDialog.isShowing()) {
+                                            progressDialog.dismiss();
+                                            Dialog dialog2 = new Dialog(PostAdActivity.this);
+                                            dialog2.setContentView(R.layout.success_popup);
+                                            dialog2.setCancelable(false);
+                                            dialog2.show();
+                                            TextView textView = dialog2.findViewById(R.id.textview);
+                                            Button okBtn = dialog2.findViewById(R.id.okBtn);
+                                            textView.setText("Ad created Successfully");
+
+                                            okBtn.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    dialog2.dismiss();
+                                                    Intent intent = new Intent(PostAdActivity.this, MainActivity.class);
+                                                    intent.putExtra("fragment", "home");
+                                                    startActivity(intent);
+
+                                                }
+                                            });
+                                        }
+                                    }
+                                };
+
+                                progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialog) {
+                                        handler.removeCallbacks(runnable);
+                                    }
+                                });
+
+                                handler.postDelayed(runnable, 10000);
                             }
-                        } else if (ad_Type.equals("vehicle")) {
+                        }
+                        else if (ad_Type.equals("vehicle")) {
                             if (TextUtils.isEmpty(adTitle)) {
                                 titleEt.setError("Ad title");
+                                Toast.makeText(PostAdActivity.this, "Provide Ad title", Toast.LENGTH_LONG).show();
+                            }else if(location.equals(" Select Location")){
+                                Toast.makeText(PostAdActivity.this, "Select Location", Toast.LENGTH_LONG).show();
+                            }else if(img1.getDrawable().getConstantState()==getResources().
+                                    getDrawable(R.drawable.ic_baseline_image_24).getConstantState()){
+                                Toast.makeText(PostAdActivity.this, "Upload Image ", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(price)) {
                                 priceEt.setError("Enter price");
+                                Toast.makeText(PostAdActivity.this, "Provide price", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(description)) {
                                 descriptionEt.setError("Enter description");
+                                Toast.makeText(PostAdActivity.this, "Provide description", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(phn1)) {
                                 Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
                             } else {
                                 model = new PostAdModel(adTitle, condition, price, warranty, otherInfo, phoneNumbers, description,
                                         locationId, modelYear, mileage, categoryId, imgArray, negotiable, ad_Type, hidePhone, false);
+                                Call<AdDetails> call = ApiUtils.getUserService().postsellAd("Token " + token, model);
+                                call.enqueue(new Callback<AdDetails>() {
+                                    @Override
+                                    public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
+                                        if (response.code() == 201) {
+
+                                        }
+                                        else {
+                                            Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<AdDetails> call, Throwable t) {
+
+                                    }
+                                });
+
+                                ProgressDialog progressDialog = new ProgressDialog(PostAdActivity.this);
+                                progressDialog.setTitle("Uploading");
+                                progressDialog.setMessage("Loading...");
+                                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                progressDialog.setCancelable(false);
+                                progressDialog.show();
+                                final Handler handler = new Handler();
+                                final Runnable runnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (progressDialog.isShowing()) {
+                                            progressDialog.dismiss();
+                                            Dialog dialog2 = new Dialog(PostAdActivity.this);
+                                            dialog2.setContentView(R.layout.success_popup);
+                                            dialog2.setCancelable(false);
+                                            dialog2.show();
+                                            TextView textView = dialog2.findViewById(R.id.textview);
+                                            Button okBtn = dialog2.findViewById(R.id.okBtn);
+                                            textView.setText("Ad created Successfully");
+
+                                            okBtn.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    dialog2.dismiss();
+                                                    Intent intent = new Intent(PostAdActivity.this, MainActivity.class);
+                                                    intent.putExtra("fragment", "home");
+                                                    startActivity(intent);
+
+                                                }
+                                            });
+                                        }
+                                    }
+                                };
+
+                                progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialog) {
+                                        handler.removeCallbacks(runnable);
+                                    }
+                                });
+
+                                handler.postDelayed(runnable, 10000);
                             }
-                        } else if (ad_Type.equals("property")) {
+                        }
+                        else if (ad_Type.equals("property")) {
                             if (TextUtils.isEmpty(adTitle)) {
                                 titleEt.setError("Ad title");
+                                Toast.makeText(PostAdActivity.this, "Provide Ad title", Toast.LENGTH_LONG).show();
+                            }else if(location.equals(" Select Location")){
+                                Toast.makeText(PostAdActivity.this, "Select Location", Toast.LENGTH_LONG).show();
+                            }else if(img1.getDrawable().getConstantState()==getResources().
+                                    getDrawable(R.drawable.ic_baseline_image_24).getConstantState()){
+                                Toast.makeText(PostAdActivity.this, "Upload Image ", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(price)) {
                                 priceEt.setError("Enter price");
+                                Toast.makeText(PostAdActivity.this, "Provide price", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(description)) {
                                 descriptionEt.setError("Enter description");
+                                Toast.makeText(PostAdActivity.this, "Provide description", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(phn1)) {
                                 Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
-                            } else {
+                            }
+                            else {
                                 model = new PostAdModel(adTitle, price, otherInfo, phoneNumbers, description,
                                         locationId, address, land, categoryId, imgArray, negotiable, ad_Type, hidePhone,
                                         false);
-                            }
-                        } else if (ad_Type.equals("general")) {
+                                Call<AdDetails> call = ApiUtils.getUserService().postsellAd("Token " + token, model);
+                                call.enqueue(new Callback<AdDetails>() {
+                                    @Override
+                                    public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
+                                        if (response.code() == 201) {
 
+                                        }
+                                        else {
+                                            Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<AdDetails> call, Throwable t) {
+
+                                    }
+                                });
+
+                                ProgressDialog progressDialog = new ProgressDialog(PostAdActivity.this);
+                                progressDialog.setTitle("Uploading");
+                                progressDialog.setMessage("Loading...");
+                                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                progressDialog.setCancelable(false);
+                                progressDialog.show();
+                                final Handler handler = new Handler();
+                                final Runnable runnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (progressDialog.isShowing()) {
+                                            progressDialog.dismiss();
+                                            Dialog dialog2 = new Dialog(PostAdActivity.this);
+                                            dialog2.setContentView(R.layout.success_popup);
+                                            dialog2.setCancelable(false);
+                                            dialog2.show();
+                                            TextView textView = dialog2.findViewById(R.id.textview);
+                                            Button okBtn = dialog2.findViewById(R.id.okBtn);
+                                            textView.setText("Ad created Successfully");
+
+                                            okBtn.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    dialog2.dismiss();
+                                                    Intent intent = new Intent(PostAdActivity.this, MainActivity.class);
+                                                    intent.putExtra("fragment", "home");
+                                                    startActivity(intent);
+
+                                                }
+                                            });
+                                        }
+                                    }
+                                };
+
+                                progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialog) {
+                                        handler.removeCallbacks(runnable);
+                                    }
+                                });
+
+                                handler.postDelayed(runnable, 10000);
+                            }
+                        }
+                        else if (ad_Type.equals("general")) {
                             if (TextUtils.isEmpty(adTitle)) {
                                 titleEt.setError("Ad title");
-                            } else if (TextUtils.isEmpty(price)) {
+                                Toast.makeText(PostAdActivity.this, "Provide Ad title", Toast.LENGTH_LONG).show();
+                            }else if(location.equals(" Select Location")){
+                                Toast.makeText(PostAdActivity.this, "Select Location", Toast.LENGTH_LONG).show();
+                            }else if(img1.getDrawable().getConstantState()==getResources().
+                                    getDrawable(R.drawable.ic_baseline_image_24).getConstantState()){
+                                Toast.makeText(PostAdActivity.this, "Upload Image ", Toast.LENGTH_LONG).show();
+                            }
+                            else if (TextUtils.isEmpty(price)) {
                                 priceEt.setError("Enter price");
+                                Toast.makeText(PostAdActivity.this, "Provide price", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(description)) {
                                 descriptionEt.setError("Enter description");
+                                Toast.makeText(PostAdActivity.this, "Provide description", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(phn1)) {
                                 Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
-                            } else {
+                            }
+                            else {
                                 model = new PostAdModel(adTitle, price, otherInfo, phoneNumbers, description,
                                         locationId, categoryId, imgArray, negotiable, ad_Type, hidePhone,
                                         false);
+                                Call<AdDetails> call = ApiUtils.getUserService().postsellAd("Token " + token, model);
+                                call.enqueue(new Callback<AdDetails>() {
+                                    @Override
+                                    public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
+                                        if (response.code() == 201) {
+
+                                        }
+                                        else {
+                                            Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<AdDetails> call, Throwable t) {
+
+                                    }
+                                });
+
+                                ProgressDialog progressDialog = new ProgressDialog(PostAdActivity.this);
+                                progressDialog.setTitle("Uploading");
+                                progressDialog.setMessage("Loading...");
+                                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                progressDialog.setCancelable(false);
+                                progressDialog.show();
+                                final Handler handler = new Handler();
+                                final Runnable runnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (progressDialog.isShowing()) {
+                                            progressDialog.dismiss();
+                                            Dialog dialog2 = new Dialog(PostAdActivity.this);
+                                            dialog2.setContentView(R.layout.success_popup);
+                                            dialog2.setCancelable(false);
+                                            dialog2.show();
+                                            TextView textView = dialog2.findViewById(R.id.textview);
+                                            Button okBtn = dialog2.findViewById(R.id.okBtn);
+                                            textView.setText("Ad created Successfully");
+
+                                            okBtn.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    dialog2.dismiss();
+                                                    Intent intent = new Intent(PostAdActivity.this, MainActivity.class);
+                                                    intent.putExtra("fragment", "home");
+                                                    startActivity(intent);
+
+                                                }
+                                            });
+                                        }
+                                    }
+                                };
+
+                                progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialog) {
+                                        handler.removeCallbacks(runnable);
+                                    }
+                                });
+
+                                handler.postDelayed(runnable, 10000);
                             }
-                        } else if (ad_Type.equals("service")) {
-                            model = new PostAdModel(adTitle, price, otherInfo, phoneNumbers, description, locationId, address,
-                                    service, categoryId, imgArray, negotiable, ad_Type, hidePhone, false);
-                        } else if (ad_Type.equals("job")) {
+                        }
+                        else if (ad_Type.equals("service")) {
                             if (TextUtils.isEmpty(adTitle)) {
                                 titleEt.setError("Ad title");
-                            } else if (TextUtils.isEmpty(deadline)) {
-                                deadlineEt.setError("Enter deadline");
+                                Toast.makeText(PostAdActivity.this, "Provide Ad title", Toast.LENGTH_LONG).show();
+                            }else if(location.equals(" Select Location")){
+                                Toast.makeText(PostAdActivity.this, "Select Location", Toast.LENGTH_LONG).show();
+                            }else if(img1.getDrawable().getConstantState()==getResources().
+                                    getDrawable(R.drawable.ic_baseline_image_24).getConstantState()){
+                                Toast.makeText(PostAdActivity.this, "Upload Image ", Toast.LENGTH_LONG).show();
+                            } else if (TextUtils.isEmpty(price)) {
+                                priceEt.setError("Enter price");
+                                Toast.makeText(PostAdActivity.this, "Provide price", Toast.LENGTH_LONG).show();
                             } else if (TextUtils.isEmpty(description)) {
                                 descriptionEt.setError("Enter description");
+                                Toast.makeText(PostAdActivity.this, "Provide description", Toast.LENGTH_LONG).show();
+                            } else if (TextUtils.isEmpty(phn1)) {
+                                Toast.makeText(PostAdActivity.this, "Provide one phone number", Toast.LENGTH_LONG).show();
+                            }
+                            else{
+                                model = new PostAdModel(adTitle, price, otherInfo, phoneNumbers, description, locationId, address,
+                                        service, categoryId, imgArray, negotiable, ad_Type, hidePhone, false);
+                                Call<AdDetails> call = ApiUtils.getUserService().postsellAd("Token " + token, model);
+                                call.enqueue(new Callback<AdDetails>() {
+                                    @Override
+                                    public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
+                                        if (response.code() == 201) {
+
+                                        }
+                                        else {
+                                            Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<AdDetails> call, Throwable t) {
+
+                                    }
+                                });
+
+                                ProgressDialog progressDialog = new ProgressDialog(PostAdActivity.this);
+                                progressDialog.setTitle("Uploading");
+                                progressDialog.setMessage("Loading...");
+                                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                progressDialog.setCancelable(false);
+                                progressDialog.show();
+                                final Handler handler = new Handler();
+                                final Runnable runnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (progressDialog.isShowing()) {
+                                            progressDialog.dismiss();
+                                            Dialog dialog2 = new Dialog(PostAdActivity.this);
+                                            dialog2.setContentView(R.layout.success_popup);
+                                            dialog2.setCancelable(false);
+                                            dialog2.show();
+                                            TextView textView = dialog2.findViewById(R.id.textview);
+                                            Button okBtn = dialog2.findViewById(R.id.okBtn);
+                                            textView.setText("Ad created Successfully");
+
+                                            okBtn.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    dialog2.dismiss();
+                                                    Intent intent = new Intent(PostAdActivity.this, MainActivity.class);
+                                                    intent.putExtra("fragment", "home");
+                                                    startActivity(intent);
+
+                                                }
+                                            });
+                                        }
+                                    }
+                                };
+
+                                progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialog) {
+                                        handler.removeCallbacks(runnable);
+                                    }
+                                });
+
+                                handler.postDelayed(runnable, 10000);
+                            }
+                        }
+                        else if (ad_Type.equals("job")) {
+                            if (TextUtils.isEmpty(adTitle)) {
+                                titleEt.setError("Ad title");
+                                Toast.makeText(PostAdActivity.this, "Provide Ad Title", Toast.LENGTH_SHORT).show();
+                            }else if(location.equals(" Select Location")){
+                                Toast.makeText(PostAdActivity.this, "Select Location", Toast.LENGTH_LONG).show();
+                            } else if (TextUtils.isEmpty(deadline)) {
+                                deadlineEt.setError("Enter deadline");
+                                Toast.makeText(PostAdActivity.this, "Provide deadline", Toast.LENGTH_SHORT).show();
+                            } else if (TextUtils.isEmpty(description)) {
+                                descriptionEt.setError("Enter description");
+                                Toast.makeText(PostAdActivity.this, "Provide description", Toast.LENGTH_SHORT).show();
                             } else {
                                 vacancy = Integer.parseInt(vacancyEt.getText().toString());
                                 model = new PostAdModel(adTitle, true, jobType, vacancy, requirment, deadline, employeer, website
                                         , otherInfo, description, locationId, address, categoryId, imgArray, ad_Type);
                                 Log.d("jobData", adTitle + "," + jobType + "," + vacancy + "," + requirment + "," + deadline + "," + employeer + "," + website
                                         + " ," + otherInfo + "," + description + "," + locationId + "," + address + "," + categoryId + "," + imgArray + "," + ad_Type);
+                                Call<AdDetails> call = ApiUtils.getUserService().postsellAd("Token " + token, model);
+                                call.enqueue(new Callback<AdDetails>() {
+                                    @Override
+                                    public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
+                                        if (response.code() == 201) {
+
+                                        }
+                                        else {
+                                            Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<AdDetails> call, Throwable t) {
+
+                                    }
+                                });
+
+                                ProgressDialog progressDialog = new ProgressDialog(PostAdActivity.this);
+                                progressDialog.setTitle("Uploading");
+                                progressDialog.setMessage("Loading...");
+                                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                progressDialog.setCancelable(false);
+                                progressDialog.show();
+                                final Handler handler = new Handler();
+                                final Runnable runnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (progressDialog.isShowing()) {
+                                            progressDialog.dismiss();
+                                            Dialog dialog2 = new Dialog(PostAdActivity.this);
+                                            dialog2.setContentView(R.layout.success_popup);
+                                            dialog2.setCancelable(false);
+                                            dialog2.show();
+                                            TextView textView = dialog2.findViewById(R.id.textview);
+                                            Button okBtn = dialog2.findViewById(R.id.okBtn);
+                                            textView.setText("Ad created Successfully");
+
+                                            okBtn.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    dialog2.dismiss();
+                                                    Intent intent = new Intent(PostAdActivity.this, MainActivity.class);
+                                                    intent.putExtra("fragment", "home");
+                                                    startActivity(intent);
+
+                                                }
+                                            });
+                                        }
+                                    }
+                                };
+
+                                progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialog) {
+                                        handler.removeCallbacks(runnable);
+                                    }
+                                });
+
+                                handler.postDelayed(runnable, 10000);
                             }
                         }
                     }
                     else if (postType.equals("bid")) {
                         if (TextUtils.isEmpty(adTitle)) {
                             titleEt.setError("Ad title");
+                            Toast.makeText(PostAdActivity.this, "Provide Ad title", Toast.LENGTH_SHORT).show();
+                        }else if(location.equals(" Select Location")){
+                            Toast.makeText(PostAdActivity.this, "Select Location", Toast.LENGTH_LONG).show();
+                        }else if(img1.getDrawable().getConstantState()==getResources().
+                                getDrawable(R.drawable.ic_baseline_image_24).getConstantState()){
+                            Toast.makeText(PostAdActivity.this, "Upload Image ", Toast.LENGTH_LONG).show();
+                        }else if(location.equals("Select Location")){
+                            Toast.makeText(PostAdActivity.this, "Select Location", Toast.LENGTH_LONG).show();
+                        }else if(img1.getDrawable().getConstantState()==getResources().
+                                getDrawable(R.drawable.ic_baseline_image_24).getConstantState()){
+                            Toast.makeText(PostAdActivity.this, "Upload Image ", Toast.LENGTH_LONG).show();
                         } else if (TextUtils.isEmpty(description)) {
                             descriptionEt.setError("Enter description");
-                        } else {
+                            Toast.makeText(PostAdActivity.this, "Provide description", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
                             model = new PostAdModel(adTitle, otherInfo, description, locationId, categoryId, imgArray, ad_Type, true);
+                            Call<AdDetails> call = ApiUtils.getUserService().postsellAd("Token " + token, model);
+                            call.enqueue(new Callback<AdDetails>() {
+                                @Override
+                                public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
+                                    if (response.code() == 201) {
+
+                                    }
+                                    else {
+                                        Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<AdDetails> call, Throwable t) {
+
+                                }
+                            });
+
+                            ProgressDialog progressDialog = new ProgressDialog(PostAdActivity.this);
+                            progressDialog.setTitle("Uploading");
+                            progressDialog.setMessage("Loading...");
+                            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                            progressDialog.setCancelable(false);
+                            progressDialog.show();
+                            final Handler handler = new Handler();
+                            final Runnable runnable = new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (progressDialog.isShowing()) {
+                                        progressDialog.dismiss();
+                                        Dialog dialog2 = new Dialog(PostAdActivity.this);
+                                        dialog2.setContentView(R.layout.success_popup);
+                                        dialog2.setCancelable(false);
+                                        dialog2.show();
+                                        TextView textView = dialog2.findViewById(R.id.textview);
+                                        Button okBtn = dialog2.findViewById(R.id.okBtn);
+                                        textView.setText("Ad created Successfully");
+
+                                        okBtn.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                dialog2.dismiss();
+                                                Intent intent = new Intent(PostAdActivity.this, MainActivity.class);
+                                                intent.putExtra("fragment", "home");
+                                                startActivity(intent);
+
+                                            }
+                                        });
+                                    }
+                                }
+                            };
+
+                            progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                @Override
+                                public void onDismiss(DialogInterface dialog) {
+                                    handler.removeCallbacks(runnable);
+                                }
+                            });
+
+                            handler.postDelayed(runnable, 10000);
                         }
                     }
                     else if (postType.equals("job")) {
                         vacancy = Integer.parseInt(vacancyEt.getText().toString());
                         if (TextUtils.isEmpty(adTitle)) {
                             titleEt.setError("Ad title");
-                        } else if (TextUtils.isEmpty(description)) {
-                            descriptionEt.setError("Enter description");
+                            Toast.makeText(PostAdActivity.this, "Provide Ad Title", Toast.LENGTH_SHORT).show();
+                        }else if(location.equals(" Select Location")){
+                            Toast.makeText(PostAdActivity.this, "Select Location", Toast.LENGTH_LONG).show();
                         } else if (TextUtils.isEmpty(deadline)) {
                             deadlineEt.setError("Enter deadline");
+                            Toast.makeText(PostAdActivity.this, "Provide deadline", Toast.LENGTH_SHORT).show();
+                        } else if (TextUtils.isEmpty(description)) {
+                            descriptionEt.setError("Enter description");
+                            Toast.makeText(PostAdActivity.this, "Provide Description", Toast.LENGTH_SHORT).show();
                         } else {
                             model = new PostAdModel(adTitle, true, jobType, vacancy, requirment, deadline, employeer, website
                                     , otherInfo, description, locationId, address, categoryId, imgArray, ad_Type);
                             Log.d("jobData", "" + vacancy+" ho");
                             Log.d("jobData", adTitle + "," + jobType + "," + vacancy + "," + requirment + "," + deadline + "," + employeer + "," + website
                                     + " ," + otherInfo + "," + description + "," + locationId + "," + address + "," + categoryId + "," + imgArray + "," + ad_Type);
+                            Call<AdDetails> call = ApiUtils.getUserService().postsellAd("Token " + token, model);
+                            call.enqueue(new Callback<AdDetails>() {
+                                @Override
+                                public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
+                                    if (response.code() == 201) {
 
+                                    }
+                                    else {
+                                        Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<AdDetails> call, Throwable t) {
+
+                                }
+                            });
+
+                            ProgressDialog progressDialog = new ProgressDialog(PostAdActivity.this);
+                            progressDialog.setTitle("Uploading");
+                            progressDialog.setMessage("Loading...");
+                            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                            progressDialog.setCancelable(false);
+                            progressDialog.show();
+                            final Handler handler = new Handler();
+                            final Runnable runnable = new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (progressDialog.isShowing()) {
+                                        progressDialog.dismiss();
+                                        Dialog dialog2 = new Dialog(PostAdActivity.this);
+                                        dialog2.setContentView(R.layout.success_popup);
+                                        dialog2.setCancelable(false);
+                                        dialog2.show();
+                                        TextView textView = dialog2.findViewById(R.id.textview);
+                                        Button okBtn = dialog2.findViewById(R.id.okBtn);
+                                        textView.setText("Ad created Successfully");
+
+                                        okBtn.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                dialog2.dismiss();
+                                                Intent intent = new Intent(PostAdActivity.this, MainActivity.class);
+                                                intent.putExtra("fragment", "home");
+                                                startActivity(intent);
+
+                                            }
+                                        });
+                                    }
+                                }
+                            };
+
+                            progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                @Override
+                                public void onDismiss(DialogInterface dialog) {
+                                    handler.removeCallbacks(runnable);
+                                }
+                            });
+
+                            handler.postDelayed(runnable, 10000);
                         }
                     }
 
                     String checkData = new Gson().toJson(model);
                     Log.d("whatif",new Gson().toJson(imgArray));
 
-                    Call<AdDetails> call = ApiUtils.getUserService().postsellAd("Token " + token, model);
-                    call.enqueue(new Callback<AdDetails>() {
-                        @Override
-                        public void onResponse(Call<AdDetails> call, Response<AdDetails> response) {
-                            if (response.code() == 201) {
 
-                            }
-                            else {
-                                Toast.makeText(PostAdActivity.this, "Failed", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<AdDetails> call, Throwable t) {
-
-                        }
-                    });
-
-                    ProgressDialog progressDialog = new ProgressDialog(PostAdActivity.this);
-                    progressDialog.setTitle("Uploading");
-                    progressDialog.setMessage("Loading...");
-                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                    progressDialog.setCancelable(false);
-                    progressDialog.show();
-                    final Handler handler = new Handler();
-                    final Runnable runnable = new Runnable() {
-                        @Override
-                        public void run() {
-                            if (progressDialog.isShowing()) {
-                                progressDialog.dismiss();
-                                Dialog dialog2 = new Dialog(PostAdActivity.this);
-                                dialog2.setContentView(R.layout.success_popup);
-                                dialog2.setCancelable(false);
-                                dialog2.show();
-                                TextView textView = dialog2.findViewById(R.id.textview);
-                                Button okBtn = dialog2.findViewById(R.id.okBtn);
-                                textView.setText("Ad created Successfully");
-
-                                okBtn.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        dialog2.dismiss();
-                                        Intent intent = new Intent(PostAdActivity.this, MainActivity.class);
-                                        intent.putExtra("fragment", "home");
-                                        startActivity(intent);
-
-                                    }
-                                });
-                            }
-                        }
-                    };
-
-                    progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                        @Override
-                        public void onDismiss(DialogInterface dialog) {
-                            handler.removeCallbacks(runnable);
-                        }
-                    });
-
-                    handler.postDelayed(runnable, 10000);
                 }else{
                     Toast.makeText(PostAdActivity.this, "Select Ad Type", Toast.LENGTH_LONG).show();
                 }

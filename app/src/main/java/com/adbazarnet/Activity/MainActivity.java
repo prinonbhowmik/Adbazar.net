@@ -38,6 +38,7 @@ import android.widget.Toast;
 import com.adbazarnet.Api.ApiUtils;
 import com.adbazarnet.Fragments.BidsFragment;
 import com.adbazarnet.Fragments.ChatFragment;
+import com.adbazarnet.Fragments.ContactFragment;
 import com.adbazarnet.Fragments.FavouriteFragment;
 import com.adbazarnet.Fragments.HomeFragment;
 import com.adbazarnet.Models.UserDetailsModel;
@@ -64,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Dialog dialog;
     private String loadFragment = null, lang = null;
     private int count=0,status;
-
     private String language;
 
     @Override
@@ -384,7 +384,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drawerLayout.closeDrawers();
                 break;
             case R.id.contact:
-
+                FragmentTransaction contact = getSupportFragmentManager().beginTransaction();
+                contact.replace(R.id.fragment_container, new ContactFragment());
+                contact.commit();
+                drawerLayout.closeDrawers();
                 break;
             case R.id.language:
 

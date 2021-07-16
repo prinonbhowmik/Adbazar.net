@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">AdBazar.net</string>
-    <string name="sell_item">বিক্রি করুন</string>
-    <string name="buy_item">কিনুন</string>
+    <string name="sell_item"><u>বিক্রি করুন</u></string>
+    <string name="buy_item"><u>কিনুন</u></string>
     <string name="all_ads">সমস্ত বিজ্ঞাপন</string>
     <string name="bids">" নিলামসমূহ"</string>
-    <string name="contact">" একাউন্ট"</string>
+    <string name="contact">" যোগাযোগ"</string>
     <string name="bride_groom">কনে / বর</string>
     <string name="log_in">"লগ ইন "</string>
     <string name="change_language">ভাষা পরিবর্তন</string>
